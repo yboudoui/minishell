@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   token_is_redirect_in.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 14:14:19 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/25 18:46:19 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/24 09:45:21 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 09:44:35 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#include "modules.h"
 
-# include "utils.h"
-# include "token.h"
-
-void	lexer(char *str, t_list *output);
-
-#endif
+t_token	token_is_redirect_in(char *str)
+{
+	return (token_match(str, TOKEN_REDIRECT_IN, "<", NULL));
+}

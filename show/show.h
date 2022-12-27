@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_pipe.c                                          :+:      :+:    :+:   */
+/*   show.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 19:59:33 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/24 20:02:10 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 08:04:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "modules.h"
+#ifndef SHOW_H
+# define SHOW_H
 
-t_token	is_pipe(char **str)
-{
-	return (token_match(str, TOKEN_PIPE, "|", NULL));
-}
+# include "list.h"
+
+void	print_lexer_output(t_list lexer_output);
+
+#endif

@@ -6,11 +6,47 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 14:49:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/25 18:03:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:28:21 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
+#include "modules.h"
+
+typedef t_token					(*t_fp_token_handler)(char *str);
+static const t_fp_token_handler	g_token_handlers_list[MAX_TOKEN] = {
+	token_is_redirect_in,
+	token_is_here_document,
+	token_is_wildcard,
+	token_is_spaces,
+	token_is_semicolon,
+	token_is_subshell,
+	token_is_double_quote,
+	token_is_simple_quote,
+	token_is_redirect_out_append,
+	token_is_redirect_out,
+	token_is_redirect_err_append,
+	token_is_redirect_err,
+	token_is_and,
+	token_is_background,
+	token_is_or,
+	token_is_pipe,
+	NULL
+};
+
+bool	token_founded(char *str, t_token *output)
+{
+	size_t	index;
+
+	index = 0;
+	while (g_token_handlers_list[index])
+	{
+		(*output) = g_token_handlers_list[index++](str);
+		if (*output)
+			return (true);
+	}
+	return (false);
+}
 
 t_token	token_create(t_token_type type, char *substr)
 {
@@ -35,25 +71,23 @@ void	token_destroy(void *input)
 	free(token);
 }
 
-t_token	token_match(char **str, t_token_type type, char *start, char *end)
+t_token	token_match(char *str, t_token_type type, char *start, char *end)
 {
-	size_t	match_len;
+	size_t	len;
 	char	*tmp;
-	t_token	token;
 
-	if (!str || !(*str) || !(**str) || !start || !(*start))
+	if (!str || !start)
 		return (NULL);
-	match_len = ft_strlen(start);
-	if (ft_strncmp(*str, start, match_len) != 0)
+	len = ft_strlen(start);
+	if (ft_strncmp(str, start, len) != 0)
 		return (NULL);
-	if (end && (*end))
+	if (end)
 	{
-		tmp = (*str) + match_len;
+		tmp = str + len;
 		tmp = ft_strnstr(tmp, end, ft_strlen(tmp));
-		if (end)
-			match_len = (tmp + ft_strlen(end)) - (*str);
+		if (!tmp)
+			return (NULL);
+		len = (tmp + ft_strlen(end)) - str;
 	}
-	token = token_create(type, ft_substr(*str, 0, match_len));
-	(*str) += (match_len * (token != NULL));
-	return (token);
+	return (token_create(type, ft_substr(str, 0, len)));
 }

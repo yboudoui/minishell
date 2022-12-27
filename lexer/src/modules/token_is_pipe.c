@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_double_quote.c                                  :+:      :+:    :+:   */
+/*   token_is_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 19:29:28 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/24 21:32:58 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/24 19:59:33 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 09:44:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "modules.h"
 
-t_token	is_double_quote(char **str)
+t_token	token_is_pipe(char *str)
 {
-	return (token_match(str, TOKEN_DOUBLE_QUOTES, "\"", "\""));
+	return (token_match(str, TOKEN_PIPE, "|", NULL));
 }

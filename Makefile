@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/12/25 18:03:03 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/12/27 10:20:25 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCS	=\
 ./utils/string/ft_strncmp.c\
 ./utils/string/ft_strlen.c\
 ./utils/string/ft_substr.c\
+./utils/string/is_space.c\
+./utils/string/ft_strdup.c\
 ./utils/list/list_add_front.c\
 ./utils/list/list_clear.c\
 ./utils/list/list_destroy.c\
@@ -39,30 +41,35 @@ SRCS	=\
 ./utils/memory/ft_memcpy.c\
 ./utils/memory/ft_calloc.c\
 ./main.c\
-./parser/lexer/token/token.c\
-./parser/lexer/lexer.c\
-./parser/lexer/modules/is_and.c\
-./parser/lexer/modules/is_redirect_err.c\
-./parser/lexer/modules/is_redirect_err_append.c\
-./parser/lexer/modules/is_redirect_out.c\
-./parser/lexer/modules/is_subshell.c\
-./parser/lexer/modules/is_redirect_out_append.c\
-./parser/lexer/modules/is_double_quote.c\
-./parser/lexer/modules/is_simple_quote.c\
-./parser/lexer/modules/is_redirect_in.c\
-./parser/lexer/modules/is_semicolon.c\
-./parser/lexer/modules/is_or.c\
-./parser/lexer/modules/is_background.c\
-./parser/lexer/modules/is_pipe.c\
+./parser/parser.c\
+./show/lexer_show.c\
+./lexer/src/lexer.c\
+./lexer/src/modules/token_is_or.c\
+./lexer/src/modules/token_is_spaces.c\
+./lexer/src/modules/token_is_wildcard.c\
+./lexer/src/modules/token_is_redirect_out.c\
+./lexer/src/modules/token_is_here_document.c\
+./lexer/src/modules/token_is_subshell.c\
+./lexer/src/modules/token_is_pipe.c\
+./lexer/src/modules/token_is_redirect_err.c\
+./lexer/src/modules/token_is_and.c\
+./lexer/src/modules/token_is_double_quote.c\
+./lexer/src/modules/token_is_background.c\
+./lexer/src/modules/token_is_redirect_in.c\
+./lexer/src/modules/token_is_redirect_out_append.c\
+./lexer/src/modules/token_is_simple_quote.c\
+./lexer/src/modules/token_is_redirect_err_append.c\
+./lexer/src/modules/token_is_semicolon.c\
+./lexer/src/token.c\
 
 INCS	=\
 ./utils/string\
 ./utils/list\
 ./utils\
 ./utils/memory\
-./parser/lexer/token\
-./parser/lexer/modules\
-./parser/lexer\
+./parser\
+./show\
+./lexer/inc\
 
 OBJS				=	$(SRCS:.c=.o)
 
@@ -74,6 +81,7 @@ all:		$(NAME)
 $(OBJS): %.o : %.c
 		@$(CC) $(CFLAGS) $(addprefix -I , $(INCS)) -c $< -o $@
 		@echo $(CC) $(CFLAGS) $@
+
 
 $(NAME):	$(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME)
@@ -91,7 +99,7 @@ valgrind:	fclean
 			@$(MAKE) all -C . CFLAGS="-Wall -Wextra -Werror -g3"
 			@valgrind														\
 			-s																\
-			--suppressions=./readline.supp									\
+			--suppressions=./.readline.supp									\
 			--leak-check=full												\
 			--show-leak-kinds=all											\
 			--track-origins=yes												\

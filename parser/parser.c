@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_redirect_err_append.c                           :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 19:38:27 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/24 19:39:42 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/26 16:19:08 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 10:26:40 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "modules.h"
+#include "parser.h"
 
-t_token	is_redirect_err_append(char **str)
+t_list	parser(t_list lexer)
 {
-	return (token_match(str, TOKEN_REDIRECT_ERR_APPEND, "2>>", NULL));
+	while (lexer)
+	{
+		lexer = lexer->next;
+	}
+	return (NULL);
 }

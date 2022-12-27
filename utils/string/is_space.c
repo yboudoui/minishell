@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   is_space.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/27 10:19:53 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/26 19:59:55 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 10:26:28 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#include "string.h"
 
-# include "memory.h"
-# include <stddef.h>
-# include <stdbool.h>
+bool	is_space(int c)
+{
+	bool	is;
 
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
-bool	is_space(int c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strnstr(const char *big, const char *little, size_t len);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-
-#endif
+	is = false;
+	is |= (c == '\f');
+	is |= (c == '\n');
+	is |= (c == '\r');
+	is |= (c == '\t');
+	is |= (c == '\v');
+	is |= (c == ' ');
+	return (is);
+}
