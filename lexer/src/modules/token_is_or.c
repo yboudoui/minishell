@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_redirect_err.c                                  :+:      :+:    :+:   */
+/*   token_is_or.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 19:56:28 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/24 20:03:43 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/24 19:58:54 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 09:42:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "modules.h"
 
-t_token	is_redirect_err(char **str)
+t_token	token_is_or(char *str)
 {
-	return (token_match(str, TOKEN_REDIRECT_ERR, "2>", NULL));
+	return (token_match(str, TOKEN_OR, "||", NULL));
 }

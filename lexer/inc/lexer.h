@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_subshell.c                                      :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 20:02:36 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/24 20:03:46 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/22 14:14:19 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 10:19:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "modules.h"
+#ifndef LEXER_H
+# define LEXER_H
 
-t_token	is_subshell(char **str)
-{
-	return (token_match(str, TOKEN_SUBSHELL, "(", ")"));
-}
+# include "utils.h"
+# include "token.h"
+
+void	lexer(char *str, t_list *output);
+
+#endif

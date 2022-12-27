@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 14:52:03 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/25 17:59:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:24:53 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 typedef enum e_token_type {
 	TOKEN_REDIRECT_IN,
+	TOKEN_SPACES,
+	TOKEN_HERE_DOCUMENT,
+	TOKEN_WILDCARD,
 	TOKEN_SEMICOLON,
 	TOKEN_DOUBLE_QUOTES,
 	TOKEN_SIMPLE_QUOTES,
@@ -32,7 +35,6 @@ typedef enum e_token_type {
 	TOKEN_AND,
 	TOKEN_OR,
 	TOKEN_SUBSHELL,
-	TOKEN_EOF,
 	MAX_TOKEN
 }	t_token_type;
 
@@ -45,6 +47,7 @@ struct s_token {
 
 t_token	token_create(t_token_type type, char *substr);
 void	token_destroy(void *input);
-t_token	token_match(char **str, t_token_type type, char *start, char *end);
+t_token	token_match(char *str, t_token_type type, char *start, char *end);
+bool	token_founded(char *str, t_token *output);
 
 #endif
