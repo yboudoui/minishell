@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   ft_str_find_prefix.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 14:49:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/29 15:59:00 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/29 14:50:56 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/29 17:44:00 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
-#include "modules.h"
+#include "string.h"
 
-t_token	token_create(t_token_type type, char *substr)
+int	ft_str_find_prefix(char *str, char *prefix)
 {
-	t_token	output;
+	size_t	len;
 
-	if (substr == NULL)
-		return (NULL);
-	output = ft_calloc(1, sizeof(struct s_token));
-	if (output)
-		(*output) = (struct s_token){type, substr};
-	return (output);
-}
-
-void	token_destroy(void *input)
-{
-	t_token	token;
-
-	token = input;
-	if (token == NULL)
-		return ;
-	free(token->input);
-	free(token);
+	len = ft_strlen(prefix);
+	if (len && ft_strncmp(str, prefix, len) == 0)
+		return (len);
+	return (0);
 }

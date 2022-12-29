@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/27 10:26:14 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:59:22 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int ac, char *av[], char *env[])
 		line = readline("~$ ");
 		if (NULL == line)
 			break ;
-		parsing(line);
 		add_history(line);
+		parsing(line);
 		free(line);
 	}
 	rl_clear_history();
