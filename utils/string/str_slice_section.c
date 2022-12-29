@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   str_slice_section.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 14:49:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/29 15:59:00 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/29 15:08:39 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/29 17:49:40 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
-#include "modules.h"
+#include "string.h"
 
-t_token	token_create(t_token_type type, char *substr)
+char	*str_slice_section(char *str, char *start, char *end)
 {
-	t_token	output;
+	size_t	len;
+	char	*tmp;
 
-	if (substr == NULL)
+	len = ft_str_find_prefix(str, start);
+	if (len == 0)
 		return (NULL);
-	output = ft_calloc(1, sizeof(struct s_token));
-	if (output)
-		(*output) = (struct s_token){type, substr};
-	return (output);
-}
+	tmp = ft_strnstr(&str[len], end, ft_strlen(&str[len]));
+	if (!tmp)
+		return (NULL);
+	len = (tmp + ft_strlen(end)) - str;
+	return (ft_substr(str, 0, len));
 
-void	token_destroy(void *input)
-{
-	t_token	token;
-
-	token = input;
-	if (token == NULL)
-		return ;
-	free(token->input);
-	free(token);
 }

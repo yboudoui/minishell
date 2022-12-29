@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/12/27 10:20:25 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/12/29 17:16:59 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,15 @@ RM					=	rm -f
 
 SRCS	=\
 ./utils/string/ft_strnstr.c\
+./utils/string/str_slice_prefix.c\
 ./utils/string/ft_strncmp.c\
 ./utils/string/ft_strlen.c\
 ./utils/string/ft_substr.c\
-./utils/string/is_space.c\
+./utils/string/ft_str_find_prefix.c\
 ./utils/string/ft_strdup.c\
+./utils/string/str_slice_charset.c\
+./utils/string/is_space.c\
+./utils/string/str_slice_section.c\
 ./utils/list/list_add_front.c\
 ./utils/list/list_clear.c\
 ./utils/list/list_destroy.c\
@@ -43,23 +47,8 @@ SRCS	=\
 ./main.c\
 ./parser/parser.c\
 ./show/lexer_show.c\
+./lexer/src/token_match.c\
 ./lexer/src/lexer.c\
-./lexer/src/modules/token_is_or.c\
-./lexer/src/modules/token_is_spaces.c\
-./lexer/src/modules/token_is_wildcard.c\
-./lexer/src/modules/token_is_redirect_out.c\
-./lexer/src/modules/token_is_here_document.c\
-./lexer/src/modules/token_is_subshell.c\
-./lexer/src/modules/token_is_pipe.c\
-./lexer/src/modules/token_is_redirect_err.c\
-./lexer/src/modules/token_is_and.c\
-./lexer/src/modules/token_is_double_quote.c\
-./lexer/src/modules/token_is_background.c\
-./lexer/src/modules/token_is_redirect_in.c\
-./lexer/src/modules/token_is_redirect_out_append.c\
-./lexer/src/modules/token_is_simple_quote.c\
-./lexer/src/modules/token_is_redirect_err_append.c\
-./lexer/src/modules/token_is_semicolon.c\
 ./lexer/src/token.c\
 
 INCS	=\

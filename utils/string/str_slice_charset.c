@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   str_slice_charset.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 14:49:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/29 15:59:00 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/29 15:28:36 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/29 15:32:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
-#include "modules.h"
+#include "string.h"
 
-t_token	token_create(t_token_type type, char *substr)
+char	*str_slice_charset(char *str, t_fp_is_charset charset)
 {
-	t_token	output;
+	size_t	index;
 
-	if (substr == NULL)
+	index = 0;
+	while (str[index] && charset(str[index]))
+		index++;
+	if (index == 0)
 		return (NULL);
-	output = ft_calloc(1, sizeof(struct s_token));
-	if (output)
-		(*output) = (struct s_token){type, substr};
-	return (output);
-}
-
-void	token_destroy(void *input)
-{
-	t_token	token;
-
-	token = input;
-	if (token == NULL)
-		return ;
-	free(token->input);
-	free(token);
+	return (ft_substr(str, 0, index));
 }
