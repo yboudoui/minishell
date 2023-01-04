@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/02/06 17:36:25 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/24 21:06:21 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#include "string.h"
 
-# include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
-
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
-
-#endif
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	while ((*s1 || *s2) && n--)
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+	}
+	return (0);
+}

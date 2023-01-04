@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/02/17 15:57:56 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/27 10:19:52 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#include "string.h"
 
-# include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
+char	*ft_strdup(const char *s)
+{
+	char	*output;
+	size_t	index;
 
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
-
-#endif
+	index = ft_strlen(s) + 1;
+	output = ft_calloc(index, sizeof(char));
+	if (output)
+		ft_memcpy(output, s, index);
+	return (output);
+}

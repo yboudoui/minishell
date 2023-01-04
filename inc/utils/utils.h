@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/17 11:40:27 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/24 21:38:29 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#ifndef UTILS_H
+# define UTILS_H
 
+# include <unistd.h>
+# include "memory.h"
+# include "string.h"
 # include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
-
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
 
 #endif

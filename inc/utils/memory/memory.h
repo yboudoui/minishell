@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   memory.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/24 21:10:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#ifndef MEMORY_H
+# define MEMORY_H
 
-# include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
+# include <stdlib.h>
 
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 #endif

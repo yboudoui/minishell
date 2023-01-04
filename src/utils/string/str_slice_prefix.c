@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   str_slice_prefix.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/29 15:20:14 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/29 18:11:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#include "string.h"
 
-# include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
+char	*str_slice_prefix(char *str, char *prefix)
+{
+	size_t	len;
 
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
-
-#endif
+	len = ft_str_find_prefix(str, prefix);
+	if (len)
+		return (ft_substr(str, 0, len));
+	return (NULL);
+}
