@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/30 14:58:11 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#include "lexer.h"
+#include "read_line.h"
 
-# include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
+bool	parsing(char *input)
+{
+	if (!lexer_handler(input))
+		return (true);
+	return (false);
+}
 
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
-
-#endif
+int	main(int ac, char *av[], char *env[])
+{
+	(void)ac;
+	(void)av;
+	(void)env;
+	readline_handler(parsing);
+	return (0);
+}

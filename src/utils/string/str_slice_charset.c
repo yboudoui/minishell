@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   str_slice_charset.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/29 15:28:36 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/12/29 15:32:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#include "string.h"
 
-# include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
+char	*str_slice_charset(char *str, t_fp_is_charset charset)
+{
+	size_t	index;
 
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
-
-#endif
+	index = 0;
+	while (str[index] && charset(str[index]))
+		index++;
+	if (index == 0)
+		return (NULL);
+	return (ft_substr(str, 0, index));
+}

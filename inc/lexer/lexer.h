@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/22 14:14:19 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/04 14:55:05 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#ifndef LEXER_H
+# define LEXER_H
 
-# include "list.h"
 # include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
+# include "token.h"
 
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
+bool	token_match(char *str, t_list *output);
+bool	token_list_sanitizer(t_list token_lst);
+bool	lexer_handler(char *input);
 
 #endif

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show.h                                             :+:      :+:    :+:   */
+/*   read_line_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:43:36 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/30 14:32:38 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/01 14:24:39 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHOW_H
-# define SHOW_H
+#include <readline/readline.h>
+#include <readline/history.h>
+#include "read_line.h"
 
-# include "list.h"
-# include "utils.h"
-# include "lexer.h"
-# include <stdio.h>
+void	readline_handler(bool (*handler)(char *))
+{
+	char	*line;
 
-void	print_error(char *str);
-void	print_colored_token(void *content);
-void	print_token_type(void *content);
-const char	*get_token_type_string(t_token_type type);
-
-#endif
+	while (1)
+	{
+		rl_on_new_line();
+		line = readline("~$ ");
+		if (NULL == line)
+			break ;
+		add_history(line);
+		handler(line);
+		free(line);
+	}
+	rl_clear_history();
+}

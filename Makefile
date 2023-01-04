@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/12/29 17:16:59 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/01/04 18:24:12 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,45 +20,46 @@ RM					=	rm -f
 
 # **************************************************************************** #
 
+#./src/parser/syntaxer/syntaxer.c\
+
 SRCS	=\
-./utils/string/ft_strnstr.c\
-./utils/string/str_slice_prefix.c\
-./utils/string/ft_strncmp.c\
-./utils/string/ft_strlen.c\
-./utils/string/ft_substr.c\
-./utils/string/ft_str_find_prefix.c\
-./utils/string/ft_strdup.c\
-./utils/string/str_slice_charset.c\
-./utils/string/is_space.c\
-./utils/string/str_slice_section.c\
-./utils/list/list_add_front.c\
-./utils/list/list_clear.c\
-./utils/list/list_destroy.c\
-./utils/list/list_create.c\
-./utils/list/list_last.c\
-./utils/list/ft_lstsize.c\
-./utils/list/list_remove_one.c\
-./utils/list/ft_lstiter.c\
-./utils/list/list_add_back.c\
-./utils/list/ft_lstmap.c\
-./utils/list/list_create_back.c\
-./utils/memory/ft_memcpy.c\
-./utils/memory/ft_calloc.c\
-./main.c\
-./parser/parser.c\
+./src/utils/string/ft_strnstr.c\
+./src/utils/string/str_slice_prefix.c\
+./src/utils/string/ft_strncmp.c\
+./src/utils/string/ft_strlen.c\
+./src/utils/string/ft_substr.c\
+./src/utils/string/ft_str_find_prefix.c\
+./src/utils/string/ft_strdup.c\
+./src/utils/string/str_slice_charset.c\
+./src/utils/string/is_space.c\
+./src/utils/string/str_slice_section.c\
+./src/utils/list/list_add.c\
+./src/utils/list/list_clear.c\
+./src/utils/list/list_destroy.c\
+./src/utils/list/list_create.c\
+./src/utils/list/list_last.c\
+./src/utils/list/ft_lstsize.c\
+./src/utils/list/ft_lstiter.c\
+./src/utils/list/ft_lstmap.c\
+./src/utils/memory/ft_memcpy.c\
+./src/utils/memory/ft_calloc.c\
+./src/main.c\
+./src/parser/lexer/token/cleaner.c\
+./src/parser/lexer/token/matching.c\
+./src/parser/lexer/token/token.c\
+./src/parser/lexer/lexer.c\
+./src/read_line/read_line_handler.c\
 ./show/lexer_show.c\
-./lexer/src/token_match.c\
-./lexer/src/lexer.c\
-./lexer/src/token.c\
 
 INCS	=\
-./utils/string\
-./utils/list\
-./utils\
-./utils/memory\
-./parser\
 ./show\
-./lexer/inc\
+./inc/utils/string\
+./inc/utils/list\
+./inc/utils\
+./inc/utils/memory\
+./inc/parser\
+./inc/read_line\
+./inc/lexer\
 
 OBJS				=	$(SRCS:.c=.o)
 

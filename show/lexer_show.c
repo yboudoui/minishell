@@ -6,21 +6,18 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/29 18:49:43 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:44:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-
-#include <stdio.h>
-#include "lexer.h"
+#include "show.h"
 
 void	print_error(char *str)
 {
 	printf("\033[0;31mERROR: %s\n\033[0m", str);
 }
 
-void	print_token(void *content)
+void	print_colored_token(void *content)
 {
 	t_token	input;
 
@@ -41,14 +38,43 @@ void	print_token(void *content)
 		printf("%s", input->input);
 }
 
-void	print_lexer_output(t_list lexer_output)
+const char	*get_token_type_string(t_token_type type)
+{
+	const char	*token_type_string[MAX_TOKEN] = {
+		[TOKEN_REDIRECT_IN] = "TOKEN_REDIRECT_IN",
+		[TOKEN_SPACES] = "TOKEN_SPACES",
+		[TOKEN_HERE_DOCUMENT] = "TOKEN_HERE_DOCUMENT",
+		[TOKEN_WILDCARD] = "TOKEN_WILDCARD",
+		[TOKEN_SEMICOLON] = "TOKEN_SEMICOLON",
+		[TOKEN_DOUBLE_QUOTES] = "TOKEN_DOUBLE_QUOTES",
+		[TOKEN_SIMPLE_QUOTES] = "TOKEN_SIMPLE_QUOTES",
+		[TOKEN_WORD] = "TOKEN_WORD",
+		[TOKEN_PIPE] = "TOKEN_PIPE",
+		[TOKEN_REDIRECT_OUT] = "TOKEN_REDIRECT_OUT",
+		[TOKEN_REDIRECT_OUT_APPEND] = "TOKEN_REDIRECT_OUT_APPEND",
+		[TOKEN_REDIRECT_ERR] = "TOKEN_REDIRECT_ERR",
+		[TOKEN_REDIRECT_ERR_APPEND] = "TOKEN_REDIRECT_ERR_APPEND",
+		[TOKEN_BACKGROUND] = "TOKEN_BACKGROUND",
+		[TOKEN_AND] = "TOKEN_AND",
+		[TOKEN_OR] = "TOKEN_OR",
+		[TOKEN_SUBSHELL] = "TOKEN_SUBSHELL",
+	};
+	if (type >= 0 && type < MAX_TOKEN)
+		return (token_type_string[type]);
+	return (NULL);
+}
+
+void	print_token_type(void *content)
+{
+	t_token	token;
+
+	token = content;
+	printf("%s\n", get_token_type_string(token->type));
+}
+
+void	print_lexer_token_type(t_list lexer_output)
 {
 	if (!lexer_output)
-	{
-		print_error("no token list");
-		return ;
-	}
-	printf("~$ ");
-	ft_lstiter(lexer_output, print_token);
-	printf("\n");
+		return ((void)print_error("no token list"));
+	ft_lstiter(lexer_output, print_token_type);
 }
