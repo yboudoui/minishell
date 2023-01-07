@@ -6,11 +6,20 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:47:02 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/24 21:50:47 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:25:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+void	ft_lstiter(t_list lst, void (*f)(void *))
+{
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}
 
 t_list	ft_lstmap(t_list lst, void *(*f)(void *), void (*del)(void *))
 {
@@ -24,10 +33,7 @@ t_list	ft_lstmap(t_list lst, void *(*f)(void *), void (*del)(void *))
 		if (tmp)
 			list_add_back(&output, tmp);
 		else
-		{
-			list_clear(&output, del);
-			return (NULL);
-		}
+			return (list_clear(&output, del), NULL);
 		lst = lst->next;
 	}
 	return (output);
