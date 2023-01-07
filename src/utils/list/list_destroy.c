@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:41:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 19:00:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:29:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,37 @@ void	list_destroy(t_list lst, t_fp_destroy_content del)
 {
 	if (!lst || !del)
 		return ;
-	if (lst->next)
-		lst->next->prev = lst->prev;
-	if (lst->prev)
-		lst->prev->next = lst->next;
 	del(lst->content);
-	(*lst) = (struct s_list){};
 	free(lst);
 }
 
 void	list_remove_one(t_list *root, t_fp_destroy_content del)
 {
 	t_list	current;
+	t_list	next;
 
-	if (!root || !del)
-		return ;
 	current = (*root);
-	if (current == NULL)
+	if (!root || !current || !del)
 		return ;
-	(*root) = (*root)->next;
+	next = (*root)->next;
+	if (current->next)
+		current->next->prev = current->prev;
+	if (current->prev)
+		current->prev->next = current->next;
+	(*root) = next;
 	list_destroy(current, del);
-	current = NULL;
+}
+
+void	list_clear(t_list *lst, t_fp_destroy_content del)
+{
+	t_list	tmp;
+
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		list_destroy(*lst, del);
+		(*lst) = tmp;
+	}
 }

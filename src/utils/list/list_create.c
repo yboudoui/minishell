@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:30:47 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 17:56:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:25:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	list_create(void *content)
 
 	output = ft_calloc(1, sizeof(struct s_list));
 	if (output != NULL)
-		(*output) = (struct s_list){.content = content};
+		output->content = content;
 	return (output);
 }
 

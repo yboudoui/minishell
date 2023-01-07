@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:47:55 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 17:58:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:25:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@ bool	list_add_back(t_list *root, t_list new)
 {
 	t_list	tmp;
 
-	if (root == NULL || new == NULL)
+	if (!root || !new)
 		return (false);
 	tmp = (*root);
 	if (tmp)
-		list_last(tmp)->next = new;
-	else if (root)
+	{
+		tmp = list_last(*root);
+		tmp->next = new;
+		new->prev = tmp;
+	}
+	else
 		(*root) = new;
 	return (true);
 }

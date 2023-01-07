@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/01/04 18:24:12 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/01/06 17:11:23 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,18 +34,16 @@ SRCS	=\
 ./src/utils/string/is_space.c\
 ./src/utils/string/str_slice_section.c\
 ./src/utils/list/list_add.c\
-./src/utils/list/list_clear.c\
 ./src/utils/list/list_destroy.c\
 ./src/utils/list/list_create.c\
 ./src/utils/list/list_last.c\
-./src/utils/list/ft_lstsize.c\
-./src/utils/list/ft_lstiter.c\
 ./src/utils/list/ft_lstmap.c\
 ./src/utils/memory/ft_memcpy.c\
 ./src/utils/memory/ft_calloc.c\
 ./src/main.c\
 ./src/parser/lexer/token/cleaner.c\
 ./src/parser/lexer/token/matching.c\
+./src/parser/lexer/token/commande.c\
 ./src/parser/lexer/token/token.c\
 ./src/parser/lexer/lexer.c\
 ./src/read_line/read_line_handler.c\

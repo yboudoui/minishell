@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:35:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 18:10:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:12:46 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,11 @@ static const t_token_patern	g_token_patern_list[MAX_TOKEN] = {
 	.error = "Incomplet field, missing single quote",
 },
 {TOKEN_WILDCARD,			.match = "*"},
-{TOKEN_SEMICOLON,			.match = ";"},
 {TOKEN_HERE_DOCUMENT,		.match = "<<"},
 {TOKEN_REDIRECT_IN,			.match = "<"},
 {TOKEN_REDIRECT_OUT_APPEND,	.match = ">>"},
 {TOKEN_REDIRECT_OUT,		.match = ">"},
-{TOKEN_REDIRECT_ERR_APPEND,	.match = "2>>"},
-{TOKEN_REDIRECT_ERR,		.match = "2>"},
 {TOKEN_AND,					.match = "&&"},
-{TOKEN_BACKGROUND,			.match = "&"},
 {TOKEN_OR,					.match = "||"},
 {TOKEN_PIPE,				.match = "|"},
 {TOKEN_SPACES,				.charset = is_space},
@@ -62,9 +58,9 @@ static bool	token_slice(char *str, t_token_patern patern, t_token *output)
 		tmp = str_slice_prefix(str, patern.match);
 	else if (patern.field)
 		if (str_must_slice_section(str, patern.field, &tmp) == -1)
-			return (print_error(patern.error), true);
+			return (print_error(patern.error), false);
 	(*output) = token_create(patern.type, tmp);
-	return (false);
+	return (true);
 }
 
 bool	token_founded(char *str, t_token *output)
@@ -76,12 +72,12 @@ bool	token_founded(char *str, t_token *output)
 	while (g_token_patern_list[index].type != MAX_TOKEN)
 	{
 		if (*output)
-			return (false);
-		if (token_slice(str, g_token_patern_list[index], output))
 			return (true);
+		if (!token_slice(str, g_token_patern_list[index], output))
+			return (false);
 		index++;
 	}
-	return (false);
+	return (true);
 }
 
 bool	token_match(char *str, t_list *output)
@@ -89,12 +85,11 @@ bool	token_match(char *str, t_list *output)
 	t_token	token;
 	size_t	index;
 
-	(*output) = NULL;
 	index = 0;
 	while (str[index])
 	{
 		token = NULL;
-		if (token_founded(&str[index], &token))
+		if (!token_founded(&str[index], &token))
 			return (list_clear(output, token_destroy), false);
 		if (token)
 		{
