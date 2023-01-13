@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   str_merge.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 07:18:30 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/13 07:17:40 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/13 08:15:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#include "string.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+char	*str_merge(char *str, ...)
+{
+	char	*out;
+	char	*tmp;
+	char	*current;
+	va_list	arg;
 
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*memory_dup(void *src, size_t n);
-
-#endif
+	va_start(arg, str);
+	out = str;
+	while (1)
+	{
+		current = va_arg (arg, char*);
+		if (!current)
+			break ;
+		tmp = out;
+		out = ft_strjoin(tmp, current);
+		free(tmp);
+		free(current);
+	}
+	va_end(arg);
+	return (out);
+}

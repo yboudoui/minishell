@@ -6,12 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 14:49:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/06 15:22:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:51:29 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
-#include "modules.h"
 
 t_token	token_create(t_token_type type, char *substr)
 {

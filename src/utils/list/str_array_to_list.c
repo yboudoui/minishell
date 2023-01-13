@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   str_array_to_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 07:18:30 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/11 08:18:42 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/11 08:57:43 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#include "string.h"
+#include "list.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+t_list	str_array_to_list(char *str_array[])
+{
+	t_list	out;
 
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*memory_dup(void *src, size_t n);
-
-#endif
+	out = NULL;
+	while (*str_array)
+	{
+		list_create_back(&out, ft_strdup(*str_array));
+		str_array += 1;
+	}
+	return (out);
+}

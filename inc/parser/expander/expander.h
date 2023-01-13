@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_line_handler.c                                :+:      :+:    :+:   */
+/*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 14:32:38 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/01 14:24:39 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/11 07:39:10 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/13 08:18:13 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "read_line.h"
+#ifndef EXPANDER_H
+# define EXPANDER_H
 
-void	readline_handler(bool (*handler)(char *))
-{
-	char	*line;
+# include "environment.h"
+# include "commande.h"
 
-	while (1)
-	{
-		rl_on_new_line();
-		line = readline("~$ ");
-		if (NULL == line)
-			break ;
-		add_history(line);
-		handler(line);
-		free(line);
-	}
-	rl_clear_history();
-}
+void	commande_expand_variable(t_list env, t_commande cmd);
+
+#endif
