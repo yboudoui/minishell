@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   is_empty.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 07:18:30 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/11 14:07:14 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/11 14:08:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#include "string.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*memory_dup(void *src, size_t n);
-
-#endif
+bool	is_empty(char *str)
+{
+	while (*str)
+		if (!is_space(*str++))
+			return (false);
+	return (true);
+}

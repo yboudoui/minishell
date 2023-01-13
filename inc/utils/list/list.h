@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:11:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/07 14:02:12 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:23:26 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ void	list_remove_one(t_list *root, t_fp_destroy_content del);
 
 t_list	list_last(t_list lst);
 size_t	list_size(t_list lst);
+
+t_list	str_array_to_list(char *str_array[]);
 
 #endif

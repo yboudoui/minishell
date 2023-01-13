@@ -5,43 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 14:13:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/07 16:42:00 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/11 15:55:24 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
 #include "show.h"
 
-void	token_destroy_by_type(void *input)
+bool	token_list_sanitizer(t_list *root)
 {
-	t_token_type	*type;
+	t_token	token;
+	t_list	output;
+	t_list	lst;
 
-	if (!input)
-		return ;
-	type = input;
-	if ((*type) == TOKEN_COMMANDE)
-		commande_destroy(input);
-	else
-		token_destroy(input);
+	output = NULL;
+	lst = (*root);
+	while (lst)
+	{
+		token = lst->content;
+		if (!token)
+			return (false);
+		if (token->type != TOKEN_SPACES)
+			list_create_back(&output, token_dup(token));
+		lst = lst->next;
+	}
+	list_clear(root, token_destroy);
+	(*root) = output;
+	return (true);
 }
 
-bool	lexer_handler(char *input)
+char	*lexer(char *input, t_list *out)
 {
-	t_list	lexer_output;
+	char	*error;
 
-	lexer_output = NULL;
-	if (!token_match(input, &lexer_output))
-		return (false);
-	print_colored_token_list("~$ ", lexer_output);
-	token_list_sanitizer(&lexer_output);
-	print_colored_token_list("~$ ", lexer_output);
-	token_syntaxer(&lexer_output);
-	ft_lstiter(lexer_output, print_commande_line);
-	return (list_clear(&lexer_output, token_destroy_by_type), true);
+	error = tokenizer(input, out);
+	if (error)
+		return (error);
+	print_colored_token_list("~$ ", *out);
+	token_list_sanitizer(out);
+	print_colored_token_list("~$ ", *out);
+	return (NULL);
 }
-
-/*
-mega lol test
-infile < "qweqw" | grep -la | ls -la << here_doc| test | $arg 'asdad"asdadasd"asdasd' > test.c | grep < sdkjfh >> kusdhfj  > sdfjh "uyghd " 'khgd f' << lol << 1 << 2 << 3  >> ds >>fdd >>a  >da > d >ds >d < 1 < 2 < 3
-*/

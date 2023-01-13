@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 14:14:19 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/05 16:46:47 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/11 09:15:14 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/11 15:55:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef PROMPT_H
+# define PROMPT_H
 
-# include "utils.h"
-# include "token.h"
+# include "lexer.h"
+# include "syntaxer.h"
 
-bool	token_match(char *str, t_list *output);
-bool	token_list_sanitizer(t_list *lst);
-bool	lexer_handler(char *input);
+# include "commande.h"
+# include "environment.h"
+
+typedef struct s_prompt	*t_prompt;
+
+struct s_prompt {
+	t_list	heredoc;
+	t_list	commande;
+};
+
+t_prompt	prompt_create(char *input);
+void		prompt_destroy(void *input);
 
 #endif

@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   commande.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 07:18:30 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/11 11:16:15 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/13 08:15:18 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#ifndef COMMANDE_H
+# define COMMANDE_H
 
-# include <unistd.h>
-# include <stdlib.h>
+# include "list.h"
+# include "token.h"
 
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*memory_dup(void *src, size_t n);
+typedef struct s_commande	*t_commande;
+
+struct s_commande {
+	t_list			argv;
+	t_list			redir_in;
+	t_list			redir_out;
+	t_list			redir_out_append;
+	t_list			here_document;
+};
+
+t_commande	commande_create(t_list lst);
+void		commande_destroy(void *data);
 
 #endif

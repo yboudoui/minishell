@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 07:18:30 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/02/17 21:47:34 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/13 08:15:13 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#include "string.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*output;
+	size_t	s1len;
+	size_t	s2len;
 
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*memory_dup(void *src, size_t n);
-
-#endif
+	if (!s1 | !s2)
+		return (NULL);
+	s1len = ft_strlen(s1);
+	s2len = ft_strlen(s2);
+	output = ft_calloc(s1len + s2len + 1, sizeof(char));
+	if (!output)
+		return (NULL);
+	ft_memcpy(output, s1, s1len);
+	ft_memcpy(&output[s1len], s2, s2len);
+	return (output);
+}

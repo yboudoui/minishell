@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 14:52:03 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/07 16:37:12 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:56:13 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,6 @@ typedef enum e_token_type {
 	MAX_TOKEN					=	14	| TOKEN_OPERATOR,
 }	t_token_type;
 
-typedef struct s_commande	*t_commande;
-
-struct s_commande {
-	t_token_type	type;
-//	char			**argv;
-	t_list			argv;
-	t_list			redir_in;
-	t_list			redir_out;
-	t_list			redir_out_append;
-	t_list			here_document;
-};
-
-void	commande_destroy(void *data);
-
 typedef struct s_token	*t_token;
 
 struct s_token {
@@ -64,7 +50,8 @@ struct s_token {
 t_token	token_create(t_token_type type, char *substr);
 t_token	token_dup(t_token src);
 void	token_destroy(void *input);
-bool	token_founded(char *str, t_token *output);
-bool	token_syntaxer(t_list *root);
+bool	token_match(char *str, t_list *output);
+bool	token_list_sanitizer(t_list *lst);
 
+char	*tokenizer(char *input, t_list *out);
 #endif

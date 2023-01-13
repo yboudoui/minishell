@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:35:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/06 17:12:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:31:40 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,65 +46,85 @@ static const t_token_patern	g_token_patern_list[MAX_TOKEN] = {
 {.type = MAX_TOKEN}
 };
 
-static bool	token_slice(char *str, t_token_patern patern, t_token *output)
+//	What happend if tmp is NULL?
+//	if (tmp == NULL)
+//		return ("An error occur during lexing");
+
+static char	*token_slice(char *str, t_token_patern patern, t_token *output)
 {
 	char	*tmp;
 
 	tmp = NULL;
-	(*output) = NULL;
 	if (patern.charset)
 		tmp = str_slice_charset(str, patern.charset);
 	else if (patern.match)
 		tmp = str_slice_prefix(str, patern.match);
 	else if (patern.field)
 		if (str_must_slice_section(str, patern.field, &tmp) == -1)
-			return (print_error(patern.error), false);
+			return (patern.error);
 	(*output) = token_create(patern.type, tmp);
-	return (true);
+	return (NULL);
 }
 
-bool	token_founded(char *str, t_token *output)
+static char	*token_founded(char *str, t_token *output)
 {
 	size_t	index;
+	char	*error;
 
 	(*output) = NULL;
 	index = 0;
 	while (g_token_patern_list[index].type != MAX_TOKEN)
 	{
 		if (*output)
-			return (true);
-		if (!token_slice(str, g_token_patern_list[index], output))
-			return (false);
+			return (NULL);
+		error = token_slice(str, g_token_patern_list[index], output);
+		if (error)
+			return (error);
 		index++;
 	}
-	return (true);
+	return (NULL);
 }
 
-bool	token_match(char *str, t_list *output)
+bool	token_list_create_back_word(t_list *root, char *input, size_t size)
 {
+	char	*word;
+	t_token	token;
+
+	if (size == 0)
+		return (false);
+	word = ft_substr(input, 0, size);
+	if (word)
+	{
+		token = token_create(TOKEN_WORD, word);
+		if (token)
+			return (list_create_back(root, token), true);
+	}
+	return (free(word), false);
+}
+
+char	*tokenizer(char *input, t_list *out)
+{
+	char	*error;
 	t_token	token;
 	size_t	index;
 
 	index = 0;
-	while (str[index])
+	while (input[index])
 	{
 		token = NULL;
-		if (!token_founded(&str[index], &token))
-			return (list_clear(output, token_destroy), false);
+		error = token_founded(&input[index], &token);
+		if (error)
+			return (list_clear(out, token_destroy), error);
 		if (token)
 		{
-			if (index)
-				list_create_back(output,
-					token_create(TOKEN_WORD, ft_substr(str, 0, index)));
-			list_create_back(output, token);
-			str += index + ft_strlen(token->input);
+			token_list_create_back_word(out, input, index);
+			list_create_back(out, token);
+			input += index + ft_strlen(token->input);
 			index = 0;
 		}
 		else
 			index += 1;
 	}
-	if (index)
-		list_create_back(output,
-			token_create(TOKEN_WORD, ft_substr(str, 0, index)));
-	return (true);
+	token_list_create_back_word(out, input, index);
+	return (NULL);
 }

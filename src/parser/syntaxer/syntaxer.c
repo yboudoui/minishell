@@ -5,94 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 16:19:08 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/04 14:26:40 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/01/11 12:47:18 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/11 15:54:16 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "syntaxer.h"
 
-typedef struct e_expression {
-	t_expression_type	type;
-	char				**input;
-}	t_expression;
-
-typedef enum e_error {
-	ERROR,
-	ERROR_LEXER_EOF,
-	NO_CHANGE,
-	SUCCES,
-}	t_error;
-
-typedef struct s_grammar_dependency {
-//	t_token_type			prerequisite;
-	t_token_type			conditional;
-	t_token_type			required;
-}	t_grammar_dependency;
-
-const t_grammar_dependency	*g_grammar_list[MAX_TOKEN] = {
-[TOKEN_HERE_DOCUMENT]		=	&{TOKEN_SPACES, TOKEN_WORD},
-[TOKEN_REDIRECT_IN]			=	&{TOKEN_SPACES, TOKEN_WORD},
-[TOKEN_REDIRECT_OUT_APPEND]	=	&{TOKEN_SPACES, TOKEN_WORD},
-[TOKEN_REDIRECT_OUT]		=	&{TOKEN_SPACES, TOKEN_WORD},
-};
-
-bool	get_token(t_list *lexer, t_token *output)
-{
-	if (lexer == NULL || lexer->content == NULL)
-		return (false);
-	(*output) = (*lexer)->content;
-	(*lexer) = (*lexer)->next;
-	return (true);
-}
-
-t_error	grammar_evaluate(t_list lexer, t_grammar_dependency dependency)
+static t_list	slice_commande(t_list *lst)
 {
 	t_token	token;
+	t_list	output;
 
-	if (!get_token(&lexer, &token))
-		return (ERROR_LEXER_EOF);
-	if (token->type != dependency.prerequisite)
-		return (NO_CHANGE);
-
-	if (!get_token(&lexer, &token))
-		return (ERROR_LEXER_EOF);
-	if (token->type == dependency.conditional)
-		if (!get_token(&lexer, &token))
-			return (ERROR_LEXER_EOF);
-
-	if (token->type != dependency.required)
-		return (ERROR);
-	//do something here
-	return (SUCCES);
-}
-
-
-t_error	grammar_command(t_list lexer, t_expression *expression)
-{
-	t_token	token;
-
-	if (lexer == NULL)
-		return (ERROR_LEXER_EOF);
-	token = lexer->content;
-	if (token->type != TOKEN_WORD)
-		return (NO_CHANGE);
-}
-
-t_list	parser(t_list lexer)
-{
-	t_token					token;
-	t_grammar_dependency	dependency;
-
-	while (lexer)
+	output = NULL;
+	while (*lst)
 	{
-		token = lexer->content;
-		dependency = g_grammar_list[token->type];
-		if (!dependency)
-			//??
-		if (grammar_evaluate(lexer, g_redirect_in) == ERROR);
-			return (NULL);
-		lexer = lexer->next;
+		token = (*lst)->content;
+		if (token->type == TOKEN_PIPE)
+			break ;
+		else
+			list_create_back(&output, token_dup(token));
+		(*lst) = (*lst)->next;
 	}
-	return (NULL);
+	return (output);
+}
+
+bool	syntaxer(t_list *root)
+{
+	t_list	output;
+	t_list	lst;
+	t_token	token;
+
+	output = NULL;
+	lst = (*root);
+	while (lst)
+	{
+		token = lst->content;
+		if (token->type == TOKEN_PIPE)
+			lst = lst->next;
+		else
+			list_create_back(&output, commande_create(slice_commande(&lst)));
+	}
+	list_clear(root, token_destroy);
+	(*root) = output;
+	return (true);
 }

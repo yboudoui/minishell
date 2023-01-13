@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 07:18:30 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/12/22 14:14:19 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/01/11 15:56:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#ifndef LEXER_H
+# define LEXER_H
 
-# include <unistd.h>
-# include <stdlib.h>
+# include "utils.h"
+# include "token.h"
 
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*memory_dup(void *src, size_t n);
+char	*lexer(char *input, t_list *out);
 
 #endif
