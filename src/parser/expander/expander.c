@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:35:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 08:38:35 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/01/13 09:56:06 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static char	*find_and_expand_variable(t_list env, char *str)
 		else
 			index++;
 	}
+	if (!ft_strlen(out))
+		return (free(out), NULL);
 	return (out);
 }
 
@@ -97,8 +99,11 @@ void	list_find_and_expand_variable(t_list env, t_list token)
 	{
 		cast = token->content;
 		new = find_and_expand_variable(env, cast->input);
-		free(cast->input);
-		cast->input = new;
+		if (new)
+		{
+			free(cast->input);
+			cast->input = new;
+		}
 		token = token->next;
 	}
 }
@@ -108,7 +113,7 @@ void	commande_expand_variable(t_list env, t_commande cmd)
 	if (cmd == NULL)
 		return ;
 	if (cmd->argv)
-		list_find_and_expand_variable(env, cmd->argv->next);
+		list_find_and_expand_variable(env, cmd->argv);
 	if (cmd->redir_in)
 		list_find_and_expand_variable(env, cmd->redir_in);
 	if (cmd->redir_out)
