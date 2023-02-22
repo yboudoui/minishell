@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:27:41 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/22 14:57:49 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/22 15:04:29 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ struct s_list {
 	t_list	next;
 	t_list	prev;
 };
+
+// 
 // src/utils/list/list.c
 t_list	list_create(void *content);
 bool	list_create_back(t_list *root, void *content);
