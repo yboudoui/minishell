@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:27:41 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/22 15:04:29 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/22 15:23:25 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <fcntl.h>
 
 /**************** LIST ****************/
 typedef struct s_list	*t_list;
@@ -31,7 +34,16 @@ struct s_list {
 	t_list	prev;
 };
 
-// 
+// list.c 
+typedef struct s_prompt	*t_prompt;
+
+struct s_prompt {
+	t_list	heredoc;
+	t_list	commande;
+};
+
+t_prompt	prompt_create(char *input);
+void		prompt_destroy(void *input);
 // src/utils/list/list.c
 t_list	list_create(void *content);
 bool	list_create_back(t_list *root, void *content);
@@ -210,10 +222,16 @@ t_list		env_var_as_path(t_env_var var);
 t_list		environment_list_create(char *envp[]);
 void		environment_list_destroy(void *data);
 
+/*************** PRINT UTILS ***************/
 
+void		print_error(char *str);
 
+void		print_colored_token(void *content);
+void		print_colored_token_list(char *name, t_list lst);
 
+void		print_token_type(void *content);
+const char	*get_token_type_string(t_token_type type);
 
-
+void		print_lexer_token_type(t_list lexer_output);
+void		print_commande_line(void *content);
 #endif
-
