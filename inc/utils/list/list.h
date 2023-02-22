@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:11:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/11 08:23:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:15:27 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ bool	list_add_back(t_list *root, t_list new);
 bool	list_add_front(t_list *lst, t_list new);
 
 int		ft_lstsize(t_list lst);
+void	*list_to_array(t_list lst, void *(*f)(void *));
+
 t_list	ft_lstmap(t_list lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstiter(t_list lst, void (*f)(void *));
 
