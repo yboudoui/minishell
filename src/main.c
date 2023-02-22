@@ -6,18 +6,15 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/22 16:36:45 by yboudoui         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/22 15:40:57 by kdhrif           ###   ########.fr       */
+>>>>>>> 4ae344e (Getting ready for the first merge)
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "prompt.h"
-
-#include "show.h"
-
-// juste for test
-#include "expander.h"
+#include "../inc/minishell.h"
 
 void	expand_all_command(t_list env, t_list cmd)
 {
@@ -72,7 +69,11 @@ void	exe(t_list env, t_prompt prompt)
 	ft_lstiter(prompt->commande, print_commande_line);
 	expand_all_command(env, prompt->commande);
 	ft_lstiter(prompt->commande, print_commande_line);
+<<<<<<< HEAD
 	tranforme_argv(prompt->commande);
+=======
+	/* pipex(env, prompt); */
+>>>>>>> 4ae344e (Getting ready for the first merge)
 }
 
 int	execution(char *env[], void (*exec)(t_list, t_prompt))
