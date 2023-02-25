@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 08:31:35 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:05:42 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,9 @@ void	print_commande_line(void *content)
 	if (*type == TOKEN_PIPE)
 		return ((void)printf(" PIPE \n"));
 	cmd = content;
-	printf("--------------------------\n");
 	print_colored_token_list("\targv: ", cmd->argv);
 	print_colored_token_list("\tredir_in: ", cmd->redir_in);
 	print_colored_token_list("\tredir_out: ", cmd->redir_out);
 	print_colored_token_list("\tredir_out_append: ", cmd->redir_out_append);
 	print_colored_token_list("\there_document: ", cmd->here_document);
-	printf("--------------------------\n");
 }

@@ -6,11 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:00 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/11 15:53:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:39:22 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commande.h"
+#include "../../../inc/minishell.h"
 
 t_list	get_input_by_type(t_list *root, t_token_type type)
 {
@@ -25,7 +26,7 @@ t_list	get_input_by_type(t_list *root, t_token_type type)
 	while (lst)
 	{
 		token = lst->content;
-		if (token->type == type)
+		if (token->type & type)
 		{
 			if (!lst->next || ((t_token)lst->next->content)->type == type)
 			{
@@ -55,8 +56,8 @@ t_commande	commande_create(t_list lst)
 	if (!out)
 		return (NULL);
 	out->redir_in = get_input_by_type(&lst, TOKEN_REDIRECT_IN);
-	out->redir_out = get_input_by_type(&lst, TOKEN_REDIRECT_OUT);
-	out->redir_out_append = get_input_by_type(&lst, TOKEN_REDIRECT_OUT_APPEND);
+	out->redir_out = get_input_by_type(&lst, TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND);
+	/* out->redir_out_append = get_input_by_type(&lst, TOKEN_REDIRECT_OUT_APPEND); */
 	out->here_document = get_input_by_type(&lst, TOKEN_HERE_DOCUMENT);
 	out->argv = lst;
 	return (out);
