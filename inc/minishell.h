@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:27:41 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/25 16:49:40 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/25 19:13:06 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@
 # include "../inc/read_line/read_line.h"
 # include "../inc/exec/exec.h"
 
-/*# include <unistd.h>*/
-/*# include <stdbool.h>*/
-/*# include <stdarg.h>*/
-/*# include <stddef.h>*/
-/*# include <stdio.h>*/
-/*# include <stdlib.h>*/
+# include <stdbool.h>
+# include <stdarg.h>
+# include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 
 typedef struct s_cmd t_cmd;
