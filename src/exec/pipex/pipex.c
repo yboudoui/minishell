@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/25 20:02:15 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/26 12:30:36 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,33 @@ void pipex(t_list env, t_prompt prompt)
 	}
 }
 
-char *get_cmd_path(char *cmd)
+char *check_fpath(t_pipex *pipex, char *cmd)
 {
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, F_OK) == 0)
+			return (cmd);
+		else
+		{
+			if (pipex->path == false)
+				generic_err("No such file or directory", 2);
+			else
+				generic_err("Command not found", 2);
+			return (NULL);
+		}
+	}
+	else
+		return (NULL);
+}
 
+char *get_cmd_path(t_pipex *pipex, char *cmd)
+{
+	char	*tmp1;
+	char	*tmp2;
+
+	tmp1 = check_fpath(pipex, cmd);
+	if (tmp1 != NULL)
+		return (tmp1);
 }
 
 int exec_cmd(t_pipex *pipex, char **argv, int in, int out)
@@ -49,9 +73,7 @@ int exec_cmd(t_pipex *pipex, char **argv, int in, int out)
 
 	dup_fd(in, STDIN_FILENO);
 	dup_fd(out, STDOUT_FILENO);
-	cmd_path = get_cmd_path(argv[0]);
-
-
+	cmd_path = get_cmd_path(pipex, argv[0]);
 }
 
 void execute(char **argv, t_pipex *pipex)
