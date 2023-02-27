@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/26 12:30:07 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:12:13 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ typedef struct s_pipex
 	int		fd[2];
 	int		infile;
 	int		outfile;
+	int		status;
+	int		argc;
 	t_list	env;
 }	t_pipex;
 
+void	pipeline_status(t_pipex *pipex, int i, int pid);
+
 void	path_null(t_pipex *pipex, char *cmd);
 
-void	execute(char **argv, t_pipex *pipex);
+void	execute(char **argv, t_pipex *pipex, int i);
 
 void	close_fd(int *fd);
 

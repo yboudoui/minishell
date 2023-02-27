@@ -6,34 +6,33 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 12:45:26 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:22:41 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../../inc/minishell.h"
-#include <unistd.h>
 
 void pipex(t_list env, t_prompt prompt)
 {
 	t_list_commande 		cmd;
 	t_pipex					pipex;
 	static const t_pipex	EMPTY_PIP;
+	int						i;
 
 	pipex = EMPTY_PIP;
+	pipex.argc = ft_lstsize(prompt->commande);
 	cmd = (t_list_commande)prompt->commande;
 	pipex.paths = get_paths(env, &pipex);
 	pipex.env = env;
+	i = 0;
 	while (cmd)
 	{
 		pipex.infile = infile(cmd->content->redir_in);
-		if (pipex.infile == -1)
-			continue ;
-		pipex.outfile = outfile(cmd->content->redir_out);
-		if (pipex.outfile == -1)
-			continue ;
-		execute((char **)cmd->content->argv, &pipex);
-
-
+		if (pipex.infile != -1)
+			pipex.outfile = outfile(cmd->content->redir_out);
+		if (pipex.outfile != -1)
+			execute((char **)cmd->content->argv, &pipex, i);
+		i++;
 		cmd = cmd->next;
 	}
 }
@@ -55,6 +54,13 @@ char *check_fpath(t_pipex *pipex, char *cmd)
 	}
 	else
 		return (NULL);
+}
+
+
+void	null_str_err(char *str)
+{
+	if (str == NULL)
+		generic_err("Malloc error.\n", 0);
 }
 
 
@@ -83,17 +89,44 @@ char *get_cmd_path(t_pipex *pipex, char *cmd)
 	i = -1;
 	while (pipex->paths[++i])
 	{
-		check_slash();
+		check_slash(pipex->paths[i]);
 		tmp1 = ft_strjoin(pipex->paths[i], "/");
+		null_str_err(tmp1);
 		tmp2 = ft_strjoin(tmp1, cmd);
+		null_str_err(tmp2);
 		free(tmp1);
 		if (access(tmp2, F_OK) == 0)
-		{
-			free(pipex->paths);
 			return (tmp2);
-		}
 		free(tmp2);
 	}
+}
+
+char **parse_env(t_list env)
+{
+	char	**envp;
+	int		i;
+	t_env_var tmp;
+	char *tmp1;
+	char *tmp2;
+
+	i = 0;
+	envp = (char **)malloc(sizeof(char *) * (ft_lstsize(env) + 1));
+	null_str_err((char *)envp);
+	while (env)
+	{
+		tmp = (t_env_var)env->content;
+		tmp1 = ft_strjoin(tmp->name, "=");
+		null_str_err(tmp1);
+		tmp2 = ft_strjoin(tmp1, tmp->value);
+		null_str_err(tmp2);
+		free(tmp1);
+		envp[i] = tmp2;
+		null_str_err(envp[i]);
+		i++;
+		env = env->next;
+	}
+	envp[i] = NULL;
+	return (envp);
 }
 
 int exec_cmd(t_pipex *pipex, char **argv, int in, int out)
@@ -103,9 +136,13 @@ int exec_cmd(t_pipex *pipex, char **argv, int in, int out)
 	dup_fd(in, STDIN_FILENO);
 	dup_fd(out, STDOUT_FILENO);
 	cmd_path = get_cmd_path(pipex, argv[0]);
+	if (cmd_path == NULL)
+		return (EXIT_FAILURE);
+	if (execve(cmd_path, argv, parse_env(pipex->env)) == -1)
+		generic_err("Execve error.\n", 0);
 }
 
-void execute(char **argv, t_pipex *pipex)
+void execute(char **argv, t_pipex *pipex, int i)
 {
 	pid_t	pid;
 
@@ -115,17 +152,16 @@ void execute(char **argv, t_pipex *pipex)
 	{
 		close_fd(&pipex->fd[0]);
 		exec_cmd(pipex, argv, pipex->infile, pipex->outfile);
-
-
+		if (exec_cmd(pipex, argv, pipex->infile, pipex->outfile) == -1)
+			generic_err("execve", 1);
 	}
-	else if (pid > 0)
+	else 
 	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			printf("exit status: %d\n", WEXITSTATUS(status));
+		close_fd(&pipex->fd[1]);
+		dup_fd(pipex->fd[0], STDIN_FILENO);
+		close_fd(&pipex->fd[0]);
+		pipeline_status(pipex, i, pid);
 	}
-	else
-		generic_err(NULL, 1);
 }
 
 void	*token_to_string(void *data)
