@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/11 15:55:24 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:03:21 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ char	*lexer(char *input, t_list *out)
 	error = tokenizer(input, out);
 	if (error)
 		return (error);
-	print_colored_token_list("~$ ", *out);
 	token_list_sanitizer(out);
-	print_colored_token_list("~$ ", *out);
 	return (NULL);
 }
