@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:55:39 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/25 17:11:30 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:51:22 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	generic_err(char *str, int system)
 {
-	char	*s;
-
 	if (system == 1)
 	{
 		ft_putstr_fd("minishell: ", 2);

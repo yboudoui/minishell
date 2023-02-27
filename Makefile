@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/02/22 15:42:47 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/02/27 14:41:03 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,11 @@ SRCS	=\
 ./src/utils/string/str_slice_prefix.c\
 ./src/utils/string/ft_strncmp.c\
 ./src/utils/string/ft_strlen.c\
+./src/utils/string/ft_putstr_fd.c\
 ./src/utils/string/ft_substr.c\
 ./src/utils/string/ft_str_find_prefix.c\
+./src/utils/string/ft_strchr.c\
+./src/utils/string/ft_putchar_fd.c\
 ./src/utils/string/ft_strjoin.c\
 ./src/utils/string/ft_split.c\
 ./src/utils/string/list_to_str_array.c\
@@ -55,7 +58,23 @@ SRCS	=\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/environment_list.c\
-./show/lexer_show.c\
+./src/exec/pipex/exit_macro.c\
+./src/exec/pipex/dup.c\
+./src/exec/pipex/null_str_err.c\
+./src/exec/pipex/free_str.c\
+./src/exec/pipex/success.c\
+./src/exec/pipex/get_next_line_utils.c\
+./src/exec/pipex/fork.c\
+./src/exec/pipex/get_next_line.c\
+./src/exec/pipex/pipe.c\
+./src/exec/pipex/error.c\
+./src/exec/pipex/pipex.c\
+./src/exec/pipex/exception.c\
+./src/exec/pipex/path_null.c\
+./src/exec/pipex/open.c\
+./src/exec/pipex/close.c\
+./src/exec/pipex/pipeline_status.c\
+./src/exec/pipex/heredoc.c\
 
 INCS	=\
 ./show\

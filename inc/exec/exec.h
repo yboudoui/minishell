@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 14:12:13 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:49:44 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ typedef struct s_pipex
 	int		outfile;
 	int		status;
 	int		argc;
+	int	 	remove;
 	t_list	env;
 }	t_pipex;
+
+void	pipex(t_list env, t_prompt prompt);
 
 void	pipeline_status(t_pipex *pipex, int i, int pid);
 
