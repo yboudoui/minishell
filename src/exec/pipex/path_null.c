@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:27:33 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/26 12:29:50 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:02:14 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	path_null(t_pipex *pipex, char *cmd)
 {
+	(void)cmd;
 	if (pipex->path == false)
 		generic_err("No such file or directory", 2);
 }

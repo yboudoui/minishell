@@ -6,13 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 08:20:39 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:03:43 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
-
-#include "show.h"
 
 void	prompt_destroy(void *data)
 {
@@ -40,7 +38,7 @@ t_prompt	prompt_create(char *input)
 	lexer_output = NULL;
 	error = lexer(input, &lexer_output);
 	if (error)
-		return (print_error(error), NULL);
+		return (NULL);
 	syntaxer(&lexer_output);
 	out->commande = lexer_output;
 	return (out);
