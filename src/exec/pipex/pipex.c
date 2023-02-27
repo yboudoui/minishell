@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 18:17:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:54:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void pipex(t_list env, t_prompt prompt)
 	{
 		cmd = (t_commande)cmd_list->content;
 		pipex.infile = infile(cmd->redir_in);
+		printf("Infile result = %d\n", pipex.infile);
 		exit(1);
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
