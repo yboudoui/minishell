@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 17:21:19 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 18:57:59 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 19:00:19 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int infile(t_list redir_in)
+int	infile(t_list redir_in)
 {
-	int	fd;
-	t_token token;
+	int		fd;
+	t_token	token;
 
 	if (redir_in == NULL)
 		return (STDIN_FILENO);

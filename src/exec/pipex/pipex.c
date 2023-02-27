@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 18:54:51 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 19:12:39 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ void pipex(t_list env, t_prompt prompt)
 	{
 		cmd = (t_commande)cmd_list->content;
 		pipex.infile = infile(cmd->redir_in);
-		printf("Infile result = %d\n", pipex.infile);
-		exit(1);
+		t_token tok = cmd->redir_out->content;
+		printf("redir_out input = %s", tok->input);
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
+		printf("outfile return = %d\n", pipex.outfile);
+		exit(1);
 		if (pipex.outfile != -1)
 			execute((char **)cmd->argv, &pipex, i);
 		i++;
@@ -211,30 +213,3 @@ t_cmd *cmd_create(t_commande cmd)
 }
 
 
-
-int	outfile(t_list redir_out)
-{
-	int	fd;
-	t_token token;
-
-	if (redir_out == NULL)
-		return (STDOUT_FILENO);
-	fd = -1;
-	token = NULL;
-	while (redir_out)
-	{
-		token = redir_out->content;
-		if (token->type == TOKEN_REDIRECT_OUT)
-			fd = f_open((char *)redir_out->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (token->type == TOKEN_REDIRECT_OUT_APPEND)
-			fd = f_open((char *)redir_out->content, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd == -1 && redir_out->next == NULL)
-			return (-1);
-		if (fd != -1 && redir_out->next != NULL)
-			close_fd(&fd);
-		if (fd != -1 && redir_out->next == NULL)
-			return (fd);
-		redir_out = redir_out->next;
-	}
-	return (STDOUT_FILENO);
-}
