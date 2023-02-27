@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 14:49:44 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 17:07:54 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ typedef struct s_pipex
 	int	 	remove;
 	t_list	env;
 }	t_pipex;
+
+typedef struct s_prompt	*t_prompt;
+
+char	**get_paths(t_list env, t_pipex *pipex);
 
 void	pipex(t_list env, t_prompt prompt);
 
