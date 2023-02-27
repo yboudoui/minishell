@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/25 15:52:20 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:28:17 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,22 @@ void	expand_all_command(t_list env, t_list cmd)
 
 void	exe(t_list env, t_prompt prompt)
 {
+	pid_t pid;
+	int status;
+
 	(void)env;
 	if (prompt == NULL)
 		return ;
 	if (prompt->commande == NULL)
 		return ;
-	ft_lstiter(prompt->commande, print_commande_line);
+	/* ft_lstiter(prompt->commande, print_commande_line); */
 	expand_all_command(env, prompt->commande);
-	ft_lstiter(prompt->commande, print_commande_line);
-	/* pipex(env, prompt); */
+	/* ft_lstiter(prompt->commande, print_commande_line); */
+	fork_pid(&pid);
+	if (pid == 0)
+		pipex(env, prompt);
+	else
+		waitpid(pid, &status, 0);
 }
 
 int	execution(char *env[], void (*exec)(t_list, t_prompt))

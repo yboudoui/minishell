@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 14:22:41 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:53:34 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void pipex(t_list env, t_prompt prompt)
 
 	pipex = EMPTY_PIP;
 	pipex.argc = ft_lstsize(prompt->commande);
+	printf("%d\n", pipex.argc);
+	exit(0);
 	cmd = (t_list_commande)prompt->commande;
 	pipex.paths = get_paths(env, &pipex);
 	pipex.env = env;
@@ -99,6 +101,7 @@ char *get_cmd_path(t_pipex *pipex, char *cmd)
 			return (tmp2);
 		free(tmp2);
 	}
+	return (NULL);
 }
 
 char **parse_env(t_list env)
