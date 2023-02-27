@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 19:12:39 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 19:25:01 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void pipex(t_list env, t_prompt prompt)
 	i = 0;
 	while (cmd_list)
 	{
-		cmd = (t_commande)cmd_list->content;
+		cmd = (t_commande)(cmd_list->content);
 		pipex.infile = infile(cmd->redir_in);
 		t_token tok = cmd->redir_out->content;
 		printf("redir_out input = %s", tok->input);
