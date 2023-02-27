@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 17:21:16 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 18:17:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	ft_lstsize_prompt(t_prompt lst)
 	return (out);
 }
 
+// actuellement t_prompt et t_list_commande sont extremement similaire
+// on pourrai les intervertirent sans problème mais on a ne la pas fait avant mon départ
 void pipex(t_list env, t_prompt prompt)
 {
 	t_list_commande 		cmd_list;
@@ -35,7 +37,10 @@ void pipex(t_list env, t_prompt prompt)
 
 	pipex = EMPTY_PIP;
 	pipex.argc = ft_lstsize_prompt(prompt);
-	cmd_list = (t_list_commande)prompt->content;
+// la confusion que tu fait ici c'est que tu pense que t_prompt->content est une list de commande
+// mais ça n'est plus le cas depuis se matin
+//	cmd_list = (t_list_commande)prompt->content;//		<---- kdhrif
+	cmd_list = (t_list_commande)prompt;//		<---- yboudoui
 	pipex.paths = get_paths(env, &pipex);
 	pipex.env = env;
 	i = 0;
