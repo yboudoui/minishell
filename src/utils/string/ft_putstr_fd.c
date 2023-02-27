@@ -6,11 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:02:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/22 15:03:11 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:27:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "string.h"
 
 size_t	ft_putstr_fd(char *s, int fd)
 {

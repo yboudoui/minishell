@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:17:18 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:35:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,4 @@ void	print_commande_line(void *content)
 	print_colored_token_list("\tredir_out: ", cmd->redir_out);
 	print_colored_token_list("\there_document: ", cmd->heredoc.list);
 	printf("--------------------------\n");
->>>>>>> 51666af (yboudoui merge)
 }

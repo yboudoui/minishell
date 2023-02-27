@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:12:49 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:31:39 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@
 # include "../inc/parser/lexer/lexer.h"
 # include "../inc/parser/expander/expander.h"
 # include "../inc/parser/environment/environment.h"
-# include "../inc/read_line/read_line.h"
 # include "../inc/exec/exec.h"
+
+# include <stdlib.h>
+# include "prompt.h"
+# include "expander.h"
+# include "heredoc.h"
 
 # include <stdbool.h>
 # include <stdarg.h>
@@ -57,12 +61,6 @@
 /* 	struct s_list_commande	*prev; */
 /* }	*t_list_commande; */
 
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "prompt.h"
-# include "expander.h"
-# include "heredoc.h"
 
 int	execution(t_list env, t_prompt prompt);
 

@@ -6,11 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/02/27 14:41:03 by kdhrif           ###   ########.fr        #
-=======
-#    Updated: 2023/02/27 13:22:46 by yboudoui         ###   ########.fr        #
->>>>>>> 51666af (yboudoui merge)
+#    Updated: 2023/02/27 15:23:40 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +64,6 @@ SRCS	=\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/environment_list.c\
-<<<<<<< HEAD
 ./src/exec/pipex/exit_macro.c\
 ./src/exec/pipex/dup.c\
 ./src/exec/pipex/null_str_err.c\
@@ -86,11 +81,9 @@ SRCS	=\
 ./src/exec/pipex/close.c\
 ./src/exec/pipex/pipeline_status.c\
 ./src/exec/pipex/heredoc.c\
-=======
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/execution.c\
 ./show/lexer_show.c\
->>>>>>> 51666af (yboudoui merge)
 
 INCS	=\
 ./show\
@@ -107,6 +100,7 @@ INCS	=\
 ./inc/parser/lexer\
 ./inc/parser/expander\
 ./inc/parser/environment\
+./inc/exec\
 ./inc\
 
 OBJS				=	$(SRCS:.c=.o)

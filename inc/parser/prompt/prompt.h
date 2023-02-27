@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:15:53 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:15:57 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:29:11 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct s_prompt {
 };
 
 typedef struct s_list_commande {
-	t_commande	content;
+	t_commande				content;
 	struct s_list_commande	*next;
 	struct s_list_commande	*prev;
 }	*t_list_commande;
