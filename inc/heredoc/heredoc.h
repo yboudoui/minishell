@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_merge.c                                        :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 07:17:40 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/26 18:02:29 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/23 06:06:03 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/27 11:57:45 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
-char	*str_merge(char *str, ...)
-{
-	char	*out;
-	char	*tmp;
-	char	*current;
-	va_list	arg;
+# include "list.h"
+# include "string.h"
 
-	va_start(arg, str);
-	out = str;
-	while (1)
-	{
-		current = va_arg(arg, char *);
-		if (!current)
-			break ;
-		tmp = out;
-		out = ft_strjoin(tmp, current);
-		free(tmp);
-		free(current);
-		current = NULL;
-	}
-	va_end(arg);
-	return (out);
-}
+# include "prompt.h"
+
+// open
+# include <sys/stat.h>
+# include <fcntl.h>
+
+// fork
+# include <sys/types.h>
+# include <unistd.h>
+
+// wait
+# include <sys/wait.h>
+
+// sigaction
+# include <signal.h>
+
+// read line
+# include <readline/readline.h>
+# include <readline/history.h>
+
+int	heredoc(t_prompt cmd);
+
+#endif

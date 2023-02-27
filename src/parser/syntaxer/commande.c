@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:00 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/25 15:39:22 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:20:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ t_commande	commande_create(t_list lst)
 		return (NULL);
 	out->redir_in = get_input_by_type(&lst, TOKEN_REDIRECT_IN);
 	out->redir_out = get_input_by_type(&lst, TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND);
-	/* out->redir_out_append = get_input_by_type(&lst, TOKEN_REDIRECT_OUT_APPEND); */
-	out->here_document = get_input_by_type(&lst, TOKEN_HERE_DOCUMENT);
+	out->heredoc.list = get_input_by_type(&lst, TOKEN_HERE_DOCUMENT);
 	out->argv = lst;
 	return (out);
 }
@@ -72,8 +71,12 @@ void	commande_destroy(void *data)
 		return ;
 	list_clear(&cmd->redir_in, token_destroy);
 	list_clear(&cmd->redir_out, token_destroy);
-	list_clear(&cmd->redir_out_append, token_destroy);
-	list_clear(&cmd->here_document, token_destroy);
+	list_clear(&cmd->heredoc.list, token_destroy);
+	if (cmd->heredoc.pipe)
+	{
+		close(cmd->heredoc.pipe[0]);
+		free(cmd->heredoc.pipe);
+	}
 	list_clear(&cmd->argv, token_destroy);
 	free(data);
 }

@@ -6,13 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:03:21 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:18:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-#include "show.h"
 
 bool	token_list_sanitizer(t_list *root)
 {

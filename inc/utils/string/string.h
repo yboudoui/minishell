@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 12:33:19 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:16:56 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,22 @@ char	*ft_strchr(const char *s, int c);
 bool	is_space(int c);
 bool	is_empty(char *str);
 
+void	str_new_empty(char **str);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*str_join_list(char *str[]);
+
 char	*str_merge(char *str, ...) __attribute__((sentinel));
+char	*str_merge_list(char *str[]);
+char	*str_merge_new_line(char *s1, char *s2);
+
+int		string_cmp(const char *s1, const char *s2);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_str_find_prefix(char *big, char *little);
+bool	string_end_with(const char *str, const char *suffix);
 
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

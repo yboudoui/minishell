@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 11:16:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/25 15:43:27 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/02/27 15:15:01 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/27 15:15:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ struct s_commande {
 	t_list	argv;
 	t_list	redir_in;
 	t_list	redir_out;
-	// t_list where content is t_token, to know the type, I can use t_token_type
-	t_list	redir_out_append;
-	t_list	here_document;
+	struct s_heredoc {
+		t_list	list;
+		int		*pipe;
+	}	heredoc;
 };
 
 typedef struct s_cmd t_cmd;

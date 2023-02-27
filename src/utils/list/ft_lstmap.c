@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:47:02 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/22 16:21:52 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:03:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list	ft_lstmap(t_list lst, void *(*f)(void *), void (*del)(void *))
 	return (output);
 }
 
-int		ft_lstsize(t_list lst)
+int	ft_lstsize(t_list lst)
 {
 	int	out;
 

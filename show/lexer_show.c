@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/25 16:05:42 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 15:17:18 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void	print_argv(void *content)
 	printf("\n");
 }
 
-
-
 void	print_commande_line(void *content)
 {
 	t_commande		cmd;
@@ -125,6 +123,7 @@ void	print_commande_line(void *content)
 	print_colored_token_list("\targv: ", cmd->argv);
 	print_colored_token_list("\tredir_in: ", cmd->redir_in);
 	print_colored_token_list("\tredir_out: ", cmd->redir_out);
-	print_colored_token_list("\tredir_out_append: ", cmd->redir_out_append);
-	print_colored_token_list("\there_document: ", cmd->here_document);
+	print_colored_token_list("\there_document: ", cmd->heredoc.list);
+	printf("--------------------------\n");
+>>>>>>> 51666af (yboudoui merge)
 }

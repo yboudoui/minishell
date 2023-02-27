@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   string_end_with.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:19:57 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/23 08:35:23 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/26 18:03:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "string.h"
 
-void	prompt_destroy(void *data)
+bool	string_end_with(const char *str, const char *suffix)
 {
-	if (data == NULL)
-		return ;
-	list_clear(&data, commande_destroy);
-	free(data);
-}
+	size_t	str_len;
+	size_t	suffix_len;
 
-t_prompt	prompt_create(char *input)
-{
-	char		*error;
-	t_list		lexer_output;
-
-	if (input == NULL)
-		return (NULL);
-	lexer_output = NULL;
-	error = lexer(input, &lexer_output);
-	if (error)
-		return (NULL); //ERROR
-	syntaxer(&lexer_output);
-	return ((t_prompt)lexer_output);
+	if (!str || !suffix)
+		return (false);
+	str_len = ft_strlen(str);
+	suffix_len = ft_strlen(suffix);
+	if (suffix_len > str_len)
+		return (false);
+	return (ft_strncmp(str + str_len - suffix_len, suffix, suffix_len) == 0);
 }
