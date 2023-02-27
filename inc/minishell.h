@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 16:27:41 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/25 19:13:06 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/27 15:12:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-typedef struct s_cmd t_cmd;
 
+//typedef struct s_cmd t_cmd;
 /* struct s_cmd { */
 /* 	char**	argv; */
 /* 	t_list	redir_in; //content can be casted as char * */
@@ -56,4 +56,14 @@ typedef struct s_cmd t_cmd;
 /* 	struct s_list_commande	*next; */
 /* 	struct s_list_commande	*prev; */
 /* }	*t_list_commande; */
+
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "prompt.h"
+# include "expander.h"
+# include "heredoc.h"
+
+int	execution(t_list env, t_prompt prompt);
+
 #endif

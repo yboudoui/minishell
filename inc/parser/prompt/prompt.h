@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 09:15:14 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/25 15:33:14 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/02/27 15:15:53 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/27 15:15:57 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 typedef struct s_prompt	*t_prompt;
 
 struct s_prompt {
-	t_list	heredoc;
-	t_list	commande;
+	t_commande	content;
+	t_prompt	next;
+	t_prompt	prev;
 };
 
 typedef struct s_list_commande {

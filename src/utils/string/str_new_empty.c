@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   str_new_empty.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:19:57 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/27 07:27:58 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/27 08:51:15 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "string.h"
 
-void	prompt_destroy(void *data)
+void	str_new_empty(char **str)
 {
-	if (data == NULL)
+	if (str == NULL)
 		return ;
-	list_clear(&data, commande_destroy);
-	free(data);
-}
-
-t_prompt	prompt_create(char *input)
-{
-	char		*error;
-	t_list		lexer_output;
-
-	if (input == NULL)
-		return (NULL);
-	lexer_output = NULL;
-	error = lexer(input, &lexer_output);
-	if (error)
-		return (NULL); //ERROR
-	syntaxer(&lexer_output);
-	return ((t_prompt)lexer_output);
+	(*str) = ft_strdup("");
 }

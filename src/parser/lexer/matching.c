@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:35:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/11 14:31:40 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/26 15:31:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static char	*token_founded(char *str, t_token *output)
 	return (NULL);
 }
 
-bool	token_list_create_back_word(t_list *root, char *input, size_t size)
+static bool	token_list_create_back_word(t_list *root, char *input, size_t size)
 {
 	char	*word;
 	t_token	token;

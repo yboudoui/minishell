@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:35:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 10:01:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 09:59:46 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,4 @@ void	commande_expand_variable(t_list env, t_commande cmd)
 		list_find_and_expand_variable(env, cmd->redir_in);
 	if (cmd->redir_out)
 		list_find_and_expand_variable(env, cmd->redir_out);
-	if (cmd->redir_out_append)
-		list_find_and_expand_variable(env, cmd->redir_out_append);
 }

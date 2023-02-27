@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:11:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/22 16:15:27 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:51:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdbool.h>
 
 typedef struct s_list	*t_list;
-typedef void			(*t_fp_destroy_content)(void*);
 
 struct s_list {
 	void	*content;
@@ -25,11 +24,13 @@ struct s_list {
 	t_list	prev;
 };
 
+typedef void			(*t_fp_destroy_content)(void*);
+
 t_list	list_create(void *content);
 bool	list_create_back(t_list *root, void *content);
 
 void	list_destroy(t_list lst, t_fp_destroy_content del);
-void	list_clear(t_list *lst, t_fp_destroy_content del);
+void	list_clear(void *root, t_fp_destroy_content del);
 
 bool	list_add_back(t_list *root, t_list new);
 bool	list_add_front(t_list *lst, t_list new);

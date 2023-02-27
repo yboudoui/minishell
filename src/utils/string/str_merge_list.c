@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   str_merge_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:19:57 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/23 11:03:05 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/23 15:15:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "string.h"
 
-void	prompt_destroy(void *data)
+char	*str_merge_list(char *str[])
 {
-	if (data == NULL)
-		return ;
-	list_clear(&data, commande_destroy);
-	free(data);
-}
+	char	*output;
+	char	*tmp;
 
-t_prompt	prompt_create(char *input)
-{
-	char		*error;
-	t_list		lexer_output;
-
-	if (input == NULL)
-		return (NULL);
-	lexer_output = NULL;
-	error = lexer(input, &lexer_output);
-	if (error)
-		return (NULL); //ERROR
-	syntaxer(&lexer_output);
-	return ((t_prompt)lexer_output);
+	output = ft_strdup("");
+	while (*str)
+	{
+		tmp = output;
+		output = ft_strjoin(tmp, *str);
+		free(tmp);
+		free(*str);
+		(*str) = NULL;
+		str += 1;
+	}
+	return (output);
 }

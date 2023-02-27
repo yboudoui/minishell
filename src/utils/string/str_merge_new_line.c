@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_line.h                                        :+:      :+:    :+:   */
+/*   str_merge_new_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 14:55:06 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/30 14:56:22 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/27 07:26:16 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/02/27 07:27:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_LINE_H
-# define READ_LINE_H
+#include "string.h"
 
-void	readline_handler(bool (*handler)(char *));
+char	*str_merge_new_line(char *s1, char *s2)
+{
+	char	*output;
+	char	*tmp;
 
-#endif
+	if (!is_empty(s1))
+		output = ft_strjoin(s1, "\n");
+	else
+		output = ft_strdup("");
+	tmp = output;
+	output = ft_strjoin(tmp, s2);
+	free(tmp);
+	free(s1);
+	free(s2);
+	return (output);
+}

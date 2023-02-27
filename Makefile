@@ -6,7 +6,11 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/02/27 14:41:03 by kdhrif           ###   ########.fr        #
+=======
+#    Updated: 2023/02/27 13:22:46 by yboudoui         ###   ########.fr        #
+>>>>>>> 51666af (yboudoui merge)
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +26,13 @@ RM					=	rm -f
 
 SRCS	=\
 ./src/utils/string/is_empty.c\
+./src/utils/string/str_merge_new_line.c\
+./src/utils/string/str_merge_list.c\
+./src/utils/string/str_join_list.c\
 ./src/utils/string/ft_strnstr.c\
+./src/utils/string/string_cmp.c\
 ./src/utils/string/str_merge.c\
+./src/utils/string/str_new_empty.c\
 ./src/utils/string/str_slice_prefix.c\
 ./src/utils/string/ft_strncmp.c\
 ./src/utils/string/ft_strlen.c\
@@ -34,6 +43,7 @@ SRCS	=\
 ./src/utils/string/ft_putchar_fd.c\
 ./src/utils/string/ft_strjoin.c\
 ./src/utils/string/ft_split.c\
+./src/utils/string/string_end_with.c\
 ./src/utils/string/list_to_str_array.c\
 ./src/utils/string/string_array_destroy.c\
 ./src/utils/string/ft_strdup.c\
@@ -58,6 +68,7 @@ SRCS	=\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/environment_list.c\
+<<<<<<< HEAD
 ./src/exec/pipex/exit_macro.c\
 ./src/exec/pipex/dup.c\
 ./src/exec/pipex/null_str_err.c\
@@ -75,6 +86,11 @@ SRCS	=\
 ./src/exec/pipex/close.c\
 ./src/exec/pipex/pipeline_status.c\
 ./src/exec/pipex/heredoc.c\
+=======
+./src/execution/heredoc/heredoc.c\
+./src/execution/execution.c\
+./show/lexer_show.c\
+>>>>>>> 51666af (yboudoui merge)
 
 INCS	=\
 ./show\
@@ -82,13 +98,16 @@ INCS	=\
 ./inc/utils/list\
 ./inc/utils\
 ./inc/utils/memory\
+./inc/heredoc\
 ./inc/parser\
 ./inc/parser/prompt/commande\
 ./inc/parser/prompt\
 ./inc/parser/lexer\
+./inc/parser/lexer\
+./inc/parser/lexer\
 ./inc/parser/expander\
 ./inc/parser/environment\
-./inc/read_line\
+./inc\
 
 OBJS				=	$(SRCS:.c=.o)
 
@@ -114,14 +133,16 @@ fclean:		clean
 
 re:			fclean all
 
-fsanitize:	fclean
-			@$(MAKE) all -C . CFLAGS="-Wall -Wextra -Werror -DCOLORED \
-			-fsanitize=address"
+fsanitize:	CFLAGS+= -DCOLORED -fsanitize=address -g
+fsanitize:	re
 
-valgrind:	fclean
-			@$(MAKE) all -C . CFLAGS="-Wall -Wextra -Werror -DCOLORED -g3"
+#			ASAN_OPTIONS=suppressions=.readline.fsanitize.supp"
+
+valgrind:	CFLAGS+= -DCOLORED -g3
+valgrind:	re
+			@clear
 			@valgrind														\
-			-s																\
+			-q																\
 			--suppressions=./.readline.supp									\
 			--leak-check=full												\
 			--show-leak-kinds=all											\
