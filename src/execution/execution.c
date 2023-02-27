@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 16:27:56 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 18:16:26 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	execution(t_list env, t_prompt prompt)
 	if (heredoc(prompt))
 		return (EXIT_FAILURE);
 	expand_all_command(env, prompt);
+	ft_lstiter((t_list)prompt, print_commande_line);
 	fork_pid(&pid);
 	if (pid == 0)
 		pipex(env, prompt);

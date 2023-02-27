@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 16:30:13 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 18:09:16 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-
-typedef struct s_prompt	*t_prompt;
-
-//typedef struct s_cmd t_cmd;
-/* struct s_cmd { */
-/* 	char**	argv; */
-/* 	t_list	redir_in; //content can be casted as char * */
-/* 	t_list	redir_out; //content can be casted as char * */
-/* 	char*	here_document; // need to wait for it to be done */
-/* }; */
-
-/* typedef struct s_list_commande { */
-/* 	t_commande	content; */
-/* 	struct s_list_commande	*next; */
-/* 	struct s_list_commande	*prev; */
-/* }	*t_list_commande; */
-
 
 int	execution(t_list env, t_prompt prompt);
 

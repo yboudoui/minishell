@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:00 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:20:58 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:06:39 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	get_input_by_type(t_list *root, t_token_type type)
 	while (lst)
 	{
 		token = lst->content;
-		if (token->type & type)
+		if (token->type == type)
 		{
 			if (!lst->next || ((t_token)lst->next->content)->type == type)
 			{
