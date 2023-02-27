@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/02/27 15:23:40 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/02/27 17:22:28 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,9 @@ SRCS	=\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/environment_list.c\
+./src/exec/pipex/get_paths.c\
 ./src/exec/pipex/exit_macro.c\
+./src/exec/pipex/infile.c\
 ./src/exec/pipex/dup.c\
 ./src/exec/pipex/null_str_err.c\
 ./src/exec/pipex/free_str.c\

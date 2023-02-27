@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:15:53 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:29:11 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:18:04 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "lexer.h"
 # include "syntaxer.h"
+# include "../../../inc/minishell.h"
 
 # include "commande.h"
 # include "environment.h"

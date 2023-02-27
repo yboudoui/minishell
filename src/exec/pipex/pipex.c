@@ -6,36 +6,50 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 15:33:17 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:21:16 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../../inc/minishell.h"
 
+static int	ft_lstsize_prompt(t_prompt lst)
+{
+	int	out;
+
+	out = 0;
+	while (lst)
+	{
+		out += 1;
+		lst = lst->next;
+	}
+	return (out);
+}
+
 void pipex(t_list env, t_prompt prompt)
 {
-	t_list_commande 		cmd;
+	t_list_commande 		cmd_list;
 	t_pipex					pipex;
+	t_commande              cmd;
 	static const t_pipex	EMPTY_PIP;
 	int						i;
 
 	pipex = EMPTY_PIP;
-	pipex.argc = ft_lstsize((t_list)prompt->content);
-	printf("%d\n", pipex.argc);
-	exit(0);
-	cmd = (t_list_commande)prompt->content;
+	pipex.argc = ft_lstsize_prompt(prompt);
+	cmd_list = (t_list_commande)prompt->content;
 	pipex.paths = get_paths(env, &pipex);
 	pipex.env = env;
 	i = 0;
-	while (cmd)
+	while (cmd_list)
 	{
-		pipex.infile = infile(cmd->content->redir_in);
+		cmd = (t_commande)cmd_list->content;
+		pipex.infile = infile(cmd->redir_in);
+		exit(1);
 		if (pipex.infile != -1)
-			pipex.outfile = outfile(cmd->content->redir_out);
+			pipex.outfile = outfile(cmd->redir_out);
 		if (pipex.outfile != -1)
-			execute((char **)cmd->content->argv, &pipex, i);
+			execute((char **)cmd->argv, &pipex, i);
 		i++;
-		cmd = cmd->next;
+		cmd_list = cmd_list->next;
 	}
 }
 
@@ -190,53 +204,7 @@ t_cmd *cmd_create(t_commande cmd)
 	return (new);
 }
 
-char	**get_paths(t_list env, t_pipex *pipex)
-{
-	char	**paths;
-	char	*path;
-	t_list	tmp;
 
-	tmp = env;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->content, "PATH=", 5) == 0)
-		{
-			path = ft_strdup(tmp->content + 5);
-			if (path == NULL)
-				return (NULL);
-			paths = ft_split(path, ':');
-			if (paths == NULL)
-				return (NULL);
-			free(path);
-			pipex->path = true;
-			return (paths);
-		}
-		tmp = tmp->next;
-	}
-	pipex->path = false;
-	return (NULL);
-}
-
-int infile(t_list redir_in)
-{
-	int	fd;
-
-	if (redir_in == NULL)
-		return (STDIN_FILENO);
-	fd = -1;
-	while (redir_in)
-	{
-		fd = f_open((char *)redir_in->content, O_RDONLY, 0);
-		if (fd == -1 && redir_in->next == NULL)
-			return (-1);
-		if (fd != -1 && redir_in->next != NULL)
-			close_fd(&fd);
-		if (fd != -1 && redir_in->next == NULL)
-			return (fd);
-		redir_in = redir_in->next;
-	}
-	return (STDIN_FILENO);
-}
 
 int	outfile(t_list redir_out)
 {

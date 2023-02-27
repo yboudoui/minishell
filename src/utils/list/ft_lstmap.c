@@ -6,11 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:47:02 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/26 18:03:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:15:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+#include "../../../inc/minishell.h"
 
 void	ft_lstiter(t_list lst, void (*f)(void *))
 {

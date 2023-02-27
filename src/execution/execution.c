@@ -6,11 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:37:24 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:27:56 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../inc/minishell.h"
 
 void	expand_all_command(t_list env, t_prompt cmd)
 {
@@ -31,7 +31,6 @@ int	execution(t_list env, t_prompt prompt)
 	if (heredoc(prompt))
 		return (EXIT_FAILURE);
 	expand_all_command(env, prompt);
-
 	fork_pid(&pid);
 	if (pid == 0)
 		pipex(env, prompt);
