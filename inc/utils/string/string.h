@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/22 15:44:35 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 12:33:19 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <stdbool.h>
 
 typedef bool	(*t_fp_is_charset)(int);
+
+char	*ft_strchr(const char *s, int c);
+
 bool	is_space(int c);
 bool	is_empty(char *str);
 
