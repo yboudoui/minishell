@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/26 12:30:36 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/27 12:45:26 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,43 @@ char *check_fpath(t_pipex *pipex, char *cmd)
 		return (NULL);
 }
 
+
+char *check_slash(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	if (str[i  - 1] == '/')
+		str[i - 1] = '\0';
+	return (str);
+}
+
 char *get_cmd_path(t_pipex *pipex, char *cmd)
 {
 	char	*tmp1;
 	char	*tmp2;
+	int		i;
 
 	tmp1 = check_fpath(pipex, cmd);
 	if (tmp1 != NULL)
 		return (tmp1);
+	path_null(pipex, cmd);
+	i = -1;
+	while (pipex->paths[++i])
+	{
+		check_slash();
+		tmp1 = ft_strjoin(pipex->paths[i], "/");
+		tmp2 = ft_strjoin(tmp1, cmd);
+		free(tmp1);
+		if (access(tmp2, F_OK) == 0)
+		{
+			free(pipex->paths);
+			return (tmp2);
+		}
+		free(tmp2);
+	}
 }
 
 int exec_cmd(t_pipex *pipex, char **argv, int in, int out)
