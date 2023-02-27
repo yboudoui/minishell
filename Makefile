@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/02/27 17:22:28 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/02/27 19:01:44 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ SRCS	=\
 ./src/exec/pipex/close.c\
 ./src/exec/pipex/pipeline_status.c\
 ./src/exec/pipex/heredoc.c\
+./src/exec/pipex/outfile.c\
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/execution.c\
 ./show/lexer_show.c\
