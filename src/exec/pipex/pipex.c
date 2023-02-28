@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/27 19:25:01 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:42:43 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ static int	ft_lstsize_prompt(t_prompt lst)
 		lst = lst->next;
 	}
 	return (out);
+}
+
+// ce petit bout de code permet seulement de visualiser que les redir out ce passe bien
+// tu pet le supprimer
+void print_redir_out(t_list redir)
+{
+	t_token	tok;
+
+	while (redir)
+	{
+		tok = redir->content;
+		printf("%u %u %u\n", TOKEN_REDIRECT_OUT, TOKEN_REDIRECT_OUT_APPEND, tok->type);
+		if (tok->type == TOKEN_REDIRECT_OUT)
+			printf("--------------TRUNCATE %s\n", tok->input);
+		if (tok->type == TOKEN_REDIRECT_OUT_APPEND)
+			printf("--------------APPEND %s\n", tok->input);
+		redir = redir->next;
+	}
 }
 
 // actuellement t_prompt et t_list_commande sont extremement similaire
@@ -48,8 +66,13 @@ void pipex(t_list env, t_prompt prompt)
 	{
 		cmd = (t_commande)(cmd_list->content);
 		pipex.infile = infile(cmd->redir_in);
+
+		// petit finction pour visualiser les redir out
+		print_redir_out(cmd->redir_out);
+		//------------------------------
+
 		t_token tok = cmd->redir_out->content;
-		printf("redir_out input = %s", tok->input);
+		printf("redir_out input = %s\n", tok->input);
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
 		printf("outfile return = %d\n", pipex.outfile);

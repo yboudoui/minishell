@@ -6,16 +6,18 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:00 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 19:29:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:19:21 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commande.h"
 #include "../../../inc/minishell.h"
 
+#include <stdio.h>
 t_list	get_input_by_type(t_list *root, t_token_type type)
 {
 	t_token	token;
+	t_token	tmp;
 	t_list	new;
 	t_list	out;
 	t_list	lst;
@@ -35,7 +37,9 @@ t_list	get_input_by_type(t_list *root, t_token_type type)
 				list_clear(&new, token_destroy);
 				return (NULL);
 			}
-			list_create_back(&new, token_dup(lst->next->content));
+			tmp = token_dup(lst->next->content);
+			tmp->type = token->type;
+			list_create_back(&new, tmp);
 			lst = lst->next;
 		}
 		else
