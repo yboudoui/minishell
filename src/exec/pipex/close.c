@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:37:43 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/25 17:39:13 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/28 17:46:59 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	close_fd(int *fd)
 {
 	if (close(*fd) == -1)
-		generic_err(NULL , 1);
+		generic_err("close", NULL, 1);
 	else
 		*fd = -1;
 }

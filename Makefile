@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/02/27 19:01:44 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/02/28 17:37:27 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,8 @@ SRCS	=\
 ./src/exec/pipex/exit_macro.c\
 ./src/exec/pipex/infile.c\
 ./src/exec/pipex/dup.c\
-./src/exec/pipex/null_str_err.c\
 ./src/exec/pipex/free_str.c\
+./src/exec/pipex/stat.c\
 ./src/exec/pipex/success.c\
 ./src/exec/pipex/get_next_line_utils.c\
 ./src/exec/pipex/fork.c\
@@ -84,6 +84,10 @@ SRCS	=\
 ./src/exec/pipex/pipeline_status.c\
 ./src/exec/pipex/heredoc.c\
 ./src/exec/pipex/outfile.c\
+./src/exec/pipex/get_cmd_path.c\
+./src/exec/pipex/cmd.c\
+./src/exec/pipex/null_str_err.c\
+./src/exec/pipex/parse_env.c\
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/execution.c\
 ./show/lexer_show.c\
