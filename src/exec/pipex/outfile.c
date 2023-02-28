@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:01:53 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 13:36:29 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:25:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	outfile(t_list redir_out)
 
 	if (redir_out == NULL)
 	{
+		printf("redir_out is null\n");
 		return (STDOUT_FILENO);
 	}
 	fd = -1;
