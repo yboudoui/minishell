@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 14:29:42 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:09:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,6 @@ static int	ft_lstsize_prompt(t_prompt lst)
 	return (out);
 }
 
-// ce petit bout de code permet seulement de visualiser que les redir out ce passe bien
-// tu pet le supprimer
-void print_redir_out(t_list redir)
-{
-	t_token	tok;
-
-	while (redir)
-	{
-		tok = redir->content;
-		printf("%u %u %u\n", TOKEN_REDIRECT_OUT, TOKEN_REDIRECT_OUT_APPEND, tok->type);
-		if (tok->type == TOKEN_REDIRECT_OUT)
-			printf("--------------TRUNCATE %s\n", tok->input);
-		if (tok->type == TOKEN_REDIRECT_OUT_APPEND)
-			printf("--------------APPEND %s\n", tok->input);
-		redir = redir->next;
-	}
-}
-
-// actuellement t_prompt et t_list_commande sont extremement similaire
-// on pourrai les intervertirent sans problème mais on a ne la pas fait avant mon départ
 void pipex(t_list env, t_prompt prompt)
 {
 	t_list_commande 		cmd_list;
@@ -55,10 +35,7 @@ void pipex(t_list env, t_prompt prompt)
 
 	pipex = EMPTY_PIP;
 	pipex.argc = ft_lstsize_prompt(prompt);
-// la confusion que tu fait ici c'est que tu pense que t_prompt->content est une list de commande
-// mais ça n'est plus le cas depuis se matin
-//	cmd_list = (t_list_commande)prompt->content;//		<---- kdhrif
-	cmd_list = (t_list_commande)prompt;//		<---- yboudoui
+	cmd_list = (t_list_commande)prompt;
 	pipex.paths = get_paths(env, &pipex);
 	pipex.env = env;
 	i = 0;
@@ -66,140 +43,54 @@ void pipex(t_list env, t_prompt prompt)
 	{
 		cmd = (t_commande)(cmd_list->content);
 		pipex.infile = infile(cmd->redir_in);
-		// petit finction pour visualiser les redir out
-		print_redir_out(cmd->redir_out);
-		t_token tok = cmd->redir_out->content;
-		printf("redir_out input = %s\n", tok->input);
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
-		printf("outfile return = %d\n", pipex.outfile);
-		exit(1);
 		if (pipex.outfile != -1)
-			execute((char **)cmd->argv, &pipex, i);
+			execute(cmd->argv, &pipex, i);
 		i++;
 		cmd_list = cmd_list->next;
 	}
 }
 
-char *check_fpath(t_pipex *pipex, char *cmd)
+char **parse_the_fucking_arg(t_list argv, t_pipex *pipex)
 {
-	if (ft_strchr(cmd, '/'))
-	{
-		if (access(cmd, F_OK) == 0)
-			return (cmd);
-		else
-		{
-			if (pipex->path == false)
-				generic_err("No such file or directory", 2);
-			else
-				generic_err("Command not found", 2);
-			return (NULL);
-		}
-	}
-	else
-		return (NULL);
-}
-
-
-void	null_str_err(char *str)
-{
-	if (str == NULL)
-		generic_err("Malloc error.\n", 0);
-}
-
-
-char *check_slash(char *str)
-{
+	char **arg;
+	char **ret;
 	int i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	if (str[i  - 1] == '/')
-		str[i - 1] = '\0';
-	return (str);
-}
-
-char *get_cmd_path(t_pipex *pipex, char *cmd)
-{
-	char	*tmp1;
-	char	*tmp2;
-	int		i;
-
-	tmp1 = check_fpath(pipex, cmd);
-	if (tmp1 != NULL)
-		return (tmp1);
-	path_null(pipex, cmd);
-	i = -1;
-	while (pipex->paths[++i])
+	ret = malloc((pipex->argc + 1) * sizeof(char *));
+	if (ret == NULL)
 	{
-		check_slash(pipex->paths[i]);
-		tmp1 = ft_strjoin(pipex->paths[i], "/");
-		null_str_err(tmp1);
-		tmp2 = ft_strjoin(tmp1, cmd);
-		null_str_err(tmp2);
-		free(tmp1);
-		if (access(tmp2, F_OK) == 0)
-			return (tmp2);
-		free(tmp2);
+		generic_err("Malloc failed", NULL, 3);
+		return (NULL);
 	}
-	return (NULL);
-}
-
-char **parse_env(t_list env)
-{
-	char	**envp;
-	int		i;
-	t_env_var tmp;
-	char *tmp1;
-	char *tmp2;
-
 	i = 0;
-	envp = (char **)malloc(sizeof(char *) * (ft_lstsize(env) + 1));
-	null_str_err((char *)envp);
-	while (env)
+	while (argv)
 	{
-		tmp = (t_env_var)env->content;
-		tmp1 = ft_strjoin(tmp->name, "=");
-		null_str_err(tmp1);
-		tmp2 = ft_strjoin(tmp1, tmp->value);
-		null_str_err(tmp2);
-		free(tmp1);
-		envp[i] = tmp2;
-		null_str_err(envp[i]);
+		arg = (char **)argv->content;
+		ret[i] = arg[0];
 		i++;
-		env = env->next;
+		argv = argv->next;
 	}
-	envp[i] = NULL;
-	return (envp);
+	ret[i] = (char *)0;
+	return (ret);
 }
 
-int exec_cmd(t_pipex *pipex, char **argv, int in, int out)
-{
-	char *cmd_path;
-
-	dup_fd(in, STDIN_FILENO);
-	dup_fd(out, STDOUT_FILENO);
-	cmd_path = get_cmd_path(pipex, argv[0]);
-	if (cmd_path == NULL)
-		return (EXIT_FAILURE);
-	if (execve(cmd_path, argv, parse_env(pipex->env)) == -1)
-		generic_err("Execve error.\n", 0);
-	return (1);
-}
-
-void execute(char **argv, t_pipex *pipex, int i)
+void execute(t_list shit, t_pipex *pipex, int i)
 {
 	pid_t	pid;
+	char **argv;
 
+	argv = parse_the_fucking_arg(shit, pipex);
+	if (argv == NULL)
+		return;
 	pipe_fd(pipex, pipex->fd);
 	fork_pid(&pid);
 	if (pid == 0)
 	{
 		close_fd(&pipex->fd[0]);
-		exec_cmd(pipex, argv, pipex->infile, pipex->outfile);
 		if (exec_cmd(pipex, argv, pipex->infile, pipex->outfile) == -1)
-			generic_err("execve", 1);
+			generic_err("execve", NULL, 1);
 	}
 	else 
 	{

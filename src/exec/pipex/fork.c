@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 19:30:54 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/25 19:31:39 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/28 17:43:23 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void	fork_pid(int *pid)
 {
 	*pid = fork();
 	if (*pid == -1)
-		generic_err("Fork", 1);
+		generic_err("Fork", NULL, 1);
 }
