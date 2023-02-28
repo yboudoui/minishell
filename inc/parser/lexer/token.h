@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:13:21 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:28:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 # include "list.h"
 
 typedef enum e_token_type {
-	TOKEN_SPACES				=	(1UL << 0),
-	TOKEN_WORD					=	(1UL << 1),
-	TOKEN_DOUBLE_QUOTES			=	(1UL << 2),
-	TOKEN_SIMPLE_QUOTES			=	(1UL << 3),
-	TOKEN_WILDCARD				=	(1UL << 4),
-	TOKEN_COMMANDE				=	(1UL << 5),
-	TOKEN_REDIRECT_IN			=	(1UL << 6),
-	TOKEN_HERE_DOCUMENT			=	(1UL << 7),
-	TOKEN_PIPE					=	(1UL << 8),
-	TOKEN_REDIRECT_OUT			=	(1UL << 9),
-	TOKEN_REDIRECT_OUT_APPEND	=	(1UL << 10),
-	TOKEN_AND					=	(1UL << 11),
-	TOKEN_OR					=	(1UL << 12),
-	TOKEN_SUBSHELL				=	(1UL << 13),
-	MAX_TOKEN					=	(1UL << 14),
+	TOKEN_SPACES				=	(1 << 0),
+	TOKEN_WORD					=	(1 << 1),
+	TOKEN_DOUBLE_QUOTES			=	(1 << 2),
+	TOKEN_SIMPLE_QUOTES			=	(1 << 3),
+	TOKEN_WILDCARD				=	(1 << 4),
+	TOKEN_COMMANDE				=	(1 << 5),
+	TOKEN_REDIRECT_IN			=	(1 << 6),
+	TOKEN_HERE_DOCUMENT			=	(1 << 7),
+	TOKEN_PIPE					=	(1 << 8),
+	TOKEN_REDIRECT_OUT			=	(1 << 9),
+	TOKEN_REDIRECT_OUT_APPEND	=	(1 << 10),
+	TOKEN_AND					=	(1 << 11),
+	TOKEN_OR					=	(1 << 12),
+	TOKEN_SUBSHELL				=	(1 << 13),
+	MAX_TOKEN					=	(1 << 14),
 }	t_token_type;
 
 typedef struct s_token	*t_token;
