@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 13:42:43 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:25:52 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,8 @@ void pipex(t_list env, t_prompt prompt)
 	{
 		cmd = (t_commande)(cmd_list->content);
 		pipex.infile = infile(cmd->redir_in);
-
 		// petit finction pour visualiser les redir out
 		print_redir_out(cmd->redir_out);
-		//------------------------------
-
 		t_token tok = cmd->redir_out->content;
 		printf("redir_out input = %s\n", tok->input);
 		if (pipex.infile != -1)
