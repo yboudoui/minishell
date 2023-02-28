@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 20:28:27 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/28 20:39:14 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void execute(t_list shit, t_pipex *pipex, int i)
 	if (pid == 0)
 	{
 		close_fd(&pipex->fd[0]);
-		if (pipex->outfile == STDOUT_FILENO)
+	if (pipex->outfile == STDOUT_FILENO)
 			exec_cmd(pipex, argv, pipex->infile, pipex->outfile);
-		else 
+	else 
 			exec_cmd(pipex, argv, pipex->infile, pipex->outfile);
 	}
 	else 

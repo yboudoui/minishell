@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 20:36:19 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/02/28 20:40:03 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ int exec_cmd(t_pipex *pipex, char **argv, int in, int out)
 	cmd_path = get_cmd_path(pipex, argv[0]);
 	if (cmd_path == NULL)
 		return (EXIT_FAILURE);
-	/* while (argv && *argv) */
-	/* 	printf("argv = %s\n", *argv++); */
-	exit(1);
 	if (execve(cmd_path, argv, parse_env(pipex->env)) == -1)
 		generic_err("execve", NULL, 1);
 	return (-1);
