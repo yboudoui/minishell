@@ -6,13 +6,13 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 17:55:09 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/01 16:09:39 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static char *check_fpath(t_pipex *pipex, char *cmd)
+static inline char *check_fpath(t_pipex *pipex, char *cmd)
 {
 	pipex->remove = 1;
 	if (ft_strchr(cmd, '/'))
@@ -34,7 +34,7 @@ static char *check_fpath(t_pipex *pipex, char *cmd)
 		return (NULL);
 }
 
-static char *check_slash(char *str)
+static inline char *check_slash(char *str)
 {
 	int i;
 

@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/01 14:23:10 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:14:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_pipex
 	int		status;
 	int		argc;
 	int	 	remove;
+	int		i;
 	t_list	env;
 }	t_pipex;
 
@@ -37,7 +38,7 @@ void	null_str_err(char *str);
 
 char	**parse_env(t_list env);
 
-int		exec_cmd(t_pipex *pipex, char **argv, int in, int out);
+int		exec_cmd(t_pipex *pipex, char **argv);
 
 char	*get_cmd_path(t_pipex *pipex, char *cmd);
 
@@ -49,15 +50,15 @@ void	pipeline_status(t_pipex *pipex, int i, int pid);
 
 void	path_null(t_pipex *pipex, char *cmd);
 
-int		execute(char *argv[], t_pipex *pipex, int i);
+int		execute(char *argv[], t_pipex *pipex);
 
-void	close_fd(int *fd);
+int		close_fd(int *fd);
 
 void	pipe_fd(t_pipex *pipex, int *fd);
 
 void	fork_pid(int *pid);
 
-void	dup_fd(int fd, int new_fd);
+int		dup_fd(int fd, int new_fd);
 
 char	**get_paths(t_list env, t_pipex *pipex);
 
@@ -67,6 +68,6 @@ int		outfile(t_list redir_out);
 
 int		f_open(char *file, int flag, int mode);
 
-void	generic_err(char *cmd, char *error, int system);
+int		generic_err(char *cmd, char *error, int system);
 
 #endif
