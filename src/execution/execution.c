@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/28 19:13:34 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/01 12:41:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,12 @@ void	expand_all_command(t_list env, t_prompt cmd)
 
 int	execution(t_list env, t_prompt prompt)
 {
-	pid_t pid;
-	int status;
-
 	if (prompt == NULL)
 		return (EXIT_FAILURE);
 	if (heredoc(prompt))
 		return (EXIT_FAILURE);
 	expand_all_command(env, prompt);
-	fork_pid(&pid);
-	if (pid == 0)
-		pipex(env, prompt);
-	else
-		waitpid(pid, &status, 0);
+	if (pipex(env, prompt))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

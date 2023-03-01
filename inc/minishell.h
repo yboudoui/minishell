@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 18:09:16 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:58:28 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include "../inc/parser/lexer/lexer.h"
 # include "../inc/parser/expander/expander.h"
 # include "../inc/parser/environment/environment.h"
-# include "../inc/exec/exec.h"
-# include "../inc/heredoc/heredoc.h"
+# include "../inc/execution/pipex/exec.h"
+# include "../inc/execution/heredoc/heredoc.h"
 
 # include <stdbool.h>
 # include <stdarg.h>

@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:15:53 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 13:05:26 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/01 13:12:35 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/01 14:22:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#ifndef CMD_H
+# define CMD_H
 
-# include "lexer.h"
-# include "syntaxer.h"
-# include "../../../inc/minishell.h"
-
+# include "list.h"
 # include "commande.h"
-# include "environment.h"
 
-typedef struct s_prompt	*t_prompt;
+typedef struct s_cmd	*t_cmd;
 
-struct s_prompt {
-	t_commande	content;
-	t_prompt	next;
-	t_prompt	prev;
+struct s_cmd {
+	char	**argv;
+	t_list	redir_in;
+	t_list	redir_out;
 };
 
-t_prompt	prompt_create(char *input);
-void		prompt_destroy(void *input);
+t_cmd	cmd_create(t_commande cmd);
+void	cmd_destroy(void *data);
 
 #endif

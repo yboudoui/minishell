@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/02/28 17:37:27 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/03/01 13:59:42 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,32 +64,26 @@ SRCS	=\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/environment_list.c\
-./src/exec/pipex/get_paths.c\
-./src/exec/pipex/exit_macro.c\
-./src/exec/pipex/infile.c\
-./src/exec/pipex/dup.c\
-./src/exec/pipex/free_str.c\
-./src/exec/pipex/stat.c\
-./src/exec/pipex/success.c\
-./src/exec/pipex/get_next_line_utils.c\
-./src/exec/pipex/fork.c\
-./src/exec/pipex/get_next_line.c\
-./src/exec/pipex/pipe.c\
-./src/exec/pipex/error.c\
-./src/exec/pipex/pipex.c\
-./src/exec/pipex/exception.c\
-./src/exec/pipex/path_null.c\
-./src/exec/pipex/open.c\
-./src/exec/pipex/close.c\
-./src/exec/pipex/pipeline_status.c\
-./src/exec/pipex/heredoc.c\
-./src/exec/pipex/outfile.c\
-./src/exec/pipex/get_cmd_path.c\
-./src/exec/pipex/cmd.c\
-./src/exec/pipex/null_str_err.c\
-./src/exec/pipex/parse_env.c\
 ./src/execution/heredoc/heredoc.c\
+./src/execution/cmd.c\
 ./src/execution/execution.c\
+./src/execution/pipex/success.c\
+./src/execution/pipex/outfile.c\
+./src/execution/pipex/cmd.c\
+./src/execution/pipex/stat.c\
+./src/execution/pipex/get_paths.c\
+./src/execution/pipex/pipe.c\
+./src/execution/pipex/parse_env.c\
+./src/execution/pipex/infile.c\
+./src/execution/pipex/pipex.c\
+./src/execution/pipex/path_null.c\
+./src/execution/pipex/error/dup.c\
+./src/execution/pipex/error/null_str_err.c\
+./src/execution/pipex/error/fork.c\
+./src/execution/pipex/error/error.c\
+./src/execution/pipex/get_cmd_path.c\
+./src/execution/pipex/open.c\
+./src/execution/pipex/pipeline_status.c\
 ./show/lexer_show.c\
 
 INCS	=\
@@ -98,7 +92,6 @@ INCS	=\
 ./inc/utils/list\
 ./inc/utils\
 ./inc/utils/memory\
-./inc/heredoc\
 ./inc/parser\
 ./inc/parser/prompt/commande\
 ./inc/parser/prompt\
@@ -107,8 +100,10 @@ INCS	=\
 ./inc/parser/lexer\
 ./inc/parser/expander\
 ./inc/parser/environment\
-./inc/exec\
 ./inc\
+./inc/execution/heredoc\
+./inc/execution/pipex\
+./inc/execution\
 
 OBJS				=	$(SRCS:.c=.o)
 
