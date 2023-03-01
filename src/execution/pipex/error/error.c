@@ -6,13 +6,13 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:55:39 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 17:50:12 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/01 16:30:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "../../../../inc/minishell.h"
 
-void	generic_err(char *cmd, char *error, int system)
+int	generic_err(char *cmd, char *error, int system)
 {
 	if (system == 1)
 	{
@@ -26,4 +26,5 @@ void	generic_err(char *cmd, char *error, int system)
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(error, 2);
 	}
+	return (-1);
 }
