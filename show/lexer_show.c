@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:35:02 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:51:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	print_colored_token(void *content)
 		return ((void)printf("_\n"));
 	input = content;
 	if (input->type == TOKEN_WORD)
-		printf("\e[30m\e[43m%s\e[0m", input->input);
+		printf("\e[30m\e[43m%s\e[0m", (char *)input->input);
 	else if (input->type == TOKEN_DOUBLE_QUOTES)
-		printf("\e[30m\e[101m%s\e[0m", input->input);
+		printf("\e[30m\e[101m%s\e[0m", (char *)input->input);
 	else if (input->type == TOKEN_SIMPLE_QUOTES)
-		printf("\e[30m\e[105m%s\e[0m", input->input);
+		printf("\e[30m\e[105m%s\e[0m", (char *)input->input);
 	else if (input->type == TOKEN_SPACES)
-		printf("\033[47m%s\033[0m", input->input);
+		printf("\033[47m%s\033[0m", (char *)input->input);
 	else if (input->type == TOKEN_SUBSHELL)
-		printf("\033[104m%s\033[0m", input->input);
+		printf("\033[104m%s\033[0m", (char *)input->input);
 	else
-		printf("\e[42m%s\e[0m", input->input);
+		printf("\e[42m%s\e[0m", (char *)input->input);
 	printf(" ");
 }
 
@@ -123,6 +123,5 @@ void	print_commande_line(void *content)
 	print_colored_token_list("\targv: ", cmd->argv);
 	print_colored_token_list("\tredir_in: ", cmd->redir_in);
 	print_colored_token_list("\tredir_out: ", cmd->redir_out);
-	print_colored_token_list("\there_document: ", cmd->heredoc.list);
 	printf("--------------------------\n");
 }
