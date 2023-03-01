@@ -6,14 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 12:27:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:28:23 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
-
-#include "show.h"
-#include <stdio.h>
 
 int	stop = 0;
 
@@ -26,49 +23,53 @@ static void	signal_control_c(int sig)
 	stop = 1;
 }
 
-static int	heredoc_read(int fd, t_token token)
+static int	heredoc_read(t_token token)
 {
+	int		fds[2];
+	int		*new;
 	char	*line;
 
+	if (token->type != TOKEN_HERE_DOCUMENT)
+		return (EXIT_SUCCESS);
 	str_new_empty(&line);
+	if (pipe(fds))
+		return (EXIT_FAILURE);
+	new = ft_calloc(1, sizeof(int));
+	if (new == NULL)
+		return (EXIT_FAILURE);
+	(*new) = fds[0];
 	while (line && string_cmp(line, token->input))
 	{
 		free(line);
-		if (stop)
-			return (close(fd), EXIT_FAILURE);
 		rl_on_new_line();
 		line = readline("> ");
-		if (line == NULL)
-			return (close(fd), EXIT_FAILURE);
+		if (stop || line == NULL)
+		{
+			close(fds[0]);
+			close(fds[1]);
+			return (EXIT_FAILURE);
+		}
 //		expand_all_command(env, prompt->commande);
 		if (!is_empty(line))
 			add_history(line);
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+		write(fds[1], line, ft_strlen(line));
+		write(fds[1], "\n", 1);
 	}
-	return (close(fd), EXIT_SUCCESS);
+	free(token->input);
+	token->input = new;
+	return (close(fds[1]), EXIT_SUCCESS);
 }
 
 static int	heredoc_commande(t_commande cmd)
 {
-	t_list	heredoc;
+	t_list	redir_in;
 
-	heredoc = cmd->heredoc.list;
-	if (heredoc == NULL)
-		return (EXIT_SUCCESS);
-	cmd->heredoc.pipe = ft_calloc(2, sizeof(int));
-	if (cmd->heredoc.pipe == NULL)
-		return (EXIT_FAILURE);
-	while (heredoc)
+	redir_in = cmd->redir_in;
+	while (redir_in)
 	{
-		if (pipe(cmd->heredoc.pipe))
+		if (heredoc_read(redir_in->content))
 			return (EXIT_FAILURE);
-		if (heredoc_read(cmd->heredoc.pipe[1], heredoc->content))
-			break ;
-//			return (EXIT_FAILURE);
-		heredoc = heredoc->next;
-		if (heredoc)
-			close(cmd->heredoc.pipe[0]);
+		redir_in = redir_in->next;
 	}
 	return (EXIT_SUCCESS);
 }

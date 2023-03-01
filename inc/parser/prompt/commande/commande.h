@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:15:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 13:13:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:26:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ struct s_commande {
 	t_list	argv;
 	t_list	redir_in;
 	t_list	redir_out;
-	struct s_heredoc {
-		t_list	list;
-		int		*pipe;
-	}	heredoc;
 };
 
 t_commande	commande_create(t_list lst);

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 12:41:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:23:56 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	execution(t_list env, t_prompt prompt)
 {
 	if (prompt == NULL)
 		return (EXIT_FAILURE);
-	if (heredoc(prompt))
+	if (!heredoc(prompt))
 		return (EXIT_FAILURE);
 	expand_all_command(env, prompt);
 	if (pipex(env, prompt))

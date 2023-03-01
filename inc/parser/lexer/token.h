@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/28 13:28:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:15:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef enum e_token_type {
 typedef struct s_token	*t_token;
 
 struct s_token {
-	char			*input;
+	void			*input;
 	t_token_type	type;
 };
 

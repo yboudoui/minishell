@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:00 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 14:00:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:26:57 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ t_commande	commande_create(t_list lst)
 	out = ft_calloc(1, sizeof(struct s_commande));
 	if (!out)
 		return (NULL);
-	out->redir_in = get_input_by_type(&lst, TOKEN_REDIRECT_IN);
+	out->redir_in = get_input_by_type(&lst, TOKEN_REDIRECT_IN | TOKEN_HERE_DOCUMENT);
 	out->redir_out = get_input_by_type(&lst, TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND);
-	out->heredoc.list = get_input_by_type(&lst, TOKEN_HERE_DOCUMENT);
 	out->argv = lst;
 	return (out);
 }
@@ -73,12 +72,6 @@ void	commande_destroy(void *data)
 		return ;
 	list_clear(&cmd->redir_in, token_destroy);
 	list_clear(&cmd->redir_out, token_destroy);
-	list_clear(&cmd->heredoc.list, token_destroy);
-	if (cmd->heredoc.pipe)
-	{
-		close(cmd->heredoc.pipe[0]);
-		free(cmd->heredoc.pipe);
-	}
 	list_clear(&cmd->argv, token_destroy);
 	free(data);
 }
