@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 15:51:58 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:20:43 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_colored_token_list(char *name, t_list lst)
 		return ;
 	if (name)
 		printf("%s", name);
-	ft_lstiter(lst, print_colored_token);
+	list_iter(lst, print_colored_token);
 	printf("\n");
 }
 
@@ -91,7 +91,7 @@ void	print_lexer_token_type(t_list lexer_output)
 {
 	if (!lexer_output)
 		return ((void)print_error("no token list"));
-	ft_lstiter(lexer_output, print_token_type);
+	list_iter(lexer_output, print_token_type);
 }
 
 void	print_argv(void *content)

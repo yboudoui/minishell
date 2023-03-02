@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 15:47:12 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/02 15:57:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-int	execution(t_list env, t_prompt prompt);
+int	execution(t_env_list env, t_prompt prompt);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/01 13:59:42 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/02 16:20:10 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS	=\
 ./src/utils/list/list_create.c\
 ./src/utils/list/list_last.c\
 ./src/utils/list/str_array_to_list.c\
+./src/utils/list/list_insert.c\
 ./src/utils/list/ft_lstmap.c\
 ./src/utils/list/list_add.c\
 ./src/utils/memory/ft_memcpy.c\
@@ -84,6 +85,10 @@ SRCS	=\
 ./src/execution/pipex/get_cmd_path.c\
 ./src/execution/pipex/open.c\
 ./src/execution/pipex/pipeline_status.c\
+./src/execution/builtin/cd.c\
+./src/execution/builtin/echo.c\
+./src/execution/builtin/export.c\
+./src/execution/builtin/pwd.c\
 ./show/lexer_show.c\
 
 INCS	=\
@@ -104,6 +109,7 @@ INCS	=\
 ./inc/execution/heredoc\
 ./inc/execution/pipex\
 ./inc/execution\
+./inc/execution/builtin\
 
 OBJS				=	$(SRCS:.c=.o)
 

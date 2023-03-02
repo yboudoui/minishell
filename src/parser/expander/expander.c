@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:35:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 09:59:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:01:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,21 @@ static char	*str_extract_remaining(char **str, size_t *index)
 	return (out);
 }
 
-char	*expand_variable(t_list env, char *var_name)
+char	*expand_variable(t_env_list env, char *var_name)
 {
-	t_env_var	var;
+	char	*variable_name;
 
 	while (env)
 	{
-		var = env->content;
-		if (ft_strncmp(var->name, var_name, ft_strlen(var->name)) == 0)
-			return (ft_strdup(var->value));
+		variable_name = env->var->name;
+		if (ft_strncmp(variable_name, var_name, ft_strlen(variable_name)) == 0)
+			return (ft_strdup(env->var->value));
 		env = env->next;
 	}
 	return (ft_strdup("\0"));
 }
 
-static char	*find_and_expand_variable(t_list env, char *str)
+static char	*find_and_expand_variable(t_env_list env, char *str)
 {
 	char	*out;
 	char	*remaining;
@@ -90,7 +90,7 @@ static char	*find_and_expand_variable(t_list env, char *str)
 	return (out);
 }
 
-void	list_find_and_expand_variable(t_list env, t_list token)
+void	list_find_and_expand_variable(t_env_list env, t_list token)
 {
 	t_token	cast;
 	char	*new;
@@ -108,7 +108,7 @@ void	list_find_and_expand_variable(t_list env, t_list token)
 	}
 }
 
-void	commande_expand_variable(t_list env, t_commande cmd)
+void	commande_expand_variable(t_env_list env, t_commande cmd)
 {
 	if (cmd == NULL)
 		return ;

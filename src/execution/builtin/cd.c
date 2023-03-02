@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.h                                         :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 07:39:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 15:57:12 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/02 07:52:52 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/02 16:21:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANDER_H
-# define EXPANDER_H
+#include "builtin.h"
 
-# include "environment.h"
-# include "commande.h"
-
-void	commande_expand_variable(t_env_list env, t_commande cmd);
-
-#endif
+int	cd(char *argv[])
+{
+//	if (argv == NULL || *argv != "cd")
+//		return (EXIT_FAILURE);
+	argv += 1;
+	if (chdir(*argv))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}

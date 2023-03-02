@@ -6,13 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 16:38:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:03:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	expand_all_command(t_list env, t_prompt cmd)
+void	expand_all_command(t_env_list env, t_prompt cmd)
 {
 	while (cmd)
 	{
@@ -21,7 +21,7 @@ void	expand_all_command(t_list env, t_prompt cmd)
 	}
 }
 
-int	execution(t_list env, t_prompt prompt)
+int	execution(t_env_list env, t_prompt prompt)
 {
 	if (prompt == NULL)
 		return (EXIT_FAILURE);

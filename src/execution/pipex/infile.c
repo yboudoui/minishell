@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 17:21:19 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/01 16:40:31 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/02 07:12:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	infile(t_list redir_in)
 {
 	int		fd;
 	t_token	token;
-	int		*heredoc;
 
 	if (redir_in == NULL)
 		return (1);

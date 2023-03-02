@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 14:09:41 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:58:06 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	signal_control_c(int sig)
 	rl_redisplay();
 }
 
-static int	read_prompt(t_list env)
+static int	read_prompt(t_env_list env)
 {
 	char		*line;
 	int			exe_stop;
@@ -34,7 +34,7 @@ static int	read_prompt(t_list env)
 		rl_on_new_line();
 		line = readline("~$ ");
 		if (!line)
-			return (EXIT_SUCCESS);
+			return (EXIT_SUCCESS);	// maybe not a good idea
 		if (!is_empty(line))
 		{
 			add_history(line);
@@ -50,7 +50,7 @@ static int	read_prompt(t_list env)
 
 int	main(int ac, char *av[], char *envp[])
 {
-	t_list					env;
+	t_env_list				env;
 	const struct sigaction	signals[2] = {
 	{.sa_handler = signal_control_c},
 	{.sa_handler = SIG_IGN}
