@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:05:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/13 08:15:20 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:20:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,20 @@ struct s_env_var {
 	char	*value;
 };
 
-t_env_var	env_var_create(char *str);
-void		env_var_destroy(void *input);
-t_list		env_var_as_path(t_env_var var);
+typedef struct s_env_list	*t_env_list;
 
-t_list		environment_list_create(char *envp[]);
+struct s_env_list {
+	t_env_var	var;
+	t_env_list	next;
+	t_env_list	prev;
+};
+
+t_env_var	environment_variable_create(char *name, char *value);
+void		environment_variable_destroy(void *input);
+t_env_var	env_var_create(char *str);
+void		environment_variable_replace(t_env_var *dest, t_env_var src);
+
+t_env_list	environment_list_create(char *envp[]);
 void		environment_list_destroy(void *data);
 
 #endif

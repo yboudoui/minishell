@@ -6,14 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:47:02 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 16:15:27 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:43:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include "../../../inc/minishell.h"
 
-void	ft_lstiter(t_list lst, void (*f)(void *))
+void	list_iter(t_list lst, void (*f)(void *))
 {
 	while (lst)
 	{
@@ -40,19 +39,6 @@ t_list	ft_lstmap(t_list lst, void *(*f)(void *), void (*del)(void *))
 	return (output);
 }
 
-int	ft_lstsize(t_list lst)
-{
-	int	out;
-
-	out = 0;
-	while (lst)
-	{
-		out += 1;
-		lst = lst->next;
-	}
-	return (out);
-}
-
 void	*list_to_array(t_list lst, void *(*f)(void *))
 {
 	size_t	index;
@@ -61,7 +47,7 @@ void	*list_to_array(t_list lst, void *(*f)(void *))
 
 	if (lst == NULL)
 		return (NULL);
-	size = ft_lstsize(lst);
+	size = list_size(lst);
 	out = ft_calloc(size + 1, sizeof(void *));
 	index = 0;
 	while (lst)

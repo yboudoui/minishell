@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/01 16:14:55 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/02 16:20:46 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_pipex
 	int		argc;
 	int	 	remove;
 	int		i;
-	t_list	env;
+	t_env_list	env;
 }	t_pipex;
 
 typedef struct s_prompt	*t_prompt;
@@ -36,15 +36,15 @@ int		is_dir(char *path);
 
 void	null_str_err(char *str);
 
-char	**parse_env(t_list env);
+char	**parse_env(t_env_list env);
 
 int		exec_cmd(t_pipex *pipex, char **argv);
 
 char	*get_cmd_path(t_pipex *pipex, char *cmd);
 
-char	**get_paths(t_list env, t_pipex *pipex);
+char	**get_paths(t_env_list env, t_pipex *pipex);
 
-int		pipex(t_list env, t_prompt prompt);
+int		pipex(t_env_list env, t_prompt prompt);
 
 void	pipeline_status(t_pipex *pipex, int i, int pid);
 
@@ -59,8 +59,6 @@ void	pipe_fd(t_pipex *pipex, int *fd);
 void	fork_pid(int *pid);
 
 int		dup_fd(int fd, int new_fd);
-
-char	**get_paths(t_list env, t_pipex *pipex);
 
 int		infile(t_list redir_in);
 

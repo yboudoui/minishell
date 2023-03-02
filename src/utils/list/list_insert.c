@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.h                                         :+:      :+:    :+:   */
+/*   list_insert.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 07:39:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 15:57:12 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/02 14:18:25 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/02 15:56:39 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANDER_H
-# define EXPANDER_H
+#include "list.h"
 
-# include "environment.h"
-# include "commande.h"
+void	list_new_insert_before(t_list root, void *data)
+{
+	t_list	new;
 
-void	commande_expand_variable(t_env_list env, t_commande cmd);
-
-#endif
+	if (root == NULL)
+		return ;
+	new = list_create(data);
+	if (new == NULL)
+		return ;
+	new->next = root->next;
+	new->prev = root;
+	root->next = new;
+	if (new->next)
+		new->next->prev = new;
+}

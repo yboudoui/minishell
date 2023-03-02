@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:08:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/11 15:56:05 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:29:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*cut_variable_name(char **str)
 	return (out);
 }
 
-void	env_var_destroy(void *data)
+void	environment_variable_destroy(void *data)
 {
 	t_env_var	input;
 
@@ -40,31 +40,41 @@ void	env_var_destroy(void *data)
 	free(input);
 }
 
+t_env_var	environment_variable_create(char *name, char *value)
+{
+	t_env_var	output;
+
+	if (name == NULL)
+		return (NULL);
+	output = ft_calloc(1, sizeof(struct s_env_var));
+	if (output == NULL)
+		return (NULL);
+	(*output) = (struct s_env_var){name, value};
+	return (output);
+}
+
+void	environment_variable_replace(t_env_var *dest, t_env_var src)
+{
+	if (dest == NULL)
+		return ;
+	environment_variable_destroy(*dest);
+	(*dest) = src;
+}
+
 t_env_var	env_var_create(char *str)
 {
-	t_env_var	out;
+	char	*name;
+	char	*value;
+	t_env_var	output;
 
 	if (str == NULL)
 		return (NULL);
-	out = ft_calloc(1, sizeof(struct s_env_var));
-	if (out == NULL)
+	name = cut_variable_name(&str);
+	if (name == NULL)
 		return (NULL);
-	out->name = cut_variable_name(&str);
-	out->value = ft_strdup(str);
-	if (out->name == NULL || out->value == NULL)
-		return (env_var_destroy(out), NULL);
-	return (out);
-}
-
-t_list	env_var_as_path(t_env_var variable)
-{
-	t_list	out;
-	char	**split;
-
-	if (variable == NULL)
-		return (NULL);
-	split = ft_split(variable->value, ':');
-	out = str_array_to_list(split);
-	string_array_destroy(split);
-	return (out);
+	value = ft_strdup(str);
+	output = environment_variable_create(name, value);
+	if (output)
+		return (output);
+	return (environment_variable_destroy(output), NULL);
 }

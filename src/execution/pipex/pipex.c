@@ -6,13 +6,13 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/01 16:17:56 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/02 16:20:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../../inc/minishell.h"
 
-int	pipex(t_list env, t_prompt prompt)
+int	pipex(t_env_list env, t_prompt prompt)
 {
 	t_pipex					pipex;
 	t_cmd					cmd;
