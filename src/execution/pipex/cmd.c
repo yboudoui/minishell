@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/02 16:31:43 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:59:50 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,13 @@ static inline int cmd_out(t_pipex *pipex)
 
 int exec_cmd(t_pipex *pipex, char **argv)
 {
-	char *cmd_path;
-
 	if (cmd_in(pipex) == -1)
 		return (-1);
 	if (cmd_out(pipex) == -1)
 		return (-1);
-	cmd_path = get_cmd_path(pipex, argv[0]);
-	if (cmd_path == NULL)
+	if (pipex->cmd_path == NULL)
 		return (EXIT_FAILURE);
-	if (execve(cmd_path, argv, parse_env(pipex->env)) == -1)
+	if (execve(pipex->cmd_path, argv, parse_env(pipex->env)) == -1)
 		return (generic_err("execve", NULL, 1));
 	return (-1);
 }

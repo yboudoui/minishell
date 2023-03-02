@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/02 16:34:28 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:55:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	pipex(t_env_list env, t_prompt prompt)
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
 		if (pipex.infile != -1 && pipex.outfile != -1)
-			if (execute(cmd->argv, &pipex))
-				return (EXIT_SUCCESS);
+			execute(cmd->argv, &pipex);
 		cmd_destroy(cmd);
+		pipex.path = false;
 		prompt = prompt->next;
 	}
 	while (waitpid(0, NULL, 0) != -1)
@@ -66,6 +66,12 @@ int	execute(char *argv[], t_pipex *pipex)
 	if (argv == NULL)
 		return (EXIT_SUCCESS);
 	pipe_fd(pipex, pipex->fd);
+	pipex->cmd_path = get_cmd_path(pipex, argv[0]);
+	if (pipex->cmd_path == NULL)
+	{
+		exit_code = CMD_NOT_FOUND;
+		return (EXIT_FAILURE);
+	}
 	fork_pid(&pid);
 	if (pid == 0)
 	{
