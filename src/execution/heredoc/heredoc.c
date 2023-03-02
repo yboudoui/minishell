@@ -6,15 +6,16 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 16:28:23 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:08:07 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
+#include "../../../inc/minishell.h"
 
 int	stop = 0;
 
-static void	signal_control_c(int sig)
+void	signal_control_c(int sig)
 {
 	if (sig != SIGINT)
 		return ;
@@ -41,12 +42,14 @@ static int	heredoc_read(t_token token)
 	while (line && string_cmp(line, token->input))
 	{
 		free(line);
-		rl_on_new_line();
 		line = readline("> ");
 		if (stop || line == NULL)
 		{
-			close(fds[0]);
+			/* close(fds[0]); */
 			close(fds[1]);
+			printf("bash: warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", (char *)token->input);
+			free(token->input);
+			token->input = new;
 			return (EXIT_FAILURE);
 		}
 //		expand_all_command(env, prompt->commande);
@@ -76,24 +79,18 @@ static int	heredoc_commande(t_commande cmd)
 
 int	heredoc(t_prompt cmd)
 {
-	int						pid;
 	const struct sigaction	sigint = {
 		.sa_handler = signal_control_c
 	};
+	struct sigaction old;
 
-	pid = fork();
-	if (pid == 0)
+	sigaction(SIGINT, &sigint, &old);
+	while (cmd)
 	{
-		sigaction(SIGINT, &sigint, NULL);
-		while (cmd)
-		{
-			if (heredoc_commande(cmd->content))
-				return (EXIT_FAILURE);
-			cmd = cmd->next;
-		}
-		return (EXIT_FAILURE);
+		if (heredoc_commande(cmd->content))
+			return (EXIT_FAILURE);
+		cmd = cmd->next;
 	}
-	else
-		waitpid(pid, NULL, 0);
-	return (EXIT_SUCCESS);
+	sigaction(SIGINT, &old, NULL);
+	return (EXIT_FAILURE);
 }
