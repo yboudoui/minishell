@@ -6,11 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 16:32:40 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:03:57 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int exit_code;
 
 static void	signal_control_c(int sig)
 {
@@ -56,6 +58,7 @@ int	main(int ac, char *av[], char *envp[])
 	};
 
 	(void)av;
+	exit_code = 0;
 	if (ac != 1 || !isatty(ttyslot()))
 		return (EXIT_FAILURE);
 	sigaction(SIGINT, &signals[0], NULL);
