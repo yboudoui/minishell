@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/02 16:32:24 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:34:28 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static inline int manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
 	}
 }
 
-int	pipex(t_list env, t_prompt prompt)
+int	pipex(t_env_list env, t_prompt prompt)
 {
 	t_pipex					pipex;
 	t_cmd					cmd;
