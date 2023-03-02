@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 14:09:41 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:59:14 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	read_prompt(t_list env)
 	exe_stop = 0;
 	while (!exe_stop)
 	{
-		rl_on_new_line();
 		line = readline("~$ ");
 		if (!line)
 			return (EXIT_SUCCESS);
