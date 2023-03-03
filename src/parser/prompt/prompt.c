@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 15:19:57 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:50:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	prompt_destroy(void *data)
 	if (data == NULL)
 		return ;
 	list_clear(&data, commande_destroy);
-	free(data);
 }
 
 t_prompt	prompt_create(char *input)

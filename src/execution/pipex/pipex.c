@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/02 16:34:28 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:03:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	pipex(t_env_list env, t_prompt prompt)
 	while (prompt)
 	{
 		cmd = cmd_create(prompt->content);
+//		t_fp_builtin	fp = is_builtin(cmd->argv[0]);
+//		printf("%p\n", fp);
 		manage_pipeline_fds(&pipex, cmd);
 		pipex.i++;
 		if (pipex.infile != -1)

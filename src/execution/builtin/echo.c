@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:25:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 16:21:55 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:28:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ static int	trailing_newline(char *arg)
 	return (EXIT_SUCCESS);
 }
 
-int	echo(char *argv[])//, t_list env)
+int	builtin_echo(char *argv[], t_env_list *env)
 {
 	bool	new_line;
 	size_t	index;
 
-//	if (argv == NULL || *argv != "echo")
-//		return (EXIT_FAILURE);
+	(void)env;
+	if (argv == NULL || string_cmp(*argv, "echo"))
+		return (EXIT_FAILURE);
 	argv += 1;
 	index = 0;
 	while (trailing_newline(argv[index]))

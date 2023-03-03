@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 07:35:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 16:01:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:22:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static char	*find_and_expand_variable(t_env_list env, char *str)
 	return (out);
 }
 
+#include <stdio.h>
 void	list_find_and_expand_variable(t_env_list env, t_list token)
 {
 	t_token	cast;
@@ -98,6 +99,7 @@ void	list_find_and_expand_variable(t_env_list env, t_list token)
 	while (token)
 	{
 		cast = token->content;
+		printf("%p\n", cast);
 		new = find_and_expand_variable(env, cast->input);
 		if (new)
 		{
@@ -107,11 +109,12 @@ void	list_find_and_expand_variable(t_env_list env, t_list token)
 		token = token->next;
 	}
 }
-
+#include "show.h"
 void	commande_expand_variable(t_env_list env, t_commande cmd)
 {
 	if (cmd == NULL)
 		return ;
+	print_commande_line(cmd);
 	if (cmd->argv)
 		list_find_and_expand_variable(env, cmd->argv);
 	if (cmd->redir_in)

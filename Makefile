@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/02 16:20:10 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/03 14:51:16 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS	=\
 ./src/utils/string/str_merge_list.c\
 ./src/utils/string/str_join_list.c\
 ./src/utils/string/ft_strnstr.c\
+./src/utils/string/is_alnum.c\
 ./src/utils/string/string_cmp.c\
 ./src/utils/string/str_merge.c\
 ./src/utils/string/str_new_empty.c\
@@ -65,6 +66,7 @@ SRCS	=\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/environment_list.c\
+./src/parser/environment/utils.c\
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/cmd.c\
 ./src/execution/execution.c\
@@ -85,7 +87,11 @@ SRCS	=\
 ./src/execution/pipex/get_cmd_path.c\
 ./src/execution/pipex/open.c\
 ./src/execution/pipex/pipeline_status.c\
+./src/execution/builtin/is_builtin.c\
+./src/execution/builtin/unset.c\
+./src/execution/builtin/exit.c\
 ./src/execution/builtin/cd.c\
+./src/execution/builtin/env.c\
 ./src/execution/builtin/echo.c\
 ./src/execution/builtin/export.c\
 ./src/execution/builtin/pwd.c\

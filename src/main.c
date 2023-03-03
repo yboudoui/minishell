@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 16:32:40 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:53:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	main(int ac, char *av[], char *envp[])
 		return (EXIT_FAILURE);
 	sigaction(SIGINT, &signals[0], NULL);
 	sigaction(SIGQUIT, &signals[1], NULL);
-	env = environment_list_create(envp);
+	env = env_list_create(envp);
 	read_prompt(env);
-	environment_list_destroy(env);
+	env_list_destroy(env);
 	return (EXIT_SUCCESS);
 }
