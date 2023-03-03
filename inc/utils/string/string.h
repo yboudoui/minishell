@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 16:20:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:42:52 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_strchr(const char *s, int c);
 
 bool	is_space(int c);
 bool	is_empty(char *str);
+bool	is_alnum(char c);
 
 void	str_new_empty(char **str);
 size_t	ft_strlen(const char *s);

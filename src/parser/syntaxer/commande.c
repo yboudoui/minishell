@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:00 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 16:26:57 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:02:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_list	get_input_by_type(t_list *root, t_token_type type)
 				list_clear(root, token_destroy);
 				list_clear(&out, token_destroy);
 				list_clear(&new, token_destroy);
-				return (NULL);
+				return (list_clear(root, token_destroy), NULL);
 			}
 			tmp = token_dup(lst->next->content);
 			tmp->type = token->type;
@@ -51,15 +51,18 @@ t_list	get_input_by_type(t_list *root, t_token_type type)
 t_commande	commande_create(t_list lst)
 {
 	t_commande	out;
+	const int	redir_in = TOKEN_REDIRECT_IN | TOKEN_HERE_DOCUMENT;
+	const int	redir_out = TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND;
 
 	if (!lst)
 		return (NULL);
 	out = ft_calloc(1, sizeof(struct s_commande));
-	if (!out)
-		return (NULL);
-	out->redir_in = get_input_by_type(&lst, TOKEN_REDIRECT_IN | TOKEN_HERE_DOCUMENT);
-	out->redir_out = get_input_by_type(&lst, TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND);
-	out->argv = lst;
+	if (out)
+		(*out) = (struct s_commande){
+			.redir_in = get_input_by_type(&lst, redir_in),
+			.redir_out = get_input_by_type(&lst, redir_out),
+			.argv = lst
+		};
 	return (out);
 }
 

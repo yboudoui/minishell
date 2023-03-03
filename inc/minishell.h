@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 15:57:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:31:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # include "../inc/execution/pipex/exec.h"
 # include "../inc/execution/heredoc/heredoc.h"
 # include "../inc/execution/cmd.h"
+# include "../inc/execution/cmd.h"
+
+
+#include "builtin.h"
 
 # include <stdbool.h>
 # include <stdarg.h>

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:08:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 16:29:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:55:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*cut_variable_name(char **str)
 	return (out);
 }
 
-void	environment_variable_destroy(void *data)
+void	env_variable_destroy(void *data)
 {
 	t_env_var	input;
 
@@ -37,10 +37,11 @@ void	environment_variable_destroy(void *data)
 		return ;
 	free(input->name);
 	free(input->value);
+	(*input) = (struct s_env_var){0};
 	free(input);
 }
 
-t_env_var	environment_variable_create(char *name, char *value)
+t_env_var	env_variable_create(char *name, char *value)
 {
 	t_env_var	output;
 
@@ -51,14 +52,6 @@ t_env_var	environment_variable_create(char *name, char *value)
 		return (NULL);
 	(*output) = (struct s_env_var){name, value};
 	return (output);
-}
-
-void	environment_variable_replace(t_env_var *dest, t_env_var src)
-{
-	if (dest == NULL)
-		return ;
-	environment_variable_destroy(*dest);
-	(*dest) = src;
 }
 
 t_env_var	env_var_create(char *str)
@@ -73,8 +66,8 @@ t_env_var	env_var_create(char *str)
 	if (name == NULL)
 		return (NULL);
 	value = ft_strdup(str);
-	output = environment_variable_create(name, value);
+	output = env_variable_create(name, value);
 	if (output)
 		return (output);
-	return (environment_variable_destroy(output), NULL);
+	return (env_variable_destroy(output), NULL);
 }

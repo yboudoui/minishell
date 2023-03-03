@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 16:08:07 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/02 19:07:06 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	heredoc_read(t_token token)
 		{
 			/* close(fds[0]); */
 			close(fds[1]);
-			printf("bash: warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", (char *)token->input);
+			printf("warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", (char *)token->input);
 			free(token->input);
 			token->input = new;
 			return (EXIT_FAILURE);
