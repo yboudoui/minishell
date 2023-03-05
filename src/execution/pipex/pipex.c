@@ -6,18 +6,22 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/02 18:55:27 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/05 19:59:24 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../../inc/minishell.h"
+#include <unistd.h>
 
 static inline int manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
 {
 	int	fd;
 	fd = infile(cmd->redir_in);
 	if (fd == 1)
+	{
+		pipex->infile = fd;
 		return (0);
+	}
 	else if (fd == -1)
 	{
 		pipex->infile = -1;
@@ -37,11 +41,12 @@ int	pipex(t_env_list env, t_prompt prompt)
 	static const t_pipex	EMPTY_PIP;
 
 	pipex = EMPTY_PIP;
+	/* pipex.stdin_fd = dup(STDIN_FILENO); */
 	pipex.argc = list_size((t_list)prompt);
-	pipex.paths = get_paths(env, &pipex);
-	pipex.env = env;
 	while (prompt)
 	{
+		pipex.paths = get_paths(env, &pipex);
+		pipex.env = env;
 		cmd = cmd_create(prompt->content);
 		manage_pipeline_fds(&pipex, cmd);
 		pipex.i++;
@@ -50,12 +55,13 @@ int	pipex(t_env_list env, t_prompt prompt)
 		if (pipex.infile != -1 && pipex.outfile != -1)
 			execute(cmd->argv, &pipex);
 		cmd_destroy(cmd);
-		pipex.path = false;
 		prompt = prompt->next;
 	}
 	while (waitpid(0, NULL, 0) != -1)
 		;
 	/* free(pipex.paths); */
+	/* dup_fd(pipex.stdin_fd, STDIN_FILENO); */
+	/* close_fd(&pipex.stdin_fd); */
 	return (EXIT_SUCCESS);
 }
 
@@ -79,11 +85,8 @@ int	execute(char *argv[], t_pipex *pipex)
 		exec_cmd(pipex, argv);
 		return (EXIT_FAILURE);
 	}
-	else 
-	{
-		close_fd(&pipex->fd[1]);
-		pipex->infile = pipex->fd[0];
-		/* waitpid(pid, &pipex->status, 0); */
-		return (EXIT_SUCCESS);
-	}
+	close_fd(&pipex->fd[1]);
+	pipex->prevpipe = dup(pipex->fd[0]);
+	close_fd(&pipex->fd[0]);
+	return (EXIT_SUCCESS);
 }
