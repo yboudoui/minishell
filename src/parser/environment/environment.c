@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:08:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 18:55:02 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:58:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	env_variable_destroy(void *data)
 	if (input == NULL)
 		return ;
 	free(input->name);
+	input->name = NULL;
 	free(input->value);
-	(*input) = (struct s_env_var){0};
+	input->value = NULL;
 	free(input);
 }
 
@@ -50,14 +51,15 @@ t_env_var	env_variable_create(char *name, char *value)
 	output = ft_calloc(1, sizeof(struct s_env_var));
 	if (output == NULL)
 		return (NULL);
-	(*output) = (struct s_env_var){name, value};
+	output->name = name;
+	output->value = value;
 	return (output);
 }
 
 t_env_var	env_var_create(char *str)
 {
-	char	*name;
-	char	*value;
+	char		*name;
+	char		*value;
 	t_env_var	output;
 
 	if (str == NULL)

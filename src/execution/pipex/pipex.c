@@ -6,15 +6,16 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/03 16:03:08 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:03:35 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-static inline int manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
+static inline int	manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
 {
 	int	fd;
+
 	fd = infile(cmd->redir_in);
 	if (fd == 1)
 		return (0);
@@ -30,29 +31,26 @@ static inline int manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
 	}
 }
 
-int	pipex(t_env_list env, t_prompt prompt)
+int	pipex(t_prompt prompt)
 {
 	t_pipex					pipex;
 	t_cmd					cmd;
-	static const t_pipex	EMPTY_PIP;
+	static const t_pipex	empty_pip;
 
-	pipex = EMPTY_PIP;
+	pipex = empty_pip;
 	pipex.argc = list_size((t_list)prompt);
-	pipex.paths = get_paths(env, &pipex);
-	pipex.env = env;
+	pipex.paths = get_paths(&pipex);
 	while (prompt)
 	{
 		cmd = cmd_create(prompt->content);
-//		t_fp_builtin	fp = is_builtin(cmd->argv[0]);
-//		printf("%p\n", fp);
 		manage_pipeline_fds(&pipex, cmd);
 		pipex.i++;
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
 		if (pipex.infile != -1 && pipex.outfile != -1)
-			if (execute(cmd->argv, &pipex))
-				return (EXIT_SUCCESS);
+			execute(cmd->argv, &pipex);
 		cmd_destroy(cmd);
+		pipex.path = false;
 		prompt = prompt->next;
 	}
 	while (waitpid(0, NULL, 0) != -1)
@@ -63,11 +61,21 @@ int	pipex(t_env_list env, t_prompt prompt)
 
 int	execute(char *argv[], t_pipex *pipex)
 {
-	pid_t	pid;
+	pid_t			pid;
+	t_fp_builtin	builtin;
 
-	if (argv == NULL)
+	if (argv == NULL || pipex == NULL)
 		return (EXIT_SUCCESS);
+	builtin = is_builtin(argv[0]);
+	if (builtin)
+		return (builtin(argv));
 	pipe_fd(pipex, pipex->fd);
+	pipex->cmd_path = get_cmd_path(pipex, argv[0]);
+	if (pipex->cmd_path == NULL)
+	{
+		g_exit_code = CMD_NOT_FOUND;
+		return (EXIT_FAILURE);
+	}
 	fork_pid(&pid);
 	if (pid == 0)
 	{
@@ -75,7 +83,7 @@ int	execute(char *argv[], t_pipex *pipex)
 		exec_cmd(pipex, argv);
 		return (EXIT_FAILURE);
 	}
-	else 
+	else
 	{
 		close_fd(&pipex->fd[1]);
 		pipex->infile = pipex->fd[0];

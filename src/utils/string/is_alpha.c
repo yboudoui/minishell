@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.h                                         :+:      :+:    :+:   */
+/*   is_alpha.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 07:39:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 15:57:12 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/04 13:47:41 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/04 13:48:26 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANDER_H
-# define EXPANDER_H
+#include "string.h"
 
-# include "environment.h"
-# include "commande.h"
+bool	is_alpha(char c)
+{
+	int	is_upper;
+	int	is_lower;
 
-void	commande_expand_variable(t_env_list env, t_commande cmd);
-
-#endif
+	is_upper = (c >= 'A' && c <= 'Z');
+	is_lower = (c >= 'a' && c <= 'z');
+	return (is_upper || is_lower);
+}

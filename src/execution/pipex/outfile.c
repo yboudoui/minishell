@@ -6,19 +6,19 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:01:53 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/01 15:31:59 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/06 11:40:16 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static inline int check_outfile_err(t_list redir_out, int fd)
+static inline int	check_outfile_err(t_list redir_out, int fd)
 {
-		if (fd == -1 && redir_out->next == NULL)
-			return (-1);
-		if (fd == -1 && redir_out != NULL)
-			return (-1);
-		return (fd);
+	if (fd == -1 && redir_out->next == NULL)
+		return (-1);
+	if (fd == -1 && redir_out != NULL)
+		return (-1);
+	return (fd);
 }
 
 int	outfile(t_list redir_out)

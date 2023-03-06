@@ -6,35 +6,27 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:07:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/02 16:18:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:40:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../../inc/minishell.h"
 
-char	**parse_env(t_env_list env)
+static void	*parse_env_var(void *data)
 {
-	char	**envp;
-	int		i;
-	t_env_var tmp;
-	char *tmp1;
-	char *tmp2;
+	t_env_var	env;
+	char		*equal;
 
-	i = 0;
-	envp = (char **)malloc(sizeof(char *) * (list_size((t_list)env) + 1));
-	null_str_err((char *)envp);
-	while (env)
-	{
-		tmp = env->var;
-		tmp1 = ft_strjoin(tmp->name, "=");
-		null_str_err(tmp1);
-		tmp2 = ft_strjoin(tmp1, tmp->value);
-		null_str_err(tmp2);
-		free(tmp1);
-		envp[i] = tmp2;
-		null_str_err(envp[i]);
-		i++;
-		env = env->next;
-	}
-	envp[i] = NULL;
-	return (envp);
+	env = data;
+	if (env == NULL)
+		return (NULL);
+	equal = ft_strdup("=");
+	return (str_merge_list((char *[]){
+			env->name, equal, env->value, NULL
+		}));
+}
+
+char	**parse_env(void)
+{
+	return (list_to_array((t_list)env_list_singleton(NULL), parse_env_var));
 }
