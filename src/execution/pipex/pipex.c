@@ -6,13 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 18:40:55 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:45:16 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../../inc/minishell.h"
-#include <stdlib.h>
-#include <unistd.h>
+#include "../../../inc/minishell.h"
 
 static inline int	manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
 {
@@ -60,7 +58,7 @@ int	waitall(t_pipex *pipex)
 	return (0);
 }
 
-int	pipex(t_env_list env, t_prompt prompt)
+int	pipex(t_prompt prompt)
 {
 	t_pipex					pipex;
 	t_cmd					cmd;
@@ -69,12 +67,11 @@ int	pipex(t_env_list env, t_prompt prompt)
 	pipex = empty_pipex;
 	pipex.stdin_fd = dup(STDIN_FILENO);
 	pipex.argc = list_size((t_list)prompt);
-	pipex.paths = get_paths(env, &pipex);
+	pipex.paths = get_paths(&pipex);
 	if (init_exec(&pipex) == -1)
 		return (EXIT_FAILURE);
 	while (prompt)
 	{
-		pipex.env = env;
 		cmd = cmd_create(prompt->content);
 		manage_pipeline_fds(&pipex, cmd);
 		if (pipex.infile != -1)
@@ -94,7 +91,6 @@ int	pipex(t_env_list env, t_prompt prompt)
 
 int	execute(char *argv[], t_pipex *pipex)
 {
-	pid_t			pid;
 	t_fp_builtin	builtin;
 
 	if (argv == NULL || pipex == NULL)
