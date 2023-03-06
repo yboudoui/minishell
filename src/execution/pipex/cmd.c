@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 12:39:19 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/06 13:34:45 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static inline int	cmd_in(t_pipex *pipex)
 		if (close_fd(&pipex->fd[0]) == -1)
 			return (-1);
 	}
-	else if (pipex->i != 0)
+	else
 	{
 		if (close_fd(&pipex->fd[0]) == -1)
 			return (-1);
