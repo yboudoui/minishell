@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 14:58:07 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:34:43 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 		if (access(tmp2, F_OK) == 0)
 			return (tmp2);
 		free(tmp2);
+		i++;
 	}
-	if (pipex->path == false)
-		generic_err(cmd, "command not found\n", 2);
+	generic_err(cmd, "command not found\n", 2);
 	return (NULL);
 }
