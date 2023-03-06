@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/06 17:11:50 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/06 18:52:41 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,10 +100,9 @@ SRCS	=\
 
 INCS	=\
 ./show\
-./inc/utils/string\
-./inc/utils/list\
 ./inc/utils\
-./inc/utils/memory\
+./inc/utils\
+./inc/utils\
 ./inc/parser\
 ./inc/parser/prompt/commande\
 ./inc/parser/prompt\

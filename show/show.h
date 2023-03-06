@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:10:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 15:26:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:53:04 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SHOW_H
 
 # include "list.h"
-# include "utils.h"
+# include "string.h"
 # include "commande.h"
 # include <stdio.h>
 

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:33:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:53:57 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 # define MINISHELL_H
 
 # include "../show/show.h"
-# include "../inc/utils/string/string.h"
-# include "../inc/utils/list/list.h"
-# include "../inc/utils/utils.h"
-# include "../inc/utils/memory/memory.h"
+
+# include "../inc/utils/string.h"
+# include "../inc/utils/list.h"
+# include "../inc/utils/memory.h"
+
 # include "../inc/parser/prompt/commande/commande.h"
 # include "../inc/parser/prompt/prompt.h"
 # include "../inc/parser/token.h"
 # include "../inc/parser/environment/environment.h"
+
 # include "../inc/execution/pipex/exec.h"
 # include "../inc/execution/heredoc/heredoc.h"
 # include "../inc/execution/cmd.h"

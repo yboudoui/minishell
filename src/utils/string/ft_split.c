@@ -6,11 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 08:46:09 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:41:25 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:54:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "string.h"
 
 static size_t	ft_is_word(const char **str, char c)
 {

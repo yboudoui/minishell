@@ -6,14 +6,15 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:05:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 15:57:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:54:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
-# include "utils.h"
+# include "string.h"
+# include "list.h"
 
 typedef struct s_env_var	*t_env_var;
 
