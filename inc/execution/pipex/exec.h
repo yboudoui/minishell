@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/05 19:56:23 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/06 09:27:52 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXEC_H
 
 # include "../../inc/minishell.h"
+# include <sys/types.h>
 
 #define CMD_NOT_FOUND 127
 
@@ -22,6 +23,7 @@ typedef struct s_pipex
 	char	**paths;
 	char	**argv;
 	char	*cmd_path;
+	pid_t	*pid;
 	bool	path;
 	int		fd[2];
 	int		prevpipe;
