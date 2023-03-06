@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/05 13:41:20 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/06 12:14:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ char *get_cmd_path(t_pipex *pipex, char *cmd)
 	if (tmp1 != NULL)
 		return (tmp1);
 	path_null(pipex, cmd);
-	i = -1;
-	while (pipex->paths[++i])
+	i = 0;
+	while (pipex->paths[i])
 	{
 		check_slash(pipex->paths[i]);
 		tmp1 = ft_strjoin(pipex->paths[i], "/");
@@ -68,6 +68,7 @@ char *get_cmd_path(t_pipex *pipex, char *cmd)
 		if (access(tmp2, F_OK) == 0)
 			return (tmp2);
 		free(tmp2);
+		i++;
 	}
 	generic_err(cmd, "command not found\n", 2);
 	return (NULL);
