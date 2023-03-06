@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:05:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:48:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,28 @@ typedef enum e_token_type {
 //	TOKEN_OR					=	(1U << 12),
 //	TOKEN_SUBSHELL				=	(1U << 13),
 	MAX_TOKEN					=	(1U << 14),
-	TOKEN_IO					=	0
+	TOKEN_IO					=	(0
 	| TOKEN_REDIRECT_IN
 	| TOKEN_HERE_DOCUMENT
 	| TOKEN_REDIRECT_OUT
-	| TOKEN_REDIRECT_OUT_APPEND,
-	TOKEN_OPERATOR				=	0
+	| TOKEN_REDIRECT_OUT_APPEND),
+	TOKEN_OPERATOR				=	(0
 	| TOKEN_IO
-	| TOKEN_PIPE
+	| TOKEN_PIPE)
 }	t_token_type;
 
-typedef struct s_token	*t_token;
+typedef struct s_token		*t_token;
 
 struct s_token {
 	void			*input;
 	t_token_type	type;
 };
 
-t_token	token_create(t_token_type type, void *substr);
-t_token	token_dup(t_token src);
-void	token_destroy(void *input);
-bool	token_syntaxer(t_list *root);
-char	*tokenizer(char *input, t_list *out);
+t_token			token_create(t_token_type type, void *substr);
+t_token			token_dup(t_token src);
+void			token_destroy(void *input);
+bool			token_syntaxer(t_list *root);
+char			*tokenizer(char *input, t_list *out);
 
 typedef struct s_token_list	*t_token_list;
 

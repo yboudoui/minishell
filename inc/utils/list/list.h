@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:11:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 17:33:50 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:45:47 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ bool	list_create_front(t_list *root, void *content);
 
 bool	list_create_next(t_list *root, void *content);
 bool	list_create_prev(t_list *root, void *content);
-
 
 void	list_destroy(t_list lst, t_fp_destroy_content del);
 void	list_clear(void *root, t_fp_destroy_content del);
