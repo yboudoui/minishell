@@ -6,12 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:11:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/03 16:03:13 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/05 17:11:00 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
-/*
+
 static void	*token_to_string(void *data)
 {
 	t_token	input;
@@ -21,7 +21,7 @@ static void	*token_to_string(void *data)
 		return (NULL);
 	return (input->input);
 }
-*/
+
 t_cmd	cmd_create(t_commande cmd)
 {
 	t_cmd	output;

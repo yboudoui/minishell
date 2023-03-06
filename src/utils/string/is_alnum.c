@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:40:33 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 18:42:54 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:48:25 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ bool	is_alnum(char c)
 	is_digit = (c >= '0' && c <= '9');
 	return (is_upper || is_lower || is_digit);
 }
-

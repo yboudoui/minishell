@@ -6,11 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/03 15:53:49 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:34:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	g_exit_code;
 
 static void	signal_control_c(int sig)
 {
@@ -22,7 +24,7 @@ static void	signal_control_c(int sig)
 	rl_redisplay();
 }
 
-static int	read_prompt(t_env_list env)
+static int	read_prompt(void)
 {
 	char		*line;
 	int			exe_stop;
@@ -38,7 +40,7 @@ static int	read_prompt(t_env_list env)
 		{
 			add_history(line);
 			prompt = prompt_create(line);
-			exe_stop = execution(env, prompt);
+			exe_stop = execution(prompt);
 			prompt_destroy(prompt);
 		}
 		free(line);
@@ -49,19 +51,20 @@ static int	read_prompt(t_env_list env)
 
 int	main(int ac, char *av[], char *envp[])
 {
-	t_env_list				env;
 	const struct sigaction	signals[2] = {
 	{.sa_handler = signal_control_c},
 	{.sa_handler = SIG_IGN}
 	};
 
 	(void)av;
+	g_exit_code = 0;
 	if (ac != 1 || !isatty(ttyslot()))
 		return (EXIT_FAILURE);
 	sigaction(SIGINT, &signals[0], NULL);
 	sigaction(SIGQUIT, &signals[1], NULL);
-	env = env_list_create(envp);
-	read_prompt(env);
-	env_list_destroy(env);
+	if (!env_list_create(envp))
+		return (-1);
+	read_prompt();
+	env_list_destroy();
 	return (EXIT_SUCCESS);
 }

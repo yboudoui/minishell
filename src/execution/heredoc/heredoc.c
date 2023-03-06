@@ -6,14 +6,14 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 19:07:06 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:19:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 #include "../../../inc/minishell.h"
 
-int	stop = 0;
+int	g_stop = 0;
 
 void	signal_control_c(int sig)
 {
@@ -21,7 +21,7 @@ void	signal_control_c(int sig)
 		return ;
 	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
 	close(STDIN_FILENO);
-	stop = 1;
+	g_stop = 1;
 }
 
 static int	heredoc_read(t_token token)
@@ -43,7 +43,7 @@ static int	heredoc_read(t_token token)
 	{
 		free(line);
 		line = readline("> ");
-		if (stop || line == NULL)
+		if (g_stop || line == NULL)
 		{
 			/* close(fds[0]); */
 			close(fds[1]);

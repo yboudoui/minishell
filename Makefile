@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/03 14:51:16 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/06 17:11:50 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,10 @@ RM					=	rm -f
 SRCS	=\
 ./src/utils/string/is_empty.c\
 ./src/utils/string/str_merge_new_line.c\
+./src/utils/string/is_alpha.c\
 ./src/utils/string/str_merge_list.c\
 ./src/utils/string/str_join_list.c\
+./src/utils/string/str_find_pattern.c\
 ./src/utils/string/ft_strnstr.c\
 ./src/utils/string/is_alnum.c\
 ./src/utils/string/string_cmp.c\
@@ -61,12 +63,11 @@ SRCS	=\
 ./src/parser/lexer/lexer.c\
 ./src/parser/lexer/matching.c\
 ./src/parser/lexer/token.c\
-./src/parser/expander/expander.c\
-./src/parser/syntaxer/syntaxer.c\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/environment_list.c\
 ./src/parser/environment/utils.c\
+./src/definition.c\
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/cmd.c\
 ./src/execution/execution.c\
@@ -87,8 +88,8 @@ SRCS	=\
 ./src/execution/pipex/get_cmd_path.c\
 ./src/execution/pipex/open.c\
 ./src/execution/pipex/pipeline_status.c\
-./src/execution/builtin/is_builtin.c\
 ./src/execution/builtin/unset.c\
+./src/execution/builtin/is_builtin.c\
 ./src/execution/builtin/exit.c\
 ./src/execution/builtin/cd.c\
 ./src/execution/builtin/env.c\
@@ -106,10 +107,6 @@ INCS	=\
 ./inc/parser\
 ./inc/parser/prompt/commande\
 ./inc/parser/prompt\
-./inc/parser/lexer\
-./inc/parser/lexer\
-./inc/parser/lexer\
-./inc/parser/expander\
 ./inc/parser/environment\
 ./inc\
 ./inc/execution/heredoc\
@@ -146,8 +143,7 @@ fsanitize:	re
 
 #			ASAN_OPTIONS=suppressions=.readline.fsanitize.supp"
 
-valgrind:	CFLAGS+= -DCOLORED -g3
-valgrind:	re
+valgrind:
 			@clear
 			@valgrind														\
 			-q																\
@@ -157,6 +153,9 @@ valgrind:	re
 			--track-origins=yes												\
 			--track-fds=yes													\
 			./$(NAME)														\
+
+re_valgrind:	CFLAGS+= -DCOLORED -g3
+re_valgrind:	re valgrind
 
 #			--gen-suppressions=yes											\
 

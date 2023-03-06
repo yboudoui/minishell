@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/02 18:42:52 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:19:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ typedef bool	(*t_fp_is_charset)(int);
 char	*ft_strchr(const char *s, int c);
 
 bool	is_space(int c);
-bool	is_empty(char *str);
 bool	is_alnum(char c);
+bool	is_alpha(char c);
+bool	is_empty(char *str);
 
 void	str_new_empty(char **str);
 size_t	ft_strlen(const char *s);
@@ -59,4 +60,6 @@ char	**ft_split(char	const *str, char c);
 
 size_t	ft_putchar_fd(char c, int fd);
 size_t	ft_putstr_fd(char *s, int fd);
+
+bool	ft_multi_substr_to(char ***output, char *input, size_t *ranges[]);
 #endif

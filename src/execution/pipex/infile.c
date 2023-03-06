@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 17:21:19 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/02 16:31:57 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:36:47 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static inline int check_infile_status(t_list redir_in, int fd)
+static inline int	check_infile_status(t_list redir_in, int fd)
 {
 	if (fd == -1 && redir_in->next == NULL)
 		return (-1);

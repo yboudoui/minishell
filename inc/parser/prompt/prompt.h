@@ -6,17 +6,14 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:15:53 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/01 13:05:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:13:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROMPT_H
 # define PROMPT_H
 
-# include "lexer.h"
-# include "syntaxer.h"
-# include "../../../inc/minishell.h"
-
+# include "token.h"
 # include "commande.h"
 # include "environment.h"
 

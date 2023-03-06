@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:30:47 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/06 15:25:31 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:59:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,19 @@ t_list	list_create(void *content)
 bool	list_create_back(t_list *root, void *content)
 {
 	return (list_add_back(root, list_create(content)));
+}
+
+bool	list_create_front(t_list *root, void *content)
+{
+	return (list_add_front(root, list_create(content)));
+}
+
+bool	list_create_next(t_list *root, void *content)
+{
+	return (list_add_next(root, list_create(content)));
+}
+
+bool	list_create_prev(t_list *root, void *content)
+{
+	return (list_add_prev(root, list_create(content)));
 }

@@ -6,18 +6,17 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/03 15:00:39 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:37:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-int	builtin_pwd(char *argv[], t_env_list *env)
+int	builtin_pwd(char *argv[])
 {
 	char	*buffer;
 	size_t	size;
 
-	(void)env;
 	(void)argv;
 	if (string_cmp(*argv, "pwd"))
 		return (EXIT_FAILURE);
@@ -26,7 +25,7 @@ int	builtin_pwd(char *argv[], t_env_list *env)
 	while (buffer == NULL)
 	{
 		free(buffer);
-		buffer = ft_calloc(size,sizeof(char));
+		buffer = ft_calloc(size, sizeof(char));
 		if (buffer == NULL)
 			return (EXIT_FAILURE);
 		if (getcwd(buffer, size))
