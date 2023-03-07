@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 14:11:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:48:46 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ int	waitall(t_pipex *pipex)
 	return (0);
 }
 
+int reset_flags(t_pipex *pipex)
+{
+	pipex->abs_path_cmd = false;
+	return (0);
+}
+
 int	pipex(t_prompt prompt)
 {
 	t_pipex					pipex;
@@ -75,12 +81,12 @@ int	pipex(t_prompt prompt)
 	while (prompt)
 	{
 		pipex.env = env_list_singleton(NULL);
+		reset_flags(&pipex);
 		cmd = cmd_create(prompt->content);
 		manage_pipeline_fds(&pipex, cmd);
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
-		if (pipex.infile != -1 || pipex.outfile != -1)
-			execute(cmd->argv, &pipex);
+		execute(cmd->argv, &pipex);
 		cmd_destroy(cmd);
 		prompt = prompt->next;
 		pipex.i++;
@@ -94,6 +100,10 @@ int	pipex(t_prompt prompt)
 
 int	execute(char *argv[], t_pipex *pipex)
 {
+	if (pipex->infile == -1)
+		return (EXIT_FAILURE);
+	if (pipex->outfile == -1)
+		return (EXIT_FAILURE);
 	if (argv == NULL)
 		return (EXIT_SUCCESS);
 	pipe_fd(pipex, pipex->fd);
