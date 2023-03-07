@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:02:12 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:21:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ t_token_list	lexer(char *input)
 		return (NULL);
 	clean = list_subset(output, token_clean);
 	new = list_subset(clean, token_merge);
+	list_clear(&clean, token_destroy);
 	return (list_clear(&output, token_destroy), new);
 }

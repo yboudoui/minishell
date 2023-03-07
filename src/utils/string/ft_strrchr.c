@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_null.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/26 12:27:33 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 18:03:49 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/03/01 15:48:19 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/07 10:42:23 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "string.h"
 
-void	path_null(t_pipex *pipex, char *cmd)
+char	*ft_strrchr(const char *s, int c)
 {
-	(void)cmd;
-	if (pipex->path == false)
-		generic_err(cmd, "No such file or directory\n", 2);
+	size_t	end;
+
+	end = ft_strlen(s);
+	while (end && s[end] != (char)c)
+		end--;
+	if (s[end] == (char)c)
+		return ((char *)&s[end]);
+	return (NULL);
 }

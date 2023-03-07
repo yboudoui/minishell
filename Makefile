@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/06 18:52:41 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/07 11:18:51 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS	=\
 ./src/utils/string/str_slice_prefix.c\
 ./src/utils/string/ft_strncmp.c\
 ./src/utils/string/ft_strlen.c\
+./src/utils/string/ft_strrchr.c\
 ./src/utils/string/ft_putstr_fd.c\
 ./src/utils/string/ft_substr.c\
 ./src/utils/string/ft_str_find_prefix.c\
@@ -65,9 +66,9 @@ SRCS	=\
 ./src/parser/lexer/token.c\
 ./src/parser/syntaxer/commande.c\
 ./src/parser/environment/environment.c\
+./src/parser/environment/definition.c\
 ./src/parser/environment/environment_list.c\
 ./src/parser/environment/utils.c\
-./src/definition.c\
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/cmd.c\
 ./src/execution/execution.c\
@@ -75,15 +76,12 @@ SRCS	=\
 ./src/execution/pipex/outfile.c\
 ./src/execution/pipex/cmd.c\
 ./src/execution/pipex/stat.c\
-./src/execution/pipex/get_paths.c\
 ./src/execution/pipex/pipe.c\
 ./src/execution/pipex/parse_env.c\
 ./src/execution/pipex/infile.c\
 ./src/execution/pipex/pipex.c\
-./src/execution/pipex/path_null.c\
 ./src/execution/pipex/error/dup.c\
 ./src/execution/pipex/error/null_str_err.c\
-./src/execution/pipex/error/fork.c\
 ./src/execution/pipex/error/error.c\
 ./src/execution/pipex/get_cmd_path.c\
 ./src/execution/pipex/open.c\

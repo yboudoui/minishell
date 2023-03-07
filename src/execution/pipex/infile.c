@@ -6,13 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 17:21:19 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 18:34:52 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:05:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 static inline int	check_infile_status(t_list redir_in, int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:36:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 15:58:34 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:51:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,8 @@ bool	env_list_create(char *envp[])
 
 void	env_list_destroy(void)
 {
-	list_clear(env_list_singleton(NULL), env_variable_destroy);
+	t_env_list	env;
+
+	env = env_list_singleton(NULL);
+	list_clear(&env, env_variable_destroy);
 }

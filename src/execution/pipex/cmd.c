@@ -6,12 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 18:34:02 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:48:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-#include <unistd.h>
 
 static inline int	cmd_in(t_pipex *pipex)
 {
@@ -61,9 +60,6 @@ static inline int	cmd_out(t_pipex *pipex)
 
 int	exec_cmd(t_pipex *pipex, char **argv)
 {
-	t_env_list	env;
-
-	env = env_list_singleton(NULL);
 	if (cmd_in(pipex) == -1)
 		return (-1);
 	if (cmd_out(pipex) == -1)

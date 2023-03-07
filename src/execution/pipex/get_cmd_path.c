@@ -6,72 +6,48 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 18:34:43 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:26:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static inline char	*check_fpath(t_pipex *pipex, char *cmd)
+/*
+static inline char	*check_fpath(char *cmd)
 {
-	pipex->remove = 1;
-	if (ft_strchr(cmd, '/'))
-	{
-		if (is_dir(cmd) != 0)
-		{
-			generic_err(cmd, "Is a directory\n", 2);
-			return (NULL);
-		}
-		if (access(cmd, X_OK) == 0)
-			return (cmd);
-		else
-		{
-			generic_err(cmd, NULL, 1);
-			return (NULL);
-		}
-	}
-	else
-		return (NULL);
+//	if (!ft_strchr(cmd, '/'))
+//		return (NULL);
+	if (is_dir(cmd) != 0)
+		return (generic_err(cmd, "Is a directory\n", 2), NULL);
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
+	return (generic_err(cmd, NULL, 1), NULL);
 }
-
-static inline char	*check_slash(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	if (str[i - 1] == '/')
-		str[i - 1] = '\0';
-	return (str);
-}
-
+*/
 char	*get_cmd_path(t_pipex *pipex, char *cmd)
 {
-	char	*tmp1;
-	char	*tmp2;
+	char	*path;
 	int		i;
 
 	if (pipex == NULL)
 		return (NULL);
-	tmp1 = check_fpath(pipex, cmd);
-	if (tmp1 != NULL)
-		return (tmp1);
-	path_null(pipex, cmd);
+/*
+	if (check_fpath(cmd) == NULL)
+		return (NULL);
+*/
+	if (pipex->paths == NULL)
+		generic_err(cmd, "No such file or directory\n", 2);
 	i = -1;
 	while (pipex->paths && pipex->paths[++i])
 	{
-		check_slash(pipex->paths[i]);
-		tmp1 = ft_strjoin(pipex->paths[i], "/");
-		null_str_err(tmp1);
-		tmp2 = ft_strjoin(tmp1, cmd);
-		null_str_err(tmp2);
-		free(tmp1);
-		if (access(tmp2, F_OK) == 0)
-			return (tmp2);
-		free(tmp2);
+		path = str_join_list((char *[]){
+			pipex->paths[i],
+			(char *[]){"/", ""}[string_end_with(pipex->paths[i], "/")],
+			cmd, NULL});
+		if (access(path, F_OK) == 0)
+			return (path);
+		free(path);
 		i++;
 	}
 	generic_err(cmd, "command not found\n", 2);
-	return (NULL);
+	return (free(path), NULL);
 }
