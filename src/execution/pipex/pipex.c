@@ -6,15 +6,14 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 14:48:46 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/07 20:28:09 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 #include <stdlib.h>
-#include <unistd.h>
 
-static inline int manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
+static inline int 	manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
 {
 	int	fd;
 
@@ -57,6 +56,13 @@ int	waitall(t_pipex *pipex)
 		waitpid(pipex->pid[i], &pipex->status, 0);
 		i++;
 	}
+	if (WIFSIGNALED(pipex->status))
+	{
+		/* if (WTERMSIG(pipex->status) == 2) */
+		/* if (WTERMSIG(pipex->status) == 3) */
+	}
+	else if (WIFEXITED(pipex->status))
+		g_exit_code = WEXITSTATUS(pipex->status);
 	return (0);
 }
 
@@ -98,8 +104,16 @@ int	pipex(t_prompt prompt)
 	return (EXIT_SUCCESS);
 }
 
+void signal_handler(int signum) 
+{
+	g_exit_code = 128 + signum;
+}
+
 int	execute(char *argv[], t_pipex *pipex)
 {
+	struct sigaction	new_action;
+	struct sigaction	old_action;
+
 	if (pipex->infile == -1)
 		return (EXIT_FAILURE);
 	if (pipex->outfile == -1)
@@ -116,6 +130,11 @@ int	execute(char *argv[], t_pipex *pipex)
 	fork_pid(&pipex->pid[pipex->i]);
 	if (pipex->pid[pipex->i] == 0)
 	{
+		new_action.sa_handler = signal_handler;
+		sigemptyset(&new_action.sa_mask);
+		new_action.sa_flags = 0;
+		sigaction(SIGINT, &new_action, &old_action);
+		sigaction(SIGQUIT, &new_action, &old_action);
 		exec_cmd(pipex, argv);
 		return (EXIT_FAILURE);
 	}

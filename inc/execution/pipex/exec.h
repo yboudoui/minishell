@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 14:45:04 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/07 17:59:36 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,26 @@
 
 #define CMD_NOT_FOUND 127
 
+typedef int	(*t_fp_builtin)(char *[]);
+
 typedef struct s_pipex
 {
-	char	**paths;
-	char	**argv;
-	char	*cmd_path;
-	pid_t	*pid;
-	bool	path;
-	bool	abs_path_cmd;
-	int		fd[2];
-	int		prevpipe;
-	int		stdin_fd;
-	int		infile;
-	int		outfile;
-	int		status;
-	int		argc;
-	int	 	remove;
-	int		i;
+	char		**paths;
+	char		**argv;
+	char		*cmd_path;
+	pid_t		*pid;
+	t_fp_builtin builtin;
+	bool		path;
+	bool		abs_path_cmd;
+	int			fd[2];
+	int			prevpipe;
+	int			stdin_fd;
+	int			infile;
+	int			outfile;
+	int			status;
+	int			argc;
+	int	 		remove;
+	int			i;
 	t_env_list	env;
 }	t_pipex;
 
