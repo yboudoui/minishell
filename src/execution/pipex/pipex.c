@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 13:32:38 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/07 14:11:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	waitall(t_pipex *pipex)
 	return (0);
 }
 
-int	pipex(t_env_list env, t_prompt prompt)
+int	pipex(t_prompt prompt)
 {
 	t_pipex					pipex;
 	t_cmd					cmd;
@@ -69,12 +69,12 @@ int	pipex(t_env_list env, t_prompt prompt)
 	pipex = empty_pipex;
 	pipex.stdin_fd = dup(STDIN_FILENO);
 	pipex.argc = list_size((t_list)prompt);
-	pipex.paths = get_paths(env, &pipex);
+	pipex.paths = get_paths(env_list_singleton(NULL), &pipex);
 	if (init_exec(&pipex) == -1)
 		return (EXIT_FAILURE);
 	while (prompt)
 	{
-		pipex.env = env;
+		pipex.env = env_list_singleton(NULL);
 		cmd = cmd_create(prompt->content);
 		manage_pipeline_fds(&pipex, cmd);
 		if (pipex.infile != -1)
@@ -100,7 +100,7 @@ int	execute(char *argv[], t_pipex *pipex)
 	pipex->cmd_path = get_cmd_path(pipex, argv[0]);
 	if (pipex->cmd_path == NULL)
 	{
-		exit_code = CMD_NOT_FOUND;
+		g_exit_code = CMD_NOT_FOUND;
 		return (EXIT_FAILURE);
 	}
 	fork_pid(&pipex->pid[pipex->i]);
