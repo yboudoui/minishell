@@ -6,16 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:05:35 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 07:14:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "show.h"
-
-void	print_error(char *str)
-{
-	printf("\033[0;31mERROR: %s\n\033[0m", str);
-}
 
 void	print_colored_token(void *content, void *_)
 {
@@ -33,19 +28,9 @@ void	print_colored_token(void *content, void *_)
 		printf("\e[30m\e[105m%s\e[0m", (char *)input->input);
 	else if (input->type == TOKEN_SPACES)
 		printf("\033[47m%s\033[0m", (char *)input->input);
-/*
-	else if (input->type == TOKEN_SUBSHELL)
-		printf("\033[104m%s\033[0m", (char *)input->input);
-*/
 	else
 		printf("\e[42m%s\e[0m", (char *)input->input);
 	printf(" ");
-}
-
-void	warn_on_empty_list(t_list lst)
-{
-	if (!lst)
-		return ((void)print_error("no token list"));
 }
 
 void	print_colored_token_list(char *name, t_list lst)
@@ -64,17 +49,12 @@ const char	*get_token_type_string(t_token_type type)
 	[TOKEN_REDIRECT_IN] = "TOKEN_REDIRECT_IN",
 	[TOKEN_SPACES] = "TOKEN_SPACES",
 	[TOKEN_HERE_DOCUMENT] = "TOKEN_HERE_DOCUMENT",
-//	[TOKEN_WILDCARD] = "TOKEN_WILDCARD",
 	[TOKEN_DOUBLE_QUOTES] = "TOKEN_DOUBLE_QUOTES",
 	[TOKEN_SIMPLE_QUOTES] = "TOKEN_SIMPLE_QUOTES",
 	[TOKEN_WORD] = "TOKEN_WORD",
 	[TOKEN_PIPE] = "TOKEN_PIPE",
 	[TOKEN_REDIRECT_OUT] = "TOKEN_REDIRECT_OUT",
 	[TOKEN_REDIRECT_OUT_APPEND] = "TOKEN_REDIRECT_OUT_APPEND",
-//	[TOKEN_AND] = "TOKEN_AND",
-//	[TOKEN_OR] = "TOKEN_OR",
-//	[TOKEN_SUBSHELL] = "TOKEN_SUBSHELL",
-//	[TOKEN_COMMANDE] = "TOKEN_COMMANDE",
 	};
 
 	if (type >= 0 && type < MAX_TOKEN)
@@ -105,7 +85,7 @@ void	print_argv(void *content)
 	if (!content)
 		return ;
 	input = content;
-	while(*input)
+	while (*input)
 	{
 		printf("\033[30m\033[104m[%s]\033[0m", *input);
 		input++;

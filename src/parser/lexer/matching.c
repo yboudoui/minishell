@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:35:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 14:50:42 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 07:16:01 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ typedef struct s_token_patern {
 }		t_token_patern;
 
 static const t_token_patern	g_token_patern_list[MAX_TOKEN] = {
-/*
-{TOKEN_SUBSHELL,
-	.field = (char *[]){"(", ")"},
-	.error = "Incomplet field, missing parenthesis",
-},
-*/
 {TOKEN_DOUBLE_QUOTES,
 	.field = (char *[]){"\"", "\""},
 	.error = "Incomplet field, missing double quote",
@@ -36,13 +30,10 @@ static const t_token_patern	g_token_patern_list[MAX_TOKEN] = {
 	.field = (char *[]){"'", "'"},
 	.error = "Incomplet field, missing single quote",
 },
-//{TOKEN_WILDCARD,			.match = "*"},
 {TOKEN_HERE_DOCUMENT,		.match = "<<"},
 {TOKEN_REDIRECT_IN,			.match = "<"},
 {TOKEN_REDIRECT_OUT_APPEND,	.match = ">>"},
 {TOKEN_REDIRECT_OUT,		.match = ">"},
-//{TOKEN_AND,					.match = "&&"},
-//{TOKEN_OR,					.match = "||"},
 {TOKEN_PIPE,				.match = "|"},
 {TOKEN_SPACES,				.charset = is_space},
 {.type = MAX_TOKEN}
