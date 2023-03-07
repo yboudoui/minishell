@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 19:25:40 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/02/28 17:44:06 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/02/25 19:30:54 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/02/28 17:43:23 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-void	pipe_fd(t_pipex *pipex, int *fd)
+void	fork_pid(int *pid)
 {
-	if (pipe(fd) == -1)
-		generic_err("Pipe", NULL, 1);
-	pipex->remove = 1;
+	*pid = fork();
+	if (*pid == -1)
+		generic_err("Fork", NULL, 1);
 }

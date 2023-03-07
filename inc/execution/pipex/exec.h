@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 11:03:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 09:27:52 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../../inc/minishell.h"
 # include <sys/types.h>
 
-# define CMD_NOT_FOUND 127
+#define CMD_NOT_FOUND 127
 
 typedef struct s_pipex
 {
@@ -24,6 +24,7 @@ typedef struct s_pipex
 	char	**argv;
 	char	*cmd_path;
 	pid_t	*pid;
+	bool	path;
 	int		fd[2];
 	int		prevpipe;
 	int		stdin_fd;
@@ -31,7 +32,9 @@ typedef struct s_pipex
 	int		outfile;
 	int		status;
 	int		argc;
+	int	 	remove;
 	int		i;
+	t_env_list	env;
 }	t_pipex;
 
 typedef struct s_prompt	*t_prompt;
@@ -40,15 +43,15 @@ int		is_dir(char *path);
 
 void	null_str_err(char *str);
 
-char	**parse_env(void);
+char	**parse_env(t_env_list env);
 
 int		exec_cmd(t_pipex *pipex, char **argv);
 
 char	*get_cmd_path(t_pipex *pipex, char *cmd);
 
-char	**get_paths(t_pipex *pipex);
+char	**get_paths(t_env_list env, t_pipex *pipex);
 
-int		pipex(t_prompt prompt);
+int		pipex(t_env_list env, t_prompt prompt);
 
 void	pipeline_status(t_pipex *pipex, int i, int pid);
 
