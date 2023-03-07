@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:02:58 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 07:17:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 		[Advanced Bash-Scripting Guide: Internal Variables]
 		(https://tldp.org/LDP/abs/html/internalvariables.html#PROCCID)
 */
-/*
+
 static char	*extract_variable(char **str)
 {
 	char	*out;
@@ -50,28 +50,14 @@ static char	*str_extract_remaining(char **str, size_t *index)
 	return (out);
 }
 
-char	*expand_variable(t_env_list env, char *var_name)
-{
-	char	*variable_name;
-
-	while (env)
-	{
-		variable_name = env->var->name;
-		if (ft_strncmp(variable_name, var_name, ft_strlen(variable_name)) == 0)
-			return (ft_strdup(env->var->value));
-		env = env->next;
-	}
-	return (ft_strdup("\0"));
-}
-
-char	*find_and_expand_variable(t_env_list env, char *str)
+char	*find_and_expand_variable(char *str)
 {
 	char	*out;
 	char	*remaining;
 	char	*variable_found;
 	size_t	index;
 
-	out = ft_strdup("\0");
+	str_new_empty(&out);
 	index = 0;
 	while (*str)
 	{
@@ -79,9 +65,7 @@ char	*find_and_expand_variable(t_env_list env, char *str)
 		if (variable_found)
 		{
 			remaining = str_extract_remaining(&str, &index);
-			out = str_merge(out, remaining,
-					expand_variable(env, variable_found), NULL);
-			free(variable_found);
+			out = str_merge(out, remaining, env_get_value(variable_found), NULL);
 		}
 		else
 			index++;
@@ -91,51 +75,51 @@ char	*find_and_expand_variable(t_env_list env, char *str)
 	return (out);
 }
 
-static void	find_and_expand_env_var(void *token, void *env_list)
+static void	find_and_expand_env_var(void *token, void *_)
 {
 	t_token		tk;
-	t_env_list	env_lst;
 	char		*output;
 	size_t		old;
 	size_t		range[2];
 
+	(void)_;
 	tk = token;
-	env_lst = env_list;
-	if (tk == NULL || env_list == NULL)
+	if (tk == NULL)
 		return ;
 	str_new_empty(&output);
 	old = 0;
 	while (bash_definition_name(range, tk->input))
 	{
 		output = str_merge_list((char *[]){output,
-			ft_substr(tk->input, old, range[0]),
-			ft_substr(tk->input, range[0], range[1]),
-			NULL
-		});
+				ft_substr(tk->input, old, range[0]),
+				ft_substr(tk->input, range[0], range[1]),
+				NULL
+			});
 	}
 	free(tk->input);
 	tk->input = output;
 }
 
-static void	commande_expand_variable(void *commande, void *env_list)
+static void	commande_expand_variable(void *commande, void *_)
 {
 	t_commande	cmd;
 
+	(void)_;
 	cmd = commande;
 	if (cmd == NULL)
 		return ;
-	list_iter(cmd->argv, find_and_expand_env_var, env_list);
-	list_iter(cmd->redir_in, find_and_expand_env_var, env_list);
-	list_iter(cmd->redir_out, find_and_expand_env_var, env_list);
+	list_iter(cmd->argv, find_and_expand_env_var, NULL);
+	list_iter(cmd->redir_in, find_and_expand_env_var, NULL);
+	list_iter(cmd->redir_out, find_and_expand_env_var, NULL);
 }
-*/
+
 int	execution(t_prompt prompt)
 {
 	if (prompt == NULL)
 		return (EXIT_FAILURE);
 	if (!heredoc(prompt))
 		return (EXIT_FAILURE);
-//	list_iter(prompt, commande_expand_variable, env);
+	list_iter(prompt, commande_expand_variable, NULL);
 	pipex(prompt);
 	return (EXIT_SUCCESS);
 }

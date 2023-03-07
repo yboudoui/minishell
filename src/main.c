@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:42:29 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 07:12:23 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static int	read_prompt(void)
 	while (!exe_stop)
 	{
 		line = readline("~$ ");
-		if (!line)
-			return (EXIT_SUCCESS);	// maybe not a good idea
 		if (!is_empty(line))
 		{
 			add_history(line);
