@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 12:26:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:11:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 		return (NULL);
 */
 	if (pipex->paths == NULL)
-		generic_err(cmd, "No such file or directory\n", 2);
+		return (generic_err(cmd, "No such file or directory\n", 2), NULL);
 	i = -1;
+	path = NULL;
 	while (pipex->paths && pipex->paths[++i])
 	{
 		path = str_join_list((char *[]){
@@ -49,5 +50,5 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 		i++;
 	}
 	generic_err(cmd, "command not found\n", 2);
-	return (free(path), NULL);
+	return (NULL);
 }
