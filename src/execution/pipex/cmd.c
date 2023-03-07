@@ -6,11 +6,12 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 11:48:49 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:34:45 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+#include <unistd.h>
 
 static inline int	cmd_in(t_pipex *pipex)
 {
@@ -66,7 +67,7 @@ int	exec_cmd(t_pipex *pipex, char **argv)
 		return (-1);
 	if (pipex->cmd_path == NULL)
 		return (EXIT_FAILURE);
-	if (execve(pipex->cmd_path, argv, parse_env()) == -1)
+	if (execve(pipex->cmd_path, argv, parse_env(pipex->env)) == -1)
 		return (generic_err("execve", NULL, 1));
 	return (-1);
 }
