@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/07 07:12:23 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:13:01 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int	read_prompt(void)
 	while (!exe_stop)
 	{
 		line = readline("~$ ");
+		if (line == NULL)
+			return (EXIT_FAILURE);
 		if (!is_empty(line))
 		{
 			add_history(line);
@@ -56,6 +58,7 @@ int	main(int ac, char *av[], char *envp[])
 
 	(void)av;
 	g_exit_code = 0;
+	rl_outstream = stderr;
 	if (ac != 1 || !isatty(ttyslot()))
 		return (EXIT_FAILURE);
 	sigaction(SIGINT, &signals[0], NULL);

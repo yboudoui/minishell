@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:05:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:54:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:36:34 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ bool		env_list_create(char *envp[]);
 void		env_list_destroy(void);
 void		env_list_insert(t_env_var var);
 void		env_list_insert_new(char *name, char *value);
-t_env_var	env_find(char *name);
-char		*env_get_value(char *name);
+t_env_var	env_find(char *name, size_t start, size_t end);
+char		*env_get_value(char *name, size_t start, size_t end);
 
 t_env_var	env_variable_create(char *name, char *value);
 void		env_variable_destroy(void *input);
 t_env_var	env_var_create(char *str);
 void		env_variable_replace(t_env_var *dest, t_env_var src);
+
+char	*env_find_and_expand_var(char *str);
+int		bash_definition_name(char *str);
+int		bash_definition_variable(char *str);
 
 #endif

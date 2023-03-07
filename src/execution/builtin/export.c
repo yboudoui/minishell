@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 15:56:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:56:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static int	parse_export_arg(char *arg)
 	size_t		len;
 	t_env_var	var;
 
-	name = find_bash_definition_name(arg);
+	len = bash_definition_name(arg);
+	if (len < 0)
+		return (EXIT_FAILURE);
+	name = ft_substr(arg, 0, len);
 	if (name == NULL)
 		return (EXIT_FAILURE);
-	len = ft_strlen(name);
 	value = NULL;
 	if (!ft_strncmp(&arg[len], "=", 1))
 	{
@@ -35,7 +37,7 @@ static int	parse_export_arg(char *arg)
 	else if (!ft_strncmp(&arg[len], "+=", 2))
 	{
 		value = ft_substr(arg, len + 2, ft_strlen(arg));
-		var = env_find(name);
+		var = env_find(name, 0, 0);
 		if (var)
 			var->value = str_merge_list((char *[]){var->value, value, NULL});
 		else

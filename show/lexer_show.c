@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/07 07:14:31 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:49:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,6 @@ void	print_token_type(void *content, void *_)
 	(void)_;
 	token = content;
 	printf("%s\n", get_token_type_string(token->type));
-}
-
-void	print_lexer_token_type(t_list lexer_output)
-{
-	if (!lexer_output)
-		return ((void)print_error("no token list"));
-	list_iter(lexer_output, print_token_type, NULL);
 }
 
 void	print_argv(void *content)

@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 18:33:22 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:03:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_pipex
 	char	**argv;
 	char	*cmd_path;
 	pid_t	*pid;
-	bool	path;
 	int		fd[2];
 	int		prevpipe;
 	int		stdin_fd;
@@ -32,7 +31,6 @@ typedef struct s_pipex
 	int		outfile;
 	int		status;
 	int		argc;
-	int		remove;
 	int		i;
 }	t_pipex;
 

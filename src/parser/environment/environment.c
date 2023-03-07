@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:08:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 15:58:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:06:22 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char	*cut_variable_name(char **str)
 		return (NULL);
 	size = out - (*str);
 	out = ft_substr(*str, 0, size);
+	if (out == NULL)
+		return (NULL);
 	(*str) += size + 1;
 	return (out);
 }
@@ -49,10 +51,11 @@ t_env_var	env_variable_create(char *name, char *value)
 	if (name == NULL)
 		return (NULL);
 	output = ft_calloc(1, sizeof(struct s_env_var));
-	if (output == NULL)
-		return (NULL);
-	output->name = name;
-	output->value = value;
+	if (output != NULL)
+	{
+		output->name = name;
+		output->value = value;
+	}
 	return (output);
 }
 
