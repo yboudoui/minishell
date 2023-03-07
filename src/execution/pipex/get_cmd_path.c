@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 13:11:12 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:27:15 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 /*
 static inline char	*check_fpath(char *cmd)
 {
-//	if (!ft_strchr(cmd, '/'))
-//		return (NULL);
+	if (ft_strchr(cmd, '/'))
+		return (NULL);
 	if (is_dir(cmd) != 0)
 		return (generic_err(cmd, "Is a directory\n", 2), NULL);
 	if (access(cmd, X_OK) == 0)
