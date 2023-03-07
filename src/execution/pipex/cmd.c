@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/06 13:34:45 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/07 18:28:38 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int	exec_cmd(t_pipex *pipex, char **argv)
 		return (-1);
 	if (cmd_out(pipex) == -1)
 		return (-1);
+	if (pipex->builtin)
+	{
+		pipex->builtin(argv);
+		return (0);
+	}
 	if (pipex->cmd_path == NULL)
 		return (EXIT_FAILURE);
 	if (execve(pipex->cmd_path, argv, parse_env(pipex->env)) == -1)
