@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/07 14:14:12 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/08 15:37:08 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,8 @@ SRCS	=\
 ./src/execution/pipex/get_cmd_path.c\
 ./src/execution/pipex/open.c\
 ./src/execution/pipex/pipeline_status.c\
+./src/execution/pipex/execute.c\
+./src/execution/pipex/signal.c\
 ./src/execution/builtin/unset.c\
 ./src/execution/builtin/is_builtin.c\
 ./src/execution/builtin/exit.c\

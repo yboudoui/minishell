@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 17:59:36 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:29:13 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_pipex
 	bool		path;
 	bool		abs_path_cmd;
 	int			fd[2];
+	int			builtin_stdin;
+	int			builtin_stdout;
 	int			prevpipe;
 	int			stdin_fd;
 	int			infile;
@@ -42,6 +44,16 @@ typedef struct s_pipex
 }	t_pipex;
 
 typedef struct s_prompt	*t_prompt;
+
+int		execute(char *argv[], t_pipex *pipex);
+
+int		run_builtin(t_pipex *pipex, char **argv);
+
+void	signal_handler(int signum);
+
+int		cmd_out(t_pipex *pipex);
+
+int		cmd_in(t_pipex *pipex);
 
 int		is_dir(char *path);
 
@@ -60,8 +72,6 @@ int		pipex(t_prompt prompt);
 void	pipeline_status(t_pipex *pipex, int i, int pid);
 
 void	path_null(t_pipex *pipex, char *cmd);
-
-int		execute(char *argv[], t_pipex *pipex);
 
 int		close_fd(int *fd);
 
