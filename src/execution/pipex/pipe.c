@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 19:25:40 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 11:20:53 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:44:06 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pipe_fd(t_pipex *pipex, int *fd)
 {
-	(void)pipex;
 	if (pipe(fd) == -1)
 		generic_err("Pipe", NULL, 1);
+	pipex->remove = 1;
 }

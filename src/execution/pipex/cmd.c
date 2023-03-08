@@ -6,13 +6,14 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 15:23:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:28:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+#include <unistd.h>
 
-static inline int	cmd_in(t_pipex *pipex)
+int	cmd_in(t_pipex *pipex)
 {
 	if (pipex->infile > 2)
 	{
@@ -31,7 +32,7 @@ static inline int	cmd_in(t_pipex *pipex)
 	return (0);
 }
 
-static inline int	cmd_out(t_pipex *pipex)
+int	cmd_out(t_pipex *pipex)
 {
 	if (pipex->outfile > 2)
 	{
@@ -66,7 +67,12 @@ int	exec_cmd(t_pipex *pipex, char **argv)
 		return (-1);
 	if (pipex->cmd_path == NULL)
 		return (EXIT_FAILURE);
-	if (execve(pipex->cmd_path, argv, parse_env()) == -1)
+	if (pipex->builtin)
+	{
+		pipex->builtin(argv);
+		return (0);
+	}
+	if (execve(pipex->cmd_path, argv, parse_env(pipex->env)) == -1)
 		return (generic_err("execve", NULL, 1));
 	return (-1);
 }

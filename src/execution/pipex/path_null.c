@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   path_null.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 16:55:39 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 14:44:08 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/02/26 12:27:33 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/03/07 18:28:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-int	generic_err(char *cmd, char *error, int system)
+void	path_null(t_pipex *pipex, char *cmd)
 {
-	if (system == 1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		perror(cmd);
-	}
-	if (system == 2)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(error, 2);
-	}
-	return (-1);
+	(void)cmd;
+	if (pipex->path == false && !pipex->builtin)
+		generic_err(cmd, "No such file or directory", 2);
+	/* printf("this is the pb\n"); */
 }

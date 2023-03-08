@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_env.c                                        :+:      :+:    :+:   */
+/*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 15:07:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/08 17:43:04 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/27 16:54:19 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/03/07 18:27:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-char	**parse_env(t_env_list env)
+char	**get_paths(t_env_list env, t_pipex *pipex)
 {
-	char		**envp;
-	int			i;
-	t_env_var	tmp;
-	char		*tmp1;
-	char		*tmp2;
+	char	**paths;
+	char	*path;
 
-	i = 0;
-	envp = (char **)malloc(sizeof(char *) * (list_size((t_list)env) + 1));
-	null_str_err((char *)envp);
 	while (env)
 	{
-		tmp = env->var;
-		tmp1 = ft_strjoin(tmp->name, "=");
-		null_str_err(tmp1);
-		tmp2 = ft_strjoin(tmp1, tmp->value);
-		null_str_err(tmp2);
-		free(tmp1);
-		envp[i] = tmp2;
-		null_str_err(envp[i]);
-		i++;
+		if (ft_strncmp(env->var->name, "PATH", 5) == 0)
+		{
+			path = ft_strdup(env->var->value);
+			if (path == NULL)
+				return (NULL);
+			paths = ft_split(path, ':');
+			if (paths == NULL)
+				return (NULL);
+			free(path);
+			pipex->path = true;
+			return (paths);
+		}
 		env = env->next;
 	}
-	envp[i] = NULL;
-	return (envp);
+	pipex->path = false;
+	return (NULL);
 }
