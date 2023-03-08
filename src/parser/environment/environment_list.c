@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:36:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/07 11:51:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:29:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_env_list	env_list_singleton(t_env_list list)
 	static t_env_list	root = NULL;
 
 	if (list != NULL)
-		root = list;
+		root = (t_env_list)list_first((t_list)list);
 	return (root);
 }
 

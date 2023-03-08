@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 12:19:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:06:56 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ static int	heredoc_read(t_token token)
 	if (new == NULL)
 		return (EXIT_FAILURE);
 	(*new) = fds[0];
-	while (line && string_cmp(line, token->input))
+	while (line)
 	{
 		free(line);
 		line = readline("> ");
+		if (string_cmp(line, token->input) == 0)
+			break ;
 		if (g_stop || line == NULL)
 		{
 			/* close(fds[0]); */
@@ -82,7 +84,7 @@ int	heredoc(t_prompt cmd)
 	const struct sigaction	sigint = {
 		.sa_handler = signal_control_c
 	};
-	struct sigaction old;
+	struct sigaction	old;
 
 	sigaction(SIGINT, &sigint, &old);
 	while (cmd)

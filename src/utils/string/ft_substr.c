@@ -6,7 +6,7 @@
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:54:47 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 15:58:09 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:06:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,6 @@ bool	ft_substr_to(char **out, char *in, unsigned int start, size_t len)
 {
 	(*out) = ft_substr(in, start, len);
 	return (*out);
-}
-
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
-{
-	const unsigned char	*ptr1;
-	const unsigned char	*ptr2;
-
-	ptr1 = s1;
-	ptr2 = s2;
-	while (n--)
-	{
-		if (*ptr1 != *ptr2)
-			return (*ptr1 - *ptr2);
-		ptr1++;
-		ptr2++;
-	}
-	return (0);
-}
-
-size_t	sizeof_array(void *ptr, size_t sizeof_type, void *sentinel)
-{
-	size_t	index;
-
-	if (ptr == NULL || sizeof_type == 0)
-		return (0);
-	index = 0;
-	while (ft_memcmp(ptr, sentinel, sizeof_type))
-	{
-		index += 1;
-		ptr += (index * sizeof_type);
-	}
-	return (index);
 }
 
 void	str_array_destroy(void *data)
