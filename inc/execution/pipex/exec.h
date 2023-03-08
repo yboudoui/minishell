@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 11:03:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:39:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,54 @@
 
 typedef struct s_pipex
 {
-	char	**paths;
-	char	**argv;
-	char	*cmd_path;
-	pid_t	*pid;
-	int		fd[2];
-	int		prevpipe;
-	int		stdin_fd;
-	int		infile;
-	int		outfile;
-	int		status;
-	int		argc;
-	int		i;
+	char			**paths;
+	char			**argv;
+	char			*cmd_path;
+	pid_t			*pid;
+	t_fp_builtin	builtin;
+	bool			path;
+	bool			abs_path_cmd;
+	int				fd[2];
+	int				builtin_stdin;
+	int				builtin_stdout;
+	int				prevpipe;
+	int				stdin_fd;
+	int				infile;
+	int				outfile;
+	int				status;
+	int				argc;
+	int				remove;
+	int				i;
+	t_env_list		env;
 }	t_pipex;
 
-typedef struct s_prompt	*t_prompt;
+int		execute(char *argv[], t_pipex *pipex);
+
+int		run_builtin(t_pipex *pipex, char **argv);
+
+void	signal_handler(int signum);
+
+int		cmd_out(t_pipex *pipex);
+
+int		cmd_in(t_pipex *pipex);
 
 int		is_dir(char *path);
 
 void	null_str_err(char *str);
 
-char	**parse_env(void);
+char	**parse_env(t_env_list env);
 
 int		exec_cmd(t_pipex *pipex, char **argv);
 
 char	*get_cmd_path(t_pipex *pipex, char *cmd);
 
-char	**get_paths(t_pipex *pipex);
+char	**get_paths(t_env_list env, t_pipex *pipex);
 
 int		pipex(t_prompt prompt);
 
 void	pipeline_status(t_pipex *pipex, int i, int pid);
 
 void	path_null(t_pipex *pipex, char *cmd);
-
-int		execute(char *argv[], t_pipex *pipex);
 
 int		close_fd(int *fd);
 

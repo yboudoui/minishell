@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/08 16:33:13 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/08 17:10:43 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,16 +79,21 @@ SRCS	=\
 ./src/execution/pipex/outfile.c\
 ./src/execution/pipex/cmd.c\
 ./src/execution/pipex/stat.c\
+./src/execution/pipex/get_paths.c\
 ./src/execution/pipex/pipe.c\
 ./src/execution/pipex/parse_env.c\
 ./src/execution/pipex/infile.c\
 ./src/execution/pipex/pipex.c\
+./src/execution/pipex/path_null.c\
 ./src/execution/pipex/error/dup.c\
 ./src/execution/pipex/error/null_str_err.c\
+./src/execution/pipex/error/fork.c\
 ./src/execution/pipex/error/error.c\
 ./src/execution/pipex/get_cmd_path.c\
 ./src/execution/pipex/open.c\
 ./src/execution/pipex/pipeline_status.c\
+./src/execution/pipex/execute.c\
+./src/execution/pipex/signal.c\
 ./src/execution/builtin/unset.c\
 ./src/execution/builtin/is_builtin.c\
 ./src/execution/builtin/exit.c\

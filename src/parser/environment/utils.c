@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 16:30:48 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:35:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*env_find_and_expand_var(char *str)
 
 	if (str == NULL)
 		return (NULL);
+	if (!string_cmp(str, "~"))
+		return (env_get_value("HOME", 0, 0));
 	idx = -1;
 	output = ft_strdup("\0");
 	while (str[++idx])

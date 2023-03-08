@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 16:55:39 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 14:44:08 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/03/08 15:37:41 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/03/08 17:37:34 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../inc/minishell.h"
+#include "../../../inc/minishell.h"
 
-int	generic_err(char *cmd, char *error, int system)
+void	signal_handler(int signum)
 {
-	if (system == 1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		perror(cmd);
-	}
-	if (system == 2)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(error, 2);
-	}
-	return (-1);
+	g_exit_code = 128 + signum;
 }
