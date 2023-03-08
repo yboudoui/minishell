@@ -6,12 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/07 11:30:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:57:05 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-/*
+
 static void	token_expand_env_var(void *input, void *_)
 {
 	t_token	token;
@@ -40,14 +40,14 @@ static void	commande_expand_variable(void *commande, void *_)
 	list_iter(cmd->redir_in, token_expand_env_var, NULL);
 	list_iter(cmd->redir_out, token_expand_env_var, NULL);
 }
-*/
+
 int	execution(t_prompt prompt)
 {
 	if (prompt == NULL)
 		return (EXIT_FAILURE);
 	if (!heredoc(prompt))
 		return (EXIT_FAILURE);
-//	list_iter(prompt, commande_expand_variable, NULL);
+	list_iter(prompt, commande_expand_variable, NULL);
 	pipex(prompt);
 	return (EXIT_SUCCESS);
 }

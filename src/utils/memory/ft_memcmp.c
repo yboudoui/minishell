@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 21:08:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 14:03:43 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/08 14:02:05 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/08 14:03:44 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#include "memory.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	const unsigned char	*ptr1;
+	const unsigned char	*ptr2;
 
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*memory_dup(void *src, size_t n);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
-size_t	sizeof_array(void *ptr, size_t sizeof_type, void *sentinel);
-
-#endif
+	ptr1 = s1;
+	ptr2 = s2;
+	while (n--)
+	{
+		if (*ptr1 != *ptr2)
+			return (*ptr1 - *ptr2);
+		ptr1++;
+		ptr2++;
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 12:24:54 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:00:45 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ int	waitall(t_pipex *pipex)
 bool	pipex_create(t_prompt prompt, t_pipex *output)
 {
 	char	*env_path;
+
 	if (prompt == NULL)
 		return (output);
 	(*output) = (t_pipex){0};
 	output->stdin_fd = dup(STDIN_FILENO);
 	output->argc = list_size((t_list)prompt);
 	env_path = env_get_value("PATH", 0, 0);
-	output->paths = ft_split(env_path, ':');
-	free(env_path);
+	if (env_path)
+	{
+		output->paths = ft_split(env_path, ':');
+		free(env_path);
+	}
 	output->pid = ft_calloc(output->argc + 1, sizeof(pid_t));
 	if (output->pid == NULL)
 		return (generic_err("malloc", NULL, 2), false);
@@ -56,7 +60,7 @@ int	pipex(t_prompt prompt)
 		pipex.infile = infile(cmd->redir_in);
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmd->redir_out);
-		if (pipex.infile != -1 || pipex.outfile != -1)
+		if (pipex.infile != -1 && pipex.outfile != -1)
 			execute(cmd->argv, &pipex);
 		cmd_destroy(cmd);
 		prompt = prompt->next;

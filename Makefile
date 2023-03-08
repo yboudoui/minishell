@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/07 11:18:51 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/08 16:33:13 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ SRCS	=\
 ./src/utils/string/str_slice_prefix.c\
 ./src/utils/string/ft_strncmp.c\
 ./src/utils/string/ft_strlen.c\
-./src/utils/string/ft_strrchr.c\
 ./src/utils/string/ft_putstr_fd.c\
 ./src/utils/string/ft_substr.c\
 ./src/utils/string/ft_str_find_prefix.c\
@@ -46,6 +45,7 @@ SRCS	=\
 ./src/utils/string/string_end_with.c\
 ./src/utils/string/list_to_str_array.c\
 ./src/utils/string/string_array_destroy.c\
+./src/utils/string/ft_strrchr.c\
 ./src/utils/string/ft_strdup.c\
 ./src/utils/string/str_slice_charset.c\
 ./src/utils/string/is_space.c\
@@ -57,14 +57,17 @@ SRCS	=\
 ./src/utils/list/list_insert.c\
 ./src/utils/list/ft_lstmap.c\
 ./src/utils/list/list_add.c\
+./src/utils/memory/ft_memcmp.c\
 ./src/utils/memory/ft_memcpy.c\
 ./src/utils/memory/ft_calloc.c\
+./src/utils/memory/sizeof_array.c\
 ./src/main.c\
 ./src/parser/prompt/prompt.c\
 ./src/parser/lexer/lexer.c\
 ./src/parser/lexer/matching.c\
 ./src/parser/lexer/token.c\
 ./src/parser/syntaxer/commande.c\
+./src/parser/environment/insert.c\
 ./src/parser/environment/environment.c\
 ./src/parser/environment/definition.c\
 ./src/parser/environment/environment_list.c\
