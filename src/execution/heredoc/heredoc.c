@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 17:49:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:59:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	signal_control_c(int sig)
 		return ;
 	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
 	close(STDIN_FILENO);
-	g_exit_code = 130;
+	g_global.exit_code = 130;
 }
 
 static bool	have_to_expand(t_token token)
@@ -60,12 +60,11 @@ static int	heredoc_read(t_token token)
 	(*new) = fds[0];
 	expand = have_to_expand(token);
 	str_new_empty(&line);
-	g_exit_code = 0;
 	while (line)
 	{
 		free(line);
 		line = readline("> ");
-		if (g_exit_code || line == NULL)
+		if (g_global.exit_code || line == NULL)
 		{
 			/* close(fds[0]); */
 			close(fds[1]);

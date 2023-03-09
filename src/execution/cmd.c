@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:11:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/05 17:11:00 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:28:06 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,28 @@ void	cmd_destroy(void *data)
 		return ;
 	free(input->argv);
 	free(input);
+}
+
+t_cmd_list	convertion(t_prompt prompt)
+{
+	t_list	output;
+
+	output = NULL;
+	while (prompt)
+	{
+		list_create_back(&output, cmd_create(prompt->content));
+		prompt = prompt->next;
+	}
+	return ((t_cmd_list)output);
+}
+
+void	cmd_list_destroy(void *data)
+{
+	t_cmd_list	*input;
+
+	input = data;
+	if (input == NULL)
+		return ;
+	list_clear(input, cmd_destroy);
+	(*input) = NULL;
 }

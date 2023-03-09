@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 17:40:48 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:29:09 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,18 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-extern int	g_exit_code;
+typedef struct s_global {
+	int					exit_code;
+	struct sigaction	default_sigint;
+	struct sigaction	default_sigquit;
+	t_prompt			prompt;
+	t_cmd_list			cmds;
+	t_pipex				*pipex;
+}	t_global;
 
+extern t_global	g_global;
+
+void	meta_exit(void);
 int		execution(t_prompt prompt);
 
 #endif

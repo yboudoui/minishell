@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 17:04:49 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:04:04 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ t_prompt	prompt_create(char *input)
 
 void	prompt_destroy(void *data)
 {
-	if (data == NULL)
+	t_prompt	*input;
+
+	input = data;
+	if (input == NULL)
 		return ;
-	list_clear(&data, commande_destroy);
-	free(data);
+	list_clear(input, commande_destroy);
+	free(*input);
+	(*input) = NULL;
 }
