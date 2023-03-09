@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/08 17:41:06 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:27:16 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,17 @@ int	reset_flags(t_pipex *pipex)
 	return (0);
 }
 
+bool	is_there_a_commande(t_prompt prompt)
+{
+	while (prompt)
+	{
+		if (prompt->content && prompt->content->argv)
+			return (true);
+		prompt = prompt->next;
+	}
+	return (false);
+}
+
 int	pipex(t_prompt prompt)
 {
 	t_pipex					pipex;
@@ -80,9 +91,12 @@ int	pipex(t_prompt prompt)
 	pipex = empty_pipex;
 	pipex.argc = list_size((t_list)prompt);
 	pipex.builtin = NULL;
+	printf("%d\n", is_there_a_commande(prompt));
 	if (pipex.argc == 1)
 	{
 		cmd = cmd_create(prompt->content);
+		if (cmd->argv == NULL)
+			return (0);
 		pipex.builtin = is_builtin(cmd->argv[0]);
 		if (pipex.builtin)
 		{
@@ -92,7 +106,7 @@ int	pipex(t_prompt prompt)
 		}
 	}
 	pipex.stdin_fd = dup(STDIN_FILENO);
-	pipex.paths = get_paths(env_list_singleton(NULL), &pipex);
+	pipex.paths = get_paths(&pipex);
 	if (init_exec(&pipex) == -1)
 		return (EXIT_FAILURE);
 	while (prompt)

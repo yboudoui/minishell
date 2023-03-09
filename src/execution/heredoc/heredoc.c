@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 17:06:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 13:56:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static int	heredoc_read(t_token token)
 	{
 		free(line);
 		line = readline("> ");
-		if (string_cmp(line, token->input) == 0)
-			break ;
 		if (g_stop || line == NULL)
 		{
 			/* close(fds[0]); */
@@ -54,6 +52,8 @@ static int	heredoc_read(t_token token)
 			token->input = new;
 			return (EXIT_FAILURE);
 		}
+		if (string_cmp(line, token->input) == 0)
+			break ;
 //		expand_all_command(env, prompt->commande);
 		if (!is_empty(line))
 			add_history(line);
