@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 14:21:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 13:54:17 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:22:56 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	bash_definition_variable(char *str)
 	index = 0;
 	if (is_empty(str) || str[index] != '$')
 		return (-1);
-	index = bash_definition_name(str + 1);
+	str += 1;
+	if (ft_strncmp(str, "?", 1) == 0)
+		return (1);
+	index = bash_definition_name(str);
 	if (index < 0)
 		return (index);
 	return (index + 1);
