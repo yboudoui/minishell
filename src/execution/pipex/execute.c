@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 09:48:41 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 16:54:19 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ int	execute(char *argv[], t_pipex *pipex)
 	/* } */
 	pipex->cmd_path = get_cmd_path(pipex, argv[0]);
 	if (pipex->cmd_path == NULL)
-	{
 		g_exit_code = CMD_NOT_FOUND;
-		return (EXIT_FAILURE);
-	}
 	fork_pid(&pipex->pid[pipex->i]);
 	if (pipex->pid[pipex->i] == 0)
 	{
