@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:36:32 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 19:57:29 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 t_global	g_global;
 
-void	meta_exit(void)
+void	meta_exit(int exitcode)
 {
-	prompt_destroy(g_global.prompt);
+	prompt_destroy(&g_global.prompt);
+	cmd_list_destroy(&g_global.cmds);
 	env_list_destroy();
-	exit(0);
+	free_pipex(g_global.pipex);
+	exit(exitcode);
 }
 
 void	signal_control_c_(int sig)
@@ -36,7 +38,6 @@ static int	read_prompt(void)
 {
 	char		*line;
 	int			exe_stop;
-	t_prompt	prompt;
 
 	exe_stop = 0;
 	while (!exe_stop)
@@ -74,5 +75,5 @@ int	main(int ac, char *av[], char *envp[])
 	if (!env_list_create(envp))
 		return (-1);
 	read_prompt();
-	return (meta_exit(), EXIT_SUCCESS);
+	return (meta_exit(0), EXIT_SUCCESS);
 }

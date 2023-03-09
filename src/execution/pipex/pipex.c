@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 19:34:51 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 19:59:54 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ int	reset_flags(t_pipex *pipex)
 	return (0);
 }
 
+int free_pipex(t_pipex *pipex)
+{
+	dup_fd(pipex->stdin_fd, STDIN_FILENO);
+	close_fd(&pipex->stdin_fd);
+	free(pipex->pid);
+	string_array_destroy(pipex->paths);
+	return (0);
+}
+
 bool	is_there_a_commande(t_prompt prompt)
 {
 	while (prompt)
@@ -89,6 +98,7 @@ int	pipex(t_cmd_list cmds)
 	static const t_pipex	empty_pipex;
 	int						error_code;
 
+	g_global.pipex = &pipex;
 	error_code = EXIT_SUCCESS;
 	pipex = empty_pipex;
 	pipex.argc = list_size((t_list)cmds);
@@ -110,7 +120,6 @@ int	pipex(t_cmd_list cmds)
 		return (EXIT_FAILURE);
 	while (cmds)
 	{
-		pipex.paths = get_paths(&pipex);
 		pipex.env = env_list_singleton(NULL);
 		reset_flags(&pipex);
 		manage_pipeline_fds(&pipex, cmds->cmd);
