@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 15:05:07 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 16:43:03 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ int	pipex(t_prompt prompt)
 	}
 	waitall(&pipex);
 	dup_fd(pipex.stdin_fd, STDIN_FILENO);
+	close_fd(&pipex.stdin_fd);
 	free(pipex.pid);
 	string_array_destroy(pipex.paths);
-	close_fd(&pipex.stdin_fd);
 	return (error_code);
 }
