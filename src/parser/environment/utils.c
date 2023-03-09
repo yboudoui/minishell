@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 16:39:25 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:40:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,24 @@ char	*env_find_and_expand_var(char *str)
 		return (NULL);
 	if (!string_cmp(str, "~"))
 		return (env_get_value("HOME", 0, 0));
-	idx = -1;
+	idx = 0;
 	output = ft_strdup("\0");
-	while (str[++idx])
+	while (str[idx])
 	{
 		len = bash_definition_variable(&str[idx]);
+		idx += 1;
 		if (len < 0)
 			continue ;
-		if (str[idx + 1] == '?')
-			output = str_merge_list((char *[]){output, ft_substr(str, 0, idx),
-				ft_itoa(g_exit_code), NULL});
+		if (str[idx] == '?')
+			output = str_merge_list((char *[]){
+					output, ft_substr(str, 0, idx - 1),
+					ft_itoa(g_exit_code), NULL});
 		else
-			output = str_merge_list((char *[]){output, ft_substr(str, 0, idx),
-				env_get_value(&str[idx + 1], 0, len), NULL});
+			output = str_merge_list((char *[]){
+					output, ft_substr(str, 0, idx - 1),
+					env_get_value(&str[idx], 0, --len), NULL});
 		str += (idx + len);
-		idx = -1;
+		idx = 0;
 	}
 	if (ft_strlen(output))
 		return (output);
