@@ -6,11 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:13:42 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:36:32 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include <signal.h>
 
 t_global	g_global;
 
@@ -21,7 +22,7 @@ void	meta_exit(void)
 	exit(0);
 }
 
-static void	signal_control_c(int sig)
+void	signal_control_c_(int sig)
 {
 	if (sig != SIGINT)
 		return ;
@@ -35,6 +36,7 @@ static int	read_prompt(void)
 {
 	char		*line;
 	int			exe_stop;
+	t_prompt	prompt;
 
 	exe_stop = 0;
 	while (!exe_stop)
@@ -58,7 +60,7 @@ static int	read_prompt(void)
 int	main(int ac, char *av[], char *envp[])
 {
 	const struct sigaction	signals[2] = {
-	{.sa_handler = signal_control_c},
+	{.sa_handler = signal_control_c_},
 	{.sa_handler = SIG_IGN}
 	};
 

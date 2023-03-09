@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 19:27:09 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:34:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ int	waitall(t_pipex *pipex)
 	}
 	if (WIFSIGNALED(pipex->status))
 	{
-		/* if (WTERMSIG(pipex->status) == 2) */
-		/* if (WTERMSIG(pipex->status) == 3) */
+		printf("Received signal %d\n", WTERMSIG(pipex->status));
+		if (WTERMSIG(pipex->status) == 2)
+			ft_putstr_fd("\n", 1);
+		if (WTERMSIG(pipex->status) == 3)
+			ft_putstr_fd("Quit (core dumped)\n", 1);
 	}
 	else if (WIFEXITED(pipex->status))
 		g_global.exit_code = WEXITSTATUS(pipex->status);
