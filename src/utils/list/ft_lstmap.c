@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:47:02 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 17:33:52 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:27:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_list	ft_lstmap(t_list lst, void *(*f)(void *), void (*del)(void *))
 
 void	*list_subset(void *list, void *(*f)(void *))
 {
+	t_list	lst;
 	t_list	output;
 	void	*tmp;
-	t_list	lst;
 
 	lst = list;
 	output = NULL;

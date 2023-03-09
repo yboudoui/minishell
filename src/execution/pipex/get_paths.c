@@ -6,33 +6,27 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:54:19 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/07 18:27:51 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 13:45:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-char	**get_paths(t_env_list env, t_pipex *pipex)
+char	**get_paths(t_pipex *pipex)
 {
 	char	**paths;
-	char	*path;
+	t_env_var	found;
 
-	while (env)
+	found = env_find("PATH", 0, 0);
+	pipex->path = false;
+	if (found)
 	{
-		if (ft_strncmp(env->var->name, "PATH", 5) == 0)
+		paths = ft_split(found->value, ':');
+		if (paths)
 		{
-			path = ft_strdup(env->var->value);
-			if (path == NULL)
-				return (NULL);
-			paths = ft_split(path, ':');
-			if (paths == NULL)
-				return (NULL);
-			free(path);
 			pipex->path = true;
 			return (paths);
 		}
-		env = env->next;
 	}
-	pipex->path = false;
 	return (NULL);
 }

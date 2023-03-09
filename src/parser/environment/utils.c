@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 17:35:08 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 13:52:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ t_env_var	env_find(char *name, size_t start, size_t end)
 		end = ft_strlen(name);
 	while (env)
 	{
+		if (env->var->name == NULL)
+		{
+			env = env->next;
+			continue ;
+		}
 		if (ft_strncmp(env->var->name, name + start, end) == 0)
 			return (env->var);
 		env = env->next;

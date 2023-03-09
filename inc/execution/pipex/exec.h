@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/08 17:39:02 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 13:46:01 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		exec_cmd(t_pipex *pipex, char **argv);
 
 char	*get_cmd_path(t_pipex *pipex, char *cmd);
 
-char	**get_paths(t_env_list env, t_pipex *pipex);
+char	**get_paths(t_pipex *pipex);
 
 int		pipex(t_prompt prompt);
 
