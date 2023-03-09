@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 14:27:16 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:05:07 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	pipex(t_prompt prompt)
 	pipex = empty_pipex;
 	pipex.argc = list_size((t_list)prompt);
 	pipex.builtin = NULL;
-	printf("%d\n", is_there_a_commande(prompt));
 	if (pipex.argc == 1)
 	{
 		cmd = cmd_create(prompt->content);
@@ -111,6 +110,7 @@ int	pipex(t_prompt prompt)
 		return (EXIT_FAILURE);
 	while (prompt)
 	{
+		pipex.paths = get_paths(&pipex);
 		pipex.env = env_list_singleton(NULL);
 		cmd = cmd_create(prompt->content);
 		reset_flags(&pipex);

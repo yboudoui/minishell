@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/08 17:42:13 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 09:48:41 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	execute(char *argv[], t_pipex *pipex)
 	if (is_error(pipex, argv))
 		return (-1);
 	pipe_fd(pipex, pipex->fd);
+	/* if (pipex->path == false) */
+	/* { */
+	/* 	generic_err(argv[0], "No such file or directory", 2); */
+	/* 	return (EXIT_FAILURE); */
+	/* } */
 	pipex->cmd_path = get_cmd_path(pipex, argv[0]);
 	if (pipex->cmd_path == NULL)
 	{
