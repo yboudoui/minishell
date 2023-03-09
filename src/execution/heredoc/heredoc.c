@@ -6,14 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 16:48:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:49:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
-#include "../../../inc/minishell.h"
-
-int	g_stop = 0;
+#include "minishell.h"
 
 void	signal_control_c(int sig)
 {
@@ -21,7 +19,27 @@ void	signal_control_c(int sig)
 		return ;
 	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
 	close(STDIN_FILENO);
-	g_stop = 1;
+	g_exit_code = 130;
+}
+
+static bool	have_to_expand(t_token token)
+{
+	char	*str;
+	char	*new;
+
+	if (token == NULL || token->input == NULL)
+		return (false);
+	new = NULL;
+	str = token->input;
+	if (str[0] == '"')
+		new = ft_strtrim(str, "\"");
+	if (str[0] == '\'')
+		new = ft_strtrim(str, "'");
+	if (new == NULL)
+		return (true);
+	free (token->input);
+	token->input = new;
+	return (false);
 }
 
 static int	heredoc_read(t_token token)
@@ -32,28 +50,22 @@ static int	heredoc_read(t_token token)
 	char	*expanded;
 	bool	expand;
 
-	if (token->type != TOKEN_HERE_DOCUMENT)
+	if (token == NULL || token->type != TOKEN_HERE_DOCUMENT)
 		return (EXIT_SUCCESS);
-	str_new_empty(&line);
 	if (pipe(fds))
 		return (EXIT_FAILURE);
 	new = ft_calloc(1, sizeof(int));
 	if (new == NULL)
 		return (EXIT_FAILURE);
 	(*new) = fds[0];
-	expand = (((char *)token->input)[0] != '"' &&  ((char *)token->input)[0] != '\'');
-	if (expand)
-	{
-		line = ft_strtrim((char *)token->input, "\"'");
-		free(token->input);
-		token->input = line;
-	}
+	expand = have_to_expand(token);
 	str_new_empty(&line);
+	g_exit_code = 0;
 	while (line)
 	{
 		free(line);
 		line = readline("> ");
-		if (g_stop || line == NULL)
+		if (g_exit_code || line == NULL)
 		{
 			/* close(fds[0]); */
 			close(fds[1]);
@@ -97,10 +109,10 @@ static int	heredoc_commande(t_commande cmd)
 
 int	heredoc(t_prompt cmd)
 {
+	struct sigaction		old;
 	const struct sigaction	sigint = {
 		.sa_handler = signal_control_c
 	};
-	struct sigaction	old;
 
 	sigaction(SIGINT, &sigint, &old);
 	while (cmd)
