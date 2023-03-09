@@ -6,15 +6,30 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 11:37:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:58:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "../../../inc/minishell.h"
+
+
+
+
+int	pwd_err(char *cmd, int system)
+{
+	if (system == 1)
+	{
+		ft_putstr_fd("pwd: error retrieving the current directory: ", 2);
+		perror(cmd);
+	}
+	return (-1);
+}
 
 int	builtin_pwd(char *argv[])
 {
 	char	*buffer;
+	char	*retval;
 	size_t	size;
 
 	(void)argv;
@@ -28,12 +43,19 @@ int	builtin_pwd(char *argv[])
 		buffer = ft_calloc(size, sizeof(char));
 		if (buffer == NULL)
 			return (EXIT_FAILURE);
-		if (getcwd(buffer, size))
+		retval = getcwd(buffer, size);
+		if (retval)
 			break ;
+		if (retval == NULL)
+		{
+			pwd_err("getcwd", 1);
+			break;
+		}
 		size *= 2;
 		buffer = NULL;
 	}
 	write(STDIN_FILENO, buffer, ft_strlen(buffer));
-	write(STDIN_FILENO, "\n", 1);
+	if (retval)
+		write(STDIN_FILENO, "\n", 1);
 	return (EXIT_SUCCESS);
 }
