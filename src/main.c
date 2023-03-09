@@ -6,13 +6,20 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/07 12:13:01 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:13:42 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	g_exit_code;
+t_global	g_global;
+
+void	meta_exit(void)
+{
+	prompt_destroy(g_global.prompt);
+	env_list_destroy();
+	exit(0);
+}
 
 static void	signal_control_c(int sig)
 {
@@ -28,7 +35,6 @@ static int	read_prompt(void)
 {
 	char		*line;
 	int			exe_stop;
-	t_prompt	prompt;
 
 	exe_stop = 0;
 	while (!exe_stop)
@@ -39,9 +45,9 @@ static int	read_prompt(void)
 		if (!is_empty(line))
 		{
 			add_history(line);
-			prompt = prompt_create(line);
-			exe_stop = execution(prompt);
-			prompt_destroy(prompt);
+			g_global.prompt = prompt_create(line);
+			exe_stop = execution(g_global.prompt);
+			prompt_destroy(&g_global.prompt);
 		}
 		free(line);
 	}
@@ -57,15 +63,14 @@ int	main(int ac, char *av[], char *envp[])
 	};
 
 	(void)av;
-	g_exit_code = 0;
+	g_global = (t_global){0};
 	rl_outstream = stderr;
 	if (ac != 1 || !isatty(ttyslot()))
 		return (EXIT_FAILURE);
-	sigaction(SIGINT, &signals[0], NULL);
-	sigaction(SIGQUIT, &signals[1], NULL);
+	sigaction(SIGINT, &signals[0], &g_global.default_sigint);
+	sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
 	if (!env_list_create(envp))
 		return (-1);
 	read_prompt();
-	env_list_destroy();
-	return (EXIT_SUCCESS);
+	return (meta_exit(), EXIT_SUCCESS);
 }

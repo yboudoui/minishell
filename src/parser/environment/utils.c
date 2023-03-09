@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 17:40:59 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:58:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*env_find_and_expand_var(char *str)
 		if (str[idx] == '?')
 			output = str_merge_list((char *[]){
 					output, ft_substr(str, 0, idx - 1),
-					ft_itoa(g_exit_code), NULL});
+					ft_itoa(g_global.exit_code), NULL});
 		else
 			output = str_merge_list((char *[]){
 					output, ft_substr(str, 0, idx - 1),

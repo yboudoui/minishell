@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 16:43:03 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 19:27:09 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	waitall(t_pipex *pipex)
 		/* if (WTERMSIG(pipex->status) == 3) */
 	}
 	else if (WIFEXITED(pipex->status))
-		g_exit_code = WEXITSTATUS(pipex->status);
+		g_global.exit_code = WEXITSTATUS(pipex->status);
 	return (0);
 }
 
@@ -80,27 +80,24 @@ bool	is_there_a_commande(t_prompt prompt)
 	return (false);
 }
 
-int	pipex(t_prompt prompt)
+int	pipex(t_cmd_list cmds)
 {
 	t_pipex					pipex;
-	t_cmd					cmd;
 	static const t_pipex	empty_pipex;
 	int						error_code;
 
 	error_code = EXIT_SUCCESS;
 	pipex = empty_pipex;
-	pipex.argc = list_size((t_list)prompt);
+	pipex.argc = list_size((t_list)cmds);
 	pipex.builtin = NULL;
 	if (pipex.argc == 1)
 	{
-		cmd = cmd_create(prompt->content);
-		if (cmd->argv == NULL)
+		if (cmds->cmd->argv == NULL)
 			return (0);
-		pipex.builtin = is_builtin(cmd->argv[0]);
+		pipex.builtin = is_builtin(cmds->cmd->argv[0]);
 		if (pipex.builtin)
 		{
-			run_builtin(&pipex, cmd->argv);
-			cmd_destroy(cmd);
+			run_builtin(&pipex, cmds->cmd->argv);
 			return (0);
 		}
 	}
@@ -108,19 +105,17 @@ int	pipex(t_prompt prompt)
 	pipex.paths = get_paths(&pipex);
 	if (init_exec(&pipex) == -1)
 		return (EXIT_FAILURE);
-	while (prompt)
+	while (cmds)
 	{
 		pipex.paths = get_paths(&pipex);
 		pipex.env = env_list_singleton(NULL);
-		cmd = cmd_create(prompt->content);
 		reset_flags(&pipex);
-		manage_pipeline_fds(&pipex, cmd);
+		manage_pipeline_fds(&pipex, cmds->cmd);
 		if (pipex.infile != -1)
-			pipex.outfile = outfile(cmd->redir_out);
-		if (execute(cmd->argv, &pipex))
+			pipex.outfile = outfile(cmds->cmd->redir_out);
+		if (execute(cmds->cmd->argv, &pipex))
 			error_code = EXIT_FAILURE;
-		cmd_destroy(cmd);
-		prompt = prompt->next;
+		cmds = cmds->next;
 		pipex.i++;
 	}
 	waitall(&pipex);

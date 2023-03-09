@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 17:53:08 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:28:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ static void	commande_expand_variable(void *commande, void *_)
 
 int	execution(t_prompt prompt)
 {
-	if (prompt == NULL)
+	if (g_global.prompt == NULL)
 		return (EXIT_FAILURE);
+	g_global.exit_code = 0;
 	if (!heredoc(prompt))
 		return (EXIT_FAILURE);
 	list_iter(prompt, commande_expand_variable, NULL);
-	pipex(prompt);
+	g_global.cmds = convertion(prompt);
+	pipex(g_global.cmds);
+	cmd_list_destroy(&g_global.cmds);
 	return (EXIT_SUCCESS);
 }

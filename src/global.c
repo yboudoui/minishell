@@ -1,18 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   global.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 15:37:41 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 19:00:47 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/09 18:45:51 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/09 19:13:45 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
-void	signal_handler(int signum)
-{
-	g_global.exit_code = 128 + signum;
-}
+

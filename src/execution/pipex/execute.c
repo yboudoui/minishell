@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 16:54:19 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 19:00:05 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	run_builtin(t_pipex *pipex, char **argv)
 {
-	g_exit_code = pipex->builtin(argv);
+	g_global.exit_code = pipex->builtin(argv);
 	return (0);
 }
 
@@ -44,7 +44,7 @@ int	execute(char *argv[], t_pipex *pipex)
 	/* } */
 	pipex->cmd_path = get_cmd_path(pipex, argv[0]);
 	if (pipex->cmd_path == NULL)
-		g_exit_code = CMD_NOT_FOUND;
+		g_global.exit_code = CMD_NOT_FOUND;
 	fork_pid(&pipex->pid[pipex->i]);
 	if (pipex->pid[pipex->i] == 0)
 	{
