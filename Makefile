@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/08 17:10:43 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/09 16:49:36 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ RM					=	rm -f
 
 SRCS	=\
 ./src/utils/string/is_empty.c\
+./src/utils/string/ft_strtrim.c\
 ./src/utils/string/str_merge_new_line.c\
 ./src/utils/string/is_alpha.c\
 ./src/utils/string/str_merge_list.c\
@@ -39,6 +40,7 @@ SRCS	=\
 ./src/utils/string/ft_substr.c\
 ./src/utils/string/ft_str_find_prefix.c\
 ./src/utils/string/ft_strchr.c\
+./src/utils/string/ft_itoa.c\
 ./src/utils/string/ft_putchar_fd.c\
 ./src/utils/string/ft_strjoin.c\
 ./src/utils/string/ft_split.c\
@@ -76,6 +78,7 @@ SRCS	=\
 ./src/execution/cmd.c\
 ./src/execution/execution.c\
 ./src/execution/pipex/success.c\
+./src/execution/pipex/execute.c\
 ./src/execution/pipex/outfile.c\
 ./src/execution/pipex/cmd.c\
 ./src/execution/pipex/stat.c\
@@ -89,11 +92,10 @@ SRCS	=\
 ./src/execution/pipex/error/null_str_err.c\
 ./src/execution/pipex/error/fork.c\
 ./src/execution/pipex/error/error.c\
+./src/execution/pipex/signal.c\
 ./src/execution/pipex/get_cmd_path.c\
 ./src/execution/pipex/open.c\
 ./src/execution/pipex/pipeline_status.c\
-./src/execution/pipex/execute.c\
-./src/execution/pipex/signal.c\
 ./src/execution/builtin/unset.c\
 ./src/execution/builtin/is_builtin.c\
 ./src/execution/builtin/exit.c\

@@ -6,15 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 14:58:55 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 16:06:04 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "../../../inc/minishell.h"
-
-
-
 
 int	pwd_err(char *cmd, int system)
 {

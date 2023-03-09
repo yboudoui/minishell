@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 13:56:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:48:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	heredoc_read(t_token token)
 	int		fds[2];
 	int		*new;
 	char	*line;
+	char	*expanded;
+	bool	expand;
 
 	if (token->type != TOKEN_HERE_DOCUMENT)
 		return (EXIT_SUCCESS);
@@ -39,6 +41,14 @@ static int	heredoc_read(t_token token)
 	if (new == NULL)
 		return (EXIT_FAILURE);
 	(*new) = fds[0];
+	expand = (((char *)token->input)[0] != '"' &&  ((char *)token->input)[0] != '\'');
+	if (expand)
+	{
+		line = ft_strtrim((char *)token->input, "\"'");
+		free(token->input);
+		token->input = line;
+	}
+	str_new_empty(&line);
 	while (line)
 	{
 		free(line);
@@ -54,10 +64,16 @@ static int	heredoc_read(t_token token)
 		}
 		if (string_cmp(line, token->input) == 0)
 			break ;
-//		expand_all_command(env, prompt->commande);
 		if (!is_empty(line))
 			add_history(line);
-		write(fds[1], line, ft_strlen(line));
+		if (expand)
+		{
+			expanded = env_find_and_expand_var(line);
+			write(fds[1], expanded, ft_strlen(expanded));
+			free(expanded);
+		}
+		else
+			write(fds[1], line, ft_strlen(line));
 		write(fds[1], "\n", 1);
 	}
 	free(token->input);
