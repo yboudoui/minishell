@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/10 17:19:40 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:41:24 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,16 @@ int	reset_flags(t_pipex *pipex)
 	return (0);
 }
 
-int free_pipex(t_pipex *pipex)
+int free_pipex(void)
 {
-	dup_fd(pipex->stdin_fd, STDIN_FILENO);
-	close_fd(&pipex->stdin_fd);
-	free(pipex->pid);
-	string_array_destroy(pipex->paths);
-	pipex->paths = NULL;
+	if (g_global.pipex == NULL)
+		return (-1);
+	dup_fd(g_global.pipex->stdin_fd, STDIN_FILENO);
+	close_fd(&g_global.pipex->stdin_fd);
+	free(g_global.pipex->pid);
+	string_array_destroy(g_global.pipex->paths);
+	g_global.pipex->paths = NULL;
+	g_global.pipex = NULL;
 	return (0);
 }
 
@@ -132,10 +135,6 @@ int	pipex(t_cmd_list cmds)
 		pipex.i++;
 	}
 	waitall(&pipex);
-	dup_fd(pipex.stdin_fd, STDIN_FILENO);
-	close_fd(&pipex.stdin_fd);
-	free(pipex.pid);
-	string_array_destroy(pipex.paths);
-	pipex.paths = NULL;
+	free_pipex();
 	return (error_code);
 }
