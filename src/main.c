@@ -6,22 +6,25 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:13:42 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:57:29 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include <signal.h>
 
 t_global	g_global;
 
-void	meta_exit(void)
+void	meta_exit(int exitcode)
 {
-	prompt_destroy(g_global.prompt);
+	prompt_destroy(&g_global.prompt);
+	cmd_list_destroy(&g_global.cmds);
 	env_list_destroy();
-	exit(0);
+	free_pipex(g_global.pipex);
+	exit(exitcode);
 }
 
-static void	signal_control_c(int sig)
+void	signal_control_c_(int sig)
 {
 	if (sig != SIGINT)
 		return ;
@@ -58,7 +61,7 @@ static int	read_prompt(void)
 int	main(int ac, char *av[], char *envp[])
 {
 	const struct sigaction	signals[2] = {
-	{.sa_handler = signal_control_c},
+	{.sa_handler = signal_control_c_},
 	{.sa_handler = SIG_IGN}
 	};
 
@@ -72,5 +75,5 @@ int	main(int ac, char *av[], char *envp[])
 	if (!env_list_create(envp))
 		return (-1);
 	read_prompt();
-	return (meta_exit(), EXIT_SUCCESS);
+	return (meta_exit(0), EXIT_SUCCESS);
 }
