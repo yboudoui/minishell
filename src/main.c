@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:57:29 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/10 17:38:37 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	meta_exit(int exitcode)
 	prompt_destroy(&g_global.prompt);
 	cmd_list_destroy(&g_global.cmds);
 	env_list_destroy();
-	free_pipex(g_global.pipex);
+	free_pipex();
 	exit(exitcode);
 }
 
