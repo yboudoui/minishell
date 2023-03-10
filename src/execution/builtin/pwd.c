@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 16:06:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/10 19:39:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	builtin_pwd(char *argv[])
 		if (retval == NULL)
 		{
 			pwd_err("getcwd", 1);
-			break;
+			break ;
 		}
 		size *= 2;
 		buffer = NULL;
@@ -54,5 +54,5 @@ int	builtin_pwd(char *argv[])
 	write(STDIN_FILENO, buffer, ft_strlen(buffer));
 	if (retval)
 		write(STDIN_FILENO, "\n", 1);
-	return (EXIT_SUCCESS);
+	return (free(buffer), EXIT_SUCCESS);
 }

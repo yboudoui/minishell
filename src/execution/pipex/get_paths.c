@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:54:19 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 15:04:09 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/10 18:13:09 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	**get_paths(t_pipex *pipex)
 {
-	char	**paths;
+	char		**paths;
 	t_env_var	found;
 
 	found = env_find("PATH", 0, 0);

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:28:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:35:35 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	execution(t_prompt prompt)
 {
 	if (g_global.prompt == NULL)
 		return (EXIT_FAILURE);
-	g_global.exit_code = 0;
 	if (!heredoc(prompt))
 		return (EXIT_FAILURE);
 	list_iter(prompt, commande_expand_variable, NULL);

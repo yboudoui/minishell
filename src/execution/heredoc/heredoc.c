@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:32:09 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/10 19:26:50 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	heredoc_read(t_token token)
 		if (g_global.exit_code || line == NULL)
 		{
 			/* close(fds[0]); */
-			close(fds[1]);
+			close_fd(&fds[1]);
 			printf("warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", (char *)token->input);
 			free(token->input);
 			token->input = new;
@@ -89,7 +89,7 @@ static int	heredoc_read(t_token token)
 	}
 	free(token->input);
 	token->input = new;
-	return (close(fds[1]), EXIT_SUCCESS);
+	return (close_fd(&fds[1]), EXIT_SUCCESS);
 }
 
 static int	heredoc_commande(t_commande cmd)
