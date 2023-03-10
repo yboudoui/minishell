@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 19:44:53 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/10 17:39:40 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	run_builtin(t_pipex *pipex, char **argv)
 
 static inline int	is_error(t_pipex *pipex, char **argv)
 {
+	// add cleaning
 	if (pipex->infile == -1)
 		return (1);
 	if (pipex->outfile == -1)
@@ -31,23 +32,16 @@ static inline int	is_error(t_pipex *pipex, char **argv)
 
 int	execute(char *argv[], t_pipex *pipex)
 {
-	/* struct sigaction sa; */
-
 	if (is_error(pipex, argv))
 		return (-1);
 	pipe_fd(pipex, pipex->fd);
-	/* if (pipex->path == false) */
-	/* { */
-	/* 	generic_err(argv[0], "No such file or directory", 2); */
-	/* 	return (EXIT_FAILURE); */
-	/* } */
 	pipex->cmd_path = get_cmd_path(pipex, argv[0]);
 	if (pipex->cmd_path == NULL)
 		pipex->exitcode = CMD_NOT_FOUND;
+	sigaction();
 	fork_pid(&pipex->pid[pipex->i]);
 	if (pipex->pid[pipex->i] == 0)
 	{
-		/* sa.sa_handler = SIG_DFL; */
 		sigaction(SIGINT, &g_global.default_sigint, NULL);
 		sigaction(SIGQUIT, &g_global.default_sigquit, NULL);
 		exec_cmd(pipex, argv);
