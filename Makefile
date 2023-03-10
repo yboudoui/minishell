@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/09 19:01:17 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/10 19:59:23 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ RM					=	rm -f
 
 SRCS	=\
 ./src/utils/string/is_empty.c\
+./src/utils/string/ft_atoi.c\
 ./src/utils/string/str_merge_new_line.c\
 ./src/utils/string/is_alpha.c\
 ./src/utils/string/str_merge_list.c\
@@ -74,7 +75,6 @@ SRCS	=\
 ./src/parser/environment/definition.c\
 ./src/parser/environment/environment_list.c\
 ./src/parser/environment/utils.c\
-./src/global.c\
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/cmd.c\
 ./src/execution/execution.c\

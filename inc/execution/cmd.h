@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:12:35 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:28:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/10 19:19:27 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "commande.h"
 # include "prompt.h"
 
-typedef struct s_cmd	*t_cmd;
+typedef struct s_cmd		*t_cmd;
 
 struct s_cmd {
 	char	**argv;
@@ -25,8 +25,8 @@ struct s_cmd {
 	t_list	redir_out;
 };
 
-t_cmd	cmd_create(t_commande cmd);
-void	cmd_destroy(void *data);
+t_cmd		cmd_create(t_commande cmd);
+void		cmd_destroy(void *data);
 
 typedef struct s_cmd_list	*t_cmd_list;
 

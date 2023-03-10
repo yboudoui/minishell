@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/10 18:58:05 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:14:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,8 @@ int	pipex(t_cmd_list cmds)
 	pipex = empty_pipex;
 	pipex.argc = list_size((t_list)cmds);
 	pipex.builtin = NULL;
-	if (pipex.argc == 1)
+	if (pipex.argc == 1 && cmds->cmd->argv)
 	{
-		if (cmds->cmd->argv == NULL)
-			return (0);
 		pipex.builtin = is_builtin(cmds->cmd->argv[0]);
 		if (pipex.builtin)
 		{
@@ -120,16 +118,21 @@ int	pipex(t_cmd_list cmds)
 	}
 	pipex.stdin_fd = dup(STDIN_FILENO);
 	pipex.paths = get_paths(&pipex);
+	pipex.env = env_list_singleton(NULL);
 	if (init_exec(&pipex) == -1)
 		return (EXIT_FAILURE);
 	while (cmds)
 	{
-		pipex.env = env_list_singleton(NULL);
 		reset_flags(&pipex);
 		manage_pipeline_fds(&pipex, cmds->cmd);
 		if (pipex.infile != -1)
 			pipex.outfile = outfile(cmds->cmd->redir_out);
-		if (execute(cmds->cmd->argv, &pipex))
+		if (cmds->cmd->argv == NULL)
+		{
+			close_fd(&pipex.infile);
+			close_fd(&pipex.outfile);
+		}
+		else if (execute(cmds->cmd->argv, &pipex))
 			error_code = EXIT_FAILURE;
 		cmds = cmds->next;
 		pipex.i++;
