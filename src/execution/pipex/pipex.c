@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 19:59:54 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:08:49 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int free_pipex(t_pipex *pipex)
 	close_fd(&pipex->stdin_fd);
 	free(pipex->pid);
 	string_array_destroy(pipex->paths);
+	pipex->paths = NULL;
 	return (0);
 }
 
@@ -135,5 +136,6 @@ int	pipex(t_cmd_list cmds)
 	close_fd(&pipex.stdin_fd);
 	free(pipex.pid);
 	string_array_destroy(pipex.paths);
+	pipex.paths = NULL;
 	return (error_code);
 }
