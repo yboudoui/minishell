@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/10 17:17:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:19:40 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ int	waitall(t_pipex *pipex)
 	}
 	if (WIFSIGNALED(pipex->status))
 	{
-		/* if (WTERMSIG(pipex->status) == 2) */
-		/* if (WTERMSIG(pipex->status) == 3) */
+		printf("Received signal %d\n", WTERMSIG(pipex->status));
+		if (WTERMSIG(pipex->status) == 2)
+			ft_putstr_fd("\n", 1);
+		if (WTERMSIG(pipex->status) == 3)
+			ft_putstr_fd("Quit (core dumped)\n", 1);
 	}
 	else if (WIFEXITED(pipex->status))
 		g_global.exit_code = WEXITSTATUS(pipex->status);
@@ -66,6 +69,16 @@ int	reset_flags(t_pipex *pipex)
 {
 	pipex->abs_path_cmd = false;
 	pipex->builtin = NULL;
+	return (0);
+}
+
+int free_pipex(t_pipex *pipex)
+{
+	dup_fd(pipex->stdin_fd, STDIN_FILENO);
+	close_fd(&pipex->stdin_fd);
+	free(pipex->pid);
+	string_array_destroy(pipex->paths);
+	pipex->paths = NULL;
 	return (0);
 }
 
@@ -86,6 +99,7 @@ int	pipex(t_cmd_list cmds)
 	static const t_pipex	empty_pipex;
 	int						error_code;
 
+	g_global.pipex = &pipex;
 	error_code = EXIT_SUCCESS;
 	pipex = empty_pipex;
 	pipex.argc = list_size((t_list)cmds);
@@ -107,7 +121,6 @@ int	pipex(t_cmd_list cmds)
 		return (EXIT_FAILURE);
 	while (cmds)
 	{
-		pipex.paths = get_paths(&pipex);
 		pipex.env = env_list_singleton(NULL);
 		reset_flags(&pipex);
 		manage_pipeline_fds(&pipex, cmds->cmd);
@@ -123,5 +136,6 @@ int	pipex(t_cmd_list cmds)
 	close_fd(&pipex.stdin_fd);
 	free(pipex.pid);
 	string_array_destroy(pipex.paths);
+	pipex.paths = NULL;
 	return (error_code);
 }

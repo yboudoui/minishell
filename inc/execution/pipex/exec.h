@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/09 19:28:11 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:51:45 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_pipex
 	t_fp_builtin	builtin;
 	bool			path;
 	bool			abs_path_cmd;
+	int				exitcode;
 	int				fd[2];
 	int				builtin_stdin;
 	int				builtin_stdout;
@@ -43,6 +44,8 @@ typedef struct s_pipex
 }	t_pipex;
 
 int		execute(char *argv[], t_pipex *pipex);
+
+int free_pipex(t_pipex *pipex);
 
 int		run_builtin(t_pipex *pipex, char **argv);
 
