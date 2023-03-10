@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:47:37 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/10 17:40:45 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+
+void	signal_control_c_(int sig);
 
 typedef struct s_global {
 	int					exit_code;

@@ -6,7 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/10 17:41:24 by yboudoui         ###   ########.fr       */
+=======
+/*   Updated: 2023/03/10 17:43:28 by kdhrif           ###   ########.fr       */
+>>>>>>> 822f4a8 (pulling fixed invalid read on str_destroy in free_pipex)
 /*                                                                            */
 /* ************************************************************************** */
 
