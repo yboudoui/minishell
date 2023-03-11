@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:11:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 19:28:06 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:51:15 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ t_cmd	cmd_create(t_commande cmd)
 
 	output = ft_calloc(1, sizeof(struct s_cmd));
 	output->argv = list_to_array(cmd->argv, token_to_string);
-	output->redir_in = cmd->redir_in;
-	output->redir_out = cmd->redir_out;
+	output->redir = cmd->redir;
 	return (output);
 }
 

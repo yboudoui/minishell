@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/10 18:17:46 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/11 10:54:37 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 
 # define CMD_NOT_FOUND 127
 
-typedef struct sigaction t_sig;
-
 typedef struct s_pipex
 {
 	char			**paths;
@@ -30,8 +28,6 @@ typedef struct s_pipex
 	t_fp_builtin	builtin;
 	bool			path;
 	bool			abs_path_cmd;
-	struct sigaction	*sigint;
-	struct sigaction	*sigquit;
 	int				exitcode;
 	int				fd[2];
 	int				builtin_stdin;

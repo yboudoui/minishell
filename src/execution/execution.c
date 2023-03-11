@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 18:35:35 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:52:27 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static void	commande_expand_variable(void *commande, void *_)
 	if (cmd == NULL)
 		return ;
 	list_iter(cmd->argv, token_expand_env_var, NULL);
-	list_iter(cmd->redir_in, token_expand_env_var, NULL);
-	list_iter(cmd->redir_out, token_expand_env_var, NULL);
+	list_iter(cmd->redir, token_expand_env_var, NULL);
 }
 
 int	execution(t_prompt prompt)

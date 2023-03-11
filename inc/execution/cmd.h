@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:12:35 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 19:19:27 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:51:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ typedef struct s_cmd		*t_cmd;
 
 struct s_cmd {
 	char	**argv;
-	t_list	redir_in;
-	t_list	redir_out;
+	t_list	redir;
 };
 
 t_cmd		cmd_create(t_commande cmd);

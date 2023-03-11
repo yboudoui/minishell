@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 17:38:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:05:06 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	signal_control_c_(int sig)
 {
 	if (sig != SIGINT)
 		return ;
+	write(2, "no\n", 3);
 	write(STDIN_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -68,10 +69,13 @@ int	main(int ac, char *av[], char *envp[])
 	(void)av;
 	g_global = (t_global){0};
 	rl_outstream = stderr;
-	if (ac != 1 || !isatty(ttyslot()))
+	if (ac != 1)// || !isatty(ttyslot()))
 		return (EXIT_FAILURE);
-	sigaction(SIGINT, &signals[0], &g_global.default_sigint);
-	sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
+	if (isatty(ttyslot()))
+	{
+		sigaction(SIGINT, &signals[0], &g_global.default_sigint);
+		sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
+	}
 	if (!env_list_create(envp))
 		return (-1);
 	read_prompt();
