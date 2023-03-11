@@ -6,12 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/07 09:49:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:54:45 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "show.h"
-
+/*
 void	print_colored_token(void *content, void *_)
 {
 	t_token	input;
@@ -103,3 +103,4 @@ void	print_commande_line(void *content, void *_)
 	print_colored_token_list("\tredir_out: ", cmd->redir_out);
 	printf("--------------------------\n");
 }
+*/
