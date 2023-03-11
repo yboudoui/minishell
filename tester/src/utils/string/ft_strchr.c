@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 16:37:42 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/11 16:37:32 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/27 12:16:47 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/03/11 14:44:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "string.h"
 
-int	f_open(char *file, int flag, int mode)
+char	*ft_strchr(const char *s, int c)
 {
-	int	fd;
+	int	i;
 
-	if (mode == 0)
-		fd = open(file, flag);
-	else
-		fd = open(file, flag, mode);
-	if (fd == -1)
-		generic_err(file, NULL, 1);
-	return (fd);
-}
-
-int	close_fd(int *fd)
-{
-	if ((*fd) < 2)
-		return (0);
-	if (close(*fd) == -1)
-		return (generic_err("close", NULL, 1));
-	else
-		*fd = -1;
+	i = -1;
+	while (s[++i])
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+	if (s[i] == (char)c)
+		return ((char *)s + i);
 	return (0);
 }

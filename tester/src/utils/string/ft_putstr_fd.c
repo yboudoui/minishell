@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 16:37:42 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/11 16:37:32 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/02/22 15:02:12 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/02/27 15:27:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include "string.h"
 
-int	f_open(char *file, int flag, int mode)
+size_t	ft_putstr_fd(char *s, int fd)
 {
-	int	fd;
-
-	if (mode == 0)
-		fd = open(file, flag);
-	else
-		fd = open(file, flag, mode);
-	if (fd == -1)
-		generic_err(file, NULL, 1);
-	return (fd);
-}
-
-int	close_fd(int *fd)
-{
-	if ((*fd) < 2)
+	if (!s)
 		return (0);
-	if (close(*fd) == -1)
-		return (generic_err("close", NULL, 1));
-	else
-		*fd = -1;
-	return (0);
+	return (write(fd, s, ft_strlen(s)));
 }
