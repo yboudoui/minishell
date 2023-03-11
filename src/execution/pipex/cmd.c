@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/11 13:00:23 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/11 15:32:24 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ int	cmd_in(t_pipex *pipex)
 {
 	if (pipex->infile > 2)
 	{
-		if (isatty(ttyslot()) && dup_fd(pipex->infile, STDIN_FILENO) == -1)
-		{
-			write(2, "here\n", 3);
+		if (dup_fd(pipex->infile, STDIN_FILENO) == -1)
 			return (-1);
-		}
 		if (close_fd(&pipex->infile) == -1)
 			return (-1);
 		if (close_fd(&pipex->fd[0]) == -1)

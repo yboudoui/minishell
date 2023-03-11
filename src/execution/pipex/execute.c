@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/11 11:14:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:08:50 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	run_builtin(t_pipex *pipex, char **argv)
 
 static inline int	is_error(t_pipex *pipex, char **argv)
 {
-	// add cleaning
-	if (pipex->infile == -1)
-		return (1);
-	if (pipex->outfile == -1)
+	if (pipex->redir_error)
 		return (1);
 	if (argv == NULL)
 		return (1);

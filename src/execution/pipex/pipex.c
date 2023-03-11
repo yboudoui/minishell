@@ -6,33 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/11 13:00:49 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/11 15:18:35 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-
-static inline int	manage_pipeline_fds(t_pipex *pipex, t_cmd cmd)
-{
-	int	fd;
-
-	fd = infile(cmd->redir_in);
-	if (fd == 1)
-	{
-		pipex->infile = fd;
-		return (0);
-	}
-	else if (fd == -1)
-	{
-		pipex->infile = -1;
-		return (0);
-	}
-	else
-	{
-		pipex->infile = fd;
-		return (0);
-	}
-}
 
 int	init_exec(t_pipex *pipex)
 {
@@ -125,9 +103,7 @@ int	pipex(t_cmd_list cmds)
 	while (cmds)
 	{
 		reset_flags(&pipex);
-		manage_pipeline_fds(&pipex, cmds->cmd);
-		if (pipex.infile != -1)
-			pipex.outfile = outfile(cmds->cmd->redir_out);
+		pipex.redir_error = manage_redirs(cmds->cmd->redir, &pipex);
 		if (cmds->cmd->argv == NULL)
 		{
 			close_fd(&pipex.infile);
