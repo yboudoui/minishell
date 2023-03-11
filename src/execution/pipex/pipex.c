@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/10 20:14:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:10:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	waitall(t_pipex *pipex)
 	}
 	else if (WIFEXITED(pipex->status))
 		g_global.exit_code = WEXITSTATUS(pipex->status);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	return (0);
 }
 
@@ -138,8 +140,8 @@ int	pipex(t_cmd_list cmds)
 		pipex.i++;
 	}
 	waitall(&pipex);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_control_c_);
+//	signal(SIGQUIT, SIG_IGN);
+//	signal(SIGINT, signal_control_c_);
 	free_pipex();
 	return (error_code);
 }

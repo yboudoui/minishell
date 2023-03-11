@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 19:26:50 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:48:00 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	signal_control_c(int sig)
 {
 	if (sig != SIGINT)
 		return ;
-	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
-	close(STDIN_FILENO);
+	write(STDIN_FILENO, "\n", 1); // sortie d'erreur!!!
+//	close(STDIN_FILENO);
 	g_global.exit_code = 130;
 }
 
@@ -94,14 +94,14 @@ static int	heredoc_read(t_token token)
 
 static int	heredoc_commande(t_commande cmd)
 {
-	t_list	redir_in;
+	t_list	redir;
 
-	redir_in = cmd->redir_in;
-	while (redir_in)
+	redir = cmd->redir;
+	while (redir)
 	{
-		if (heredoc_read(redir_in->content))
+		if (heredoc_read(redir->content))
 			return (EXIT_FAILURE);
-		redir_in = redir_in->next;
+		redir = redir->next;
 	}
 	return (EXIT_SUCCESS);
 }
