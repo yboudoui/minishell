@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/11 11:10:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 13:00:49 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	waitall(t_pipex *pipex)
 	}
 	if (WIFSIGNALED(pipex->status))
 	{
-		printf("Received signal %d\n", WTERMSIG(pipex->status));
 		if (WTERMSIG(pipex->status) == 2)
 			ft_putstr_fd("\n", 1);
 		if (WTERMSIG(pipex->status) == 3)
