@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/11 15:18:35 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/11 17:08:40 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ bool	is_there_a_commande(t_prompt prompt)
 
 int	pipex(t_cmd_list cmds)
 {
-	t_pipex					pipex;
-	static const t_pipex	empty_pipex;
-	int						error_code;
+	static t_pipex	empty_pipex;
+	t_pipex			pipex;
+	int				error_code;
 
+	pipex = empty_pipex;
 	g_global.pipex = &pipex;
 	error_code = EXIT_SUCCESS;
-	pipex = empty_pipex;
 	pipex.argc = list_size((t_list)cmds);
 	pipex.builtin = NULL;
 	if (pipex.argc == 1 && cmds->cmd->argv)

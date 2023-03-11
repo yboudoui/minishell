@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 12:48:00 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:59:39 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,13 @@ static int	heredoc_read(t_token token)
 		if (expand)
 		{
 			expanded = env_find_and_expand_var(line);
-			write(fds[1], expanded, ft_strlen(expanded));
-			free(expanded);
+			if (expanded)
+			{
+				write(fds[1], expanded, ft_strlen(expanded));
+				free(expanded);
+			}
+			else
+				write(fds[1], line, ft_strlen(line));
 		}
 		else
 			write(fds[1], line, ft_strlen(line));

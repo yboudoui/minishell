@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 12:52:27 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:56:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	token_expand_env_var(void *input, void *_)
 
 	(void)_;
 	token = input;
-	if (token == NULL)
+	if (token == NULL && token->type != TOKEN_HERE_DOCUMENT)
 		return ;
 	expanded = env_find_and_expand_var(token->input);
 	if (expanded == NULL)
