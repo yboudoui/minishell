@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 13:13:43 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/12 12:52:11 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/12 16:54:07 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,11 @@ int close_or_assign(int fd_end, int fd_new)
 {
 	if (fd_new == -1)
 	{
-		printf("here is closed because of error %d\n", fd_end);
 		close_fd(&fd_end);
 		return (-2);
 	}
 	if (fd_end != -1)
-	{
-		printf("here is closed %d\n", fd_end);
 		close_fd(&fd_end);
-	}
 	return (fd_new);
 }
 
@@ -61,10 +57,7 @@ int close_all(t_list redir, int fd_infile, int fd_outfile)
 	{
 		token = redir->content;
 		if (token->type == TOKEN_HERE_DOCUMENT)
-		{
-			printf("closing = %d\n", *(int *)token->input);
 			close_fd((int *)token->input);
-		}
 		redir = redir->next;
 	}
 	return (1);
@@ -88,10 +81,7 @@ int manage_redirs(t_list redir, t_pipex *pipex)
 		else if (token->type == TOKEN_REDIRECT_OUT_APPEND)
 			fd_outfile = close_or_assign(fd_outfile, redir_append(token));
 		else if (token->type == TOKEN_HERE_DOCUMENT)
-		{
-			printf("heredoc in redir\n");
 			fd_infile = close_or_assign(fd_infile, *(int *)(token->input));
-		}
 		if (fd_infile == -2 || fd_outfile == -2)
 		{
 			close_all(redir, fd_infile, fd_outfile);
@@ -100,8 +90,6 @@ int manage_redirs(t_list redir, t_pipex *pipex)
 		redir = redir->next;
 	}
 	pipex->infile = fd_infile;
-	printf("pipex->infile :%d\n", fd_infile);
 	pipex->outfile = fd_outfile;
-	printf("pipex->outfile :%d\n", fd_outfile);
 	return (0);
 }

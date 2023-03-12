@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/12 13:52:58 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/12 17:15:46 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	execute(char *argv[], t_pipex *pipex)
 		sigaction(SIGQUIT, &g_global.default_sigquit, NULL);
 		exec_cmd(pipex, argv);
 	}
-	free(pipex->cmd_path);
 	dup_fd(pipex->fd[0], STDIN_FILENO);
 	close_fd(&pipex->fd[1]);
 	close_fd(&pipex->fd[0]);

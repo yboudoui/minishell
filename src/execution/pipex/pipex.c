@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/12 15:24:45 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/12 16:53:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	waitall(t_pipex *pipex)
 int	reset_flags(t_pipex *pipex)
 {
 	pipex->abs_path_cmd = false;
+	pipex->redir_error = false;
 	pipex->builtin = NULL;
 	return (0);
 }
@@ -101,10 +102,8 @@ int	pipex(t_cmd_list cmds)
 	{
 		reset_flags(pipex);
 		pipex->redir_error = manage_redirs(cmds->cmd->redir, pipex);
-		printf("redir_error = %d\n", pipex->redir_error);
 		execute(cmds->cmd->argv, pipex);
 		cmds = cmds->next;
-		printf("loop %d\n", pipex->i);
 		pipex->i++;
 	}
 	waitall(pipex);
