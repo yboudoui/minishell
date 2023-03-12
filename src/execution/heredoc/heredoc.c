@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 17:30:37 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/12 15:40:43 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	heredoc_read(t_token token)
 	(*new) = fds[0];
 	expand = have_to_expand(token);
 	str_new_empty(&line);
+	g_global.exit_code = 0;
 	while (line)
 	{
 		free(line);

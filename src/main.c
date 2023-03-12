@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 11:05:06 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:23:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	read_prompt(void)
 	exe_stop = 0;
 	while (!exe_stop)
 	{
-		line = readline("~$ ");
+		line = readline("~$> ");
 		if (line == NULL)
 			return (EXIT_FAILURE);
 		if (!is_empty(line))
@@ -68,7 +68,6 @@ int	main(int ac, char *av[], char *envp[])
 
 	(void)av;
 	g_global = (t_global){0};
-	rl_outstream = stderr;
 	if (ac != 1)// || !isatty(ttyslot()))
 		return (EXIT_FAILURE);
 	if (isatty(ttyslot()))
@@ -76,6 +75,8 @@ int	main(int ac, char *av[], char *envp[])
 		sigaction(SIGINT, &signals[0], &g_global.default_sigint);
 		sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
 	}
+	else
+		rl_outstream = NULL;
 	if (!env_list_create(envp))
 		return (-1);
 	read_prompt();

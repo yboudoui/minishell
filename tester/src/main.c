@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 06:28:08 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 14:50:35 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:03:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	main(int ac, char *av[], char *env[])
 
 	ml = multiplexer_create(env, "/bin/bash", "../minishell");
 
-	multiplexer_write(ml, "ls");
+	multiplexer_write(ml, "ls\n");
+//	multiplexer_write(ml, "lol\n");
+
 	multiplexer_destroy(ml);
 	return (0);
 }

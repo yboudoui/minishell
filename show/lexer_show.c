@@ -6,12 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:04:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 14:54:45 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/12 15:37:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "show.h"
-/*
+
 void	print_colored_token(void *content, void *_)
 {
 	t_token	input;
@@ -68,7 +68,10 @@ void	print_token_type(void *content, void *_)
 
 	(void)_;
 	token = content;
-	printf("%s\n", get_token_type_string(token->type));
+	if (token->type == TOKEN_HERE_DOCUMENT)
+		printf("%s %d\n", get_token_type_string(token->type), *(int *)token->input);
+	else
+		printf("%s %s\n", get_token_type_string(token->type), (char *)token->input);
 }
 
 void	print_argv(void *content)
@@ -99,8 +102,5 @@ void	print_commande_line(void *content, void *_)
 		return ((void)printf(" PIPE \n"));
 	cmd = content;
 	print_colored_token_list("\targv: ", cmd->argv);
-	print_colored_token_list("\tredir_in: ", cmd->redir_in);
-	print_colored_token_list("\tredir_out: ", cmd->redir_out);
 	printf("--------------------------\n");
 }
-*/
