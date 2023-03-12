@@ -6,19 +6,20 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 16:59:39 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:30:37 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 #include "minishell.h"
+#include <unistd.h>
 
 void	signal_control_c(int sig)
 {
 	if (sig != SIGINT)
 		return ;
-	write(STDIN_FILENO, "\n", 1); // sortie d'erreur!!!
-//	close(STDIN_FILENO);
+	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
+	close(STDIN_FILENO);
 	g_global.exit_code = 130;
 }
 
