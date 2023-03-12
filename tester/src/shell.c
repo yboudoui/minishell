@@ -6,19 +6,43 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 13:25:46 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 13:45:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:24:23 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
+#include <stdio.h>
+char	*base_name(char *path)
+{
+	char	*output;
+	int		index;
+	char	**splited;
+
+	if (path == NULL)
+		return (NULL);
+	splited = ft_split(path, '/');
+	if (splited == NULL)
+		return (NULL);
+	index = 0;
+	while (splited[index++])
+		continue ;
+	output = ft_strdup(splited[index - 2]);
+	return (string_array_destroy(splited), output);
+}
+
 t_shell	shell_create(char *path)
 {
 	t_shell	output;
+	char	*basename;
 	char	*filename;
 
-	filename = ft_strjoin(name, ".out");
+	basename = base_name(path);
+	filename = ft_strjoin("out.", basename);
+	free(basename);
 	output.fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	output.path = path;
+	output.name = basename;
 	free(filename);
 	pipe(output.pipe);
 	return (output);
@@ -45,8 +69,8 @@ void	shell_close_stdout(t_shell *shell)
 		return ;
 	if (shell->fd_out < 0)
 		return ;
-	close(shell->fd-out);
-	shell->fd-out = -1;
+	close(shell->fd_out);
+	shell->fd_out = -1;
 }
 
 void	shell_fork(t_shell *shell, char *env[])
