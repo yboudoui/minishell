@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 17:40:45 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 16:43:18 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_global {
 
 extern t_global	g_global;
 
-void	meta_exit(int exitcode);
+void	meta_exit(int exitcode, t_pipex *pipex);
 int		execution(t_prompt prompt);
 
 #endif

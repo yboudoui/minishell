@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/11 19:10:06 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/03/13 16:57:42 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,13 +80,11 @@ SRCS	=\
 ./src/execution/execution.c\
 ./src/execution/pipex/success.c\
 ./src/execution/pipex/execute.c\
-./src/execution/pipex/outfile.c\
 ./src/execution/pipex/cmd.c\
 ./src/execution/pipex/stat.c\
 ./src/execution/pipex/get_paths.c\
 ./src/execution/pipex/pipe.c\
 ./src/execution/pipex/parse_env.c\
-./src/execution/pipex/infile.c\
 ./src/execution/pipex/pipex.c\
 ./src/execution/pipex/path_null.c\
 ./src/execution/pipex/error/dup.c\
@@ -94,7 +92,11 @@ SRCS	=\
 ./src/execution/pipex/error/fork.c\
 ./src/execution/pipex/error/error.c\
 ./src/execution/pipex/signal.c\
+./src/execution/pipex/free.c\
+./src/execution/pipex/wait.c\
 ./src/execution/pipex/get_cmd_path.c\
+./src/execution/pipex/exit.c\
+./src/execution/pipex/exec_builtins.c\
 ./src/execution/pipex/open.c\
 ./src/execution/pipex/pipeline_status.c\
 ./src/execution/pipex/redir.c\
