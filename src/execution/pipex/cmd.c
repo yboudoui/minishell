@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 17:49:53 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:34:32 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	exec_cmd(t_pipex *pipex, char **argv)
 		meta_exit(127, pipex);
 	if (pipex->builtin)
 	{
-		printf("arg = %s\n", argv[0]);
 		meta_exit(pipex->builtin(argv), pipex);
 		return (0);
 	}
