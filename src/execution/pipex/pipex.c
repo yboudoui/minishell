@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 19:25:46 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:17:46 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	pipex(t_cmd_list cmds)
 	pipex = ft_calloc(1, sizeof(t_pipex));
 	g_global.pipex = pipex;
 	pipex->argc = list_size((t_list)cmds);
+	pipex->stdin_fd = dup(STDIN_FILENO);
 	if (exec_builtins(cmds, pipex))
 		return (0);
-	pipex->stdin_fd = dup(STDIN_FILENO);
 	pipex->paths = get_paths(pipex);
 	pipex->env = env_list_singleton(NULL);
 	if (init_exec(pipex) == -1)
@@ -48,7 +48,6 @@ int	pipex(t_cmd_list cmds)
 		pipex->redir_error = manage_redirs(cmds->cmd->redir, pipex);
 		execute(cmds->cmd->argv, pipex);
 		cmds = cmds->next;
-		printf("loop %d\n", pipex->i);
 		pipex->i++;
 	}
 	waitall(pipex);
