@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 17:50:31 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:58:30 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	execute(char *argv[], t_pipex *pipex)
 	close_fd(&pipex->fd[1]);
 	close_fd(&pipex->fd[0]);
 	close_fd(&pipex->infile);
+	close_fd(&pipex->outfile);
 	f_free((void **)&pipex->cmd_path);
 	return (EXIT_SUCCESS);
 }
