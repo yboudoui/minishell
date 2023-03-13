@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/07 09:56:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:54:50 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	parse_export_arg(char *arg)
 {
 	char		*name;
 	char		*value;
-	size_t		len;
+	int			len;
 	t_env_var	var;
 
 	len = bash_definition_name(arg);

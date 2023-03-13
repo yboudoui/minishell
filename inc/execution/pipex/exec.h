@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/12 16:50:23 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 17:02:32 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,20 @@ typedef struct s_pipex
 	t_env_list		env;
 }	t_pipex;
 
+
+//redir.c
 int		manage_redirs(t_list redir, t_pipex *pipex);
+
+//exec_builtins.c
+int		exec_builtins(t_cmd_list cmds, t_pipex *pipex);
+
+//wait.c
+int		waitall(t_pipex *pipex);
 
 int		execute(char *argv[], t_pipex *pipex);
 
-int		free_pipex(void);
+int		free_pipex(t_pipex *pipex);
+int		f_free(void **ptr);
 
 int		run_builtin(t_pipex *pipex, char **argv);
 
