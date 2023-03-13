@@ -6,15 +6,18 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 16:47:17 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 16:49:35 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:31:34 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-int	run_builtin(t_pipex *pipex, char **argv)
+int	run_builtin(char **argv)
 {
-	g_global.exit_code = pipex->builtin(argv);
+	t_fp_builtin	builtin;
+
+	builtin = is_builtin(argv[0]);
+	g_global.exit_code = builtin(argv);
 	return (0);
 }
 
@@ -26,7 +29,8 @@ int exec_builtins(t_cmd_list cmds, t_pipex *pipex)
 		pipex->builtin = is_builtin(cmds->cmd->argv[0]);
 		if (pipex->builtin)
 		{
-			run_builtin(pipex, cmds->cmd->argv);
+			free_pipex(pipex);
+			run_builtin(cmds->cmd->argv);
 			return (1);
 		}
 	}
