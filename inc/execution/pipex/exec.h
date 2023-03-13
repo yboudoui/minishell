@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 19:31:57 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:14:39 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pipex
 	int				builtin_stdout;
 	int				prevpipe;
 	int				stdin_fd;
+	int				stdout_fd;
 	int				infile;
 	int				outfile;
 	int				status;
@@ -50,7 +51,7 @@ int		manage_redirs(t_list redir, t_pipex *pipex);
 
 //exec_builtins.c
 int		exec_builtins(t_cmd_list cmds, t_pipex *pipex);
-int		run_builtin(char **argv);
+int		run_builtin(t_pipex *pipex, char **argv);
 
 //wait.c
 int		waitall(t_pipex *pipex);

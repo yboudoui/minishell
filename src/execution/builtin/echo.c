@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:25:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/05 18:31:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:24:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	builtin_echo(char *argv[])
 	new_line = (index != 0);
 	while (argv[index])
 	{
+		/* printf("%s", argv[index]); */
+		/* printf(" "); */
 		write(STDIN_FILENO, argv[index], ft_strlen(argv[index]));
 		write(STDIN_FILENO, " ", 1);
 		index += 1;

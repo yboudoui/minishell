@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:58:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 17:03:17 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:13:26 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	free_pipex(t_pipex *pipex)
 	return (0);
 }
 
-int f_free(void **ptr)
+int	f_free(void **ptr)
 {
 	if (*ptr)
 	{
