@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 19:39:20 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:44:25 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,34 @@ int	pwd_err(char *cmd, int system)
 		perror(cmd);
 	}
 	return (-1);
+}
+
+char *my_pwd(void)
+{
+	char	*buffer;
+	char	*retval;
+	size_t	size;
+
+	size = 512;
+	buffer = NULL;
+	while (buffer == NULL)
+	{
+		free(buffer);
+		buffer = ft_calloc(size, sizeof(char));
+		if (buffer == NULL)
+			return (NULL);
+		retval = getcwd(buffer, size);
+		if (retval)
+			break ;
+		if (retval == NULL)
+		{
+			pwd_err("getcwd", 1);
+			break ;
+		}
+		size *= 2;
+		buffer = NULL;
+	}
+	return (buffer);
 }
 
 int	builtin_pwd(char *argv[])
@@ -51,8 +79,6 @@ int	builtin_pwd(char *argv[])
 		size *= 2;
 		buffer = NULL;
 	}
-	write(STDIN_FILENO, buffer, ft_strlen(buffer));
-	if (retval)
-		write(STDIN_FILENO, "\n", 1);
+	printf("%s\n", buffer);
 	return (free(buffer), EXIT_SUCCESS);
 }

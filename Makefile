@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/13 16:57:42 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/03/14 16:15:49 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCS	=\
 ./src/utils/string/str_slice_charset.c\
 ./src/utils/string/is_space.c\
 ./src/utils/string/str_slice_section.c\
+./src/utils/string/is_digit.c\
 ./src/utils/list/list_destroy.c\
 ./src/utils/list/list_create.c\
 ./src/utils/list/list_last.c\

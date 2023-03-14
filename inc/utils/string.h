@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 19:58:09 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:14:10 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ft_itoa(int n);
 bool	is_space(int c);
 bool	is_alnum(char c);
 bool	is_alpha(char c);
+int		is_digit(char c);
 bool	is_empty(char *str);
 
 char	*ft_strtrim(char const *s1, char const *set);
