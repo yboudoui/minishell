@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:39:51 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 11:44:14 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:38:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int				builtin_exit(char *argv[]);
 int				builtin_echo(char *argv[]);
 int				builtin_unset(char *argv[]);
 int				builtin_export(char *argv[]);
+char			*my_pwd(void);
 
 t_fp_builtin	is_builtin(char *argv);
 #endif

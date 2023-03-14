@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 16:47:17 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 21:18:09 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/14 14:35:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	exec_builtins(t_cmd_list cmds, t_pipex *pipex)
 			set_redirs(pipex);
 			if (ft_strncmp(cmds->cmd->argv[0], "exit", 5) == 0)
 			{
+				dup_fd(pipex->stdout_fd, STDOUT_FILENO);
+				close_fd(&pipex->stdout_fd);
 				free_pipex(pipex);
 				run_builtin(NULL, cmds->cmd->argv);
 			}
