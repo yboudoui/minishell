@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 14:56:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:38:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,18 @@ t_token_list	split_again(t_token_list lst)
 	return (output);
 }
 
+static void	*remove_space(void *input)
+{
+	t_token_list	*lst;
+
+	lst = input;
+	if (lst == NULL || (*lst) == NULL)
+		return (NULL);
+	if ((*lst)->token->type & TOKEN_SPACES)
+		return (NULL);
+	return (token_dup((*lst)->token));
+}
+
 static void	commande_expand_variable(void *commande, void *_)
 {
 	t_commande	cmd;
@@ -138,6 +150,10 @@ static void	commande_expand_variable(void *commande, void *_)
 
 	old = cmd->argv;
 	cmd->argv = (t_list)split_again((t_token_list)cmd->argv);
+	list_clear(&old, token_destroy);
+
+	old = cmd->argv;
+	cmd->argv = list_subset(cmd->argv, remove_space);
 	list_clear(&old, token_destroy);
 
 	list_iter(cmd->redir, token_expand_env_var, NULL);
