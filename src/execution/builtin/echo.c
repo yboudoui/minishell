@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:25:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/14 12:22:53 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/15 13:03:43 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ int	builtin_echo(char *argv[])
 	new_line = (index != 0);
 	while (argv[index])
 	{
-		argv[index][ft_strlen(argv[index])] = '\0';
-		printf("%s\n", argv[index]);
-		/* write(STDIN_FILENO, argv[index], ft_strlen(argv[index])); */
-		/* write(STDIN_FILENO, " ", 1); */
+		write(STDOUT_FILENO, argv[index], ft_strlen(argv[index]));
+		write(STDOUT_FILENO, " ", 1);
 		index += 1;
 	}
-	/* if (!new_line) */
-	/* 	write(STDIN_FILENO, "\n", 1); */
+	if (!new_line)
+		write(STDOUT_FILENO, "\n", 1);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 01:21:40 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/10 19:57:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:38:11 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_isdigit(int c)
 
 int	ft_atoi(const char *nptr)
 {
-	int	result;
-	int	sign;
+	long long int	result;
+	long long int	sign;
 
 	while ((*nptr >= '\t' && *nptr <= '\r') || *nptr == ' ')
 		nptr++;

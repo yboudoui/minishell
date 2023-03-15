@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/13 16:43:18 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/15 16:21:58 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <limits.h>
 
 void	signal_control_c_(int sig);
 

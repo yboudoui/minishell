@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:52:52 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/14 16:50:50 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/15 12:54:39 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	builtin_cd(char *argv[])
 	env_list_insert_new("OLDPWD", my_pwd());
 	if (chdir(*argv))
 		return (generic_err(*argv, NULL, 1), 1);
+	env_list_insert_new("PWD", my_pwd());
 	return (0);
 }

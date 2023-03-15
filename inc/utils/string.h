@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 16:29:59 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:34:32 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef bool	(*t_fp_is_charset)(int);
 int		ft_atoi(const char *nptr);
 char	*ft_strchr(const char *s, int c);
 
-char	*ft_itoa(int n);
+char	*ft_itoa(long long int n);
 bool	is_space(int c);
 bool	is_alnum(char c);
 bool	is_alpha(char c);

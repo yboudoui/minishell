@@ -6,19 +6,19 @@
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:09:41 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 16:29:25 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:12:38 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long long int n)
 {
 	char		*out;
 	int			size;
-	long int	m;
-	long int	ntmp1;
-	long int	ntmp2;
+	long long int	m;
+	long long int	ntmp1;
+	long long int	ntmp2;
 
 	m = n;
 	size = (m <= 0);
