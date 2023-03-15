@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/14 14:14:10 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/15 16:29:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 char	*str_slice_section(char *str, char *start, char *end);
-int		str_must_slice_section(char *str, char **section, char **out);
 char	*str_slice_prefix(char *str, char *prefix);
+int		str_must_slice_section(char *str, char **section, char **out);
 char	*str_slice_charset(char *str, t_fp_is_charset charset);
 
 char	**list_to_str_array(t_list lst, bool (*cast_content)(void *, char **));

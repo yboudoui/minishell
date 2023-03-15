@@ -6,7 +6,11 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/03/14 16:15:49 by kdhrif           ###   ########.fr        #
+=======
+#    Updated: 2023/03/14 20:36:41 by yboudoui         ###   ########.fr        #
+>>>>>>> fde493e (fix: parsing)
 #                                                                              #
 # **************************************************************************** #
 
@@ -167,7 +171,7 @@ valgrind:
 			./$(NAME)														\
 
 re_valgrind:	CFLAGS+= -DCOLORED -g3
-re_valgrind:	re valgrind
+re_valgrind:	all valgrind
 
 #			--gen-suppressions=yes											\
 

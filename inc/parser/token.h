@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/11 12:47:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:27:28 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,18 @@ typedef enum e_token_type {
 	TOKEN_WORD					=	(1U << 1),
 	TOKEN_DOUBLE_QUOTES			=	(1U << 2),
 	TOKEN_SIMPLE_QUOTES			=	(1U << 3),
-	TOKEN_REDIRECT_IN			=	(1U << 4),
-	TOKEN_HERE_DOCUMENT			=	(1U << 5),
-	TOKEN_PIPE					=	(1U << 6),
+	TOKEN_PIPE					=	(1U << 4),
+	TOKEN_REDIRECT_IN			=	(1U << 5),
+	TOKEN_HERE_DOCUMENT			=	(1U << 6),
 	TOKEN_REDIRECT_OUT			=	(1U << 7),
 	TOKEN_REDIRECT_OUT_APPEND	=	(1U << 8),
 	MAX_TOKEN					=	(1U << 9),
+	TOKEN_EXPANDABLE			=	(0
+	| TOKEN_WORD
+	| TOKEN_DOUBLE_QUOTES
+	| TOKEN_REDIRECT_IN
+	| TOKEN_REDIRECT_OUT
+	| TOKEN_REDIRECT_OUT_APPEND),
 	TOKEN_IO					=	(0
 	| TOKEN_REDIRECT_IN
 	| TOKEN_HERE_DOCUMENT
