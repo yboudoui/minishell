@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 16:21:58 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/15 18:11:02 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ extern t_global	g_global;
 
 void	meta_exit(int exitcode, t_pipex *pipex);
 int		execution(t_prompt prompt);
+void	incr_shlvl(void);
 
 #endif

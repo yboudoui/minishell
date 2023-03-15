@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/13 16:59:21 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/15 18:11:24 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	read_prompt(void)
 	int			exe_stop;
 
 	exe_stop = 0;
+	incr_shlvl();
 	while (!exe_stop)
 	{
 		line = readline("~$> ");

@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/15 17:52:36 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/03/15 18:12:33 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRCS	=\
 ./src/parser/environment/definition.c\
 ./src/parser/environment/environment_list.c\
 ./src/parser/environment/utils.c\
+./src/utils/shlvl.c\
 ./src/execution/heredoc/heredoc.c\
 ./src/execution/cmd.c\
 ./src/execution/execution.c\
