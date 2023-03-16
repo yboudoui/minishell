@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:52:52 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 15:07:38 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/16 15:13:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_error(char **argv)
 {
 	if (argv[0] && argv[1] && argv[2])
 	{
-		generic_err(argv[0], "too many arguments", 2);
+		generic_err(argv[0], "too many arguments\n", 2);
 		return (1);
 	}
 	return (0);
