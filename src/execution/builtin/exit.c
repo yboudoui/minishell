@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:59:20 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 18:11:52 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/16 11:04:01 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static inline int	my_name_is_norminette(bool *error)
 	return (2);
 }
 
-static inline int check_overflow_error(long long int n, char *str, bool *error)
+int	check_overflow_error(long long int n, char *str, bool *error)
 {
-	char *cmp;
+	char	*cmp;
 
 	if (n == LONG_MIN && ft_strncmp(str, "-9223372036854775808", 20) == 0)
 		return (0);
@@ -47,8 +47,10 @@ static inline long long int	ft_atoi_exit(char *str, bool *error)
 	neg = 0;
 	i = 0;
 	n = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
+	while (*str && *str == ' ')
+		str++;
+	while (*str && *str == '0')
+		str++;
 	if (str[i] == '+' || str[i] == '-')
 		if (str[i++] == '-')
 			neg = -1;
@@ -64,7 +66,6 @@ static inline long long int	ft_atoi_exit(char *str, bool *error)
 		return (2);
 	return (n);
 }
-
 
 int	more_norminette(char **argv, bool *error, int exit_code)
 {
