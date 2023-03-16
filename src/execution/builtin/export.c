@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 17:52:43 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/16 16:11:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	parse_export_arg(char *arg)
 	if (!ft_strncmp(&arg[len], "=", 1))
 	{
 		value = ft_substr(arg, len + 1, ft_strlen(arg));
-		env_list_insert_new(name, value);
+		if (env_list_insert_new(name, value))
+			free(name);
 		return (EXIT_SUCCESS);
 	}
 	else if (!ft_strncmp(&arg[len], "+=", 2))
@@ -41,7 +42,8 @@ static int	parse_export_arg(char *arg)
 		if (var)
 			var->value = str_merge_list((char *[]){var->value, value, NULL});
 		else
-			env_list_insert_new(name, value);
+			if (env_list_insert_new(name, value))
+				free(name);
 		return (EXIT_SUCCESS);
 	}
 	return (free(name), EXIT_FAILURE);

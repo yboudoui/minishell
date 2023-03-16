@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:05:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 14:38:24 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:09:16 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_env_list	env_list_singleton(t_env_list list);
 bool		env_list_create(char *envp[]);
 void		env_list_destroy(void);
 void		env_list_insert(t_env_var var);
-void		env_list_insert_new(char *name, char *value);
+bool		env_list_insert_new(char *name, char *value);
 t_env_var	env_find(char *name, size_t start, size_t end);
 void		env_remove(char *name, size_t start, size_t end);
 char		*env_get_value(char *name, size_t start, size_t end);
