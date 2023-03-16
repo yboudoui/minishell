@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/15 18:12:33 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/03/16 18:14:37 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -159,11 +159,7 @@ fsanitize:	re
 valgrind:
 			@clear
 			@valgrind														\
-			-q																\
 			--suppressions=./.readline.supp									\
-			--leak-check=full												\
-			--show-leak-kinds=all											\
-			--track-origins=yes												\
 			--track-fds=yes													\
 			./$(NAME)														\
 

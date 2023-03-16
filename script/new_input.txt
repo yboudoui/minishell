@@ -1,0 +1,360 @@
+Cd .                                                                      
+cD .                                                                      
+echo                                                                      
+echo bonjour                                                              
+echo lalalala lalalalal alalalalal alalalala                              
+echo lalalala                lalalalal      alalalalal alalalala          
+echo -n                                                                   
+echo -n bonjour                                                           
+echo -n lalalala lalalalal alalalalal alalalala                           
+echo -n lalalala                lalalalal      alalalalal alalalala       
+echo bonjour -n                                                           
+echo -n bonjour -n                                                        
+                        echo                     bonjour             je   
+                        echo       -n            bonjour             je   
+echo a '' b '' c '' d                                                     
+echo a "" b "" c "" d                                                     
+echo -n a '' b '' c '' d                                                  
+echo -n a "" b "" c "" d                                                  
+echo '' '' ''                                                             
+Echo bonjour                                                              
+eCho bonjour                                                              
+ecHo bonjour                                                              
+echO bonjour                                                              
+EchO bonjour                                                              
+eCHo bonjour                                                              
+EcHo bonjour                                                              
+eChO bonjour                                                              
+echo -n -n -n -n bonjour                                                  
+echo -nnnnnnnnnnnnnnnnnnnnn bonjour                                       
+echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n                        
+env                                                                       
+Env                                                                       
+enV                                                                       
+exit                                                                      
+exit 1                                                                    
+exit 2                                                                    
+exit 3                                                                    
+exit ' 3'                                                                 
+exit '\t3'                                                                
+exit '\t\f\r 3'                                                           
+exit '3 '                                                                 
+exit '3\t'                                                                
+exit '3\r'                                                                
+exit '3\t\f\r '                                                           
+exit '3     a'                                                            
+exit '3\t\t\ta'                                                           
+exit 0                                                                    
+exit -0                                                                   
+exit -1                                                                   
+exit 255                                                                  
+exit 256                                                                  
+exit 2000000                                                              
+exit -2000000                                                             
+exit 2147483647                                                           
+exit -2147483648                                                          
+exit 2147483648                                                           
+exit -2147483649                                                          
+exit 3147483648                                                           
+exit -3147483649                                                          
+exit 4294967295                                                           
+exit 4294967296                                                           
+exit -9223372036854775808                                                 
+exit 9223372036854775807                                                  
+exit -9223372036854775809                                                 
+exit 9223372036854775808                                                  
+exit 18446744073709551615                                                 
+exit 18446744073709551616                                                 
+exit +1                                                                   
+exit +2                                                                   
+exit +3                                                                   
+exit +0                                                                   
+exit +255                                                                 
+exit +256                                                                 
+exit +2000000                                                             
+exit +2147483647                                                          
+exit ++1                                                                  
+exit ++2                                                                  
+exit ++3                                                                  
+exit ++0                                                                  
+exit ++255                                                                
+exit ++256                                                                
+exit ++2000000                                                            
+exit ++2147483647                                                         
+exit --1                                                                  
+exit --2                                                                  
+exit --3                                                                  
+exit --0                                                                  
+exit --255                                                                
+exit --256                                                                
+exit --2000000                                                            
+exit --2147483647                                                         
+exit bonjour                                                              
+exit 0_                                                                   
+exit _0                                                                   
+exit 0123456789                                                           
+exit -0123456789                                                          
+exit 00000000000000000000000000000000000000000000001                      
+exit 0 bonjour                                                            
+exit bonjour 0                                                            
+exit 0 1                                                                  
+exit 0 1 2 3 4 5 6 7 8 9                                                  
+export                                                                    
+export 1=a                                                                
+export BONJOURJESUIS =a                                                   
+export BONJOURJESUIS= a                                                   
+export BONJOUR\\JESUIS=a                                                  
+export BONJOUR\'JESUIS=a                                                  
+export BONJOUR\"JESUIS=a                                                  
+export BONJOUR\$JESUIS=a                                                  
+export BONJOUR\&JESUIS=a                                                  
+export BONJOUR\|JESUIS=a                                                  
+export BONJOUR\_JESUIS=a                                                  
+export BONJOUR\0JESUIS=a                                                  
+export \B\O\N\ \ \ \ \ \ \ JOURJESUIS=a                                   
+export 'AH@'=nop                                                          
+export "AH'"=nop                                                          
+export 'AH"'=nop                                                          
+export 'AH$'=nop                                                          
+export 'AH!'=nop                                                          
+export 'AH|'=nop                                                          
+export 'AH&'=nop                                                          
+export 'AH\'=nop                                                          
+export BONJOUR\\JESUIS                                                    
+export BONJOUR\'JESUIS                                                    
+export BONJOUR\"JESUIS                                                    
+export BONJOUR\$JESUIS                                                    
+export BONJOUR\&JESUIS                                                    
+export BONJOUR\|JESUIS                                                    
+export BONJOUR\_JESUIS                                                    
+export BONJOUR\0JESUIS                                                    
+Export B=bonjour                                                          
+exporT B=bonjour                                                          
+pwd                                                                       
+pwd | cat -e                                                              
+Pwd                                                                       
+pwD                                                                       
+unset                                                                     
+unset 'AH@'=nop                                                           
+unset "AH'"=nop                                                           
+unset 'AH"'=nop                                                           
+unset 'AH$'=nop                                                           
+unset 'AH!'=nop                                                           
+unset 'AH|'=nop                                                           
+unset 'AH&'=nop                                                           
+unset 'AH\'=nop                                                           
+Unset TERM                                                                
+unseT TERM                                                                
+notfound                                                                  
+notfound a b c                                                            
+echo "\"" >>a"b""c"                                                       
+echo foo>bar                                                              
+echo foo >bar                                                             
+echo foo> bar                                                             
+echo foo > bar                                                            
+echo > somefile
+echo bonjour > test                                                       
+echo > test bonjour                                                       
+> test echo bonjour                                                       
+echo bonjour >> test                                                      
+echo >> test bonjour                                                      
+>> test echo bonjour                                                      
+echo bonjour > test                                                       
+echo > test'sticked' bonjour                                              
+> test'sticked' echo bonjour                                              
+echo bonjour >> test'sticked'                                             
+echo >> test'sticked' bonjour                                             
+>> test'sticked' echo bonjour                                             
+echo > test"sticked" bonjour                                              
+> test"sticked" echo bonjour                                              
+echo bonjour >> test"sticked"                                             
+echo >> test"sticked" bonjour                                             
+>> test"sticked" echo bonjour                                             
+echo > test'yo'"sticked" bonjour                                          
+> test'yo'"sticked" echo bonjour                                          
+echo bonjour >> test'yo'"sticked"                                         
+echo >> test'yo'"sticked" bonjour                                         
+>> test'yo'"sticked" echo bonjour                                         
+echo bonjour > test > je > suis                                           
+echo > test > je bonjour > suis                                           
+> test echo bonjour > je > suis                                           
+echo bonjour >> test > je >> suis                                         
+echo >> test bonjour > je > suis                                          
+>> test echo > je bonjour > suis                                          
+echo bonjour>test>je>suis                                                 
+>test echo bonjour>je>suis                                                
+echo bonjour>>test>je>>suis                                               
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'       
+echo bonjour > a"b"c"d"e"f"g"h"i"j"k"l"m"n"o"p"q"r"s"t"u"v"w"x"y"z"       
+echo bonjour > a'b'c"d"e'f'g"h"i'j'k"l"m'n'o"p'q'r"s't'u"v"w"x"y'z'       
+> file                                                                    
+>                                                                         
+>>                                                                        
+<                                                                         
+echo >                                                                    
+echo >>                                                                   
+echo <                                                                    
+> test                                                                    
+>> test                                                                   
+echo foo >>> bar                                                          
+echo foo >>>> bar                                                         
+echo foo >>>>> bar                                                        
+cat < doesnotexist                                                        
+echo $?                                                                   
+echo                                                                      
+notfound                                                                  
+cat < doesntexist                                                         
+cat /etc/shells | head -c 10                                              
+cat -e /etc/shells | head -c 10                                           
+cat -e /etc/shells | cat -e | head -c 10                                  
+cat -e /etc/shells | cat -e | cat -e | head -c 10
+echo bonjour | cat                                                        
+echo bonjour | cat -e                                                     
+echo|                                                                     
+echo |                                                                    
+echo |                                                                    
+|cat                                                                      
+| cat                                                                     
+ | cat                                                                    
+echo bonjour | | cat -e                                                   
+echo bonjour | asdf                                                       
+asdf | echo bonjour                                                       
+ls asdfasdf | echo a                                                      
+echo a | ls asdfasdf                                                      
+echo a > foo | cat -e                                                     
+echo a >> foo | cat -e                                                    
+< | a                                                                     
+> | a                                                                     
+>> | a                                                                    
+| < a                                                                     
+| > a                                                                     
+| >> a                                                                    
+echo $_                                                                   
+echo $SHLVL                                                               
+echo \a                                                                   
+\e\c\h\o bonjour                                                          
+echo charles\                                                             
+echo \ \ jesuis\ \ charles                                                
+echo \ \ jesuis\&\& \ charles                                             
+echo \ \ jesuis\|\| \ charles                                             
+echo \ \ jesuis \|\| \ charles                                            
+echo \ \ \ \ \ \ \ \                                                      
+echo \ \ \ \ \ \ \ \               \ \ \ \ \ \                            
+echo \$PATH                                                               
+echo \$\P\A\T\H                                                           
+echo\ bonjour                                                             
+\ echo bonjour                                                            
+ \ echo bonjour                                                           
+                 \ echo bonjour                                           
+ \                 echo bonjour                                           
+                 \                    echo bonjour                        
+/bin/echo " \  "                                                          
+/bin/echo " \" "                                                          
+/bin/echo " \' "                                                          
+/bin/echo " \a "                                                          
+/bin/echo " \b "                                                          
+/bin/echo " \| "                                                          
+/bin/echo " \! "                                                          
+/bin/echo " \@ "                                                          
+/bin/echo " \$ "                                                          
+/bin/echo " \$LESS "                                                      
+/bin/echo " \$? "                                                         
+/bin/echo " \\ "                                                          
+/bin/echo " \\\ "                                                         
+/bin/echo " \\\\ "                                                        
+/bin/echo " \\\\\ "                                                       
+/bin/echo " \\\\\\ "                                                      
+/bin/echo " \\\\\\\ "                                                     
+/bin/echo " \\\\\\\\ "                                                    
+/bin/echo ' \  '                                                          
+/bin/echo ' \" '                                                          
+/bin/echo ' \a '                                                          
+/bin/echo ' \b '                                                          
+/bin/echo ' \| '                                                          
+/bin/echo ' \! '                                                          
+/bin/echo ' \@ '                                                          
+/bin/echo ' \$ '                                                          
+/bin/echo ' $LESS '                                                       
+/bin/echo ' \$? '                                                         
+/bin/echo ' \\ '                                                          
+/bin/echo ' \\\ '                                                         
+echo \                                                                    
+echo "\""'bonjour'                                                        
+echo $A                                                                   
+echo $A$B                                                                 
+echo $A$B$C                                                               
+echo $A$B$C$D                                                             
+echo $                                                                    
+echo \$                                                                   
+echo \$\$\$\$                                                             
+echo \$$\$$                                                               
+'echo' 'bonjour'                                                          
+'echo' 'je' 'suis' 'charles'                                              
+"echo" "bonjour"                                                          
+"echo" "je" "suis" "charles"                                              
+echo je'suis'"charles"                                                    
+echo "je"suis'charles'                                                    
+echo 'je'"suis"charles                                                    
+echo "\""                                                                 
+echo "\$"                                                                 
+echo "\\"                                                                 
+echo "\a"                                                                 
+echo "\A"                                                                 
+ls ""                                                                     
+ls ''                                                                     
+ls "" "" "" '' """"                                                       
+ls '' '' '''' ''                                                          
+'     echo' bonjour                                                       
+'echo     ' bonjour                                                       
+"     echo" bonjour                                                       
+"echo     " bonjour                                                       
+''echo bonjour                                                            
+""echo bonjour                                                            
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''echo bonjour    
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""echo bonjour    
+echo'' bonjour                                                            
+echo"" bonjour                                                            
+echo'''''''''''''''''''''''''''''''''''''''''''''''''''''''''' bonjour    
+echo"""""""""""""""""""""""""""""""""""""""""""""""""""""""""" bonjour    
+ec''ho bonjour                                                            
+ec""ho bonjour                                                            
+ec''''''''''''''''''''''''''''''''''''''''''''''''''''''''''ho bonjour    
+ec""""""""""""""""""""""""""""""""""""""""""""""""""""""""""ho bonjour    
+'''''''e''''''''''c''''''''''''h''''''''o''''''''''''''''''''' bonjour    
+"""""""e""""""""""c""""""""""""h""""""""o""""""""""""""""""""" bonjour    
+echo '"'                                                                  
+echo '""""""""""""""""""""""""""'                                         
+echo "'"                                                                  
+echo "''''''''''''''''''''''''''"                                         
+echo '                                                                    
+echo "                                                                    
+echo '''                                                                  
+echo """                                                                  
+echo '''''''''''''''''''''''''''''''''''''''''''                          
+echo """""""""""""""""""""""""""""""""""""""""""                          
+echo 'AH\'                                                                
+echo "AH\"                                                                
+echo "AH\""                                                               
+echo '\''                                                                 
+echo "\""                                                                 
+echo "\\""                                                                
+echo bonjour > "fi le"                                                    
+echo bonjour > 'fi le'                                                    
+echo foo                                                                  
+echo                    foo                                               
+             echo foo                                                     
+echo foo                                                                  
+         echo           foo                                               
+echo\t\t\t\t\t\t\t\t\t\tfoo                                               
+\t\t\t\t\t\techo\tfoo                                                     
+echo\tfoo\t\t\t\t\t\t                                                     
+\t\t\t\techo\t\t\t\tfoo\t\t\t\t                                           
+\fecho\ffoo                                                               
+\necho\nfoo                                                               
+\recho\rfoo                                                               
+\vecho\vfoo                                                               
+\t\r\v\fecho\v\t\r\vfoo                                                   
+                                                                          
+                                                                          
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                
+            \t\t\t           \t\t\t                                       

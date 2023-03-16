@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 15:39:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/16 19:00:10 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ void	signal_control_c_(int sig)
 
 static int	read_prompt(void)
 {
+	const struct sigaction	signals[2] = {
+	{.sa_handler = signal_control_c_},
+	{.sa_handler = SIG_IGN}
+	};
 	char		*line;
-	int			exe_stop;
 
-	exe_stop = 0;
 	incr_shlvl();
-	while (!exe_stop)
+	while (42)
 	{
+		sigaction(SIGINT, &signals[0], &g_global.default_sigint);
+		sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
 		line = readline("~$> ");
 		if (line == NULL)
 			return (EXIT_FAILURE);
@@ -41,7 +45,7 @@ static int	read_prompt(void)
 		{
 			add_history(line);
 			g_global.prompt = prompt_create(line);
-			exe_stop = execution(g_global.prompt);
+			execution(g_global.prompt);
 			prompt_destroy(&g_global.prompt);
 		}
 		free(line);
@@ -52,22 +56,10 @@ static int	read_prompt(void)
 
 int	main(int ac, char *av[], char *envp[])
 {
-	const struct sigaction	signals[2] = {
-	{.sa_handler = signal_control_c_},
-	{.sa_handler = SIG_IGN}
-	};
-
 	(void)av;
 	g_global = (t_global){0};
 	if (ac != 1 || !isatty(ttyslot()))
 		return (EXIT_FAILURE);
-	if (isatty(ttyslot()))
-	{
-		sigaction(SIGINT, &signals[0], &g_global.default_sigint);
-		sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
-	}
-	else
-		rl_outstream = NULL;
 	if (!env_list_create(envp))
 		return (-1);
 	read_prompt();

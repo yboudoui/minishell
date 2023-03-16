@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 18:11:02 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:28:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_global {
 	struct sigaction	default_sigquit;
 	t_prompt			prompt;
 	t_cmd_list			cmds;
+	int					save_stdin;
 	t_pipex				*pipex;
 }	t_global;
 

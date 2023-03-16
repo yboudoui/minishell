@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 15:54:44 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:33:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,6 @@ static void	*remove_space(void *input)
 	return (token_dup((*lst)->token));
 }
 
-void	print_(void *input, void *_)
-{
-	t_token	tk;
-
-	(void)_;
-	tk = input;
-	printf("[%s]", (char *)tk->input);
-}
-
 static void	commande_expand_variable(void *commande, void *_)
 {
 	t_commande	cmd;
@@ -132,8 +123,8 @@ int	execution(t_prompt prompt)
 
 	if (g_global.prompt == NULL)
 		return (EXIT_FAILURE);
-	if (!heredoc(prompt))
-		return (EXIT_FAILURE);
+	if (heredoc(prompt))
+		return (EXIT_SUCCESS);
 	list_iter(prompt, commande_expand_variable, NULL);
 	cmd = convertion(prompt);
 	g_global.cmds = cmd;

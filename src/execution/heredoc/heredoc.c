@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/12 15:40:43 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/16 19:00:10 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	signal_control_c(int sig)
 {
 	if (sig != SIGINT)
 		return ;
-	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
+//	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
 	close(STDIN_FILENO);
 	g_global.exit_code = 130;
 }
@@ -51,7 +51,7 @@ static int	heredoc_read(t_token token)
 	char	*expanded;
 	bool	expand;
 
-	if (token == NULL || token->type != TOKEN_HERE_DOCUMENT)
+	if (token == NULL)
 		return (EXIT_SUCCESS);
 	if (pipe(fds))
 		return (EXIT_FAILURE);
@@ -68,7 +68,7 @@ static int	heredoc_read(t_token token)
 		line = readline("> ");
 		if (g_global.exit_code || line == NULL)
 		{
-			/* close(fds[0]); */
+			close_fd(&fds[0]);
 			close_fd(&fds[1]);
 			printf("warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", (char *)token->input);
 			free(token->input);
@@ -101,13 +101,21 @@ static int	heredoc_read(t_token token)
 
 static int	heredoc_commande(t_commande cmd)
 {
-	t_list	redir;
+	t_token_list	redir;
+	int				*last;
 
-	redir = cmd->redir;
+	last = NULL;
+	redir = (t_token_list)cmd->redir;
 	while (redir)
 	{
-		if (heredoc_read(redir->content))
-			return (EXIT_FAILURE);
+		if (redir->token->type == TOKEN_HERE_DOCUMENT)
+		{
+			if (last)
+				close_fd(last);
+			if (heredoc_read(redir->token))
+				return (EXIT_FAILURE);
+			last = redir->token->input;
+		}
 		redir = redir->next;
 	}
 	return (EXIT_SUCCESS);
@@ -115,18 +123,28 @@ static int	heredoc_commande(t_commande cmd)
 
 int	heredoc(t_prompt cmd)
 {
-	struct sigaction		old;
+//	struct sigaction		old;
 	const struct sigaction	sigint = {
-		.sa_handler = signal_control_c
+		.sa_handler = signal_control_c,
+		.sa_flags = SA_RESETHAND
 	};
 
-	sigaction(SIGINT, &sigint, &old);
+	g_global.save_stdin = dup(STDIN_FILENO);
+	sigaction(SIGINT, &sigint, NULL);//&old);
 	while (cmd)
 	{
 		if (heredoc_commande(cmd->content))
+		{
+			dup2(g_global.save_stdin, STDIN_FILENO);
+			close(g_global.save_stdin);
 			return (EXIT_FAILURE);
+		}
 		cmd = cmd->next;
 	}
-	sigaction(SIGINT, &old, NULL);
-	return (EXIT_FAILURE);
+	close(STDIN_FILENO);
+	dup2(g_global.save_stdin, STDIN_FILENO);
+	close(g_global.save_stdin);
+//	sigemptyset()
+//	sigaction(SIGINT, &old, NULL);
+	return (EXIT_SUCCESS);
 }
