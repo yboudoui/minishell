@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:25:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 13:03:43 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/16 15:10:43 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	builtin_echo(char *argv[])
 	while (argv[index])
 	{
 		write(STDOUT_FILENO, argv[index], ft_strlen(argv[index]));
-		write(STDOUT_FILENO, " ", 1);
+		if (argv[index + 1] != NULL)
+			write(STDOUT_FILENO, " ", 1);
 		index += 1;
 	}
 	if (!new_line)
