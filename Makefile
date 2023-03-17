@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/17 14:35:12 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/17 14:45:08 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS	=\
 ./src/utils/string/is_alnum.c\
 ./src/utils/string/ft_strtrim.c\
 ./src/utils/string/string_cmp.c\
-./src/utils/string/str_merge.c\
 ./src/utils/string/str_new_empty.c\
 ./src/utils/string/str_merge_list_to.c\
 ./src/utils/string/str_slice_prefix.c\
@@ -89,7 +88,7 @@ SRCS	=\
 ./src/execution/pipex/execute.c\
 ./src/execution/pipex/cmd.c\
 ./src/execution/pipex/stat.c\
-./src/execution/pipex/exit.c\
+./src/execution/pipex/meta_exit.c\
 ./src/execution/pipex/get_paths.c\
 ./src/execution/pipex/redirection/open.c\
 ./src/execution/pipex/redirection/redir.c\

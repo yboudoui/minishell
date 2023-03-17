@@ -6,7 +6,7 @@
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 00:14:36 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 16:48:44 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 14:51:46 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	while (ft_is_in_set(*s1, set))
 		s1++;
-	end = ft_strlen(s1) - 1;
-	while (ft_is_in_set(s1[end], set))
+	end = ft_strlen(s1);
+	if (end == 0)
+		return (ft_strdup(""));
+	end -= 1;
+	while (s1[end] && ft_is_in_set(s1[end], set))
 		end--;
 	if (!end)
 		return (ft_substr(s1, 0, 1));

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 12:53:39 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 14:38:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char			*ft_strrchr(const char *s, int c);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*str_join_list(char *str[]);
 
-char			*str_merge(char *str, ...) __attribute__((sentinel));
 char			*str_merge_list(char *str[]);
 char			*str_merge_new_line(char *s1, char *s2);
 void			str_merge_to(char **str, char *s);

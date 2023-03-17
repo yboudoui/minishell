@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 09:49:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 14:58:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,42 @@ static void	remove_quotes(void *input, void *_)
 	}
 }
 
+static char	*check_syntax(t_token_list lst)
+{
+	t_token_type	last;
+
+	if (lst == NULL)
+		return ("Impossible happend\n");
+	last = TOKEN_WORD;
+	while (lst)
+	{
+		if (lst->token->type & TOKEN_OPERATOR && last & TOKEN_OPERATOR)
+			return ("Syntax error\n");
+		last = lst->token->type;
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
 t_token_list	lexer(char *input)
 {
+	char			*error;
 	t_token_list	output;
 	t_token_list	merged;
 
 	output = NULL;
 	if (input == NULL)
 		return (NULL);
-	if (tokenizer(input, (t_list *)&output))
-		return (NULL);
+	error = tokenizer(input, (t_list *)&output);
+	if (error)
+		return (ft_putstr_fd(error, 2), NULL);
 	list_iter(output, remove_quotes, NULL);
+	error = check_syntax(output);
+	if (error)
+	{
+		list_clear(&output, token_destroy);
+		return (ft_putstr_fd(error, 2), NULL);
+	}
 	merged = list_subset(output, token_merge);
 	list_clear(&output, token_destroy);
 	return (merged);

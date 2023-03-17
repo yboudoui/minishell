@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:35:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 10:41:29 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 14:45:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ typedef struct s_token_patern {
 static const t_token_patern	g_token_patern_list[MAX_TOKEN] = {
 {TOKEN_DOUBLE_QUOTES,
 	.field = (char *[]){"\"", "\""},
-	.error = "Incomplet field, missing double quote",
+	.error = "Incomplet field, missing double quote\n",
 },
 {TOKEN_SIMPLE_QUOTES,
 	.field = (char *[]){"'", "'"},
-	.error = "Incomplet field, missing single quote",
+	.error = "Incomplet field, missing single quote\n",
 },
 {TOKEN_HERE_DOCUMENT,		.match = "<<"},
 {TOKEN_REDIRECT_IN,			.match = "<"},
@@ -37,10 +37,6 @@ static const t_token_patern	g_token_patern_list[MAX_TOKEN] = {
 {TOKEN_SPACES,				.charset = is_space},
 {.type = MAX_TOKEN}
 };
-
-//	What happend if tmp is NULL?
-//	if (tmp == NULL)
-//		return ("An error occur during lexing");
 
 static char	*token_slice(char *str, t_token_patern patern, t_token *output)
 {
