@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:38:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 16:28:10 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:34:22 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ int	heredoc_read(t_token token)
 		free(line);
 	}
 	token->fd = fds[0];
-	return (close_fd(&fds[1]), EXIT_SUCCESS);
+	return (close_fd(&fds[1]), true);
 }

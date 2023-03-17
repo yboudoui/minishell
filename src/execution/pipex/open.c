@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:37:42 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/16 18:04:11 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:34:18 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ int	f_open(char *file, int flag, int mode)
 
 int	close_fd(int *fd)
 {
-	if ((*fd) < 2)
-		return (0);
-	if (close(*fd) == -1)
-		return (generic_err("close", NULL, 1));
-	else
-		*fd = -1;
+	struct stat	buf;
+
+	if (fstat(*fd, &buf) != -1)
+		close(*fd);
+	(*fd) = -1;
 	return (0);
 }

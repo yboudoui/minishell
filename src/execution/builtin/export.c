@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 13:56:18 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:14:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,22 @@ static char	*extract_variable_name(char **arg)
 	return (out);
 }
 
-static int	parse_export_arg(char *arg)
+static bool	parse_export_arg(char *arg)
 {
 	char		*name;
 	char		*value;
 	t_env_var	var;
 
+	printf("[%s]\n", arg);
 	name = extract_variable_name(&arg);
 	if (name == NULL)
 		return (EXIT_FAILURE);
 	if (ft_strncmp(arg, "=", 1) == 0)
 	{
 		value = ft_substr(arg, 1, ft_strlen(arg));
-		if (value)
-			env_list_insert_new(ft_strdup(name), value);
-		return (free(name), EXIT_SUCCESS);
+		if (value && env_list_insert_new(name, value))
+			free(name);
+		return (true);
 	}
 	else if (ft_strncmp(arg, "+=", 2) == 0)
 	{
@@ -49,11 +50,11 @@ static int	parse_export_arg(char *arg)
 		var = env_find(name, 0, 0);
 		if (var)
 			str_merge_to(&var->value, value);
-		else
-			env_list_insert_new(ft_strdup(name), value);
-		return (free(name), EXIT_SUCCESS);
+		else if (env_list_insert_new(name, value))
+			free(name);
+		return (true);
 	}
-	return (free(name), EXIT_FAILURE);
+	return (free(name), false);
 }
 
 static void	print_export(void *data, void *_)
@@ -79,7 +80,7 @@ int	builtin_export(char *argv[])
 		return (list_iter(env, print_export, NULL), EXIT_SUCCESS);
 	while (*argv)
 	{
-		if (parse_export_arg(*argv))
+		if (parse_export_arg(*argv) == false)
 			printf("export: `%s': not a valid identifier\n", *argv);
 		argv += 1;
 	}

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 16:44:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:10:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ static t_token_list	list_join(t_token_list lst)
 			lst = lst->next;
 			continue ;
 		}
-		if (new)
+		if (new && lst->token->type & TOKEN_MERGE)
 		{
-			if (lst->token->type & TOKEN_MERGE)
-				str_merge_to(&new->input, ft_strdup(lst->token->input));
-			else
-				new = NULL;
+			str_merge_to(&new->input, ft_strdup(lst->token->input));
+			if (lst->token->type & (~TOKEN_WORD))
+				new->type = lst->token->type;
 		}
 		else
+		{
+			new = NULL;
 			list_create_back((t_list *)&output, token_dup(lst->token));
+		}
 		lst = lst->next;
 	}
 	return (output);
