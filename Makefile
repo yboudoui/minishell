@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/16 18:14:37 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/17 06:45:33 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -154,18 +154,18 @@ re:			fclean all
 fsanitize:	CFLAGS+= -DCOLORED -fsanitize=address -g
 fsanitize:	re
 
-#			ASAN_OPTIONS=suppressions=.readline.fsanitize.supp"
-
 valgrind:
 			@clear
 			@valgrind														\
+			-q																\
 			--suppressions=./.readline.supp									\
+			--leak-check=full												\
+			--show-leak-kinds=all											\
+			--track-origins=yes												\
 			--track-fds=yes													\
 			./$(NAME)														\
 
 re_valgrind:	CFLAGS+= -DCOLORED -g3
 re_valgrind:	all valgrind
-
-#			--gen-suppressions=yes											\
 
 .PHONY:		all clean fclean re bonus

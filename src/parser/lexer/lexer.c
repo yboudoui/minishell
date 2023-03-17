@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 17:45:27 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 07:45:09 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	*token_merge(void *input)
 	lst = input;
 	if (lst == NULL || (*lst) == NULL)
 		return (NULL);
-//	if ((*lst)->token->type & TOKEN_SPACES)
-//		return (NULL);
 	if ((*lst)->token->type & TOKEN_IO)
 	{
 		out = token_dup((*lst)->token);

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 16:32:22 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 07:45:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ char	*env_find_and_expand_var(char *str)
 		idx = 0;
 	}
 	if (idx)
-		output = str_merge_list((char *[]){output, ft_strdup(str),NULL});
+		output = str_merge_list((char *[]){output, ft_strdup(str), NULL});
 	return (output);
 }

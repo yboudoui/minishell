@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 21:14:39 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 07:46:53 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_pipex
 	int				i;
 	t_env_list		env;
 }	t_pipex;
-
 
 //redir.c
 int		manage_redirs(t_list redir, t_pipex *pipex);

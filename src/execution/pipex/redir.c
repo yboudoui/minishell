@@ -6,13 +6,13 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 13:13:43 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/13 17:46:34 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 07:46:37 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-int redir_in(t_token token)
+int	redir_in(t_token token)
 {
 	int	fd;
 
@@ -20,7 +20,7 @@ int redir_in(t_token token)
 	return (fd);
 }
 
-int redir_out(t_token token)
+int	redir_out(t_token token)
 {
 	int	fd;
 
@@ -28,7 +28,7 @@ int redir_out(t_token token)
 	return (fd);
 }
 
-int redir_append(t_token token)
+int	redir_append(t_token token)
 {
 	int	fd;
 
@@ -36,7 +36,7 @@ int redir_append(t_token token)
 	return (fd);
 }
 
-int close_or_assign(int fd_end, int fd_new)
+int	close_or_assign(int fd_end, int fd_new)
 {
 	if (fd_new == -1)
 	{
@@ -48,9 +48,10 @@ int close_or_assign(int fd_end, int fd_new)
 	return (fd_new);
 }
 
-int close_all(t_list redir, int fd_infile, int fd_outfile)
+int	close_all(t_list redir, int fd_infile, int fd_outfile)
 {
 	t_token	token;
+
 	close_fd(&fd_infile);
 	close_fd(&fd_outfile);
 	while (redir)
@@ -63,11 +64,11 @@ int close_all(t_list redir, int fd_infile, int fd_outfile)
 	return (1);
 }
 
-int manage_redirs(t_list redir, t_pipex *pipex)
+int	manage_redirs(t_list redir, t_pipex *pipex)
 {
 	t_token	token;
-	int fd_infile;
-	int fd_outfile;
+	int		fd_infile;
+	int		fd_outfile;
 
 	fd_infile = -1;
 	fd_outfile = -1;

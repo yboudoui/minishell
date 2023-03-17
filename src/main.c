@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 19:00:10 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 07:44:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	signal_control_c_(int sig)
 
 static int	read_prompt(void)
 {
+	char					*line;
 	const struct sigaction	signals[2] = {
 	{.sa_handler = signal_control_c_},
 	{.sa_handler = SIG_IGN}
 	};
-	char		*line;
 
 	incr_shlvl();
 	while (42)

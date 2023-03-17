@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/14 16:44:25 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 07:47:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	pwd_err(char *cmd, int system)
 	return (-1);
 }
 
-char *my_pwd(void)
+char	*my_pwd(void)
 {
 	char	*buffer;
 	char	*retval;

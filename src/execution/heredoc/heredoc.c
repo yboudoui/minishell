@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 19:00:10 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 07:48:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	signal_control_c(int sig)
 {
 	if (sig != SIGINT)
 		return ;
-//	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
+	write(STDERR_FILENO, "\n", 1); // sortie d'erreur!!!
 	close(STDIN_FILENO);
 	g_global.exit_code = 130;
 }
@@ -70,7 +70,10 @@ static int	heredoc_read(t_token token)
 		{
 			close_fd(&fds[0]);
 			close_fd(&fds[1]);
-			printf("warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", (char *)token->input);
+			if (g_global.exit_code != 130)
+			{
+				printf("warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", (char *)token->input);
+			}
 			free(token->input);
 			token->input = new;
 			return (EXIT_FAILURE);
@@ -123,18 +126,20 @@ static int	heredoc_commande(t_commande cmd)
 
 int	heredoc(t_prompt cmd)
 {
-//	struct sigaction		old;
+	struct sigaction		old;
 	const struct sigaction	sigint = {
 		.sa_handler = signal_control_c,
 		.sa_flags = SA_RESETHAND
 	};
 
+	sigaction(SIGINT, &sigint, &old);
 	g_global.save_stdin = dup(STDIN_FILENO);
-	sigaction(SIGINT, &sigint, NULL);//&old);
 	while (cmd)
 	{
 		if (heredoc_commande(cmd->content))
 		{
+			sigaction(SIGINT, &old, NULL);
+			close(STDIN_FILENO);
 			dup2(g_global.save_stdin, STDIN_FILENO);
 			close(g_global.save_stdin);
 			return (EXIT_FAILURE);
@@ -144,7 +149,6 @@ int	heredoc(t_prompt cmd)
 	close(STDIN_FILENO);
 	dup2(g_global.save_stdin, STDIN_FILENO);
 	close(g_global.save_stdin);
-//	sigemptyset()
-//	sigaction(SIGINT, &old, NULL);
+	sigaction(SIGINT, &old, NULL);
 	return (EXIT_SUCCESS);
 }

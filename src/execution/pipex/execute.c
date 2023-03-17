@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/16 15:39:48 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 07:48:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	execute(char *argv[], t_pipex *pipex)
 {
-	const struct sigaction sa = {
+	const struct sigaction	sa = {
 		.sa_handler = SIG_IGN
 	};
 

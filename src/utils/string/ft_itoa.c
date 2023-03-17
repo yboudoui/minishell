@@ -6,7 +6,7 @@
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:09:41 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 16:12:38 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 07:44:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_itoa(long long int n)
 {
-	char		*out;
-	int			size;
+	char			*out;
+	int				size;
 	long long int	m;
 	long long int	ntmp1;
 	long long int	ntmp2;

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 18:33:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 07:50:07 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ static void	token_expand_env_var(void *input, void *_)
 t_token_list	list_join(t_token_list lst)
 {
 	t_token_list	output;
+	char			*joined;
+	t_token			new;
 
 	output = NULL;
 	while (lst)
 	{
-		if (lst->next && lst->next->token->type & (TOKEN_DOUBLE_QUOTES | TOKEN_SIMPLE_QUOTES))
+		if (lst->next && lst->next->token->type & TOKEN_QUOTE)
 		{
-			list_create_back((t_list *)&output, token_create(lst->next->token->type, ft_strjoin(lst->token->input, lst->next->token->input)));
+			joined = ft_strjoin(lst->token->input, lst->next->token->input);
+			new = token_create(lst->next->token->type, joined);
+			list_create_back((t_list *)&output, new);
 			lst = lst->next->next;
 			continue ;
 		}
@@ -62,7 +66,7 @@ t_token_list	split_again(t_token_list lst)
 	{
 		if (lst->token->type & (TOKEN_WORD))
 		{
-			splited = ft_split(lst->token->input, ' ');
+			splited = ft_split(lst->token->input, ' '); //by whitspaces!!
 			idx = 0;
 			while (splited[idx])
 			{
