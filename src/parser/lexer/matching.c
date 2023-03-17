@@ -6,12 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:35:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/14 15:04:52 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 08:20:34 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
-#include "show.h"
 
 typedef struct s_token_patern {
 	t_token_type	type;

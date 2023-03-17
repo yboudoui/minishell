@@ -6,14 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 18:28:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:49:42 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../show/show.h"
 # include "../inc/utils/string.h"
 # include "../inc/utils/list.h"
 # include "../inc/utils/memory.h"
@@ -39,6 +38,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <signal.h>
 
 void	signal_control_c_(int sig);
 
@@ -54,8 +54,8 @@ typedef struct s_global {
 
 extern t_global	g_global;
 
+void	commande_expand_variable(void *commande, void *_);
 void	meta_exit(int exitcode, t_pipex *pipex);
-int		execution(t_prompt prompt);
 void	incr_shlvl(void);
 
 #endif

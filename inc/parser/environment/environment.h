@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:05:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 16:09:16 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 08:48:11 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		env_variable_destroy(void *input);
 t_env_var	env_var_create(char *str);
 void		env_variable_replace(t_env_var *dest, t_env_var src);
 
-char		*env_find_and_expand_var(char *str);
+void		env_find_and_expand_var(char **str);
 int			bash_definition_name(char *str);
 int			bash_definition_variable(char *str);
 

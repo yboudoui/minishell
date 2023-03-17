@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 07:45:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 08:48:10 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,36 +58,43 @@ char	*env_get_value(char *str, size_t start, size_t end)
 	return (NULL);
 }
 
-char	*env_find_and_expand_var(char *str)
+void	env_find_and_expand_var(char **str)
 {
 	char	*output;
+	char	*input;
 	int		idx;
 	int		len;
 
-	if (str == NULL)
-		return (NULL);
-	if (!string_cmp(str, "~"))
-		return (env_get_value("HOME", 0, 0));
+	if (str == NULL || (*str) == NULL)
+		return ;
+	input = (*str);
+	if (!string_cmp(input, "~"))
+	{
+		(*str) = env_get_value("HOME", 0, 0);
+		return ;
+	}
 	idx = 0;
 	output = ft_strdup("\0");
-	while (str[idx])
+	while (input[idx])
 	{
-		len = bash_definition_variable(&str[idx]);
+		len = bash_definition_variable(&input[idx]);
 		idx += 1;
 		if (len < 0)
 			continue ;
-		if (str[idx] == '?')
+		if (input[idx] == '?')
 			output = str_merge_list((char *[]){
-					output, ft_substr(str, 0, idx - 1),
+					output, ft_substr(input, 0, idx - 1),
 					ft_itoa(g_global.exit_code), NULL});
 		else
 			output = str_merge_list((char *[]){
-					output, ft_substr(str, 0, idx - 1),
-					env_get_value(&str[idx], 0, --len), NULL});
-		str += (idx + len);
+					output, ft_substr(input, 0, idx - 1),
+					env_get_value(&input[idx], 0, --len), NULL});
+		input += (idx + len);
 		idx = 0;
 	}
 	if (idx)
-		output = str_merge_list((char *[]){output, ft_strdup(str), NULL});
-	return (output);
+		output = str_merge_list((char *[]){
+				output, ft_strdup(input), NULL});
+	free(*str);
+	(*str) = output;
 }

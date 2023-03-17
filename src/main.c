@@ -6,12 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 07:44:41 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:50:13 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include <signal.h>
 
 t_global	g_global;
 
@@ -23,6 +22,22 @@ void	signal_control_c_(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+}
+
+static int	execution(t_prompt prompt)
+{
+	t_cmd_list	cmd;
+
+	if (g_global.prompt == NULL)
+		return (EXIT_FAILURE);
+	if (heredoc(prompt))
+		return (EXIT_SUCCESS);
+	list_iter(prompt, commande_expand_variable, NULL);
+	cmd = convertion(prompt);
+	g_global.cmds = cmd;
+	pipex(cmd);
+	cmd_list_destroy(&g_global.cmds);
+	return (EXIT_SUCCESS);
 }
 
 static int	read_prompt(void)

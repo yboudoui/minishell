@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/15 16:34:32 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 08:56:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	**ft_split(char	const *str, char c);
 
 size_t	ft_putchar_fd(char c, int fd);
 size_t	ft_putstr_fd(char *s, int fd);
+size_t	ft_putnl_fd(char *s, int fd);
 
 bool	ft_multi_substr_to(char ***output, char *input, size_t *ranges[]);
 #endif

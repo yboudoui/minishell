@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:06:03 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/02/27 16:30:50 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 09:39:25 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include <readline/history.h>
 
 typedef struct s_prompt	*t_prompt;
+int	heredoc_read(t_token token);
 int	heredoc(t_prompt cmd);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/17 06:45:33 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/17 09:47:41 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,8 +78,9 @@ SRCS	=\
 ./src/parser/environment/utils.c\
 ./src/utils/shlvl.c\
 ./src/execution/heredoc/heredoc.c\
+./src/execution/heredoc/heredoc_readline.c\
 ./src/execution/cmd.c\
-./src/execution/execution.c\
+./src/execution/commande_expansion.c\
 ./src/execution/pipex/success.c\
 ./src/execution/pipex/execute.c\
 ./src/execution/pipex/cmd.c\
@@ -110,7 +111,6 @@ SRCS	=\
 ./src/execution/builtin/echo.c\
 ./src/execution/builtin/export.c\
 ./src/execution/builtin/pwd.c\
-./show/lexer_show.c\
 
 INCS	=\
 ./show\
