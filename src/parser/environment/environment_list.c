@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:36:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 16:29:08 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:55:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ bool	env_list_create(char *envp[])
 {
 	t_env_var	var;
 
+	if (envp == NULL)
+		return (true);
 	while (*envp)
 	{
 		var = env_var_create(*envp);

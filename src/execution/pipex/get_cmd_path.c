@@ -6,12 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/17 14:05:14 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:46:22 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-#include "environment.h"
 
 static inline char	*check_fpath(t_pipex *pipex, char *cmd)
 {
@@ -34,7 +33,7 @@ static inline char	*check_fpath(t_pipex *pipex, char *cmd)
 	else
 		return (NULL);
 }
-/*
+
 static inline char	*check_slash(char *str)
 {
 	int	i;
@@ -46,36 +45,7 @@ static inline char	*check_slash(char *str)
 		str[i - 1] = '\0';
 	return (str);
 }
-*/
 
-char	*get_cmd_path(t_pipex *pipex, char *cmd)
-{
-	char	*tmp1;
-	char	*output;
-	char	**paths;
-	size_t	index;
-
-	pipex->builtin = is_builtin(cmd);
-	if (pipex->builtin)
-		return (ft_strdup(cmd));
-	tmp1 = check_fpath(pipex, cmd);
-	if (tmp1)
-		return (tmp1);
-	paths = env_list_get_value_list("PATH");
-	output = NULL;
-	index = 0;
-	while (paths && paths[index])
-	{
-		free(output);
-		output = str_join_list((char *[]){paths[index], cmd, NULL});
-		if (access(output, F_OK) == 0)
-			return (string_array_destroy(paths), output);
-		index += 1;
-	}
-	return (NULL);
-}
-
-/*
 char	*get_cmd_path(t_pipex *pipex, char *cmd)
 {
 	char	*tmp1;
@@ -84,7 +54,7 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 
 	pipex->builtin = is_builtin(cmd);
 	if (pipex->builtin)
-		return (ft_strdup(cmd));
+		return (cmd);
 	tmp1 = check_fpath(pipex, cmd);
 	if (tmp1 != NULL)
 		return (tmp1);
@@ -109,4 +79,3 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 		generic_err(cmd, "command not found\n", 2);
 	return (NULL);
 }
-*/

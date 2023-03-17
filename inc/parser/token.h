@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 14:27:25 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:17:50 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef enum e_token_type {
 	TOKEN_QUOTE					=	(0
 	| TOKEN_SIMPLE_QUOTES
 	| TOKEN_DOUBLE_QUOTES),
+	TOKEN_MERGE					=	(0
+	| TOKEN_QUOTE
+	| TOKEN_WORD),
 	TOKEN_EXPANDABLE			=	(0
 	| TOKEN_WORD
 	| TOKEN_DOUBLE_QUOTES

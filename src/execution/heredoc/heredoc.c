@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 09:41:41 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:28:11 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static int	heredoc_commande(t_commande cmd)
 		if (redir->token->type == TOKEN_HERE_DOCUMENT)
 		{
 			close_fd(&last);
-			g_global.exit_code = 0;
-			if (heredoc_read(redir->token))
+			if (heredoc_read(redir->token) == false)
 				return (EXIT_FAILURE);
 			last = redir->token->fd;
 		}

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 13:38:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:44:45 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,25 @@ static void	token_expand_env_var(void *input, void *_)
 static t_token_list	list_join(t_token_list lst)
 {
 	t_token_list	output;
-	char			*joined;
 	t_token			new;
 
 	output = NULL;
+	new = NULL;
 	while (lst)
 	{
-		if (lst->next && lst->next->token->type & TOKEN_QUOTE)
+		if (new == NULL && (lst->token->type & TOKEN_MERGE))
 		{
-			joined = ft_strjoin(lst->token->input, lst->next->token->input);
-			new = token_create(lst->next->token->type, joined);
+			new = token_dup(lst->token);
 			list_create_back((t_list *)&output, new);
-			lst = lst->next->next;
+			lst = lst->next;
 			continue ;
+		}
+		if (new)
+		{
+			if (lst->token->type & TOKEN_MERGE)
+				str_merge_to(&new->input, ft_strdup(lst->token->input));
+			else
+				new = NULL;
 		}
 		else
 			list_create_back((t_list *)&output, token_dup(lst->token));
