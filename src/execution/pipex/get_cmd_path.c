@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/17 17:22:56 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 17:26:36 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 
 	pipex->builtin = is_builtin(cmd);
 	if (pipex->builtin)
-		return (cmd);
+		return (ft_strdup(cmd));
 	tmp1 = check_fpath(pipex, cmd);
 	if (tmp1 != NULL)
 		return (tmp1);
