@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 09:47:16 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 13:38:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	token_expand_env_var(void *input, void *_)
 		return ;
 	if (token->type & (TOKEN_HERE_DOCUMENT | TOKEN_SIMPLE_QUOTES))
 		return ;
-	env_find_and_expand_var(&token->input);
+	env_find_and_expand_var_to(&token->input);
 }
 
 static t_token_list	list_join(t_token_list lst)
@@ -61,7 +61,7 @@ static t_token_list	split_again(t_token_list lst)
 	{
 		if (lst->token->type & (TOKEN_WORD))
 		{
-			splited = ft_split(lst->token->input, ' '); //by whitspaces!!
+			splited = ft_split(lst->token->input, is_space);
 			idx = 0;
 			while (splited[idx])
 			{

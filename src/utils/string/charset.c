@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_to_str_array.c                                :+:      :+:    :+:   */
+/*   charset.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:24:08 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/01/11 08:38:30 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/17 10:28:24 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/17 10:41:27 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
-#include "list.h"
 
-char	**list_to_str_array(t_list lst, bool (*cast_content)(void *, char **))
+static char	*g_charset;
+
+static bool	charset_fp(int c)
 {
-	size_t	size;
 	size_t	index;
-	char	**out;
 
-	size = list_size(lst);
-	if (!size)
-		return (NULL);
-	out = ft_calloc(size + 1, sizeof(char *));
-	if (!out)
-		return (NULL);
 	index = 0;
-	while (index < size)
+	while (g_charset[index])
 	{
-		if (!cast_content(lst->content, &out[index]))
-			return (string_array_destroy(out), NULL);
-		lst = lst->next;
-		index++;
+		if (g_charset[index] == c)
+			return (true);
+		index += 1;
 	}
-	return (out);
+	return (false);
+}
+
+t_fp_charset	str_charset(char *str)
+{
+	if (str == NULL)
+		return (NULL);
+	g_charset = str;
+	return (charset_fp);
 }

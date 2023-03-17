@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 08:32:27 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 14:27:25 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ typedef enum e_token_type {
 	TOKEN_REDIRECT_OUT			=	(1U << 7),
 	TOKEN_REDIRECT_OUT_APPEND	=	(1U << 8),
 	MAX_TOKEN					=	(1U << 9),
+	REDIR_IN					=	(0
+	| TOKEN_REDIRECT_IN
+	| TOKEN_HERE_DOCUMENT),
+	REDIR_OUT					=	(0
+	| TOKEN_REDIRECT_OUT
+	| TOKEN_REDIRECT_OUT_APPEND),
 	TOKEN_QUOTE					=	(0
 	| TOKEN_SIMPLE_QUOTES
 	| TOKEN_DOUBLE_QUOTES),
@@ -38,10 +44,8 @@ typedef enum e_token_type {
 	| TOKEN_REDIRECT_OUT
 	| TOKEN_REDIRECT_OUT_APPEND),
 	TOKEN_IO					=	(0
-	| TOKEN_REDIRECT_IN
-	| TOKEN_HERE_DOCUMENT
-	| TOKEN_REDIRECT_OUT
-	| TOKEN_REDIRECT_OUT_APPEND),
+	| REDIR_IN
+	| REDIR_OUT),
 	TOKEN_OPERATOR				=	(0
 	| TOKEN_IO
 	| TOKEN_PIPE)

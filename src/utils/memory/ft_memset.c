@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_array_destroy.c                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:29:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 10:23:11 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/03/01 14:52:42 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/17 11:28:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "memory.h"
 
-void	string_array_destroy(void *data)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	**input;
-	size_t	index;
+	char	*ptr;
 
-	if (data == NULL)
-		return ;
-	index = 0;
-	input = data;
-	while (input[index])
-	{
-		free(input[index]);
-		index++;
-	}
-	free(data);
+	ptr = s;
+	while (n--)
+		*ptr++ = c;
+	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 08:56:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 12:53:39 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,53 +19,55 @@
 # include <stddef.h>
 # include <stdbool.h>
 
-typedef bool	(*t_fp_is_charset)(int);
+typedef bool	(*t_fp_charset)(int);
+t_fp_charset	str_charset(char *str);
 
-int		ft_atoi(const char *nptr);
-char	*ft_strchr(const char *s, int c);
+bool			is_space(int c);
+bool			is_alnum(char c);
+bool			is_alpha(char c);
+bool			is_digit(char c);
+bool			is_empty(char *str);
 
-char	*ft_itoa(long long int n);
-bool	is_space(int c);
-bool	is_alnum(char c);
-bool	is_alpha(char c);
-int		is_digit(char c);
-bool	is_empty(char *str);
+int				ft_atoi(const char *nptr);
+char			*ft_strchr(const char *s, int c);
 
-char	*ft_strtrim(char const *s1, char const *set);
-void	str_new_empty(char **str);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
-char	*ft_strrchr(const char *s, int c);
+char			*ft_itoa(long long int n);
 
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*str_join_list(char *str[]);
+char			*ft_strtrim(char const *s1, char const *set);
+void			str_new_empty(char **str);
+size_t			ft_strlen(const char *s);
+char			*ft_strdup(const char *s);
+char			*ft_strrchr(const char *s, int c);
 
-char	*str_merge(char *str, ...) __attribute__((sentinel));
-char	*str_merge_list(char *str[]);
-char	*str_merge_new_line(char *s1, char *s2);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*str_join_list(char *str[]);
 
-int		string_cmp(const char *s1, const char *s2);
+char			*str_merge(char *str, ...) __attribute__((sentinel));
+char			*str_merge_list(char *str[]);
+char			*str_merge_new_line(char *s1, char *s2);
+void			str_merge_to(char **str, char *s);
+void			str_merge_list_to(char **str, char *list[]);
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_str_find_prefix(char *big, char *little);
-bool	string_end_with(const char *str, const char *suffix);
+int				string_cmp(const char *s1, const char *s2);
 
-char	*ft_strnstr(const char *big, const char *little, size_t len);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_str_find_prefix(char *big, char *little);
+bool			string_end_with(const char *str, const char *suffix);
 
-char	*str_slice_section(char *str, char *start, char *end);
-char	*str_slice_prefix(char *str, char *prefix);
-int		str_must_slice_section(char *str, char **section, char **out);
-char	*str_slice_charset(char *str, t_fp_is_charset charset);
+char			*ft_strnstr(const char *big, const char *little, size_t len);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 
-char	**list_to_str_array(t_list lst, bool (*cast_content)(void *, char **));
-void	string_array_destroy(void *data);
+char			*str_slice_section(char *str, char *start, char *end);
+char			*str_slice_prefix(char *str, char *prefix);
+int				str_must_slice_section(char *str, char **section, char **out);
+char			*str_slice_charset(char *str, t_fp_charset charset);
 
-char	**ft_split(char	const *str, char c);
+void			string_array_destroy(void *data);
 
-size_t	ft_putchar_fd(char c, int fd);
-size_t	ft_putstr_fd(char *s, int fd);
-size_t	ft_putnl_fd(char *s, int fd);
+char			**ft_split(char	const *str, t_fp_charset charset);
 
-bool	ft_multi_substr_to(char ***output, char *input, size_t *ranges[]);
+size_t			ft_putchar_fd(char c, int fd);
+size_t			ft_putstr_fd(char *s, int fd);
+size_t			ft_putnl_fd(char *s, int fd);
+
 #endif

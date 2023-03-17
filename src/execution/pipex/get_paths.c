@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:54:19 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/10 18:13:09 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:41:45 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**get_paths(t_pipex *pipex)
 	pipex->path = false;
 	if (found)
 	{
-		paths = ft_split(found->value, ':');
+		paths = ft_split(found->value, str_charset(":"));
 		if (paths)
 		{
 			pipex->path = true;

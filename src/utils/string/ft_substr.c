@@ -6,7 +6,7 @@
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:54:47 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/08 14:06:54 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 13:33:46 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*output;
 	size_t	str_len;
 
-	if (!s)
+	if (!s || (start == len))
 		return (NULL);
 	str_len = ft_strlen(s);
 	len = ((str_len > len) * len)
@@ -72,10 +72,4 @@ char	**ft_multi_substr(char const *input, size_t *ranges[])
 		index += 1;
 	}
 	return (output);
-}
-
-bool	ft_multi_substr_to(char ***output, char *input, size_t *ranges[])
-{
-	(*output) = ft_multi_substr(input, ranges);
-	return (*output);
 }

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:52:52 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 15:13:27 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 11:40:53 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	check_error(char **argv)
 
 int	builtin_cd(char *argv[])
 {
+	char	*old_pwd;
+
 	if (check_error(argv))
 		return (1);
 	if (argv == NULL || string_cmp(*argv, "cd"))
@@ -32,9 +34,13 @@ int	builtin_cd(char *argv[])
 	argv += 1;
 	if (*argv == NULL)
 		return (EXIT_SUCCESS);
-	env_list_insert_new("OLDPWD", my_pwd());
+	old_pwd = print_working_directory("chdir");
 	if (chdir(*argv))
+	{
+		free(old_pwd);
 		return (generic_err(*argv, NULL, 1), 1);
-	env_list_insert_new("PWD", my_pwd());
+	}
+	env_list_insert_new("OLDPWD", old_pwd);
+	env_list_insert_new("PWD", print_working_directory("chdir"));
 	return (0);
 }

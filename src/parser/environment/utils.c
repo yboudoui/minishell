@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 08:48:10 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 13:44:07 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,43 +58,44 @@ char	*env_get_value(char *str, size_t start, size_t end)
 	return (NULL);
 }
 
-void	env_find_and_expand_var(char **str)
+char	*env_find_and_expand_var(char *in)
 {
-	char	*output;
-	char	*input;
+	char	*out;
 	int		idx;
 	int		len;
 
-	if (str == NULL || (*str) == NULL)
-		return ;
-	input = (*str);
-	if (!string_cmp(input, "~"))
-	{
-		(*str) = env_get_value("HOME", 0, 0);
-		return ;
-	}
+	if (in == NULL)
+		return (NULL);
 	idx = 0;
-	output = ft_strdup("\0");
-	while (input[idx])
+	out = ft_strdup("\0");
+	while (in[idx])
 	{
-		len = bash_definition_variable(&input[idx]);
+		len = bash_definition_variable(&in[idx]);
 		idx += 1;
 		if (len < 0)
 			continue ;
-		if (input[idx] == '?')
-			output = str_merge_list((char *[]){
-					output, ft_substr(input, 0, idx - 1),
-					ft_itoa(g_global.exit_code), NULL});
+		str_merge_to(&out, ft_substr(in, 0, idx - 1));
+		if (in[idx] == '?')
+			str_merge_to(&out, ft_itoa(g_global.exit_code));
 		else
-			output = str_merge_list((char *[]){
-					output, ft_substr(input, 0, idx - 1),
-					env_get_value(&input[idx], 0, --len), NULL});
-		input += (idx + len);
+			str_merge_to(&out, env_get_value(&in[idx], 0, --len));
+		in += (idx + len);
 		idx = 0;
 	}
 	if (idx)
-		output = str_merge_list((char *[]){
-				output, ft_strdup(input), NULL});
+		str_merge_to(&out, ft_strdup(in));
+	return (out);
+}
+
+void	env_find_and_expand_var_to(char **str)
+{
+	char	*tmp;
+
+	if (str == NULL || (*str) == NULL)
+		return ;
+	tmp = env_find_and_expand_var(*str);
+	if (tmp == NULL)
+		return ;
 	free(*str);
-	(*str) = output;
+	(*str) = tmp;
 }

@@ -6,15 +6,13 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:13:15 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/14 16:17:32 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/17 10:32:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-int	is_digit(char c)
+bool	is_digit(char c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	return (c >= '0' && c <= '9');
 }

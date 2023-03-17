@@ -6,13 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:28:36 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/12/29 15:32:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:34:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-char	*str_slice_charset(char *str, t_fp_is_charset charset)
+char	*str_slice_charset(char *str, t_fp_charset charset)
 {
 	size_t	index;
 

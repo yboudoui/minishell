@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_array_destroy.c                             :+:      :+:    :+:   */
+/*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:29:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 10:23:11 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/17 14:32:15 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/17 14:32:37 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "redirection.h"
 
-void	string_array_destroy(void *data)
+int	redir_in(t_token token)
 {
-	char	**input;
-	size_t	index;
+	return (f_open(token->input, O_RDONLY, 0));
+}
 
-	if (data == NULL)
-		return ;
-	index = 0;
-	input = data;
-	while (input[index])
-	{
-		free(input[index]);
-		index++;
-	}
-	free(data);
+int	redir_out(t_token token)
+{
+	return (f_open(token->input, O_WRONLY | O_CREAT | O_TRUNC, 0644));
+}
+
+int	redir_append(t_token token)
+{
+	return (f_open(token->input, O_WRONLY | O_CREAT | O_APPEND, 0644));
 }

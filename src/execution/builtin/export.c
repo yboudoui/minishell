@@ -6,45 +6,52 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 16:11:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 13:56:18 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
 
-// not well written
+static char	*extract_variable_name(char **arg)
+{
+	int		len;
+	char	*out;
+
+	len = bash_definition_name(*arg);
+	if (len < 0)
+		return (NULL);
+	out = ft_substr(*arg, 0, len);
+	if (out)
+		(*arg) += len;
+	return (out);
+}
+
 static int	parse_export_arg(char *arg)
 {
 	char		*name;
 	char		*value;
-	int			len;
 	t_env_var	var;
 
-	len = bash_definition_name(arg);
-	if (len < 0)
-		return (EXIT_FAILURE);
-	name = ft_substr(arg, 0, len);
+	name = extract_variable_name(&arg);
 	if (name == NULL)
 		return (EXIT_FAILURE);
-	value = NULL;
-	if (!ft_strncmp(&arg[len], "=", 1))
+	if (ft_strncmp(arg, "=", 1) == 0)
 	{
-		value = ft_substr(arg, len + 1, ft_strlen(arg));
-		if (env_list_insert_new(name, value))
-			free(name);
-		return (EXIT_SUCCESS);
+		value = ft_substr(arg, 1, ft_strlen(arg));
+		if (value)
+			env_list_insert_new(ft_strdup(name), value);
+		return (free(name), EXIT_SUCCESS);
 	}
-	else if (!ft_strncmp(&arg[len], "+=", 2))
+	else if (ft_strncmp(arg, "+=", 2) == 0)
 	{
-		value = ft_substr(arg, len + 2, ft_strlen(arg));
+		value = ft_substr(arg, 2, ft_strlen(arg));
 		var = env_find(name, 0, 0);
 		if (var)
-			var->value = str_merge_list((char *[]){var->value, value, NULL});
+			str_merge_to(&var->value, value);
 		else
-			if (env_list_insert_new(name, value))
-				free(name);
-		return (EXIT_SUCCESS);
+			env_list_insert_new(ft_strdup(name), value);
+		return (free(name), EXIT_SUCCESS);
 	}
 	return (free(name), EXIT_FAILURE);
 }

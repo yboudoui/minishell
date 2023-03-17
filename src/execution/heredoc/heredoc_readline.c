@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:38:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 09:41:42 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 13:38:24 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	heredoc_read(t_token token)
 			return (false);
 		}
 		if (expand)
-			env_find_and_expand_var(&line);
+			env_find_and_expand_var_to(&line);
 		ft_putnl_fd(line, fds[1]);
 		free(line);
 	}

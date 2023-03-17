@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_array_destroy.c                             :+:      :+:    :+:   */
+/*   str_merge_list_to.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:29:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 10:23:11 by yboudoui         ###   ########.fr       */
+/*   Created: 2023/03/17 12:43:43 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/03/17 13:21:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-void	string_array_destroy(void *data)
+void	str_merge_to(char **str, char *s)
 {
-	char	**input;
-	size_t	index;
+	char	*tmp;
 
-	if (data == NULL)
+	if (str == NULL)
 		return ;
-	index = 0;
-	input = data;
-	while (input[index])
+	if (s)
 	{
-		free(input[index]);
-		index++;
+		tmp = ft_strjoin((*str), s);
+		free(s);
+		free(*str);
+		(*str) = tmp;
 	}
-	free(data);
+}
+
+void	str_merge_list_to(char **str, char *list[])
+{
+	if (str == NULL || list == NULL)
+		return ;
+	str_merge_to(str, str_merge_list(list));
 }
