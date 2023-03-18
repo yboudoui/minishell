@@ -6,11 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 17:01:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:05:17 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+#include <unistd.h>
 
 t_global	g_global;
 
@@ -70,14 +71,69 @@ static int	read_prompt(void)
 	return (EXIT_SUCCESS);
 }
 
+/* static int	read_prompt_one(void) */
+/* { */
+/* 	char					*line; */
+/* 	const struct sigaction	signals[2] = { */
+/* 	{.sa_handler = signal_control_c_}, */
+/* 	{.sa_handler = SIG_IGN} */
+/* 	}; */
+/* 	bool					run_once; */
+
+/* 	incr_shlvl(); */
+/* 	run_once = true; */
+/* 	while (run_once) */
+/* 	{ */
+/* 		sigaction(SIGINT, &signals[0], &g_global.default_sigint); */
+/* 		sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit); */
+/* 		line = readline("~$> "); */
+/* 		if (line == NULL) */
+/* 			return (EXIT_FAILURE); */
+/* 		if (!is_empty(line)) */
+/* 		{ */
+/* 			add_history(line); */
+/* 			g_global.prompt = prompt_create(line); */
+/* 			execution(g_global.prompt); */
+/* 			prompt_destroy(&g_global.prompt); */
+/* 		} */
+/* 		free(line); */
+/* 		run_once = false; */
+/* 	} */
+/* 	rl_clear_history(); */
+/* 	return (EXIT_SUCCESS); */
+/* } */
+
+int loop_tester(char *line)
+{
+	g_global.prompt = prompt_create(line);
+	execution(g_global.prompt);
+	prompt_destroy(&g_global.prompt);
+	return (0);
+}
 int	main(int ac, char *av[], char *envp[])
 {
 	(void)av;
 	g_global = (t_global){0};
-	if (ac != 1 || !isatty(ttyslot()))
-		return (EXIT_FAILURE);
+	/* if (ac == 2) */
+	/* { */ 
+	/* 	if ( ac == 2 && ft_strncmp("-c", av[1], 3) == 0) */
+	/* 	{ */
+	/* 		read_prompt_one(); */
+	/* 		return (EXIT_SUCCESS); */
+	/* 	} */
+	/* } */
 	if (!env_list_create(envp))
 		return (-1);
+	if (ac >= 2)
+	{
+		/* if (av[1][0] == '-' && av[1][1] == 'c' && av[2]) */
+		loop_tester(av[2]);
+		/* else */
+		/* 	generic_err(av[1], "No such file or directory\n", 2); */
+		return (g_global.exit_code);
+	}
+	if (ac != 1 && isatty(ttyslot()))
+		return (EXIT_FAILURE);
 	read_prompt();
 	return (meta_exit(0, NULL), EXIT_SUCCESS);
 }
