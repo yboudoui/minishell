@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:38:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 18:35:15 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:10:13 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ int	heredoc_read(t_token token)
 
 	if (token == NULL || pipe(fds))
 		return (EXIT_FAILURE);
-	expand = (token->type & (TOKEN_QUOTE));
+	expand = !(token->type & TOKEN_QUOTE);
 	g_global.exit_code = 0;
-	printf("[%s]\n", token->input);
 	while (heredoc_stop(&line, token->input))
 	{
-		if (g_global.exit_code || line == NULL)
+		if (g_global.exit_code)
 		{
 			close_fd(&fds[0]);
 			close_fd(&fds[1]);
