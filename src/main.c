@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 16:19:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:04:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	signal_control_c_(int sig)
 	if (sig != SIGINT)
 		return ;
 	write(STDIN_FILENO, "\n", 1);
+	g_global.exit_code = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
