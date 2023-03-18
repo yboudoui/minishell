@@ -6,45 +6,42 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/14 18:56:21 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:39:07 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 
-static t_list	slice_commande(t_list *lst)
+#include <stdio.h>
+static t_list	slice_commande(t_token_list *lst)
 {
-	t_token	token;
 	t_list	output;
 
 	output = NULL;
 	while (*lst)
 	{
-		token = (*lst)->content;
-		if (token->type == TOKEN_PIPE)
+		if ((*lst)->token->type == TOKEN_PIPE)
 			break ;
 		else
-			list_create_back(&output, token_dup(token));
+			list_create_back((t_list *)&output, token_dup((*lst)->token));
 		(*lst) = (*lst)->next;
 	}
 	return (output);
 }
 
-static bool	syntaxer(t_list *root)
+static bool	syntaxer(t_token_list *root)
 {
-	t_list	output;
-	t_list	lst;
-	t_token	token;
+	t_token_list	lst;
+	t_token_list	output;
 
 	output = NULL;
 	lst = (*root);
 	while (lst)
 	{
-		token = lst->content;
-		if (token->type == TOKEN_PIPE)
+		if (lst->token->type == TOKEN_PIPE)
 			lst = lst->next;
 		else
-			list_create_back(&output, commande_create(slice_commande(&lst)));
+			list_create_back((t_list *)&output, commande_create(slice_commande(&lst)));
 	}
 	list_clear(root, token_destroy);
 	(*root) = output;
@@ -60,7 +57,7 @@ t_prompt	prompt_create(char *input)
 	lexer_output = lexer(input);
 	if (lexer_output == NULL)
 		return (NULL);
-	syntaxer((t_list *)&lexer_output);
+	syntaxer(&lexer_output);
 	return ((t_prompt)lexer_output);
 }
 

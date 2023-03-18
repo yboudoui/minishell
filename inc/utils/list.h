@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:11:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 18:45:47 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:43:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_list	ft_lstmap(t_list lst, void *(*f)(void *), void (*del)(void *));
 void	*list_subset(void *list, void *(*f)(void *));
 void	list_iter(void *list, void (*f)(void *, void *), void *data);
 
-void	list_remove_one(t_list *root, t_fp_destroy_content del);
+void	list_remove_one(void *lst, t_fp_destroy_content del);
 
 t_list	list_last(t_list lst);
 t_list	list_first(t_list lst);

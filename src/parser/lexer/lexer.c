@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 13:34:00 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:38:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,23 @@ static void	*token_merge(void *input)
 	lst = input;
 	if (lst == NULL || (*lst) == NULL)
 		return (NULL);
+	if ((*lst)->token->type == TOKEN_PIPE)
+		return (token_dup((*lst)->token));
 	if ((*lst)->token->type & TOKEN_IO)
 	{
 		out = token_dup((*lst)->token);
 		(*lst) = (*lst)->next;
 		if ((*lst) == NULL || (*lst)->token->type & TOKEN_OPERATOR)
 			return (token_destroy(out), NULL);
-		while ((*lst)->token->type == TOKEN_SPACES)
+		while ((*lst) && ((*lst)->token->type == TOKEN_SPACES))
 			(*lst) = (*lst)->next;
 		if ((*lst) == NULL || (*lst)->token->type & TOKEN_OPERATOR)
 			return (token_destroy(out), NULL);
-		free(out->input);
-		out->input = ft_strdup((*lst)->token->input);
-		(*lst) = (*lst)->next;
+		else
+		{
+			free(out->input);
+			out->input = ft_strdup((*lst)->token->input);
+		}
 		return (out);
 	}
 	return (token_dup((*lst)->token));
@@ -66,11 +70,13 @@ static char	*check_syntax(t_token_list lst)
 	last = TOKEN_WORD;
 	while (lst)
 	{
+/*
 		if (lst->token->type == TOKEN_SPACES)
 		{
 			lst = lst->next;
 			continue ;
 		}
+*/
 		if (lst->token->type & TOKEN_OPERATOR && last & TOKEN_OPERATOR)
 			return (g_global.exit_code = 2, "Syntax error\n");
 		last = lst->token->type;

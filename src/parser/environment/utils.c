@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 17:50:00 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:07:44 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,24 @@ t_env_var	env_find(char *name, size_t start, size_t end)
 void	env_remove(char *name, size_t start, size_t end)
 {
 	t_env_list	env;
+	char		*tmp;
 
 	if (name == NULL)
 		return ;
 	env = env_list_singleton(NULL);
 	if (start == end)
 		end = ft_strlen(name);
+	tmp = ft_substr(name, start, end);
 	while (env)
 	{
-		if (ft_strncmp(env->var->name, name + start, end) == 0)
-			return (list_remove_one((t_list *)&env, env_variable_destroy));
+		if (string_cmp(env->var->name, tmp) == 0)
+		{
+			free(tmp);
+			return (list_remove_one(env, env_variable_destroy));
+		}
 		env = env->next;
 	}
+	free(tmp);
 }
 
 char	*env_get_value(char *str, size_t start, size_t end)
