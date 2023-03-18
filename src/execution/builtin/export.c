@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 18:14:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 19:31:53 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static bool	parse_export_arg(char *arg)
 	char		*value;
 	t_env_var	var;
 
-	printf("[%s]\n", arg);
 	name = extract_variable_name(&arg);
 	if (name == NULL)
 		return (EXIT_FAILURE);

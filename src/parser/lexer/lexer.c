@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 18:34:16 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 13:34:00 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ static char	*check_syntax(t_token_list lst)
 	last = TOKEN_WORD;
 	while (lst)
 	{
+		if (lst->token->type == TOKEN_SPACES)
+		{
+			lst = lst->next;
+			continue ;
+		}
 		if (lst->token->type & TOKEN_OPERATOR && last & TOKEN_OPERATOR)
 			return (g_global.exit_code = 2, "Syntax error\n");
 		last = lst->token->type;

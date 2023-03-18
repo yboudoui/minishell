@@ -6,26 +6,15 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/17 18:58:22 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/17 19:28:17 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
-/*
-static void	signal_control_c(int sig)
-{
-	(void)sig;
-	printf("l\n");
-//	if (sig != SIGINT)
-//		return ;
-	write(STDERR_FILENO, "9\n", 2);
-//	close(STDIN_FILENO);
-	g_global.exit_code = 130;
-}
-*/
+
 static const struct sigaction	g_default_sig[2] = {
-	{.sa_handler = SIG_DFL},
-	{.sa_handler = SIG_IGN}
+{.sa_handler = SIG_DFL},
+{.sa_handler = SIG_IGN}
 };
 
 int	execute(char *argv[], t_pipex *pipex)
