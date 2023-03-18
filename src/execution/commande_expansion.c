@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 19:33:15 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:36:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	token_expand_env_var(void *input, void *_)
 	env_find_and_expand_var_to(&token->input);
 }
 
-static t_token_list	list_join(t_token_list lst)
+ t_token_list	list_join(t_token_list lst)
 {
 	t_token_list	output;
 	t_token			new;
@@ -65,7 +65,7 @@ static t_token_list	split_again(t_token_list lst)
 	output = NULL;
 	while (lst)
 	{
-		if (lst->token->type & (TOKEN_WORD))
+		if (lst->token->type & TOKEN_MERGE)
 		{
 			splited = ft_split(lst->token->input, is_space);
 			idx = 0;
@@ -106,9 +106,11 @@ void	commande_expand_variable(void *commande, void *_)
 	if (cmd == NULL)
 		return ;
 	list_iter(cmd->argv, token_expand_env_var, NULL);
+/*
 	old = cmd->argv;
 	cmd->argv = (t_list)list_join((t_token_list)cmd->argv);
 	list_clear(&old, token_destroy);
+*/
 	old = cmd->argv;
 	cmd->argv = (t_list)split_again((t_token_list)cmd->argv);
 	list_clear(&old, token_destroy);

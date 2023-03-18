@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 17:47:31 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:40:29 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,22 @@ static void	signal_control_c(int sig)
 static int	heredoc_commande(t_commande cmd)
 {
 	t_token_list	redir;
-	int				last;
+	int				*last;
 
-	last = -1;
+	last = NULL;
 	redir = (t_token_list)cmd->redir;
 	while (redir)
 	{
 		if (redir->token->type & TOKEN_HERE_DOCUMENT)
 		{
-			close_fd(&last);
-			if (heredoc_read(redir->token) == false)
+			if (heredoc_read(redir->token))
+			{
+				if (last)
+					close_fd(last);
+				last = &redir->token->fd;
+			}
+			else
 				return (EXIT_FAILURE);
-			if (redir->prev)
-				redir->prev->token->fd = -1;
-			last = redir->token->fd;
 		}
 		redir = redir->next;
 	}

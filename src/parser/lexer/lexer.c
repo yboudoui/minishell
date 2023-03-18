@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 17:48:35 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:35:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,21 @@ static void	*token_merge(void *input)
 	lst = input;
 	if (lst == NULL || (*lst) == NULL)
 		return (NULL);
+	if ((*lst)->token->type == TOKEN_SPACES)
+		return (NULL);
 	if ((*lst)->token->type == TOKEN_PIPE)
 		return (token_dup((*lst)->token));
-	if ((*lst)->token->type == TOKEN_HERE_DOCUMENT)
+	if ((*lst)->token->type & TOKEN_IO)
 	{
-		out = token_create(TOKEN_HERE_DOCUMENT, ft_strdup(""));
+		out = token_create((*lst)->token->type, ft_strdup(""));
 		(*lst) = (*lst)->next;
 		while ((*lst) && ((*lst)->token->type == TOKEN_SPACES))
 			(*lst) = (*lst)->next;
 		while ((*lst) && ((*lst)->token->type & TOKEN_MERGE))
 		{
-//			out->type |= (*lst)->token->type;
+			out->type |= (*lst)->token->type;
 			str_merge_to(&out->input, ft_strdup((*lst)->token->input));
 			(*lst) = (*lst)->next;
-		}
-		printf("--[%s]\n", out->input);
-		return (out);
-	}
-
-	if ((*lst)->token->type & TOKEN_IO)
-	{
-		out = token_dup((*lst)->token);
-		(*lst) = (*lst)->next;
-		if ((*lst) == NULL || (*lst)->token->type & TOKEN_OPERATOR)
-			return (token_destroy(out), NULL);
-		while ((*lst) && ((*lst)->token->type == TOKEN_SPACES))
-			(*lst) = (*lst)->next;
-		if ((*lst) == NULL || (*lst)->token->type & TOKEN_OPERATOR)
-			return (token_destroy(out), NULL);
-		else
-		{
-			free(out->input);
-			out->input = ft_strdup((*lst)->token->input);
 		}
 		return (out);
 	}
@@ -101,6 +84,17 @@ static char	*check_syntax(t_token_list lst)
 	return (NULL);
 }
 
+void	print(void *in, void *_)
+{
+	t_token	tk;
+
+	(void)_;
+	tk = in;
+	if (tk == NULL)
+		return ;
+	printf("%s ", tk->input);
+}
+
 t_token_list	lexer(char *input)
 {
 	char			*error;
@@ -121,6 +115,8 @@ t_token_list	lexer(char *input)
 		return (ft_putstr_fd(error, 2), NULL);
 	}
 	merged = list_subset(output, token_merge);
+	list_iter(merged, print, NULL);
+	printf("\n");
 	list_clear(&output, token_destroy);
 	return (merged);
 }

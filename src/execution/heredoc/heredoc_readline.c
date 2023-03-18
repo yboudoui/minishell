@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:38:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 17:25:09 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:35:15 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,7 @@ static bool	heredoc_stop(char **line, char *stop_word)
 	(*line) = _read;
 	return (true);
 }
-/*
-static bool	have_to_expand(t_token token)
-{
-	char	*str;
-	char	*new;
 
-	if (token == NULL || token->input == NULL)
-		return (false);
-	new = NULL;
-	str = token->input;
-	if (str[0] == '"')
-		new = ft_strtrim(str, "\"");
-	if (str[0] == '\'')
-		new = ft_strtrim(str, "'");
-	if (new == NULL)
-		return (true);
-	free (token->input);
-	token->input = new;
-	return (false);
-}
-*/
 int	heredoc_read(t_token token)
 {
 	int		fds[2];
@@ -58,7 +38,6 @@ int	heredoc_read(t_token token)
 	if (token == NULL || pipe(fds))
 		return (EXIT_FAILURE);
 	expand = (token->type & (TOKEN_QUOTE));
-//	expand = have_to_expand(token);
 	g_global.exit_code = 0;
 	printf("[%s]\n", token->input);
 	while (heredoc_stop(&line, token->input))
