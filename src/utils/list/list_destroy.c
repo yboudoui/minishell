@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:41:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 16:07:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:48:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@ void	list_destroy(t_list lst, t_fp_destroy_content del)
 
 void	list_remove_one(void *lst, t_fp_destroy_content del)
 {
-	t_list	current;
+	t_list	*current;
+	t_list	new;
 
 	current = lst;
-	if (current == NULL)
+	if (current == NULL || (*current) == NULL)
 		return ;
-	if (current->next)
-		current->next->prev = current->prev;
-	if (current->prev)
-		current->prev->next = current->next;
-	list_destroy(current, del);
+	new = (*current)->next;
+	if ((*current)->next)
+		(*current)->next->prev = (*current)->prev;
+	if ((*current)->prev)
+		(*current)->prev->next = (*current)->next;
+	list_destroy(*current, del);
+	(*current) = new;
 }
 
 void	list_clear(void *root, t_fp_destroy_content del)

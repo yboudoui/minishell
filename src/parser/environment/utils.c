@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 16:07:44 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:52:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	env_remove(char *name, size_t start, size_t end)
 		if (string_cmp(env->var->name, tmp) == 0)
 		{
 			free(tmp);
-			return (list_remove_one(env, env_variable_destroy));
+			list_remove_one(&env, env_variable_destroy);
+			env_list_singleton(env);
+			return ;
 		}
 		env = env->next;
 	}

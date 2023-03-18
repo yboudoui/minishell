@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 18:14:34 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/18 19:34:42 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*print_working_directory(char *cmd_name)
 	working_directory = getcwd(buffer, PATH_MAX);
 	if (working_directory)
 		return (ft_strdup(working_directory));
-ft_putstr_fd(cmd_name, 2);
+	ft_putstr_fd(cmd_name, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd("error retrieving the current directory: ", 2);
 	ft_putstr_fd("getcwd: cannot access parent directories: ", 2);

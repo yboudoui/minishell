@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 18:36:48 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:32:57 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,6 @@ static void	token_expand_env_var(void *input, void *_)
 	if (token->type & (TOKEN_HERE_DOCUMENT | TOKEN_SIMPLE_QUOTES))
 		return ;
 	env_find_and_expand_var_to(&token->input);
-}
-
- t_token_list	list_join(t_token_list lst)
-{
-	t_token_list	output;
-	t_token			new;
-
-	output = NULL;
-	new = NULL;
-	while (lst)
-	{
-		if (new == NULL && (lst->token->type & TOKEN_MERGE))
-		{
-			new = token_dup(lst->token);
-			list_create_back((t_list *)&output, new);
-		}
-		else if (new && lst->token->type & TOKEN_MERGE)
-		{
-			str_merge_to(&new->input, ft_strdup(lst->token->input));
-			if (lst->token->type & (~TOKEN_WORD))
-				new->type = lst->token->type;
-		}
-		else
-		{
-			new = NULL;
-			list_create_back((t_list *)&output, token_dup(lst->token));
-		}
-		lst = lst->next;
-	}
-	return (output);
 }
 
 static t_token_list	split_again(t_token_list lst)
@@ -106,11 +76,6 @@ void	commande_expand_variable(void *commande, void *_)
 	if (cmd == NULL)
 		return ;
 	list_iter(cmd->argv, token_expand_env_var, NULL);
-/*
-	old = cmd->argv;
-	cmd->argv = (t_list)list_join((t_token_list)cmd->argv);
-	list_clear(&old, token_destroy);
-*/
 	old = cmd->argv;
 	cmd->argv = (t_list)split_again((t_token_list)cmd->argv);
 	list_clear(&old, token_destroy);

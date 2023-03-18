@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 17:03:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:32:00 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	syntaxer(t_token_list *root)
 			lst = lst->next;
 		else
 			list_create_back((t_list *)&output,
-							commande_create(slice_commande(&lst)));
+				commande_create(slice_commande(&lst)));
 	}
 	list_clear(root, token_destroy);
 	(*root) = output;
