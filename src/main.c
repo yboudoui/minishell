@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 18:05:17 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/18 18:31:01 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ int	main(int ac, char *av[], char *envp[])
 		return (-1);
 	if (ac >= 2)
 	{
-		/* if (av[1][0] == '-' && av[1][1] == 'c' && av[2]) */
-		loop_tester(av[2]);
-		/* else */
-		/* 	generic_err(av[1], "No such file or directory\n", 2); */
+		if (av[1][0] == '-' && av[1][1] == 'c' && av[2])
+			loop_tester(av[2]);
+		else
+			generic_err(av[1], "No such file or directory\n", 2);
 		return (g_global.exit_code);
 	}
 	if (ac != 1 && isatty(ttyslot()))
