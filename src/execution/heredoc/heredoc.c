@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 18:48:55 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:47:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ static int	heredoc_commande(t_commande cmd)
 	redir = (t_token_list)cmd->redir;
 	while (redir)
 	{
-		if (redir->token->type == TOKEN_HERE_DOCUMENT)
+		if (redir->token->type & TOKEN_HERE_DOCUMENT)
 		{
 			close_fd(&last);
 			if (heredoc_read(redir->token) == false)
 				return (EXIT_FAILURE);
+			if (redir->prev)
+				redir->prev->token->fd = -1;
 			last = redir->token->fd;
 		}
 		redir = redir->next;

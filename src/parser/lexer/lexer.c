@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 16:38:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:48:35 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ static void	*token_merge(void *input)
 		return (NULL);
 	if ((*lst)->token->type == TOKEN_PIPE)
 		return (token_dup((*lst)->token));
+	if ((*lst)->token->type == TOKEN_HERE_DOCUMENT)
+	{
+		out = token_create(TOKEN_HERE_DOCUMENT, ft_strdup(""));
+		(*lst) = (*lst)->next;
+		while ((*lst) && ((*lst)->token->type == TOKEN_SPACES))
+			(*lst) = (*lst)->next;
+		while ((*lst) && ((*lst)->token->type & TOKEN_MERGE))
+		{
+//			out->type |= (*lst)->token->type;
+			str_merge_to(&out->input, ft_strdup((*lst)->token->input));
+			(*lst) = (*lst)->next;
+		}
+		printf("--[%s]\n", out->input);
+		return (out);
+	}
+
 	if ((*lst)->token->type & TOKEN_IO)
 	{
 		out = token_dup((*lst)->token);

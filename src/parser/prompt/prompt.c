@@ -6,13 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:14:15 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 16:39:07 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:03:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 
-#include <stdio.h>
 static t_list	slice_commande(t_token_list *lst)
 {
 	t_list	output;
@@ -41,7 +40,8 @@ static bool	syntaxer(t_token_list *root)
 		if (lst->token->type == TOKEN_PIPE)
 			lst = lst->next;
 		else
-			list_create_back((t_list *)&output, commande_create(slice_commande(&lst)));
+			list_create_back((t_list *)&output,
+							commande_create(slice_commande(&lst)));
 	}
 	list_clear(root, token_destroy);
 	(*root) = output;
