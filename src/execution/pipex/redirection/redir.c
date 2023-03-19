@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 13:13:43 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/18 19:13:07 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 12:19:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	manage_redirs(t_list redir, t_pipex *pipex)
 	while (redir)
 	{
 		token = redir->content;
-		if (token->type == TOKEN_REDIRECT_IN)
+		if (token->type & TOKEN_REDIRECT_IN)
 			fd_infile = close_or_assign(fd_infile, redir_in(token));
-		else if (token->type == TOKEN_REDIRECT_OUT)
+		else if (token->type & TOKEN_REDIRECT_OUT)
 			fd_outfile = close_or_assign(fd_outfile, redir_out(token));
-		else if (token->type == TOKEN_REDIRECT_OUT_APPEND)
+		else if (token->type & TOKEN_REDIRECT_OUT_APPEND)
 			fd_outfile = close_or_assign(fd_outfile, redir_append(token));
 		else if (token->type & TOKEN_HERE_DOCUMENT)
 			fd_infile = close_or_assign(fd_infile, token->fd);

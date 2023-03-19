@@ -6,12 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:15:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 19:32:57 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:51:35 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
+/*
 static void	token_expand_env_var(void *input, void *_)
 {
 	t_token	token;
@@ -24,7 +24,7 @@ static void	token_expand_env_var(void *input, void *_)
 		return ;
 	env_find_and_expand_var_to(&token->input);
 }
-
+*/
 static t_token_list	split_again(t_token_list lst)
 {
 	char			**splited;
@@ -35,7 +35,9 @@ static t_token_list	split_again(t_token_list lst)
 	output = NULL;
 	while (lst)
 	{
-		if (lst->token->type & TOKEN_MERGE)
+//			printf("(%s)\n", lst->token->input);
+		if (lst->token->type & (TOKEN_WORD | TOKEN_EXPANDED) && !(lst->token->type & TOKEN_QUOTE))
+//		if (lst->token->type & TOKEN_MERGE)
 		{
 			splited = ft_split(lst->token->input, is_space);
 			idx = 0;
@@ -54,17 +56,6 @@ static t_token_list	split_again(t_token_list lst)
 	return (output);
 }
 
-static void	*remove_space(void *input)
-{
-	t_token_list	*lst;
-
-	lst = input;
-	if (lst == NULL || (*lst) == NULL)
-		return (NULL);
-	if ((*lst)->token->type & TOKEN_SPACES)
-		return (NULL);
-	return (token_dup((*lst)->token));
-}
 
 void	commande_expand_variable(void *commande, void *_)
 {
@@ -75,12 +66,15 @@ void	commande_expand_variable(void *commande, void *_)
 	cmd = commande;
 	if (cmd == NULL)
 		return ;
-	list_iter(cmd->argv, token_expand_env_var, NULL);
+//	list_iter(cmd->argv, token_expand_env_var, NULL);
+
 	old = cmd->argv;
 	cmd->argv = (t_list)split_again((t_token_list)cmd->argv);
 	list_clear(&old, token_destroy);
+
+/*
 	old = cmd->argv;
-	cmd->argv = list_subset(cmd->argv, remove_space);
+	cmd->argv = list_subset(cmd->argv, expand_variable);
 	list_clear(&old, token_destroy);
-	list_iter(cmd->redir, token_expand_env_var, NULL);
+*/
 }

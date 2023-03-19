@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 19:32:17 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:51:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ static void	*token_merge(void *input)
 		(*lst) = (*lst)->next;
 		while ((*lst) && ((*lst)->token->type == TOKEN_SPACES))
 			(*lst) = (*lst)->next;
+		while ((*lst) && ((*lst)->token->type & TOKEN_MERGE))
+		{
+			out->type |= (*lst)->token->type;
+			str_merge_to(&out->input, ft_strdup((*lst)->token->input));
+			(*lst) = (*lst)->next;
+		}
+		return (out);
+	}
+	if ((*lst)->token->type & TOKEN_MERGE)
+	{
+		out = token_dup((*lst)->token);
+		if ((*lst)->next && (*lst)->next->token->type & TOKEN_OPERATOR)
+			return (out);
+		(*lst) = (*lst)->next;
 		while ((*lst) && ((*lst)->token->type & TOKEN_MERGE))
 		{
 			out->type |= (*lst)->token->type;
@@ -77,6 +91,28 @@ static char	*check_syntax(t_token_list lst)
 	return (NULL);
 }
 
+void	expand_variable(void *token, void *_)
+{
+	t_token	input;
+
+	(void)_;
+	input = token;
+	if (input == NULL)
+		return ;
+	token_expand_variable(input);
+}
+
+void	print(void *token, void *_)
+{
+	t_token	input;
+
+	(void)_;
+	input = token;
+	if (input == NULL)
+		return ;
+	printf("[%s]", input->input);
+}
+
 t_token_list	lexer(char *input)
 {
 	char			*error;
@@ -90,6 +126,7 @@ t_token_list	lexer(char *input)
 	if (error)
 		return (ft_putstr_fd(error, 2), NULL);
 	list_iter(output, remove_quotes, NULL);
+	list_iter(output, expand_variable, NULL);
 	error = check_syntax(output);
 	if (error)
 	{
@@ -98,5 +135,10 @@ t_token_list	lexer(char *input)
 	}
 	merged = list_subset(output, token_merge);
 	list_clear(&output, token_destroy);
+/*
+	printf("merged: ");
+	list_iter(merged, print, NULL);
+	printf("\n");
+*/
 	return (merged);
 }

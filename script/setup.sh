@@ -10,14 +10,17 @@ if [ $? = 0 ]; then
 fi
 
 mkdir test_bsh test_msh
+msh_cmd="make re_valgrind"
+bsh_cmd="bash"
 
 tmux	new-session		-s $SESSIONNAME									\;	\
 		split-window	-t $SESSIONNAME:0 -h							\;	\
-		send-key		-t $SESSIONNAME:0.0									\
-						"cd test_msh; ./../minishell; clear"	ENTER	\;	\
-		send-key		-t $SESSIONNAME:0.1									\
-						"cd test_bsh; bash --posix; clear"		ENTER	\;	\
-		setw			synchronize-panes on								\
+		send-key		-t $SESSIONNAME:0.0			"$msh_cmd"	ENTER	\;	\
+		send-key		-t $SESSIONNAME:0.1			"$bsh_cmd"	ENTER	\;	\
+		send-key		-t $SESSIONNAME:0.0			"cd test_msh"	ENTER	\;	\
+		send-key		-t $SESSIONNAME:0.1			"cd test_bsh"	ENTER	\;	\
+		setw			synchronize-panes on							\;	\
+
 
 
 #		split-window	-t $SESSIONNAME:0 -b -l 90%		\;	\

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 14:21:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/09 16:22:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:43:42 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int	bash_definition_variable(char *str)
 		return (1);
 	index = bash_definition_name(str);
 	if (index < 0)
-		return (index);
+		return (-1);
 	return (index + 1);
 }

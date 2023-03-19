@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/17 14:45:08 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/19 06:29:15 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,7 +151,7 @@ fclean:		clean
 
 re:			fclean all
 
-fsanitize:	CFLAGS+= -DCOLORED -fsanitize=address -g
+fsanitize:	CFLAGS+= -fsanitize=address -g3
 fsanitize:	re
 
 valgrind:
@@ -165,7 +165,7 @@ valgrind:
 			--track-fds=yes													\
 			./$(NAME)														\
 
-re_valgrind:	CFLAGS+= -DCOLORED -g3
+re_valgrind:	CFLAGS+= -g3
 re_valgrind:	all valgrind
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re
