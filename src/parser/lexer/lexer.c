@@ -6,8 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 15:28:23 by kdhrif           ###   ########.fr       */
->>>>>>> f3866de (worked on syntax error)
+/*   Updated: 2023/03/19 15:30:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,10 +173,5 @@ t_token_list	lexer(char *input)
 	}
 	merged = list_subset(output, token_merge);
 	list_clear(&output, token_destroy);
-/*
-	printf("merged: ");
-	list_iter(merged, print, NULL);
-	printf("\n");
-*/
 	return (merged);
 }

@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/17 07:46:53 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:56:11 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <sys/types.h>
 
 # define CMD_NOT_FOUND 127
+
+typedef struct s_flag
+{
+	bool	is_fork;
+} t_flag;
 
 typedef struct s_pipex
 {
@@ -87,6 +92,9 @@ void	path_null(t_pipex *pipex, char *cmd);
 int		close_fd(int *fd);
 
 void	pipe_fd(t_pipex *pipex, int *fd);
+
+//singleton.c
+t_flag	*f(void);
 
 void	fork_pid(int *pid);
 

@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 14:45:20 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/19 17:22:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,36 @@ static char	*check_builtin_or_fpath(char *cmd, t_pipex *pipex)
 	return (NULL);
 }
 
+static char	*check_path(t_pipex *pipex, char *cmd)
+{
+	int		i;
+	char	*tmp1;
+	char	*tmp2;
+
+	i = -1;
+	while (pipex->paths[++i])
+	{
+		check_slash(pipex->paths[i]);
+		tmp1 = ft_strjoin(pipex->paths[i], "/");
+		if (tmp1 == NULL)
+			return (NULL);
+		tmp2 = ft_strjoin(tmp1, cmd);
+		if (tmp2 == NULL)
+		{
+			f_free((void **)&tmp1);
+			return (NULL);
+		}
+		free(tmp1);
+		if (access(tmp2, F_OK) == 0)
+			return (tmp2);
+		free(tmp2);
+	}
+	return (NULL);
+}
+
 char	*get_cmd_path(t_pipex *pipex, char *cmd)
 {
 	char	*tmp1;
-	char	*tmp2;
 	int		i;
 
 	tmp1 = check_builtin_or_fpath(cmd, pipex);
@@ -71,20 +97,11 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 		return (tmp1);
 	path_null(pipex, cmd);
 	i = -1;
-	if (pipex->paths == NULL)
+	if (!pipex->paths)
 		return (NULL);
-	while (pipex->paths[++i])
-	{
-		check_slash(pipex->paths[i]);
-		tmp1 = ft_strjoin(pipex->paths[i], "/");
-		null_str_err(tmp1);
-		tmp2 = ft_strjoin(tmp1, cmd);
-		null_str_err(tmp2);
-		free(tmp1);
-		if (access(tmp2, F_OK) == 0)
-			return (tmp2);
-		free(tmp2);
-	}
+	tmp1 = check_path(pipex, cmd);
+	if (tmp1)
+		return (tmp1);
 	if (!pipex->abs_path_cmd)
 		generic_err(cmd, "command not found\n", 2);
 	return (NULL);

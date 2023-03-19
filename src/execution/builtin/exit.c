@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:59:20 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/16 11:04:01 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/19 17:59:23 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	more_norminette(char **argv, bool *error, int exit_code)
 	i = 0;
 	while (argv[i])
 		i++;
-	printf("exit\n");
+	if (!f()->is_fork)
+		printf("exit\n");
 	if (*error == true && exit_code == 2)
 	{
 		generic_err(argv[0], "numeric argument required\n", 2);

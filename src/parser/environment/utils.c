@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 15:01:58 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:31:36 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char	*env_find_and_expand_var(char *in)
 		return (NULL);
 	idx = 0;
 	out = ft_strdup("\0");
-	printf("[%s]\n", in);
 	while (in[idx])
 	{
 		len = bash_definition_variable(&in[idx]);

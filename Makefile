@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/19 06:29:15 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/19 17:48:39 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ SRCS	=\
 ./src/execution/pipex/wait.c\
 ./src/execution/pipex/pipeline_status.c\
 ./src/execution/pipex/free.c\
+./src/execution/builtin/singleton.c\
 ./src/execution/builtin/unset.c\
 ./src/execution/builtin/is_builtin.c\
 ./src/execution/builtin/exit.c\

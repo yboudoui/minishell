@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/17 07:36:05 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:58:24 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,24 @@ int	cmd_out(t_pipex *pipex)
 	return (0);
 }
 
+int	handle_builtin(t_pipex *pipex, char **argv)
+{
+	t_fp_builtin	builtin;
+
+	if (ft_strncmp("exit", *argv, ft_strlen("exit")) == 0)
+	{
+		f()->is_fork = true;	
+		builtin = pipex->builtin;
+		free_pipex(pipex);
+		meta_exit(builtin(argv), NULL);
+	}
+	meta_exit(pipex->builtin(argv), pipex);
+	return (0);
+}
+
 int	exec_cmd(t_pipex *pipex, char **argv)
 {
-	char	**env;
+	char			**env;
 
 	cmd_in(pipex);
 	cmd_out(pipex);
@@ -72,10 +87,7 @@ int	exec_cmd(t_pipex *pipex, char **argv)
 	if (pipex->cmd_path == NULL)
 		meta_exit(127, pipex);
 	if (pipex->builtin)
-	{
-		meta_exit(pipex->builtin(argv), pipex);
-		return (0);
-	}
+		handle_builtin(pipex, argv);
 	env = parse_env(pipex->env);
 	if (execve(pipex->cmd_path, argv, env) == -1)
 	{
