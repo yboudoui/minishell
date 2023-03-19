@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:59:20 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 17:59:23 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/19 19:22:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,8 @@ int	builtin_exit(char *argv[])
 {
 	long long int	exit_code;
 	bool			error;
-	int				i;
 
 	error = false;
-	i = 0;
 	exit_code = 0;
 	argv += 1;
 	if (*argv != NULL)

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:35:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/17 14:45:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:49:11 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,24 @@ static bool	token_list_create_back_word(t_list *root, char *input, size_t size)
 	return (free(word), false);
 }
 
+static void	remove_quotes(void *input, void *_)
+{
+	t_token	token;
+	char	*trimed;
+
+	(void)_;
+	token = input;
+	if (token == NULL)
+		return ;
+	if (token->type & (TOKEN_DOUBLE_QUOTES | TOKEN_SIMPLE_QUOTES))
+	{
+		trimed = ft_strtrim(token->input,
+				(char *[]){"'", "\""}[token->type == TOKEN_DOUBLE_QUOTES]);
+		free(token->input);
+		token->input = trimed;
+	}
+}
+
 char	*tokenizer(char *input, t_list *out)
 {
 	char	*error;
@@ -114,5 +132,5 @@ char	*tokenizer(char *input, t_list *out)
 			index += 1;
 	}
 	token_list_create_back_word(out, input, index);
-	return (NULL);
+	return (list_iter(*out, remove_quotes, NULL), NULL);
 }

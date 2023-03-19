@@ -6,7 +6,8 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:05:05 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/19 19:26:22 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:07:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +34,8 @@ static bool	parse_export_arg(char *arg)
 	char		*value;
 	t_env_var	var;
 
+	if (arg == NULL || is_digit(*arg))
+		return (false);
 	name = extract_variable_name(&arg);
 	if (name == NULL)
 		return (EXIT_FAILURE);
