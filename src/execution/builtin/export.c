@@ -6,12 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 06:20:16 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:05:05 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../../inc/minishell.h"
 #include "builtin.h"
-#include "minishell.h"
 
 static char	*extract_variable_name(char **arg)
 {

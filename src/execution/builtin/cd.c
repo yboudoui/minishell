@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:52:52 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 19:34:49 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:22:52 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,36 @@ int	check_source(char *cdvar)
 	return (0);
 }
 
-int	builtin_cd(char *argv[])
+int	cd_no_args_or_tilde(char **argv)
 {
-	char	*old_pwd;
 	char	*reset;
 	char	*cdvar;
 
+	cdvar = env_get_value("HOME", 0, 0);
+	reset = env_get_value("PWD", 0, 0);
+	env_list_insert_new("OLDPWD", ft_strdup(reset));
+	free(reset);
+	if (cdvar == NULL)
+	{
+		generic_err("cd", "HOME not set\n", 2);
+		return (1);
+	}
+	check_source(cdvar);
+	return (0);
+}
+
+int	builtin_cd(char *argv[])
+{
+	char	*old_pwd;
+
+	old_pwd = NULL;
 	if (check_error(argv))
 		return (1);
 	if (argv == NULL || string_cmp(*argv, "cd"))
 		return (EXIT_FAILURE);
 	argv += 1;
 	if (*argv == NULL || ft_strncmp(*argv, "~", ft_strlen(*argv)) == 0)
-	{
-		cdvar = env_get_value("HOME", 0, 0);
-		reset = env_get_value("PWD", 0, 0);
-		env_list_insert_new("OLDPWD", ft_strdup(reset));
-		free(reset);
-		if (cdvar == NULL)
-		{
-			generic_err("cd", "HOME not set\n", 2);
-			return (1);
-		}
-		check_source(cdvar);
-		return (0);
-	}
+		cd_no_args_or_tilde(argv);
 	else
 		old_pwd = print_working_directory("chdir");
 	if (chdir(*argv))

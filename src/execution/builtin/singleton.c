@@ -6,17 +6,15 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 17:43:01 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 17:56:06 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/19 19:23:17 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-t_flag *f(void)
+t_flag	*f(void)
 {
-	static t_flag is_fork;
+	static t_flag	is_fork;
 
 	return (&is_fork);
 }
-
-
