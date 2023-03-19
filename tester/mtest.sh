@@ -44,7 +44,7 @@ function exec_test()
 {
 	TEST1=$(./minishell -c "echo $@")
 	ES_1=$?
-	TEST2=$(bash --posix -c "echo $@")
+	TEST2=$(bash -c "echo $@")
 	ES_2=$?
 	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✓ "

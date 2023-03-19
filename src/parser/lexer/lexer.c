@@ -6,7 +6,8 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 11:51:41 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:28:23 by kdhrif           ###   ########.fr       */
+>>>>>>> f3866de (worked on syntax error)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +75,57 @@ static void	remove_quotes(void *input, void *_)
 	}
 }
 
-static char	*check_syntax(t_token_list lst)
-{
-	t_token_type	last;
+/* static char	*check_syntax(t_token_list lst) */
+/* { */
+/* 	t_token_type	last; */
 
-	if (lst == NULL)
-		return ("Impossible happend\n");
-	last = TOKEN_WORD;
-	while (lst)
-	{
-		if (lst->token->type & TOKEN_OPERATOR && last & TOKEN_OPERATOR)
-			return (g_global.exit_code = 2, "Syntax error\n");
-		last = lst->token->type;
-		lst = lst->next;
+/* 	if (lst == NULL) */
+/* 		return ("Impossible happend\n"); */
+/* 	last = TOKEN_WORD; */
+/* 	while (lst) */
+/* 	{ */
+/* 		if (lst->token->type & TOKEN_OPERATOR && last & TOKEN_OPERATOR) */
+/* 			return (g_global.exit_code = 2, "Syntax error\n"); */
+/* 		last = lst->token->type; */
+/* 		lst = lst->next; */
+/* 	} */
+/* 	return (NULL); */
+/* } */
+
+static char	*check_syntax(t_token_list tokens)
+{
+	  t_token_list current = tokens;
+	  // Check if the first token is an operator or special character
+	if (current && current->token->type & (TOKEN_OPERATOR | TOKEN_SPACES)) 
+		return (g_global.exit_code = 2, "syntax error near unexpected token\n");
+
+	while (current) {
+		t_token_type token_type = current->token->type;
+		
+		// Case: Consecutive redirections (>, >>, <, <<) with or without spaces
+		if (token_type & (TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND |
+					TOKEN_REDIRECT_IN | TOKEN_HERE_DOCUMENT)) {
+			t_token_list next_nonspace = current->next;
+			while (next_nonspace && (next_nonspace->token->type & TOKEN_SPACES)) {
+				next_nonspace = next_nonspace->next;
+			}
+			if (next_nonspace && (next_nonspace->token->type & (TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND |
+							TOKEN_REDIRECT_IN | TOKEN_HERE_DOCUMENT))) 
+				return (g_global.exit_code = 2, "syntax error near unexpected redirection\n");
+		}
+
+		// Case: Special characters that should be followed by a word
+		if (token_type & (TOKEN_PIPE | TOKEN_REDIRECT_OUT | TOKEN_REDIRECT_OUT_APPEND |
+					TOKEN_REDIRECT_IN | TOKEN_HERE_DOCUMENT)) {
+			t_token_list next_nonspace = current->next;
+			while (next_nonspace && (next_nonspace->token->type & TOKEN_SPACES)) {
+				next_nonspace = next_nonspace->next;
+			}
+			if (!next_nonspace) {
+				return (g_global.exit_code = 2, "syntax error near unexpected token\n");
+			}
+		}
+		current = current->next;
 	}
 	return (NULL);
 }

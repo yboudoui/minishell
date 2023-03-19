@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/18 13:36:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:45:20 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,34 @@ static inline char	*check_slash(char *str)
 	return (str);
 }
 
-char	*get_cmd_path(t_pipex *pipex, char *cmd)
+static char	*check_builtin_or_fpath(char *cmd, t_pipex *pipex)
 {
 	char	*tmp1;
-	char	*tmp2;
-	int		i;
 
+	tmp1 = NULL;
 	pipex->builtin = is_builtin(cmd);
 	if (pipex->builtin)
 		return (ft_strdup(cmd));
 	tmp1 = check_fpath(pipex, cmd);
 	if (tmp1 != NULL)
 		return (tmp1);
+	return (NULL);
+}
+
+char	*get_cmd_path(t_pipex *pipex, char *cmd)
+{
+	char	*tmp1;
+	char	*tmp2;
+	int		i;
+
+	tmp1 = check_builtin_or_fpath(cmd, pipex);
+	if (tmp1)
+		return (tmp1);
 	path_null(pipex, cmd);
-	i = 0;
+	i = -1;
 	if (pipex->paths == NULL)
 		return (NULL);
-	while (pipex->paths[i])
+	while (pipex->paths[++i])
 	{
 		check_slash(pipex->paths[i]);
 		tmp1 = ft_strjoin(pipex->paths[i], "/");
@@ -73,7 +84,6 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 		if (access(tmp2, F_OK) == 0)
 			return (tmp2);
 		free(tmp2);
-		i++;
 	}
 	if (!pipex->abs_path_cmd)
 		generic_err(cmd, "command not found\n", 2);
