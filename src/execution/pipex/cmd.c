@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 19:23:31 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/20 16:26:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	cmd_out(t_pipex *pipex)
 int	handle_builtin(t_pipex *pipex, char **argv)
 {
 	t_fp_builtin	builtin;
+	int				exit_code;
 
 	if (ft_strncmp("exit", *argv, ft_strlen("exit")) == 0)
 	{
@@ -70,7 +71,8 @@ int	handle_builtin(t_pipex *pipex, char **argv)
 		free_pipex(pipex);
 		meta_exit(builtin(argv), NULL);
 	}
-	meta_exit(pipex->builtin(argv), pipex);
+	exit_code = pipex->builtin(argv);
+	meta_exit(exit_code, pipex);
 	return (0);
 }
 
@@ -88,7 +90,7 @@ int	exec_cmd(t_pipex *pipex, char **argv)
 		meta_exit(127, pipex);
 	if (pipex->builtin)
 		handle_builtin(pipex, argv);
-	env = parse_env(pipex->env);
+	env = parse_env(env_list_singleton(NULL));
 	if (execve(pipex->cmd_path, argv, env) == -1)
 	{
 		pipex->exitcode = 1;

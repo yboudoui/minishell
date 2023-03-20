@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 17:57:53 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:43:04 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	pipex(t_cmd_list cmds)
 	if (exec_builtins(cmds, pipex))
 		return (0);
 	pipex->paths = get_paths(pipex);
-	pipex->env = env_list_singleton(NULL);
 	if (init_exec(pipex) == -1)
 		return (EXIT_FAILURE);
 	while (cmds)

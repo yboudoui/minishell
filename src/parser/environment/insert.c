@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:30:09 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:09:58 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:00:19 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	env_list_insert(t_env_var var)
 		if (cmp == 0)
 			return ((void)env_variable_replace(&tmp->var, var));
 		if (cmp < 0)
-		{
-			list_create_prev((t_list *)&tmp, var);
-			env_list_singleton(tmp);
-			return ;
-		}
+			return (list_create_prev((t_list *)&tmp, var),
+				(void)env_list_singleton(tmp));
 		if (tmp->next == NULL)
 			break ;
 		tmp = tmp->next;
@@ -60,6 +57,6 @@ bool	env_list_insert_new(char *name, char *value)
 		found->value = value;
 		return (true);
 	}
-	env_list_insert(env_variable_create(name, value));
+	env_list_insert(env_variable_create(ft_strdup(name), value));
 	return (false);
 }

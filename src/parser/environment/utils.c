@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:36:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:22:59 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:58:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	env_remove(char *name, size_t start, size_t end)
 	t_env_list	env;
 	char		*tmp;
 
-	if (name == NULL)
-		return ;
 	env = env_list_singleton(NULL);
+	if (name == NULL || env == NULL)
+		return ;
 	if (start == end)
 		end = ft_strlen(name);
 	tmp = ft_substr(name, start, end);
