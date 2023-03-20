@@ -6,15 +6,15 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:38:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/18 19:10:13 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:04:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 #include "minishell.h"
 
-static const char	*g_heredoc_error_msg = "warning:"
-	"here-document at line 1 delimited by end-of-file (wanted `%s')\n";
+static const char	*g_heredoc_error_msg = "warning: "
+	"here-document delimited by end-of-file (wanted `%s')\n";
 
 static bool	heredoc_stop(char **line, char *stop_word)
 {
@@ -23,6 +23,12 @@ static bool	heredoc_stop(char **line, char *stop_word)
 	if (line == NULL || stop_word == NULL)
 		return (false);
 	_read = readline("> ");
+	if (_read == NULL && g_global.exit_code != 130)
+	{
+		g_global.exit_code = 0;
+		printf(g_heredoc_error_msg, stop_word);
+		return (false);
+	}
 	if (_read && string_cmp(_read, stop_word) == 0)
 		return (free(_read), false);
 	(*line) = _read;
@@ -45,8 +51,6 @@ int	heredoc_read(t_token token)
 		{
 			close_fd(&fds[0]);
 			close_fd(&fds[1]);
-			if (g_global.exit_code != 130)
-				printf(g_heredoc_error_msg, token->input);
 			return (free(line), false);
 		}
 		if (expand)
