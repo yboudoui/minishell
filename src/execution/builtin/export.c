@@ -6,8 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 14:12:36 by kdhrif           ###   ########.fr       */
-/*   Updated: 2023/03/19 19:07:54 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:21:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +18,8 @@ static char	*extract_variable_name(char **arg)
 	int		len;
 	char	*out;
 
+	if (arg == NULL || is_digit(*arg))
+		return (NULL);
 	len = bash_definition_name(*arg);
 	if (len < 0)
 		return (NULL);
@@ -34,8 +35,6 @@ static bool	parse_export_arg(char *arg)
 	char		*value;
 	t_env_var	var;
 
-	if (arg == NULL || is_digit(*arg))
-		return (false);
 	name = extract_variable_name(&arg);
 	if (name == NULL)
 		return (EXIT_FAILURE);

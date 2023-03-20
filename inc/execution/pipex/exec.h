@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 17:56:11 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/20 14:16:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct s_flag
 {
 	bool	is_fork;
-} t_flag;
+}	t_flag;
 
 typedef struct s_pipex
 {
