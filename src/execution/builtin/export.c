@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:26:22 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:12:36 by kdhrif           ###   ########.fr       */
 /*   Updated: 2023/03/19 19:07:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -82,7 +82,6 @@ int	builtin_export(char *argv[])
 		return (list_iter(env, print_export, NULL), EXIT_SUCCESS);
 	while (*argv)
 	{
-		printf("[%s]\n", *argv);
 		if (parse_export_arg(*argv) == false)
 			printf("export: `%s': not a valid identifier\n", *argv);
 		argv += 1;

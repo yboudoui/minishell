@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:23:43 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:36:53 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	*token_merge(void *input)
 	}
 	return (token_dup((*lst)->token));
 }
-/*
+
 static char	*check_syntax(t_token_list lst)
 {
 	if (lst && lst->token->type & TOKEN_PIPE)
@@ -91,7 +91,6 @@ static char	*check_syntax(t_token_list lst)
 	}
 	return (NULL);
 }
-*/
 
 void	expand_variable(void *token, void *_)
 {
@@ -119,7 +118,6 @@ t_token_list	lexer(char *input)
 	error = tokenizer(input, (t_list *)&output);
 	if (error)
 		return (ft_putstr_fd(error, 2), NULL);
-/*
 	error = check_syntax(output);
 	if (error)
 	{
@@ -127,7 +125,6 @@ t_token_list	lexer(char *input)
 		list_clear(&output, token_destroy);
 		return (ft_putstr_fd(error, 2), NULL);
 	}
-*/
 	operator = list_subset(output, token_merge_operator);
 	list_iter(operator, expand_variable, NULL);
 	list_clear(&output, token_destroy);

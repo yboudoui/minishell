@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:52:52 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 14:15:17 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/20 14:18:23 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_source(char *cdvar)
 	return (0);
 }
 
-int cd_no_args()
+int	cd_no_args(void)
 {
 	char	*reset;
 	char	*cdvar;
