@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 14:03:21 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/20 14:24:34 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,14 @@ static int	read_prompt(void)
 	return (EXIT_SUCCESS);
 }
 
-int loop_tester(char *line)
+int	loop_tester(char *line)
 {
 	g_global.prompt = prompt_create(line);
 	execution(g_global.prompt);
 	prompt_destroy(&g_global.prompt);
 	return (0);
 }
+
 int	main(int ac, char *av[], char *envp[])
 {
 	(void)av;

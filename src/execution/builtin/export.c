@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 14:21:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:23:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*extract_variable_name(char **arg)
 	int		len;
 	char	*out;
 
-	if (arg == NULL || is_digit(*arg))
+	if (arg == NULL || (*arg) == NULL || is_digit(**arg))
 		return (NULL);
 	len = bash_definition_name(*arg);
 	if (len < 0)

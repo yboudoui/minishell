@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:36:53 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/20 14:29:17 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,17 @@ static char	*check_syntax(t_token_list lst)
 	{
 		if (lst->token->type & TOKEN_IO)
 		{
-			while (lst->next && (lst->next->token->type & TOKEN_SPACES))
-				lst->next = lst->next->next;
-			if (lst->next && (lst->next->token->type & TOKEN_IO))
+			lst = lst->next;
+			while (lst && (lst->token->type & TOKEN_SPACES))
+				lst = lst->next;
+			if (lst && (lst->token->type & TOKEN_IO))
 				return ("syntax error near unexpected redirection\n");
 		}
 		if (lst->token->type & TOKEN_OPERATOR)
 		{
-			while (lst->next && (lst->next->token->type & TOKEN_SPACES))
-				lst->next = lst->next->next;
-			if (!lst->next)
+			while (lst && (lst->token->type & TOKEN_SPACES))
+				lst = lst->next;
+			if (lst == NULL)
 				return ("syntax error near unexpected token\n");
 		}
 		lst = lst->next;
@@ -118,6 +119,7 @@ t_token_list	lexer(char *input)
 	error = tokenizer(input, (t_list *)&output);
 	if (error)
 		return (ft_putstr_fd(error, 2), NULL);
+
 	error = check_syntax(output);
 	if (error)
 	{
@@ -125,6 +127,7 @@ t_token_list	lexer(char *input)
 		list_clear(&output, token_destroy);
 		return (ft_putstr_fd(error, 2), NULL);
 	}
+
 	operator = list_subset(output, token_merge_operator);
 	list_iter(operator, expand_variable, NULL);
 	list_clear(&output, token_destroy);
