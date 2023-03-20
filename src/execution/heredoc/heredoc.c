@@ -6,12 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:01:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:24:11 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 #include "minishell.h"
+#include "../../../inc/minishell.h"
 
 static void	signal_control_c(int sig)
 {
