@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2023/03/20 15:20:55 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/03/20 17:58:13 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS	=\
 ./src/main.c\
 ./src/parser/prompt/prompt.c\
 ./src/parser/lexer/lexer.c\
+./src/parser/lexer/check_syntax.c\
 ./src/parser/lexer/matching.c\
 ./src/parser/lexer/token.c\
 ./src/parser/syntaxer/commande.c\

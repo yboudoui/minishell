@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:04:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:57:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ struct s_token_list {
 };
 
 t_token_list	lexer(char *input);
+t_token_list	checker(char *input);
 
 #endif

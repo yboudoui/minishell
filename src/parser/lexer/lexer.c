@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 16:51:01 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:57:24 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +67,6 @@ static void	*token_merge(void *input)
 	return (token_dup((*lst)->token));
 }
 
-static char	*check_syntax(t_token_list lst)
-{
-	if (lst && lst->token->type & TOKEN_PIPE)
-		return ("syntax error near unexpected token\n");
-	while (lst)
-	{
-		if (lst->token->type & TOKEN_IO)
-		{
-			lst = lst->next;
-			while (lst && (lst->token->type & TOKEN_SPACES))
-				lst = lst->next;
-			if (lst && (lst->token->type & TOKEN_IO))
-				return ("syntax error near unexpected redirection\n");
-		}
-		if (lst->token->type & TOKEN_OPERATOR)
-		{
-			while (lst && (lst->token->type & TOKEN_SPACES))
-				lst = lst->next;
-			if (lst == NULL)
-				return ("syntax error near unexpected token\n");
-		}
-		lst = lst->next;
-	}
-	return (NULL);
-}
-
 void	expand_variable(void *token, void *_)
 {
 	t_token	input;
@@ -108,24 +82,13 @@ void	expand_variable(void *token, void *_)
 
 t_token_list	lexer(char *input)
 {
-	char			*error;
 	t_token_list	output;
 	t_token_list	merged;
 	t_token_list	operator;
 
-	output = NULL;
-	if (input == NULL)
+	output = checker(input);
+	if (output == NULL)
 		return (NULL);
-	error = tokenizer(input, (t_list *)&output);
-	if (error)
-		return (ft_putstr_fd(error, 2), NULL);
-	error = check_syntax(output);
-	if (error)
-	{
-		g_global.exit_code = 2;
-		list_clear(&output, token_destroy);
-		return (ft_putstr_fd(error, 2), NULL);
-	}
 	operator = list_subset(output, token_merge_operator);
 	list_iter(operator, expand_variable, NULL);
 	list_clear(&output, token_destroy);
