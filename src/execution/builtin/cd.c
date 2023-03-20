@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:52:52 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 13:51:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:15:17 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_source(char *cdvar)
 	return (0);
 }
 
-int	cd_no_args_or_tilde(void)
+int cd_no_args()
 {
 	char	*reset;
 	char	*cdvar;
@@ -54,14 +54,18 @@ int	builtin_cd(char *argv[])
 {
 	char	*old_pwd;
 
-	old_pwd = NULL;
 	if (check_error(argv))
 		return (1);
 	if (argv == NULL || string_cmp(*argv, "cd"))
 		return (EXIT_FAILURE);
 	argv += 1;
 	if (*argv == NULL || ft_strncmp(*argv, "~", ft_strlen(*argv)) == 0)
-		cd_no_args_or_tilde();
+	{
+		if (cd_no_args())
+			return (1);
+		else
+			return (0);
+	}
 	else
 		old_pwd = print_working_directory("chdir");
 	if (chdir(*argv))
