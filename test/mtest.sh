@@ -108,7 +108,7 @@ exec_test 'cat < ls'
 exec_test 'cat < ls > ls'
 
 # MULTI TESTS
-# exec_test 'echo testing multi | echo "test 1 | x | and 2" | cat tests/lorem.txt | grep Lorem'
+exec_test 'echo testing multi | echo "test 1 | x | and 2" | cat tests/lorem.txt | grep Lorem'
 
 #EXEC
 exec_test "gdagadgag"
@@ -226,11 +226,11 @@ exec_test 'echo """Makefile"'
 exec_test 'echo "" "Makefile"'
 
 # SYNTAX ERROR
-# exec_test 'cat -e bonjour | exit"'
-# exec_test 'exit | cat -e bonjour"'
-# exec_test 'pwd"'
-# exec_test 'env | grep HOLA"'
-# exec_test 'cd /mnt/nfs/homes/kdhrif"'
+exec_test 'cat -e bonjour | exit"'
+exec_test 'exit | cat -e bonjour"'
+exec_test 'pwd"'
+exec_test 'env | grep HOLA"'
+exec_test 'cd /mnt/nfs/homes/kdhrif"'
 exec_test '| test'
 exec_test 'echo > <'
 exec_test 'echo | |'
