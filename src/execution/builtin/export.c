@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 16:58:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:47:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ static bool	parse_export_arg(char *arg)
 	if (ft_strncmp(arg, "=", 1) == 0)
 	{
 		value = ft_substr(arg, 1, ft_strlen(arg));
-		if (value && env_list_insert_new(name, value))
-			free(name);
-		return (true);
+		env_list_insert_new(name, value);
+		return (free(name), true);
 	}
 	else if (ft_strncmp(arg, "+=", 2) == 0)
 	{
@@ -51,34 +50,46 @@ static bool	parse_export_arg(char *arg)
 		var = env_find(name, 0, 0);
 		if (var)
 			str_merge_to(&var->value, value);
-		else if (env_list_insert_new(name, value))
-			free(name);
-		return (true);
+		else
+			env_list_insert_new(name, value);
+		return (free(name), true);
 	}
-	return (free(name), false);
+	return (free(name), true);
 }
 
-static void	print_export(void *data, void *_)
+static void	print_export(void *data, void *str)
 {
 	t_env_var	input;
+	char		*line;
+	char		**fmt;
 
-	(void)_;
 	input = data;
 	if (input == NULL || input->name == NULL)
 		return ;
-	printf("export %s=\"%s\"\n", input->name, input->value);
+	fmt = (char *[]){
+		"export ", input->name, "=\"", input->value, "\"\n", NULL};
+	line = str_join_list(fmt, NULL);
+	str_merge_to(str, line);
 }
 
 int	builtin_export(char *argv[])
 {
 	t_env_list	env;
+	char		*str;
 
 	env = env_list_singleton(NULL);
-	if (argv == NULL || env == NULL || string_cmp(*argv, "export"))
+	if (argv == NULL || string_cmp(*argv, "export"))
 		return (EXIT_FAILURE);
 	argv += 1;
 	if (*argv == NULL)
-		return (list_iter(env, print_export, NULL), EXIT_SUCCESS);
+	{
+		str = ft_strdup("");
+		list_iter(env, print_export, &str);
+		if (ft_putstr_fd(str, STDOUT_FILENO) < 0)
+			ft_putstr_fd("export: write error: No space left on device",
+				STDERR_FILENO);
+		return (free(str), EXIT_SUCCESS);
+	}
 	while (*argv)
 	{
 		if (parse_export_arg(*argv) == false)

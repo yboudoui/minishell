@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 11:33:25 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:17:44 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ struct s_token_list {
 
 t_token_list	lexer(char *input);
 t_token_list	checker(char *input);
+void			skip_token_spaces(t_token_list *lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 11:34:01 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:24:15 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ static void	*token_merge_operator(void *input)
 	{
 		out = token_create((*lst)->token->type, ft_strdup(""));
 		(*lst) = (*lst)->next;
-		while ((*lst) && ((*lst)->token->type == TOKEN_SPACES))
-			(*lst) = (*lst)->next;
+		skip_token_spaces(lst);
 		while ((*lst) && ((*lst)->token->type & TOKEN_MERGE))
 		{
 			out->type |= (*lst)->token->type;
 			str_merge_to(&out->input, ft_strdup((*lst)->token->input));
-			(*lst) = (*lst)->next;
+			if ((*lst)->next && ((*lst)->next->token->type & TOKEN_MERGE))
+				(*lst) = (*lst)->next;
+			else
+				break ;
 		}
 		return (out);
 	}

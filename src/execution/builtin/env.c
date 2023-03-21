@@ -6,11 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:56:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 16:35:26 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/21 17:34:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 static void	print_env(void *data, void *str)
 {
@@ -42,7 +43,8 @@ int	builtin_env(char *argv[])
 			"env: ‘", *argv, "’: No such file or directory\n", NULL};
 		str = str_join_list(fmt, NULL);
 		ft_putstr_fd(str, STDERR_FILENO);
-		return (free(str), EXIT_FAILURE);
+		g_global.exit_code = 127;
+		return (free(str), 127);
 	}
 	str = ft_strdup("");
 	list_iter(env, print_env, &str);

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:30:09 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 17:00:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:37:56 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ bool	env_list_insert_new(char *name, char *value)
 {
 	t_env_var	found;
 
-	if (name == NULL || value == NULL)
+	if (name == NULL)
 		return (false);
+	if (value == NULL)
+		value = ft_strdup("");
 	found = env_find(name, 0, ft_strlen(name));
 	if (found)
 	{

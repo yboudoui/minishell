@@ -6,12 +6,20 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:48:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 14:44:48 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:18:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 #include "minishell.h"
+
+void	skip_token_spaces(t_token_list *lst)
+{
+	if (lst == NULL)
+		return ;
+	while ((*lst) && (*lst)->token->type == TOKEN_SPACES)
+		(*lst) = (*lst)->next;
+}
 
 static void	*token_remove_useless_dolar(void *input)
 {
@@ -30,14 +38,6 @@ static void	*token_remove_useless_dolar(void *input)
 		(*lst)->token->input = ft_strdup("");
 	}
 	return (token_dup((*lst)->token));
-}
-
-static void	skip_token_spaces(t_token_list *lst)
-{
-	if (lst == NULL)
-		return ;
-	while ((*lst) && (*lst)->token->type == TOKEN_SPACES)
-		(*lst) = (*lst)->next;
 }
 
 static bool	token_io(t_token_list *lst)
