@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/21 10:55:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:12:48 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	handle_builtin(t_pipex *pipex, char **argv)
 	t_fp_builtin	builtin;
 	int				exit_code;
 
+	signal(SIGPIPE, SIG_IGN);
 	if (ft_strncmp("exit", *argv, ft_strlen("exit")) == 0)
 	{
 		f()->is_fork = true;
