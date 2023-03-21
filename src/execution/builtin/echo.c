@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:25:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 11:01:52 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:01:04 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	trailing_newline(char *arg)
 int	builtin_echo(char *argv[])
 {
 	bool	new_line;
+	char	*str;
 	size_t	index;
 
 	if (argv == NULL || string_cmp(*argv, "echo"))
@@ -35,18 +36,13 @@ int	builtin_echo(char *argv[])
 	while (!trailing_newline(argv[index]))
 		index += 1;
 	new_line = (index != 0);
-	while (argv[index])
-	{
-		if (write(STDOUT_FILENO, argv[index], ft_strlen(argv[index])) == -1)
-		{
-			generic_err("echo: write error", NULL, 1);
-			return (1);
-		}
-		if (argv[index + 1] != NULL)
-			write(STDOUT_FILENO, " ", 1);
-		index += 1;
-	}
+	str = str_join_list(&argv[index], " ");
 	if (!new_line)
-		write(STDOUT_FILENO, "\n", 1);
-	return (EXIT_SUCCESS);
+		str_merge_to(&str, ft_strdup("\n"));
+	if (ft_putstr_fd(str, STDOUT_FILENO) < 0)
+	{
+		generic_err("echo: write error", NULL, 1);
+		return (free(str), 1);
+	}
+	return (free(str), EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:48:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 06:48:21 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:44:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	*token_remove_useless_dolar(void *input)
 	if (lst == NULL || (*lst) == NULL)
 		return (NULL);
 	if (string_cmp((*lst)->token->input, "$") == 0
+		&& (*lst)->token->type & TOKEN_WORD
 		&& (*lst)->next
 		&& (*lst)->next->token->type & TOKEN_QUOTE)
 	{
@@ -57,11 +58,11 @@ static char	*check_syntax(t_token_list lst)
 {
 	skip_token_spaces(&lst);
 	if (lst && lst->token->type & TOKEN_PIPE)
-		return ("syntax error near unexpected token\n");
+		return ("minishell: syntax error near unexpected token\n");
 	while (lst)
 	{
 		if (token_io(&lst) == false)
-			return ("syntax error near unexpected redirection\n");
+			return ("minishell: syntax error near unexpected redirection\n");
 		else
 		{
 			skip_token_spaces(&lst);
@@ -69,8 +70,8 @@ static char	*check_syntax(t_token_list lst)
 			{
 				lst = lst->next;
 				skip_token_spaces(&lst);
-				if (lst == NULL)
-					return ("syntax error near unexpected token\n");
+				if (lst == NULL || lst->token->type & TOKEN_PIPE)
+					return ("minishell: syntax error near unexpected token\n");
 			}
 		}
 		if (lst)
@@ -90,7 +91,10 @@ t_token_list	checker(char *input)
 		return (NULL);
 	error = tokenizer(input, (t_list *)&output);
 	if (error)
+	{
+		g_global.exit_code = 2;
 		return (ft_putstr_fd(error, 2), NULL);
+	}
 	error = check_syntax(output);
 	if (error)
 	{

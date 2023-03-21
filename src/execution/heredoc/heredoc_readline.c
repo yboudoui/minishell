@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:38:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 10:56:06 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:28:24 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 
 static void	heredoc_error(char *stop_word)
 {
+	char	**fmt;
+	char	*error;
+
 	g_global.exit_code = 0;
-	ft_putstr_fd("warning: ", 2);
-	ft_putstr_fd("here-document delimited by end-of-file (wanted `", 2);
-	ft_putstr_fd(stop_word, 2);
-	ft_putstr_fd("')\n", 2);
+	fmt = (char *[]){
+		"here-document delimited by end-of-file (wanted `", stop_word, "')\n",
+		NULL};
+	error = str_join_list(fmt, NULL);
+	generic_err("warning", error, 2);
+	free(error);
 }
 
 static bool	heredoc_stop(char **line, char *stop_word)

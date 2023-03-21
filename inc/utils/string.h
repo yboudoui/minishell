@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 11:28:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:05:46 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char			*ft_strdup(const char *s);
 char			*ft_strrchr(const char *s, int c);
 
 char			*ft_strjoin(char const *s1, char const *s2);
-char			*str_join_list(char *str[]);
+char			*str_join_list(char *str[], char *delimiter);
 
 char			*str_merge_list(char *str[]);
 char			*str_merge_new_line(char *s1, char *s2);

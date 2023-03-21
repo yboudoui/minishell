@@ -6,26 +6,31 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:56:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 07:05:57 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:37:47 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-static void	print_env(void *data, void *_)
+static void	print_env(void *data, void *str)
 {
 	t_env_var	input;
+	char		*line;
+	char		**fmt;
 
-	(void)_;
 	input = data;
 	if (input == NULL || input->name == NULL)
 		return ;
-	printf("%s=%s\n", input->name, input->value);
+	fmt = (char *[]){input->name, "=", input->value, "\n", NULL};
+	line = str_join_list(fmt, NULL);
+	str_merge_to(str, line);
 }
 
 int	builtin_env(char *argv[])
 {
 	t_env_list	env;
+	char		**fmt;
+	char		*str;
 
 	env = env_list_singleton(NULL);
 	if (argv == NULL || env == NULL || string_cmp(*argv, "env"))
@@ -33,10 +38,16 @@ int	builtin_env(char *argv[])
 	argv += 1;
 	if (*argv != NULL)
 	{
-		ft_putstr_fd("env: ‘", 2);
-		ft_putstr_fd(*argv, 2);
-		ft_putstr_fd("’: No such file or directory\n", 2);
-		return (EXIT_FAILURE);
+		fmt = (char *[]){
+			"env: ‘", *argv, "’: No such file or directory\n", NULL};
+		str = str_join_list(fmt, NULL);
+		ft_putstr_fd(str, STDERR_FILENO);
+		return (free(str), EXIT_FAILURE);
 	}
-	return (list_iter((t_list)env, print_env, NULL), EXIT_SUCCESS);
+	str = ft_strdup("");
+	list_iter(env, print_env, &str);
+	if (ft_putstr_fd(str, STDIN_FILENO) < 0)
+		ft_putstr_fd("env: write error: No space left on device",
+			STDERR_FILENO);
+	return (free(str), EXIT_SUCCESS);
 }
