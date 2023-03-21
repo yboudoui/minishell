@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 15:50:27 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:54:01 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ static int	read_prompt(void)
 		sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
 		line = readline("~$> ");
 		if (line == NULL)
-		{
-			printf("line is null\n");
 			return (EXIT_FAILURE);
-		}
 		if (!is_empty(line))
 		{
 			add_history(line);
