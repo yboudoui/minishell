@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/20 15:43:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 10:57:42 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	pipex(t_cmd_list cmds)
 	g_global.pipex = pipex;
 	pipex->argc = list_size((t_list)cmds);
 	pipex->stdin_fd = dup(STDIN_FILENO);
+	pipex->stdout_fd = -1;
 	if (exec_builtins(cmds, pipex))
 		return (0);
 	pipex->paths = get_paths(pipex);

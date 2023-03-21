@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:48:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 18:02:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 06:48:21 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,50 @@ static void	*token_remove_useless_dolar(void *input)
 	return (token_dup((*lst)->token));
 }
 
+static void	skip_token_spaces(t_token_list *lst)
+{
+	if (lst == NULL)
+		return ;
+	while ((*lst) && (*lst)->token->type == TOKEN_SPACES)
+		(*lst) = (*lst)->next;
+}
+
+static bool	token_io(t_token_list *lst)
+{
+	skip_token_spaces(lst);
+	if (lst == NULL || (*lst) == NULL)
+		return (true);
+	if ((*lst)->token->type & TOKEN_IO)
+	{
+		(*lst) = (*lst)->next;
+		skip_token_spaces(lst);
+		return ((*lst) && (*lst)->token->type & TOKEN_MERGE);
+	}
+	return (true);
+}
+
 static char	*check_syntax(t_token_list lst)
 {
+	skip_token_spaces(&lst);
 	if (lst && lst->token->type & TOKEN_PIPE)
 		return ("syntax error near unexpected token\n");
 	while (lst)
 	{
-		if (lst->token->type & TOKEN_IO)
+		if (token_io(&lst) == false)
+			return ("syntax error near unexpected redirection\n");
+		else
 		{
+			skip_token_spaces(&lst);
+			if (lst && lst->token->type & TOKEN_PIPE)
+			{
+				lst = lst->next;
+				skip_token_spaces(&lst);
+				if (lst == NULL)
+					return ("syntax error near unexpected token\n");
+			}
+		}
+		if (lst)
 			lst = lst->next;
-			while (lst && (lst->token->type & TOKEN_SPACES))
-				lst = lst->next;
-			if (lst && (lst->token->type & TOKEN_IO))
-				return ("syntax error near unexpected redirection\n");
-		}
-		if (lst->token->type & TOKEN_OPERATOR)
-		{
-			while (lst && (lst->token->type & TOKEN_SPACES))
-				lst = lst->next;
-			if (lst == NULL)
-				return ("syntax error near unexpected token\n");
-		}
-		lst = lst->next;
 	}
 	return (NULL);
 }

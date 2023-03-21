@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 14:24:34 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 07:05:37 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int	main(int ac, char *av[], char *envp[])
 			generic_err(av[1], "No such file or directory\n", 2);
 		return (g_global.exit_code);
 	}
-	if (ac != 1 && isatty(ttyslot()))
-		return (EXIT_FAILURE);
+//	if (ac != 1 || isatty(ttyslot()))
+//		return (EXIT_FAILURE);
 	read_prompt();
 	return (meta_exit(0, NULL), EXIT_SUCCESS);
 }

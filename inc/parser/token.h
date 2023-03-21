@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:13:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 17:57:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 06:00:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ struct s_token {
 
 t_token			token_create(t_token_type type, void *substr);
 t_token			token_dup(t_token src);
-void			token_expand_variable(t_token token);
+void			token_expand_variable(void *token, void *_);
 void			token_destroy(void *input);
 bool			token_syntaxer(t_list *root);
 char			*tokenizer(char *input, t_list *out);

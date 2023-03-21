@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:58:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/20 17:57:24 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 06:02:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,6 @@ static void	*token_merge(void *input)
 	return (token_dup((*lst)->token));
 }
 
-void	expand_variable(void *token, void *_)
-{
-	t_token	input;
-
-	(void)_;
-	input = token;
-	if (input == NULL)
-		return ;
-	if (input->type & TOKEN_HERE_DOCUMENT)
-		return ;
-	token_expand_variable(input);
-}
-
 t_token_list	lexer(char *input)
 {
 	t_token_list	output;
@@ -90,7 +77,7 @@ t_token_list	lexer(char *input)
 	if (output == NULL)
 		return (NULL);
 	operator = list_subset(output, token_merge_operator);
-	list_iter(operator, expand_variable, NULL);
+	list_iter(operator, token_expand_variable, NULL);
 	list_clear(&output, token_destroy);
 	merged = list_subset(operator, token_merge);
 	list_clear(&operator, token_destroy);

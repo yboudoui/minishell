@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:58:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/20 15:43:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 09:30:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	free_pipex(t_pipex *pipex)
 		f_free((void **)&pipex->pid);
 	if (pipex->cmd_path)
 		f_free((void **)&pipex->cmd_path);
+	close_fd(&pipex->fd[1]);
+	close_fd(&pipex->fd[0]);
 	string_array_destroy(pipex->paths);
 	pipex->paths = NULL;
 	f_free((void **)&pipex);

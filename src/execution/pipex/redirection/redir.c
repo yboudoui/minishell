@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 13:13:43 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 15:27:56 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/21 10:56:45 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	close_all(t_list redir, int fd_infile, int fd_outfile)
 	while (redir)
 	{
 		token = redir->content;
-		if (token->type == TOKEN_HERE_DOCUMENT)
+		if (token->type & TOKEN_HERE_DOCUMENT)
 			close_fd(&token->fd);
 		redir = redir->next;
 	}

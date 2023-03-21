@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:56:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 15:56:57 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 07:05:57 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ int	builtin_env(char *argv[])
 	if (argv == NULL || env == NULL || string_cmp(*argv, "env"))
 		return (EXIT_FAILURE);
 	argv += 1;
-	if (*argv == NULL)
-		return (list_iter((t_list)env, print_env, NULL), EXIT_SUCCESS);
-	return (EXIT_FAILURE);
+	if (*argv != NULL)
+	{
+		ft_putstr_fd("env: ‘", 2);
+		ft_putstr_fd(*argv, 2);
+		ft_putstr_fd("’: No such file or directory\n", 2);
+		return (EXIT_FAILURE);
+	}
+	return (list_iter((t_list)env, print_env, NULL), EXIT_SUCCESS);
 }
