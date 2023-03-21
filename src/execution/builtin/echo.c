@@ -6,11 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:25:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 06:14:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:01:52 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "../../../inc/minishell.h"
 
 static int	trailing_newline(char *arg)
 {
@@ -36,7 +37,11 @@ int	builtin_echo(char *argv[])
 	new_line = (index != 0);
 	while (argv[index])
 	{
-		write(STDOUT_FILENO, argv[index], ft_strlen(argv[index]));
+		if (write(STDOUT_FILENO, argv[index], ft_strlen(argv[index])) == -1)
+		{
+			generic_err("echo: write error", NULL, 1);
+			return (1);
+		}
 		if (argv[index + 1] != NULL)
 			write(STDOUT_FILENO, " ", 1);
 		index += 1;
