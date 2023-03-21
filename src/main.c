@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 11:33:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:50:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ static int	read_prompt(void)
 		sigaction(SIGQUIT, &signals[1], &g_global.default_sigquit);
 		line = readline("~$> ");
 		if (line == NULL)
+		{
+			printf("line is null\n");
 			return (EXIT_FAILURE);
+		}
 		if (!is_empty(line))
 		{
 			add_history(line);
@@ -93,8 +96,8 @@ int	main(int ac, char *av[], char *envp[])
 			generic_err(av[1], "No such file or directory\n", 2);
 		return (g_global.exit_code);
 	}
-//	if (ac != 1 || isatty(ttyslot()))
-//		return (EXIT_FAILURE);
+	if (ac != 1 && isatty(ttyslot()))
+		return (EXIT_FAILURE);
 	read_prompt();
 	return (meta_exit(0, NULL), EXIT_SUCCESS);
 }

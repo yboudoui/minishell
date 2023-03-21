@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/20 15:43:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:28:37 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	path_null(t_pipex *pipex, char *cmd);
 int		close_fd(int *fd);
 
 void	pipe_fd(t_pipex *pipex, int *fd);
+
+int		is_fd_open(int fd);
 
 //singleton.c
 t_flag	*f(void);

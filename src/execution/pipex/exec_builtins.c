@@ -6,12 +6,18 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 16:47:17 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/21 11:34:41 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:51:08 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
+#include <errno.h>
 #include <unistd.h>
+
+int	is_fd_open(int fd)
+{
+	return (fcntl(fd, F_GETFD) != -1 || errno != EBADF);
+}
 
 int	run_builtin(t_pipex *pipex, char **argv)
 {
@@ -19,6 +25,8 @@ int	run_builtin(t_pipex *pipex, char **argv)
 
 	builtin = is_builtin(argv[0]);
 	g_global.exit_code = builtin(argv);
+	pipex->fd[0] = -1;
+	pipex->fd[1] = -1;
 	if (pipex)
 	{
 		dup_fd(pipex->stdout_fd, STDOUT_FILENO);
