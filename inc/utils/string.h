@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 21:05:07 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 14:05:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:34:54 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void			string_array_destroy(void *data);
 
 char			**ft_split(char	const *str, t_fp_charset charset);
 
-size_t			ft_putchar_fd(char c, int fd);
-size_t			ft_putstr_fd(char *s, int fd);
-size_t			ft_putnl_fd(char *s, int fd);
+ssize_t			ft_putchar_fd(char c, int fd);
+ssize_t			ft_putstr_fd(char *s, int fd);
+ssize_t			ft_putnl_fd(char *s, int fd);
 
 #endif
