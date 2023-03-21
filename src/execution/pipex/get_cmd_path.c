@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 19:22:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/21 09:08:32 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,11 @@ static char	*check_path(t_pipex *pipex, char *cmd)
 char	*get_cmd_path(t_pipex *pipex, char *cmd)
 {
 	char	*tmp1;
-	int		i;
 
 	tmp1 = check_builtin_or_fpath(cmd, pipex);
 	if (tmp1)
 		return (tmp1);
 	path_null(pipex, cmd);
-	i = -1;
 	if (!pipex->paths)
 		return (NULL);
 	tmp1 = check_path(pipex, cmd);
