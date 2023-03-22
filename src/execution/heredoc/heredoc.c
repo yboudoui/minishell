@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:05:42 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 17:01:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:36:11 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	signal_control_c(int sig)
 {
 	if (sig != SIGINT)
 		return ;
+	printf("lol");
 	write(STDOUT_FILENO, "\n", 1);
 	close(STDIN_FILENO);
 	g_global.exit_code = 130;

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:12:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 16:02:03 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 15:39:53 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	signal_control_c_(int sig);
 
 typedef struct s_global {
 	int					exit_code;
+	int					heredoc_signal;
 	struct sigaction	default_sigint;
 	struct sigaction	default_sigquit;
 	t_prompt			prompt;

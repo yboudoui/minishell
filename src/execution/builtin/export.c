@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 15:12:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:34:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static bool	any_equality(char *arg, char *name)
 static bool	parse_export_arg(char *arg)
 {
 	char	*name;
+	bool	error;
 
 	name = extract_variable_name(&arg);
 	if (name == NULL)
@@ -65,7 +66,12 @@ static bool	parse_export_arg(char *arg)
 		env_list_insert_new(name, ft_strdup(""));
 		return (free(name), true);
 	}
-	return (free(name), any_equality(arg, name));
+	else
+	{
+		error = any_equality(arg, name);
+		return (free(name), error);
+	}
+	return (free(name), false);
 }
 
 static void	print_export(void *data, void *str)
