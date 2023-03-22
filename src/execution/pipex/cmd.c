@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/21 13:14:02 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:22:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	handle_builtin(t_pipex *pipex, char **argv)
 	{
 		f()->is_fork = true;
 		builtin = pipex->builtin;
-		free_pipex(pipex);
 		meta_exit(builtin(argv), NULL);
 	}
 	exit_code = pipex->builtin(argv);

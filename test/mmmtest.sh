@@ -73,6 +73,8 @@ function exec_test() {
 
 # Test cases array
 test_cases=(
+	"exit | exit"
+	"exit | env"
   "export -HOLA=bonjour"
   "export --HOLA=bonjour"
   "export HOLA-=bonjour"
