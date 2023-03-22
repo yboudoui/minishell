@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 15:48:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:12:34 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ int	main(int ac, char *av[], char *envp[])
 		return (g_global.exit_code);
 	}
 	read_prompt();
-	return (meta_exit(0, NULL), EXIT_SUCCESS);
+	return (meta_exit(g_global.exit_code, NULL), EXIT_SUCCESS);
 }
