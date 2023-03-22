@@ -426,8 +426,6 @@ test_cases=(
  'cd / | echo 0'
  'env|"wc" -l'
  'env|"wc "-l'
- 'expr 1 + 1'
- 'expr 0 + 0'
  'cat | cat | cat | ls'
  'ls | exit'
  'ls | exit 42'

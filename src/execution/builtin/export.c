@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 16:47:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:59:48 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	parse_export_arg(char *arg)
 
 	name = extract_variable_name(&arg);
 	if (name == NULL)
-		return (EXIT_FAILURE);
+		return (false);
 	if (ft_strncmp(arg, "=", 1) == 0)
 	{
 		value = ft_substr(arg, 1, ft_strlen(arg));
@@ -86,15 +86,16 @@ int	builtin_export(char *argv[])
 		str = ft_strdup("");
 		list_iter(env, print_export, &str);
 		if (ft_putstr_fd(str, STDOUT_FILENO) < 0)
-			ft_putstr_fd("export: write error: No space left on device",
+			ft_putstr_fd("minishell: export: write error: No space left on device\n",
 				STDERR_FILENO);
 		return (free(str), EXIT_SUCCESS);
 	}
 	while (*argv)
 	{
 		if (parse_export_arg(*argv) == false)
-			printf("export: `%s': not a valid identifier\n", *argv);
+			printf("minishell: export: `%s': not a valid identifier\n", *argv);
 		argv += 1;
+		return (1);
 	}
 	return (EXIT_SUCCESS);
 }

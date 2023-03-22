@@ -6,12 +6,26 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 14:21:21 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 17:40:02 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:49:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 
+/* int	bash_definition_name(char *str) */
+/* { */
+/* 	int	index; */
+
+/* 	index = 0; */
+/* 	if (is_empty(str)) */
+/* 		return (-1); */
+/* 	if (!(is_alpha(str[index]) || str[index] == '_')) */
+/* 		return (-1); */
+/* 	index += 1; */
+/* 	while (str[index] && (is_alnum(str[index]) || str[index] == '_')) */
+/* 		index += 1; */
+/* 	return (index); */
+/* } */
 int	bash_definition_name(char *str)
 {
 	int	index;
@@ -22,8 +36,12 @@ int	bash_definition_name(char *str)
 	if (!(is_alpha(str[index]) || str[index] == '_'))
 		return (-1);
 	index += 1;
-	while (str[index] && (is_alnum(str[index]) || str[index] == '_'))
+	while (str[index])
+	{
+		if (!(is_alnum(str[index]) || str[index] == '_'))
+			return (-1);
 		index += 1;
+	}
 	return (index);
 }
 
