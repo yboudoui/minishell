@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 15:34:54 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:45:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	builtin_export(char *argv[])
 		if (parse_export_arg(*argv) == false)
 			printf("minishell: export: `%s': not a valid identifier\n", *argv);
 		argv += 1;
-		return (1);
 	}
 	return (EXIT_SUCCESS);
 }
