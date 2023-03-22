@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 16:47:17 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/21 15:51:08 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 12:38:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ int	run_builtin(t_pipex *pipex, char **argv)
 
 	builtin = is_builtin(argv[0]);
 	g_global.exit_code = builtin(argv);
-	pipex->fd[0] = -1;
-	pipex->fd[1] = -1;
 	if (pipex)
 	{
-		dup_fd(pipex->stdout_fd, STDOUT_FILENO);
-		close_fd(&pipex->stdout_fd);
+		pipex->fd[0] = -1;
+		pipex->fd[1] = -1;
+		if (pipex->stdout_fd > 2)
+		{
+			dup_fd(pipex->stdout_fd, STDOUT_FILENO);
+			close_fd(&pipex->stdout_fd);
+		}
 		free_pipex(pipex);
 	}
 	return (0);
@@ -68,8 +71,7 @@ int	exec_builtins(t_cmd_list cmds, t_pipex *pipex)
 			{
 				dup_fd(pipex->stdout_fd, STDOUT_FILENO);
 				close_fd(&pipex->stdout_fd);
-				free_pipex(pipex);
-				run_builtin(NULL, cmds->cmd->argv);
+				run_builtin(pipex, cmds->cmd->argv);
 			}
 			else
 				run_builtin(pipex, cmds->cmd->argv);

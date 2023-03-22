@@ -5,6 +5,27 @@ BOLDRED="\033[1;31m"
 CYAN="\033[0;36m"
 RESET="\033[0m"
 
+if make -C ../ > /dev/null; then
+    echo "make -C ../ command executed successfully"
+else
+    echo "make -C ../ command failed"
+    exit 1
+fi
+
+if cp ../minishell .; then
+    echo "cp ../minishell . command executed successfully"
+else
+    echo "cp ../minishell . command failed"
+    exit 1
+fi
+
+if chmod 755 minishell; then
+    echo "chmod 755 minishell command executed successfully"
+else
+    echo "chmod 755 minishell command failed"
+    exit 1
+fi
+
 function exec_test() {
   # Split the commands and run them separately
   IFS=';' read -ra commands <<< "$1"

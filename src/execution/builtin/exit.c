@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:59:20 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/19 19:22:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:55:00 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	more_norminette(char **argv, bool *error, int exit_code)
 	if (*error == true && exit_code == 2)
 	{
 		generic_err(argv[0], "numeric argument required\n", 2);
-		meta_exit(exit_code, NULL);
+		meta_exit(exit_code, g_global.pipex);
 	}
 	if (i > 1)
 	{
@@ -112,6 +112,6 @@ int	builtin_exit(char *argv[])
 	}
 	if (more_norminette(argv, &error, exit_code) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	meta_exit(exit_code, NULL);
+	meta_exit(exit_code, g_global.pipex);
 	return (EXIT_SUCCESS);
 }
