@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:48:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 17:18:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:00:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	*token_remove_useless_dolar(void *input)
 	t_token_list	*lst;
 
 	lst = input;
-	if (lst == NULL || (*lst) == NULL)
+	if (lst == NULL || (*lst) == NULL || (*lst)->token->input == NULL)
 		return (NULL);
 	if (string_cmp((*lst)->token->input, "$") == 0
 		&& (*lst)->token->type & TOKEN_WORD

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 13:31:45 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:05:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	builtin_pwd(char *argv[])
 {
 	char	*buffer;
 
-	if (string_cmp(*argv, "pwd"))
+	if (argv == NULL || (*argv) == NULL || string_cmp(*argv, "pwd"))
 		return (EXIT_FAILURE);
 	buffer = print_working_directory("pwd");
 	if (buffer)

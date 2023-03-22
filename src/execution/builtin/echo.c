@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:25:39 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 15:01:04 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:04:53 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	builtin_echo(char *argv[])
 	char	*str;
 	size_t	index;
 
-	if (argv == NULL || string_cmp(*argv, "echo"))
+	if (argv == NULL || (*argv) == NULL || string_cmp(*argv, "echo"))
 		return (EXIT_FAILURE);
 	argv += 1;
 	index = 0;

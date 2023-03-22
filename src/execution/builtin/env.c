@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:56:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 13:34:51 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:07:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ static void	print_env(void *data, void *str)
 
 int	builtin_env(char *argv[])
 {
-	t_env_list	env;
 	char		**fmt;
 	char		*str;
 
-	env = env_list_singleton(NULL);
-	if (argv == NULL || env == NULL || string_cmp(*argv, "env"))
+	if (argv == NULL || (*argv) == NULL || string_cmp(*argv, "env"))
 		return (EXIT_FAILURE);
 	argv += 1;
 	if (*argv != NULL)
@@ -47,7 +45,7 @@ int	builtin_env(char *argv[])
 		return (free(str), 127);
 	}
 	str = ft_strdup("");
-	list_iter(env, print_env, &str);
+	list_iter(env_list_singleton(NULL), print_env, &str);
 	if (ft_putstr_fd(str, STDOUT_FILENO) < 0)
 	{
 		generic_err("env: write error", NULL, 1);

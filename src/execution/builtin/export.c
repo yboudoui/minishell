@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 11:59:48 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:08:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,18 @@ static void	print_export(void *data, void *str)
 
 int	builtin_export(char *argv[])
 {
-	t_env_list	env;
 	char		*str;
 
-	env = env_list_singleton(NULL);
-	if (argv == NULL || string_cmp(*argv, "export"))
+	if (argv == NULL || (*argv) == NULL || string_cmp(*argv, "export"))
 		return (EXIT_FAILURE);
 	argv += 1;
 	if (*argv == NULL)
 	{
 		str = ft_strdup("");
-		list_iter(env, print_export, &str);
+		list_iter(env_list_singleton(NULL), print_export, &str);
 		if (ft_putstr_fd(str, STDOUT_FILENO) < 0)
-			ft_putstr_fd("minishell: export: write error: No space left on device\n",
+			ft_putstr_fd("minishell: "
+				"export: write error: No space left on device\n",
 				STDERR_FILENO);
 		return (free(str), EXIT_SUCCESS);
 	}

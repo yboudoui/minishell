@@ -6,19 +6,19 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/19 18:15:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:28:47 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/minishell.h"
 
-static const struct sigaction	g_default_sig[2] = {
-{.sa_handler = SIG_DFL},
-{.sa_handler = SIG_IGN}
-};
-
 int	execute(char *argv[], t_pipex *pipex)
 {
+	static const struct sigaction	g_default_sig[2] = {
+	{.sa_handler = SIG_DFL},
+	{.sa_handler = SIG_IGN}
+	};
+
 	pipe_fd(pipex, pipex->fd);
 	if (argv != NULL && !pipex->redir_error)
 		pipex->cmd_path = get_cmd_path(pipex, argv[0]);
@@ -38,6 +38,5 @@ int	execute(char *argv[], t_pipex *pipex)
 	close_fd(&pipex->fd[0]);
 	close_fd(&pipex->infile);
 	close_fd(&pipex->outfile);
-	f_free((void **)&pipex->cmd_path);
-	return (EXIT_SUCCESS);
+	return (f_free((void **)&pipex->cmd_path), EXIT_SUCCESS);
 }

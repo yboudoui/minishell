@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:16:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/06 11:42:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:03:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_fp_builtin	is_builtin(char *argv)
 {
 	size_t	index;
 
+	if (argv == NULL)
+		return (NULL);
 	index = 0;
 	while (index < 7)
 	{
