@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:56:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 17:34:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:34:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	builtin_env(char *argv[])
 	str = ft_strdup("");
 	list_iter(env, print_env, &str);
 	if (ft_putstr_fd(str, STDOUT_FILENO) < 0)
-		ft_putstr_fd("env: write error: No space left on device\n",
-			STDERR_FILENO);
+	{
+		generic_err("env: write error", NULL, 1);
+		return (free(str), 1);
+	}
 	return (free(str), EXIT_SUCCESS);
 }

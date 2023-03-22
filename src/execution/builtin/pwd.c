@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 07:42:58 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/21 16:08:22 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:31:45 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ int	builtin_pwd(char *argv[])
 		return (EXIT_FAILURE);
 	buffer = print_working_directory("pwd");
 	if (buffer)
-		printf("%s\n", buffer);
+	{
+		if (ft_putstr_fd(buffer, STDOUT_FILENO) < 0)
+		{
+			generic_err("pwd: write error", NULL, 1);
+			return (free(buffer), 1);
+		}
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	}
 	return (free(buffer), EXIT_SUCCESS);
 }
