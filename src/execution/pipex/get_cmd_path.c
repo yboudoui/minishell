@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/22 16:10:02 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 17:04:07 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static inline char	*check_fpath(t_pipex *pipex, char *cmd)
 			return (ft_strdup(cmd));
 		else
 		{
+			pipex->is_err = true;
 			generic_err(cmd, NULL, 1);
 			return (NULL);
 		}
@@ -97,6 +98,8 @@ char	*get_cmd_path(t_pipex *pipex, char *cmd)
 		return (tmp1);
 	path_null(pipex, cmd);
 	if (!pipex->paths)
+		return (NULL);
+	if (pipex->is_err)
 		return (NULL);
 	tmp1 = check_path(pipex, cmd);
 	if (tmp1)
