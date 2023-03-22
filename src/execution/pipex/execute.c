@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:33:35 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/22 14:28:47 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:09:19 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	execute(char *argv[], t_pipex *pipex)
 	pipe_fd(pipex, pipex->fd);
 	if (argv != NULL && !pipex->redir_error)
 		pipex->cmd_path = get_cmd_path(pipex, argv[0]);
-	if (pipex->cmd_path == NULL)
-		pipex->exitcode = CMD_NOT_FOUND;
 	sigaction(SIGINT, &g_default_sig[1], NULL);
 	sigaction(SIGQUIT, &g_default_sig[1], NULL);
 	fork_pid(&pipex->pid[pipex->i]);

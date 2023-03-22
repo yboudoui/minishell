@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:51:18 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/22 15:05:59 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:09:05 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ int	exec_cmd(t_pipex *pipex, char **argv)
 		meta_exit(1, pipex);
 	if (argv == NULL)
 		meta_exit(0, pipex);
-	if (pipex->cmd_path == NULL)
+	if (pipex->cmd_path == NULL && !pipex->is_dir)
 		meta_exit(127, pipex);
+	if (pipex->cmd_path == NULL && pipex->is_dir)
+		meta_exit(126, pipex);
 	if (pipex->builtin)
 		handle_builtin(pipex, argv);
 	env = parse_env(env_list_singleton(NULL));

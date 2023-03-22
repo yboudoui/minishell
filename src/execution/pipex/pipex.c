@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:22:32 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/22 12:28:16 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 16:07:54 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	reset_flags(t_pipex *pipex)
 {
 	pipex->abs_path_cmd = false;
 	pipex->redir_error = false;
+	pipex->is_dir = false;
 	pipex->builtin = NULL;
 	f()->is_fork = false;
 	return (0);

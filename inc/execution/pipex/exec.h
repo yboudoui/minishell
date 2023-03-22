@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 16:39:52 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/21 15:28:37 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 16:07:33 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_pipex
 	bool			path;
 	bool			abs_path_cmd;
 	bool			redir_error;
+	bool			is_dir;
 	int				exitcode;
 	int				fd[2];
 	int				builtin_stdin;

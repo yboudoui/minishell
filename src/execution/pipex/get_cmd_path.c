@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:53:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/03/21 09:08:32 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/03/22 16:10:02 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static inline char	*check_fpath(t_pipex *pipex, char *cmd)
 		pipex->abs_path_cmd = true;
 		if (is_dir(cmd) != 0)
 		{
+			pipex->is_dir = true;
 			generic_err(cmd, "Is a directory\n", 2);
 			return (NULL);
 		}
