@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 07:04:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 14:43:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:50:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	main(int ac, char *av[], char *envp[])
 {
 	(void)av;
 	g_global = (t_global){0};
-	signal(SIGPIPE, SIG_IGN);
 	if (ac != 1 || isatty(STDIN_FILENO) == 0)
 		return (EXIT_FAILURE);
 	if (!env_list_create(envp))

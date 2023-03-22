@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 08:00:49 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 14:08:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:12:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,16 @@ static char	*extract_variable_name(char **arg)
 	return (out);
 }
 
-static bool	parse_export_arg(char *arg)
+static bool	any_equality(char *arg, char *name)
 {
-	char		*name;
 	char		*value;
 	t_env_var	var;
 
-	name = extract_variable_name(&arg);
-	if (name == NULL)
-		return (false);
 	if (ft_strncmp(arg, "=", 1) == 0)
 	{
 		value = ft_substr(arg, 1, ft_strlen(arg));
 		env_list_insert_new(name, value);
-		return (free(name), true);
+		return (true);
 	}
 	else if (ft_strncmp(arg, "+=", 2) == 0)
 	{
@@ -52,9 +48,24 @@ static bool	parse_export_arg(char *arg)
 			str_merge_to(&var->value, value);
 		else
 			env_list_insert_new(name, value);
+		return (true);
+	}
+	return (false);
+}
+
+static bool	parse_export_arg(char *arg)
+{
+	char	*name;
+
+	name = extract_variable_name(&arg);
+	if (name == NULL)
+		return (false);
+	if (ft_strlen(arg) == 0)
+	{
+		env_list_insert_new(name, ft_strdup(""));
 		return (free(name), true);
 	}
-	return (free(name), true);
+	return (free(name), any_equality(arg, name));
 }
 
 static void	print_export(void *data, void *str)

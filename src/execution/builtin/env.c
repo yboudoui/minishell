@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:56:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2023/03/22 14:31:00 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:05:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	print_env(void *data, void *str)
 	char		**fmt;
 
 	input = data;
-	if (input == NULL || input->name == NULL)
+	if (input == NULL || input->name == NULL || input->value == NULL)
 		return ;
 	fmt = (char *[]){input->name, "=", input->value, "\n", NULL};
 	line = str_join_list(fmt, NULL);
